@@ -1,0 +1,34 @@
+{
+  "routes": [
+    {
+      "title": "Sobre nosotros",
+      "path": "#historia",
+      "type": "link"
+    },
+    {
+      "title": "Ayuda",
+      "path": "/ayuda",
+      "type": "link"
+    },
+    {
+      "title": "Propietarios",
+      "path": "/propietarios",
+      "type": "link"
+    },
+    {
+      "title": "Administradores",
+      "path": "/administradores",
+      "type": "link"
+    },
+    {
+      "title": "Descarga la app",
+      "path": "#descargar",
+      "type": "button-download"
+    },
+    {
+      "title": "Ingresar online",
+      "path": "/ingresar",
+      "type": "button-ingress"
+    }
+  ]
+}

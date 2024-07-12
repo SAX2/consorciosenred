@@ -1,0 +1,165 @@
+@tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @layer base {
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
+
+      --card: 0 0% 100%;
+      --card-foreground: 222.2 84% 4.9%;
+
+      --popover: 0 0% 100%;
+      --popover-foreground: 222.2 84% 4.9%;
+
+      --primary: 222.2 47.4% 11.2%;
+      --primary-foreground: 210 40% 98%;
+
+      --secondary: 210 40% 96.1%;
+      --secondary-foreground: 222.2 47.4% 11.2%;
+
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+
+      --accent: 210 40% 96.1%;
+      --accent-foreground: 222.2 47.4% 11.2%;
+
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 214.3 31.8% 91.4%;
+      --input: 214.3 31.8% 91.4%;
+      --ring: 222.2 84% 4.9%;
+
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+
+      --card: 222.2 84% 4.9%;
+      --card-foreground: 210 40% 98%;
+
+      --popover: 222.2 84% 4.9%;
+      --popover-foreground: 210 40% 98%;
+
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+
+      --secondary: 217.2 32.6% 17.5%;
+      --secondary-foreground: 210 40% 98%;
+
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+
+      --accent: 217.2 32.6% 17.5%;
+      --accent-foreground: 210 40% 98%;
+
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 217.2 32.6% 17.5%;
+      --input: 217.2 32.6% 17.5%;
+      --ring: 212.7 26.8% 83.9%;
+    }
+  }
+
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
+  }
+
+  .bg-radial-gradient-180 {
+    background: radial-gradient(circle at 50% 70%, #0a0a0a00 0%, #0A0A0A 80%);
+  }
+  
+  .bg-radial-gradient {
+    background: radial-gradient(circle at 50% 30%, #0a0a0a00 0%, #0A0A0A 80%);
+  }
+  
+  .bg-linear {
+    background: linear-gradient(0deg, #0A0A0A 4%, #0a0a0a00 100%);
+  }
+  
+  .h-screen-main {
+    max-height: calc(100vh - 107px) !important;
+  }
+
+  .h-screen-main-h {
+    height: calc(100vh - 214px) !important;
+  }
+
+  @media not all and (max-width: 768px) {
+    .h-screen-main {
+      max-height: calc(100vh - 72px);
+    }
+
+    .h-screen-main-h {
+      height: calc(100vh - 144px);
+    }
+  }
+
+  .border-gradient {
+    border: linear-gradient(243deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  }
+
+  .template-bento {
+    grid-template-areas:
+    "a b c"
+    "a b c"
+    "a d e"
+    "f g h"
+    "f g h";
+  }
+
+  @media not all and (min-width: 768px) {
+    .template-bento {
+      grid-template-areas:
+      "a"
+      "b"
+      "c"
+      "d"
+      "e"
+      "f"
+      "g"
+      "h";
+    }
+  }
+
+  .side-a {
+    grid-area: a;
+  }
+
+  .side-b {
+    grid-area: b;
+  }
+  
+  .side-c {
+    grid-area: c;
+  }
+  
+  .side-d {
+    grid-area: d;
+  }
+
+  .side-e {
+    grid-area: e;
+  }
+  
+  .side-f {
+    grid-area: f;
+  }
+
+  .side-g {
+    grid-area: g;
+  }
+
+  .side-h {
+    grid-area: h;
+  }

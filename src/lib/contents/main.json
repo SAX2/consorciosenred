@@ -1,0 +1,88 @@
+{
+  "main": {
+    "title": "Gestión Eficiente de \n Propiedad Horizontal",
+    "description": "La Herramienta Interactiva para Administraciones, Proveedores, Propietarios e Inquilinos.",
+    "content": [
+      {
+        "title": "Ingresar online",
+        "path": "/ingresar",
+        "type": "button-ingress"
+      },
+      {
+        "title": "Descarga la app",
+        "path": "#descargar",
+        "type": "button-download"
+      }
+    ]
+  },
+  "mainImage": {
+    "description": "Captura del panel de administrador"
+  },
+  "experience": {
+    "title": "Nuestra Experiencia de más de 45 Años",
+    "content": "Nos dedicamos exclusivamente a brindar servicios especializados para Administradores de Propiedad Horizontal. Entendemos la complejidad y los desafíos diarios que enfrentan las Administraciones y Consorcios de Propietarios. Nuestra experiencia nos ha permitido desarrollar ConsorciosEnRed™, una herramienta integral que optimiza la gestión y comunicación dentro de la comunidad consorcial."
+  },
+  "metrics": {
+    "title": "Puede confiar en nosotros",
+    "pill": "Metricas",
+    "content": [
+      {
+        "content": "+415",
+        "title": "Administraciones"
+      },
+      {
+        "content": "+115000",
+        "title": "Unidades"
+      },
+      {
+        "content": "+45",
+        "title": "Años de experiencia"
+      }
+    ]
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "content": [
+      {
+        "title": "¿Qué es la gestión de propiedad horizontal?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo accedo a mis documentos digitales?",
+        "content": ""
+      },
+      {
+        "title": "¿Con qué frecuencia se realizan las asambleas?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo se gestionan los pagos de expensas?",
+        "content": ""
+      },
+      {
+        "title": "¿Qué hago si tengo un problema en mi unidad?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo funcionan las reservas de amenities?",
+        "content": ""
+      },
+      {
+        "title": "¿Ofrecen servicios de mantenimiento?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo se manejan los conflictos entre vecinos?",
+        "content": ""
+      },
+      {
+        "title": "¿Qué información puedo ver como propietario?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo se garantiza la gestión asd asdasoa?",
+        "content": ""
+      }
+    ]
+  }
+}

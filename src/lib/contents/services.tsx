@@ -5,7 +5,7 @@ const services = {
   page: {
     path: "/servicios",
     title: "servicios",
-    button: "Saber mas"
+    button: "know-more"
   },
   bento: [
     {
@@ -28,7 +28,7 @@ const services = {
         name: "",
         button: "string",
       },
-      bento: "row-span-3 col-span-2 bg-green side-b text-white flex-col justify-end gap-1 max-md:flex-row-reverse max-md:!py-6"
+      bento: "row-span-3 col-span-2 bg-green side-b text-[#183300] flex-col justify-end gap-1 max-md:flex-row-reverse max-md:!py-6"
     },
     {
       title: "Documentación Digital",
@@ -61,7 +61,7 @@ const services = {
         name: "",
         button: "string",
       },
-      bento: "row-span-1 col-span-2 bg-green side-e text-white flex-row-reverse max-md:flex-row-reverse max-md:!py-6"
+      bento: "row-span-1 col-span-2 bg-green side-e text-[#183300] flex-row-reverse max-md:flex-row-reverse max-md:!py-6"
     },
     {
       title: "Seguimiento Legal",
@@ -83,7 +83,7 @@ const services = {
         name: "",
         button: "string",
       },
-      bento: "row-span-1 col-span-2 bg-green side-g text-white flex-col justify-end gap-1 max-md:flex-row-reverse max-md:!py-6"
+      bento: "row-span-1 col-span-2 bg-green side-g text-[#183300] flex-col justify-end gap-1 max-md:flex-row-reverse max-md:!py-6"
     },
     {
       title: "Atención al Cliente",

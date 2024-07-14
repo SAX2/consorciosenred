@@ -84,5 +84,76 @@
         "content": ""
       }
     ]
+  },
+  "videos": {
+    "title": "Conozca nuestros servicios a detalle",
+    "page": {
+      "path": "/documentacion",
+      "title": "documentacion",
+      "button": "know-more"
+    },
+    "content": [
+      {
+        "title": "¿Qué es la gestión de propiedad horizontal?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo accedo a mis documentos digitales?",
+        "content": ""
+      },
+      {
+        "title": "¿Con qué frecuencia se realizan las asambleas?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo se gestionan los pagos de expensas?",
+        "content": ""
+      },
+      {
+        "title": "¿Qué hago si tengo un problema en mi unidad?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo funcionan las reservas de amenities?",
+        "content": ""
+      },
+      {
+        "title": "¿Ofrecen servicios de mantenimiento?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo se manejan los conflictos entre vecinos?",
+        "content": ""
+      },
+      {
+        "title": "¿Qué información puedo ver como propietario?",
+        "content": ""
+      },
+      {
+        "title": "¿Cómo se garantiza la gestión asd asdasoa?",
+        "content": ""
+      }
+    ]
+  },
+  "appInstall": {
+    "title": "Pruebe Ahora Nuestras Apps \n para una Gestión Simplificada",
+    "content": [
+      {
+        "page": {
+          "path": "/propietarios",
+          "title": "propietarios",
+          "button": "Soy propietario",
+          "className": "bg-yellow text-black"
+        }
+      },
+      {
+        "page": {
+          "path": "/administradores",
+          "title": "administadores",
+          "button": "Administradores",
+          "className": "bg-green text-white"
+        }
+      }
+    ]
   }
 }

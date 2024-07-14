@@ -14,6 +14,8 @@ import HoverPopover from "@/components/button/HoverPopover";
 import { Separator } from "@/components/ui/separator";
 import AnimatedCounter from "./components/AnimatedCounter";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Section from "./components/Section";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 export default function Home() {
   const mainSection = useRef(null);
@@ -78,7 +80,7 @@ export default function Home() {
                           "group px-4 py-2 text-white rounded-md text-2xl font-medium flex items-center max-md:text-xl max-md:py-1 max-md:px-2 max-sm:text-lg",
                           route.type === "button-ingress" &&
                             "bg-white/15 backdrop-blur-md",
-                          route.type === "button-download" && "bg-green"
+                          route.type === "button-download" && "bg-blue"
                         )}
                       >
                         {route.title}
@@ -105,11 +107,15 @@ export default function Home() {
         >
           <div className="flex flex-col gap-2 items-end max-[425px]:items-center max-[425px]:px-4">
             <Image
+              width={992}
+              height={644}
               src={desktopAdminPreview}
               alt="Captura del panel de administrador"
               className="w-full h-auto rounded-xl border-4 border-outline/25 max-[425px]:hidden"
             />
             <Image
+              width={582}
+              height={1144}
               src={mobileAdminPreviewIphone}
               alt="Captura del panel de administrador"
               className="w-dvw h-auto max-[425px]:block hidden"
@@ -119,16 +125,11 @@ export default function Home() {
             </p>
           </div>
         </section>
-        <section className="items-center h-full max-w-[1000px] w-full justify-center flex pt-8 max-md:pt-0">
-          <div className="flex flex-col gap-4 py-16 max-md:py-12">
-            <h2 className="font-geist font-bold text-3xl text-white max-md:text-center tracking-tight">
-              {main.experience.title}
-            </h2>
-            <p className="text-white text-lg max-md:text-center">
-              {main.experience.content}
-            </p>
-          </div>
-        </section>
+        <Section data={main.experience} black>
+          <p className="text-white text-lg max-md:text-center">
+            {main.experience.content}
+          </p>
+        </Section>
       </article>
       <article className="flex flex-col items-center bg-white w-full px-8 max-md:px-4">
         <section className="items-center h-full max-w-[1000px] w-full justify-center flex pt-8 max-md:pt-0">
@@ -144,7 +145,9 @@ export default function Home() {
         <section className="items-center h-full max-w-[1000px] w-full justify-center flex">
           <div className="flex flex-col gap-12 py-16 max-md:py-12 w-full items-center">
             <div className="flex flex-col gap-4 items-center">
-              <div className="px-2 py-[2px] rounded-lg bg-blue w-fit text-white font-medium text-sm">{main.metrics.pill}</div>
+              <div className="px-2 py-[2px] rounded-lg bg-blue w-fit text-white font-medium text-sm">
+                {main.metrics.pill}
+              </div>
               <h2 className="font-geist font-bold text-4xl text-black text-center tracking-tight">
                 {main.metrics.title}
               </h2>
@@ -153,7 +156,7 @@ export default function Home() {
               {main.metrics.content.map((metric, index) => {
                 return (
                   <>
-                    <div className="flex flex-col gap-2 w-full items-center">
+                    <div className="flex flex-col gap-2 w-full items-center" key={index}>
                       <AnimatedCounter
                         plus={true}
                         from={0}
@@ -162,7 +165,9 @@ export default function Home() {
                           "text-green font-semibold text-6xl font-geist text-center"
                         )}
                       />
-                      <h4 className="font-bold text-2xl text-center">{metric.title}</h4>
+                      <h3 className="font-bold text-2xl text-center">
+                        {metric.title}
+                      </h3>
                     </div>
                     <Separator orientation="vertical" />
                   </>
@@ -173,21 +178,83 @@ export default function Home() {
         </section>
       </article>
       <article className="flex flex-col items-center bg-white w-full px-8 max-md:px-4">
-        <section className="items-center h-full max-w-[1000px] w-full justify-center flex pt-8 max-md:pt-0">
-          <div className="flex flex-col gap-8 py-16 max-md:py-12">
-            <h2 className="font-geist font-bold text-3xl text-black max-md:text-center tracking-tight">
-              {main.faq.title}
-            </h2>
-            <Accordion type="multiple" className="grid gap-3 grid-cols-2 w-full max-md:grid-cols-1">
-              {main.faq.content.map(item => {
+        <Section data={main.videos}>
+          <Carousel>
+            <CarouselContent className="gap-4 pl-4">
+              {main.videos.content.map((item) => {
                 return (
-                  <AccordionItem key={item.title} value={item.title} className="w-full bg-grey p-3 border-0 rounded-lg">
-                    <AccordionTrigger className="flex justify-between p-0 hover:no-underline">{item.title}</AccordionTrigger>
-                    <AccordionContent className="!border-0">{item.content}</AccordionContent>
-                  </AccordionItem>
+                  <CarouselItem
+                    key={item.title}
+                    className="bg-grey max-w-[400px] min-h-[200px] rounded-md flex items-center p-0 justify-center"
+                  >
+                    <iframe
+                      width="400"
+                      height="100%"
+                      src="https://www.youtube.com/embed/2dpUZT9hqIQ?si=IJjKj9N7DonjorJi"
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                      className="rounded-md"
+                    ></iframe>
+                  </CarouselItem>
                 );
               })}
-            </Accordion>
+            </CarouselContent>
+            <div className="flex gap-2 w-full justify-end">
+              <CarouselPrevious className="relative -top-[50%] !right-0 !bottom-0 translate-y-1/2 !left-0 bg-black-sec text-grey-text border-outline rounded-md hover:bg-black-nav hover:text-grey-text/90" />
+              <CarouselNext className="relative -top-[50%] !right-0 !bottom-0 translate-y-1/2 !left-0 bg-black-sec text-grey-text border-outline rounded-md hover:bg-black-nav hover:text-grey-text/90" />
+            </div>
+          </Carousel>
+        </Section>
+        <Section data={main.faq} className="pt-0">
+          <Accordion
+            type="multiple"
+            className="grid gap-3 grid-cols-2 w-full max-md:grid-cols-1"
+          >
+            {main.faq.content.map((item) => {
+              return (
+                <AccordionItem
+                  key={item.title}
+                  value={item.title}
+                  className="w-full bg-grey p-3 border-0 rounded-lg"
+                >
+                  <AccordionTrigger className="flex justify-between p-0 hover:no-underline">
+                    {item.title}
+                  </AccordionTrigger>
+                  <AccordionContent className="!border-0">
+                    {item.content}
+                  </AccordionContent>
+                </AccordionItem>
+              );
+            })}
+          </Accordion>
+        </Section>
+      </article>
+      <article className="flex flex-col items-center bg-black w-full px-8 max-md:px-4">
+        <section className="items-center h-full max-w-[1000px] w-full justify-center flex">
+          <div className="flex flex-col gap-8 py-16 max-md:py-12 w-full items-center max-w-[900px] max-md:gap-4">
+            <h2 className="text-white text-6xl text-center tracking-tight font-geist font-black max-md:text-5xl max-sm:text-4xl max-[425px]:text-3xl">
+              {main.appInstall.title}
+            </h2>
+            <div className="flex gap-3 justify-center items-center">
+              {main.appInstall.content.map(item => {
+                return (
+                  <Link
+                    key={item.page.path}
+                    href={item.page.path}
+                    className={cn(
+                      item.page.className,
+                      "group px-4 py-2 rounded-md text-2xl font-medium flex items-center max-md:text-xl max-md:py-1 max-md:px-2 max-sm:text-lg"
+                    )}
+                    title={item.page.title}
+                  >
+                    {item.page.button}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </section>
       </article>

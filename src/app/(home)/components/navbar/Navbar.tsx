@@ -45,14 +45,15 @@ const Navbar = () => {
         <ul>
           <li>
             <Link
+              aria-label='Consorcios en red logo'
               href={"/"}
               className="flex items-center gap-2 transition-transform"
             >
               <Image
                 src={logoBackgroundWhite}
                 alt="Logo"
-                width={40}
-                height={40}
+                width={38}
+                height={38}
                 className="w-[40px] max-md:w-[36px]"
               />
               <span

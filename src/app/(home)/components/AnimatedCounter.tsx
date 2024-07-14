@@ -13,7 +13,7 @@ interface AnimatedCounterProps {
 
 const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ from, to, animatedOptions, className, plus }) => {
   const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref)
+  const inView = useInView(ref, { once: true })
 
   useIsomorphicLayoutEffect(() => {
     const element = ref.current;

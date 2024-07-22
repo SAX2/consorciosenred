@@ -1,21 +1,22 @@
 "use client"
 
+import services, { appInstall } from '@/lib/contents/services'
+import { Separator } from "@/components/ui/separator";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { caba1, desktopAdminPreview, mobileAdminPreviewIphone } from "@/lib/images";
-import { IconChevronRight } from "@tabler/icons-react";
+import { IconArrowNarrowRight, IconChevronRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { useInView } from "framer-motion"
 import { useRef } from "react";
 import Image from "next/image";
 import main from '@/lib/contents/main.json'
-import services from '@/lib/contents/services'
 import Link from "next/link";
-import Bento from "./components/bento/Bento";
 import HoverPopover from "@/components/button/HoverPopover";
-import { Separator } from "@/components/ui/separator";
 import AnimatedCounter from "./components/AnimatedCounter";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import Section from "./components/Section";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Section from "./components/hero-sections/Section";
+import Service from "./components/hero-sections/Services";
+import NewsCard from "./components/card/NewsCard";
 
 export default function Home() {
   const mainSection = useRef(null);
@@ -27,7 +28,7 @@ export default function Home() {
         className="flex flex-col items-center bg-black w-full px-8 max-md:px-4"
         ref={mainSection}
       >
-        <section className="items-center h-screen-main-h h-full max-w-[1000px] w-full justify-center flex">
+        <section className="items-center h-screen-main-h h-full max-w-[1000px] w-full justify-center flex max-sm:items-end max-sm:pb-28">
           <div className="absolute top-0 left-0 w-full h-screen h-screen-main  select-none">
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-radial-gradient opacity-60"></div>
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-radial-gradient"></div>
@@ -54,7 +55,7 @@ export default function Home() {
             </h1>
             <p
               className={cn(
-                "text-white text-2xl text-center tracking-tight max-md:text-xl max-sm:text-lg max-[425px]:text-sm transition-all duration-500",
+                "text-white text-2xl text-center tracking-tight max-md:text-xl max-sm:text-lg max-[425px]:text-sm max-[425px]:leading-snug transition-all duration-500",
                 isMainSectionInView
                   ? "none opacity-100"
                   : "translate-y-16 opacity-0"
@@ -126,20 +127,26 @@ export default function Home() {
           </div>
         </section>
         <Section data={main.experience} black>
-          <p className="text-white text-lg max-md:text-center">
-            {main.experience.content}
-          </p>
+          <p className="text-white text-lg">{main.experience.content}</p>
         </Section>
       </article>
       <article className="flex flex-col items-center bg-white w-full px-8 max-md:px-4">
-        <section className="items-center h-full max-w-[1000px] w-full justify-center flex pt-8 max-md:pt-0">
-          <div className="flex flex-col gap-8 py-16 max-md:py-12">
-            <h2 className="font-geist font-bold text-3xl text-black max-md:text-center tracking-tight">
-              {services.title}
-            </h2>
-            <Bento services={services.bento} />
-          </div>
-        </section>
+        {services.map((service, index) => {
+          return (
+            <>
+              <Service
+                service={service}
+                key={service.title}
+                className={cn(
+                  (index + 1) % 2 == 0 ? "flex-row-reverse" : "flex-row"
+                )}
+              />
+              <div className="max-w-[1000px] w-full py-8">
+                {index + 1 !== services.length && <Separator />}
+              </div>
+            </>
+          );
+        })}
       </article>
       <article className="flex flex-col items-center bg-grey w-full px-8 max-md:px-4">
         <section className="items-center h-full max-w-[1000px] w-full justify-center flex">
@@ -153,10 +160,13 @@ export default function Home() {
               </h2>
             </div>
             <div className="flex justify-center gap-3 w-full max-md:flex-col max-md:gap-4">
-              {main.metrics.content.map((metric, index) => {
+              {main.metrics.content.map((metric, index: number) => {
                 return (
                   <>
-                    <div className="flex flex-col gap-2 w-full items-center" key={index}>
+                    <div
+                      className="flex flex-col gap-2 w-full items-center"
+                      key={metric.content + index}
+                    >
                       <AnimatedCounter
                         plus={true}
                         from={0}
@@ -178,6 +188,22 @@ export default function Home() {
         </section>
       </article>
       <article className="flex flex-col items-center bg-white w-full px-8 max-md:px-4">
+        <Section data={main.news}>
+          <Carousel>
+            <CarouselContent className="gap-11 max-md:gap-4">
+              {main.news.content.map((item, index) => {
+                return (
+                  <CarouselItem
+                    key={item.title}
+                    className={cn("h-fit max-w-[480px] w-full", index === 1 && "!pl-0")}
+                  >
+                    <NewsCard content={item} mainPath='/noticias' />
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+          </Carousel>
+        </Section>
         <Section data={main.videos}>
           <Carousel>
             <CarouselContent className="gap-4 pl-4">
@@ -202,59 +228,81 @@ export default function Home() {
                 );
               })}
             </CarouselContent>
-            <div className="flex gap-2 w-full justify-end">
+            <div className="flex gap-2 w-full justify-end max-md:hidden">
               <CarouselPrevious className="relative -top-[50%] !right-0 !bottom-0 translate-y-1/2 !left-0 bg-black-sec text-grey-text border-outline rounded-md hover:bg-black-nav hover:text-grey-text/90" />
               <CarouselNext className="relative -top-[50%] !right-0 !bottom-0 translate-y-1/2 !left-0 bg-black-sec text-grey-text border-outline rounded-md hover:bg-black-nav hover:text-grey-text/90" />
             </div>
           </Carousel>
         </Section>
-        <Section data={main.faq} className="pt-0">
-          <Accordion
-            type="multiple"
-            className="grid gap-3 grid-cols-2 w-full max-md:grid-cols-1"
-          >
-            {main.faq.content.map((item) => {
-              return (
-                <AccordionItem
-                  key={item.title}
-                  value={item.title}
-                  className="w-full bg-grey p-3 border-0 rounded-lg"
-                >
-                  <AccordionTrigger className="flex justify-between p-0 hover:no-underline">
-                    {item.title}
-                  </AccordionTrigger>
-                  <AccordionContent className="!border-0">
-                    {item.content}
-                  </AccordionContent>
-                </AccordionItem>
-              );
-            })}
-          </Accordion>
-        </Section>
-      </article>
-      <article className="flex flex-col items-center bg-black w-full px-8 max-md:px-4">
-        <section className="items-center h-full max-w-[1000px] w-full justify-center flex">
-          <div className="flex flex-col gap-8 py-16 max-md:py-12 w-full items-center max-w-[900px] max-md:gap-4">
-            <h2 className="text-white text-6xl text-center tracking-tight font-geist font-black max-md:text-5xl max-sm:text-4xl max-[425px]:text-3xl">
-              {main.appInstall.title}
+        <section className="h-full max-w-[1000px] w-full justify-center flex py-8 max-md:py-8 gap-12 max-md:flex-col">
+          <div className="w-[70%] max-md:w-full">
+            <h2 className="font-semibold font-geist text-3xl leading-tight tracking-tight">
+              {main.faq.title}
             </h2>
-            <div className="flex gap-3 justify-center items-center">
-              {main.appInstall.content.map(item => {
+          </div>
+          <div className="w-full flex flex-col gap-4">
+            <Accordion type="multiple" className="flex flex-col gap-3">
+              {main.faq.content.map((item) => {
                 return (
-                  <Link
-                    key={item.page.path}
-                    href={item.page.path}
-                    className={cn(
-                      item.page.className,
-                      "group px-4 py-2 rounded-md text-2xl font-medium flex items-center max-md:text-xl max-md:py-1 max-md:px-2 max-sm:text-lg"
-                    )}
-                    title={item.page.title}
+                  <AccordionItem
+                    key={item.title}
+                    value={item.title}
+                    className="p-3"
                   >
-                    {item.page.button}
-                  </Link>
+                    <AccordionTrigger className="flex justify-between p-0 hover:no-underline [&>svg]:text-blue text-lg gap-4 text-start">
+                      {item.title}
+                    </AccordionTrigger>
+                    <AccordionContent className="!border-0 text-lg font-normal pt-4 leading-snug text-black/75">
+                      {item.content}
+                    </AccordionContent>
+                  </AccordionItem>
                 );
               })}
-            </div>
+            </Accordion>
+            <Link
+              href={main.faq.page?.path}
+              title={main.faq?.title}
+              className="w-fit flex items-center text-lg gap-1 px-3 py-1 rounded-md hover:bg-blue/15 text-blue font-medium transition-colors"
+            >
+              Ver mas <IconArrowNarrowRight width={24} height={24} />
+            </Link>
+          </div>
+        </section>
+      </article>
+      <article className="flex flex-col items-center bg-black w-full px-8 max-md:px-4">
+        <section className="items-center h-full max-w-[1000px] w-full justify-center flex py-16 gap-8 max-md:flex-col">
+          <div className="w-full flex flex-col gap-8 max-md:max-w-[340px]">
+            <h2 className="text-white font-semibold text-6xl max-md:text-4xl max-md:text-center">
+              {appInstall.title}
+            </h2>
+            <ul className="flex flex-col gap-1 max-md:items-center w-full">
+              {appInstall.content.map((route, index) => {
+                return (
+                  <li key={route.page.path + index}>
+                    <Link
+                      href={route.page.path}
+                      className={cn(
+                        route.page.className,
+                        "px-3 py-2 transition-colors rounded-md text-xl font-medium flex items-center gap-1 w-fit"
+                      )}
+                      title={route.page.title}
+                    >
+                      {route.page.button}{" "}
+                      <IconArrowNarrowRight width={24} height={24} />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="w-full bg-black-app-bg rounded-lg max-h-[420px] max-md:max-h-[400px] relative flex justify-center overflow-clip">
+            <Image
+              width={291}
+              height={604}
+              src={appInstall.image}
+              alt={appInstall.title}
+              className="h-fit pt-8 relative"
+            />
           </div>
         </section>
       </article>

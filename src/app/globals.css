@@ -92,16 +92,16 @@
   }
 
   .h-screen-main-h {
-    height: calc(100vh - 214px) !important;
+    height: calc(100vh - 214px);
   }
 
-  @media not all and (max-width: 768px) {
+  @media (max-width: 768px) {
     .h-screen-main {
       max-height: calc(100vh - 72px);
     }
 
     .h-screen-main-h {
-      height: calc(100vh - 144px);
+      height: calc(100vh - 300px) !important;
     }
   }
 

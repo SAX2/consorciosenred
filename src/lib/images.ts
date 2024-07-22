@@ -6,12 +6,18 @@ import CABA3 from "../../public/images/CABA3.webp";
 import DesktopAdminPreview from "../../public/images/desktop-admin-preview.webp";
 import MobileAdminPreview from "../../public/images/mobile-admin-preview.webp";
 import MobileAdminPreviewIphone from "../../public/images/mobile-admin-preview-iphone.webp";
+import MobileBookingPreviewIphone from "../../public/images/mobile-booking-preview-iphone.png";
+import MobileAppInstallPreviewIphone from "../../public/images/app-install-preview-iphone.webp";
+import Pattern from "../../public/utils/pattern1.svg";
 
 export const logoBackgroundBlue = Logo;
 export const logoBackgroundWhite = LogoWhite;
 export const caba1 = CABA1;
 export const caba2 = CABA2;
 export const caba3 = CABA3;
+export const pattern = Pattern;
 export const desktopAdminPreview = DesktopAdminPreview;
 export const mobileAdminPreview = MobileAdminPreview;
 export const mobileAdminPreviewIphone = MobileAdminPreviewIphone;
+export const mobileBookingPreviewIphone = MobileBookingPreviewIphone;
+export const mobileAppInstallPreviewIphone = MobileAppInstallPreviewIphone;

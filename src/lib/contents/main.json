@@ -42,46 +42,31 @@
   },
   "faq": {
     "title": "Preguntas Frecuentes",
+    "page": {
+      "path": "/faq",
+      "title": "preguntas frecuentes",
+      "button": "show-more"
+    },
     "content": [
       {
         "title": "¿Qué es la gestión de propiedad horizontal?",
-        "content": ""
+        "content": "La gestión de propiedad horizontal abarca la administración y el mantenimiento de edificios y conjuntos residenciales, incluyendo áreas comunes, servicios y la resolución de problemas de los propietarios."
       },
       {
         "title": "¿Cómo accedo a mis documentos digitales?",
-        "content": ""
+        "content": "Puedes acceder a tus documentos digitales a través del portal de propietarios en nuestra página web o mediante nuestra aplicación móvil, utilizando tus credenciales de acceso."
       },
       {
         "title": "¿Con qué frecuencia se realizan las asambleas?",
-        "content": ""
+        "content": "Las asambleas ordinarias se realizan anualmente, pero se pueden convocar asambleas extraordinarias cuando sea necesario para tratar asuntos urgentes."
       },
       {
         "title": "¿Cómo se gestionan los pagos de expensas?",
-        "content": ""
+        "content": "Los pagos de expensas se pueden realizar mediante transferencia bancaria, débito automático o directamente en nuestras oficinas. Recibirás un detalle mensual con el monto a pagar y las opciones disponibles."
       },
       {
         "title": "¿Qué hago si tengo un problema en mi unidad?",
-        "content": ""
-      },
-      {
-        "title": "¿Cómo funcionan las reservas de amenities?",
-        "content": ""
-      },
-      {
-        "title": "¿Ofrecen servicios de mantenimiento?",
-        "content": ""
-      },
-      {
-        "title": "¿Cómo se manejan los conflictos entre vecinos?",
-        "content": ""
-      },
-      {
-        "title": "¿Qué información puedo ver como propietario?",
-        "content": ""
-      },
-      {
-        "title": "¿Cómo se garantiza la gestión asd asdasoa?",
-        "content": ""
+        "content": "Si tienes un problema en tu unidad, puedes reportarlo a través de nuestra aplicación móvil, el portal de propietarios o contactando directamente a nuestro equipo de administración para recibir asistencia."
       }
     ]
   },
@@ -90,7 +75,8 @@
     "page": {
       "path": "/documentacion",
       "title": "documentacion",
-      "button": "know-more"
+      "button": "Saber mas",
+      "mainColor": "text-yellow-sec hover:bg-yellow/15"
     },
     "content": [
       {
@@ -135,23 +121,31 @@
       }
     ]
   },
-  "appInstall": {
-    "title": "Pruebe Ahora Nuestras Apps \n para una Gestión Simplificada",
+  "news": {
+    "title": "Ultimas noticias",
+    "page": {
+      "path": "/noticias",
+      "title": "noticias",
+      "button": "Noticias",
+      "mainColor": "text-blue hover:bg-blue/15"
+    },
     "content": [
       {
-        "page": {
-          "path": "/propietarios",
-          "title": "propietarios",
-          "button": "Soy propietario",
-          "className": "bg-yellow text-black"
+        "title": "Bono anual para encargados",
+        "createdAt": "2024-07-21",
+        "mainColor": "bg-green",
+        "content": {
+          "title": "Bonificación Anual para Encargados de Propiedad Horizontal",
+          "description": "Regulación establece bonificación anual en propiedad horizontal. Contenido: El Ministerio de Trabajo anuncia normativa que exige pago de bono anual a encargados de edificios. La medida reconoce su labor esencial y mejora condiciones laborales. Consorcios deben incluirlo en presupuestos desde el próximo año fiscal."
         }
       },
       {
-        "page": {
-          "path": "/administradores",
-          "title": "administadores",
-          "button": "Administradores",
-          "className": "bg-green text-white"
+        "title": "Nuevo régimen de expensas",
+        "createdAt": "2024-07-14",
+        "mainColor": "bg-blue",
+        "content": {
+          "title": "Implementa Régimen de Información de Expensas",
+          "description": "Nuevo sistema para reportar gastos en consorcios. Contenido: AFIP introduce sistema obligatorio para que administradores reporten detalladamente gastos e ingresos de propiedades horizontales. Busca aumentar transparencia y combatir evasión fiscal. Informes trimestrales requeridos a través de plataforma en línea de AFIP."
         }
       }
     ]

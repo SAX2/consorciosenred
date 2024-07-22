@@ -1,6 +1,6 @@
 import { StaticDataType } from '@/lib/types/data.types';
 import { cn } from '@/lib/utils';
-import { IconArrowRight } from '@tabler/icons-react';
+import { IconArrowNarrowRight, IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react'
 
@@ -22,13 +22,13 @@ const Section: React.FC<SectionProps> = ({ data, children, className, black }) =
       <div className="flex flex-col gap-8 py-16 max-md:py-12 w-full">
         <div
           className={cn(
-            "flex gap-1 max-md:justify-center",
+            "flex gap-1",
             data.page?.path && "justify-between items-center"
           )}
         >
           <h2
             className={cn(
-              "font-geist font-bold text-3xl  max-md:text-center tracking-tight",
+              "font-geist font-semibold text-3xl tracking-tight",
               black ? "text-white" : "text-black"
             )}
           >
@@ -37,18 +37,30 @@ const Section: React.FC<SectionProps> = ({ data, children, className, black }) =
           {data.page && (
             <Link
               href={data.page?.path}
-              title={data.page?.title}
-              className="flex items-center gap-1 font-medium bg-grey p-1 rounded-md h-fit hover:bg-gray-100 transition-colors max-md:transition-none max-md:hidden"
-            >
-              {data.page.button === "know-more" && (
-                <>
-                  Saber mas <IconArrowRight width={16} height={16} />
-                </>
+              title={data?.title}
+              className={cn(
+                "w-fit flex items-center text-lg gap-1 px-3 py-1 rounded-md font-medium transition-colors max-md:hidden",
+                data.page.mainColor
               )}
+            >
+              {data.page?.button}{" "}
+              <IconArrowNarrowRight width={24} height={24} />
             </Link>
           )}
         </div>
         {children}
+        {data.page && (
+          <Link
+            href={data.page?.path}
+            title={data?.title}
+            className={cn(
+              "w-fit hidden items-center text-lg gap-1 px-3 py-1 rounded-md font-medium transition-colors max-md:flex",
+              data.page.mainColor
+            )}
+          >
+            {data.page?.button} <IconArrowNarrowRight width={24} height={24} />
+          </Link>
+        )}
       </div>
     </section>
   );

@@ -53,6 +53,7 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         "black": "#0A0A0A",
+        "black-app-bg": "#0E0E0E",
         "white": "#FFFFFF",
         "blue-sec": "#00497C",
         "blue": "#086FB7",
@@ -62,7 +63,7 @@ const config = {
         "yellow": "#FFE564",
         "text-grey": "#8B8B8B",
         "grey": "#F9F9F9",
-        "outline": "#E2E2E2"
+        "outline": "#E2E2E2",
       },
       borderRadius: {
         lg: "var(--radius)",

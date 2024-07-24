@@ -8,7 +8,7 @@ import { caba1, desktopAdminPreview, mobileAdminPreviewIphone } from "@/lib/imag
 import { IconArrowNarrowRight, IconChevronRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { useInView } from "framer-motion"
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import main from '@/lib/contents/main.json'
 import Link from "next/link";
@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between scroll-smooth">
       <article
-        className="flex flex-col items-center bg-black w-full px-8 max-md:px-4"
+        className="flex flex-col items-center bg-black w-full px-8 max-md:px-4 selection:text-sky-400"
         ref={mainSection}
       >
         <section className="items-center h-screen-main-h h-full max-w-[1000px] w-full justify-center flex max-sm:items-end max-sm:pb-28">
@@ -133,10 +133,9 @@ export default function Home() {
       <article className="flex flex-col items-center bg-white w-full px-8 max-md:px-4">
         {services.map((service, index) => {
           return (
-            <>
+            <React.Fragment key={service.title}>
               <Service
                 service={service}
-                key={service.title}
                 className={cn(
                   (index + 1) % 2 == 0 ? "flex-row-reverse" : "flex-row"
                 )}
@@ -144,7 +143,7 @@ export default function Home() {
               <div className="max-w-[1000px] w-full py-8">
                 {index + 1 !== services.length && <Separator />}
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </article>
@@ -162,11 +161,8 @@ export default function Home() {
             <div className="flex justify-center gap-3 w-full max-md:flex-col max-md:gap-4">
               {main.metrics.content.map((metric, index: number) => {
                 return (
-                  <>
-                    <div
-                      className="flex flex-col gap-2 w-full items-center"
-                      key={metric.content + index}
-                    >
+                  <React.Fragment key={metric.content + index}>
+                    <div className="flex flex-col gap-2 w-full items-center">
                       <AnimatedCounter
                         plus={true}
                         from={0}
@@ -180,7 +176,7 @@ export default function Home() {
                       </h3>
                     </div>
                     <Separator orientation="vertical" />
-                  </>
+                  </React.Fragment>
                 );
               })}
             </div>
@@ -208,22 +204,29 @@ export default function Home() {
           <Carousel>
             <CarouselContent className="gap-4 pl-4">
               {main.videos.content.map((item) => {
+                const url = "";
+                // const url = "https://www.youtube.com/embed/2dpUZT9hqIQ?si=IJjKj9N7DonjorJi";
+
                 return (
                   <CarouselItem
-                    key={item.title}
+                    key={item.title + self.crypto.randomUUID()}
                     className="bg-grey max-w-[400px] min-h-[200px] rounded-md flex items-center p-0 justify-center"
                   >
-                    <iframe
-                      width="400"
-                      height="100%"
-                      src="https://www.youtube.com/embed/2dpUZT9hqIQ?si=IJjKj9N7DonjorJi"
-                      title="YouTube video player"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="rounded-md"
-                    ></iframe>
+                    {!url && <p className='text-text-grey'>No URL/Video</p>}
+                    {url && (
+                      <iframe
+                        width="400"
+                        height="100%"
+                        src={url}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                        allowTransparency
+                        className="rounded-md"
+                      ></iframe>
+                    )}
                   </CarouselItem>
                 );
               })}
@@ -234,8 +237,8 @@ export default function Home() {
             </div>
           </Carousel>
         </Section>
-        <section className="h-full max-w-[1000px] w-full justify-center flex py-8 max-md:py-8 gap-12 max-md:flex-col">
-          <div className="w-[70%] max-md:w-full">
+        <section className="h-full max-w-[1000px] w-full justify-center flex py-8 max-md:py-8 gap-12 max-md:flex-col relative">
+          <div className="w-[70%] max-md:w-full sticky top-40 h-fit max-md:block">
             <h2 className="font-semibold font-geist text-3xl leading-tight tracking-tight">
               {main.faq.title}
             </h2>
@@ -269,7 +272,7 @@ export default function Home() {
           </div>
         </section>
       </article>
-      <article className="flex flex-col items-center bg-black w-full px-8 max-md:px-4">
+      <article className="flex flex-col items-center bg-black w-full px-8 max-md:px-4 selection:text-sky-400" id='descargar'>
         <section className="items-center h-full max-w-[1000px] w-full justify-center flex py-16 gap-8 max-md:flex-col">
           <div className="w-full flex flex-col gap-8 max-md:max-w-[340px]">
             <h2 className="text-white font-semibold text-6xl max-md:text-4xl max-md:text-center">

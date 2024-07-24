@@ -33,7 +33,7 @@ const NewsCard = ({ content,mainPath }: NewsCardProps) => {
     >
       <div
         className={cn(
-          "w-full p-6 h-[275px] rounded-xl flex items-end relative group",
+          "w-full p-6 h-[275px] rounded-xl flex items-end relative group select-none",
           content.mainColor
         )}
       >

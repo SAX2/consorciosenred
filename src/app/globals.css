@@ -163,3 +163,7 @@
   .side-h {
     grid-area: h;
   }
+
+  ::selection {
+    @apply bg-blue/20 text-blue;
+  }

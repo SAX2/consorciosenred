@@ -23,6 +23,14 @@ export const login = async ({ username, password }: { username: string, password
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
+    
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      const responseText = await response.text();
+      console.error('Unexpected content type:', contentType);
+      console.error('Response body:', responseText);
+      return { error: 'Hubo un error, intente nuevamente' }
+    }
 
     let data = await response.json();
 

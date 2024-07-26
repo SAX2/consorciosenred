@@ -11,6 +11,7 @@ import { login } from '../actions';
 const page = () => {
   const [formData, setFormData] = useState({ email: "", password: "", username: "username" });
   const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState({ status: false, text: "" });
 
   const handleChange = (type: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prevState => ({
@@ -22,12 +23,19 @@ const page = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    setError({ status: false, text: "" })
     if (!formData.password || !formData.username) return;
 
     startTransition(() => {
       login({
         password: formData.password,
         username: formData.username,
+      }).then((res) => {
+        if (res.error) {
+          throw new Error(res.error);
+        }
+      }).catch((error) => {
+        setError({ status: true, text: error.message });
       });
     })
   };
@@ -40,6 +48,7 @@ const page = () => {
             {auth.login.title}
           </h1>
         </Header>
+        {error.status && <p className='text-red-600 font-medium'>{error.text}</p>}
         <form
           action=""
           className="w-full flex flex-col gap-4"

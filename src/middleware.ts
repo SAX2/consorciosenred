@@ -5,7 +5,9 @@ import type { NextRequest } from 'next/server'
 export async function middleware(request: NextRequest) {
   const cookie = cookies();
 
-  const token = cookie.get('token');
+  const token = cookie.get('token')?.value as string;
+
+  const decoded = token ? atob(token) : null;
 
   // if (request.nextUrl.pathname.startsWith('/prop')) {
   //   return NextResponse.rewrite(new URL('/about-2', request.url))

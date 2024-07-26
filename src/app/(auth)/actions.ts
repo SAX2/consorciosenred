@@ -32,7 +32,7 @@ export const login = async ({ username, password }: { username: string, password
     const role = cookie.get('role')
 
     if (role?.value == '[Propietario]') {
-      redirect('/prop')
+      redirect('/prp')
     }
 
     return data;

@@ -53,19 +53,27 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         "black": "#0A0A0A",
-        "black-app-bg": "#0E0E0E",
+
+        "black-app-bg": "#121212",
         "white": "#FFFFFF",
+
         "blue-sec": "#00497C",
         "blue": "#086FB7",
         "green": "#75B838",
         "green-sec": "#3C7E00",
         "yellow-sec": "#C9A700",
         "yellow": "#FFE564",
+
         "text-grey": "#8B8B8B",
         "grey": "#F9F9F9",
-        "outline": "#E2E2E2",
+        "grey-sec": "#F1F1F1",
+        "outline": "#DFDFDF",
+        
+        "grey-dark": "#222222",
+        "grey-sec-dark": "#1C1C1C",
+        "outline-dark": "#4A4A4A",
       },
-      borderRadius: {
+      borderRadius: { 
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useTransition } from 'react'
 import Header from '../components/Header';
 import Input from '../components/Input';
 import auth from '@/lib/contents/auth.json'
@@ -10,7 +10,7 @@ import { login } from '../actions';
 
 const page = () => {
   const [formData, setFormData] = useState({ email: "", password: "", username: "username" });
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
 
   const handleChange = (type: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prevState => ({
@@ -24,18 +24,12 @@ const page = () => {
 
     if (!formData.password || !formData.username) return;
 
-    // setLoading(true) 
-
-    login({
-      password: formData.password,
-      username: formData.username,
-    });
-
-    // const data = (await res).json()
-    // console.log(data)
-
-    // if (res.status === "complete") return setLoading(false);
-    // setLoading(false);
+    startTransition(() => {
+      login({
+        password: formData.password,
+        username: formData.username,
+      });
+    })
   };
 
   return (
@@ -51,10 +45,10 @@ const page = () => {
           className="w-full flex flex-col gap-4"
           onSubmit={handleSubmit}
         >
-          {auth.login.inputs.map((item) => {
+          {auth.login.inputs.map((item, index) => {
             return (
               <Input
-                key={item.label + self.crypto.randomUUID()}
+                key={item.label + index}
                 label={item.label}
                 placeholder={item.placeholder}
                 onChange={handleChange(item.type)}
@@ -62,7 +56,7 @@ const page = () => {
             );
           })}
           <Input
-            disabled={loading}
+            disabled={isPending}
             key={"submit"}
             type="submit"
             value="Ingresar"

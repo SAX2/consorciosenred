@@ -9,6 +9,8 @@ import MobileAdminPreviewIphone from "../../public/images/mobile-admin-preview-i
 import MobileBookingPreviewIphone from "../../public/images/mobile-booking-preview-iphone.png";
 import MobileAppInstallPreviewIphone from "../../public/images/app-install-preview-iphone.webp";
 import Pattern from "../../public/utils/pattern1.svg";
+import UserImage from "../../public/utils/user-image.webp";
+import AcrobatLogo from "../../public/utils/acrobat-logo.svg";
 
 export const logoBackgroundBlue = Logo;
 export const logoBackgroundWhite = LogoWhite;
@@ -21,3 +23,5 @@ export const mobileAdminPreview = MobileAdminPreview;
 export const mobileAdminPreviewIphone = MobileAdminPreviewIphone;
 export const mobileBookingPreviewIphone = MobileBookingPreviewIphone;
 export const mobileAppInstallPreviewIphone = MobileAppInstallPreviewIphone;
+export const userImage = UserImage;
+export const acrobatLogo = AcrobatLogo;

@@ -163,3 +163,19 @@
   .side-h {
     grid-area: h;
   }
+
+  .icon-blue {
+    @apply bg-[#3FA4EA]/25 border-[#3FA4EA]/25 text-blue dark:text-[#70C4FF]
+  }
+
+  .icon-purple {
+    @apply bg-[#A87EFF]/25 border-[#A87EFF]/25 text-[#A87EFF]
+  }
+
+  .icon-yellow {
+    @apply bg-[#FFDF41]/25 border-[#C1A30A]/25 text-[#C1A30A] dark:bg-yellow/25 dark:border-yellow/25 dark:text-yellow
+  }
+
+  .icon-green {
+    @apply bg-green/25 border-green/25 text-green-sec dark:text-green
+  }

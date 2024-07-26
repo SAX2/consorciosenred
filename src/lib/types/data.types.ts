@@ -1,5 +1,7 @@
 import { StaticImageData } from "next/image";
 
+export type roles = "[Propietario]" | "[Administrador]";
+
 export type StaticDataType = {
   title: string;
   content?: string | any[];

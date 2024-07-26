@@ -3,7 +3,6 @@ import footer from '@/lib/contents/footer';
 import Link from 'next/link';
 import Image from 'next/image';
 import { logoBackgroundBlue } from '@/lib/images';
-import { randomUUID } from 'crypto';
 
 const Footer = () => {
   return (
@@ -61,7 +60,7 @@ const Footer = () => {
                         return (
                           <Link
                             title={item.page.title}
-                            href={`${randomUUID()}_${item.page.path}`}
+                            href={`${Math.random() * 10}_${item.page.path}`}
                             key={item.page.title}
                             className="text-black hover:underline"
                           >

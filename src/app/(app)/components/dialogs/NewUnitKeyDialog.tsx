@@ -18,7 +18,7 @@ const NewUnitKeyDialog = () => {
         <span className="font-medium">Agregar / Modificar unidades</span>
         <IconChevronRight width={20} height={20} />
       </DialogTrigger>
-      <DialogContent className="bg-grey-sec dark:bg-grey-sec-dark border-outline dark:border-outline-dark max-w-[425px]">
+      <DialogContent className="bg-white dark:bg-grey-sec-dark border-outline dark:border-outline-dark max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="font-geist text-2xl">
             Vinculación de Unidades Funcionales

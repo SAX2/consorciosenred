@@ -22,3 +22,5 @@ export type ServicesStatic = {
   image: StaticImageData;
   mainColor?: string;
 }
+
+export type QueryFileProps = { type: "uf_aviso" | "uf_liquidaciones"; id: string; name: string }

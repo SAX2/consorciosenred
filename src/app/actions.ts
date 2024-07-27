@@ -6,14 +6,14 @@ import { redirect } from "next/navigation";
 export const getAuthHeaders = () => {
   const cookie = cookies();
 
-  const token = cookie.get("token")
+  const token = cookie.get("token")?.value
 
   
-  if (!token?.value) return redirect('/ingresar');
+  if (!token) return redirect('/ingresar');
   
   const headers = {
-    "Authorization": "Basic " + token?.value,
-    "TOKEN": token?.value,
+    "Authorization": `Basic ${token}`,
+    "TOKEN": token,
     "Content-Type": "application/json",
   }
 

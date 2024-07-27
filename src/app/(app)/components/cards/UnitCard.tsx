@@ -98,7 +98,7 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit }) => {
             icon={<IconMailFast width={32} height={32} />}
             mainColors="icon-yellow"
           >
-            <a href={mostRecentLiquidation.nombreAdjunto}>
+            <Link target='_blank' href={`/file/uf_liquidaciones/${mostRecentLiquidation.id}/${mostRecentLiquidation.nombreAdjunto}`}>
               <Pill
                 text={`${mostRecentLiquidation.titulo}`}
                 icon={
@@ -111,7 +111,7 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit }) => {
                 }
                 className="text-sm"
               />
-            </a>
+            </Link>
           </SemiSectionCard>
           {unit.uf_aviso.length > 0 && (
             <SemiSectionCard
@@ -120,7 +120,7 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit }) => {
               icon={<IconAlertCircle width={32} height={32} />}
               mainColors="icon-green"
             >
-              <a href={unit.uf_aviso[0].nombreAdjunto}>
+              <Link target='_blank' href={`/file/uf_aviso/${unit.uf_aviso[0].id}/${unit.uf_aviso[0].nombreAdjunto}`}>
                 <Pill
                   text={`${unit.uf_aviso[0].titulo}`}
                   icon={
@@ -133,7 +133,7 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit }) => {
                   }
                   className="text-sm"
                 />
-              </a>
+              </Link>
             </SemiSectionCard>
           )}
         </div>

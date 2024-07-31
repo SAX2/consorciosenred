@@ -17,13 +17,14 @@ import AnimatedCounter from "./components/AnimatedCounter";
 import Section from "./components/hero-sections/Section";
 import Service from "./components/hero-sections/Services";
 import NewsCard from "./components/card/NewsCard";
+import Main from './components/Main';
 
 export default function Home() {
   const mainSection = useRef(null);
   const isMainSectionInView = useInView(mainSection, { once: true });
 
   return (
-    <main className="flex flex-col items-center justify-between scroll-smooth">
+    <Main>
       <article
         className="flex flex-col items-center bg-black w-full px-8 max-md:px-4 selection:text-sky-400"
         ref={mainSection}
@@ -309,6 +310,6 @@ export default function Home() {
           </div>
         </section>
       </article>
-    </main>
+    </Main>
   );
 }

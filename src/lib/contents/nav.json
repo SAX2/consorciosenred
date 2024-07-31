@@ -2,7 +2,7 @@
   "routes": [
     {
       "title": "Sobre nosotros",
-      "path": "#historia",
+      "path": "/sobre-nosotros",
       "type": "link"
     },
     {

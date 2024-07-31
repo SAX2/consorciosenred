@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React, { useState, useRef } from 'react'
 import navigation from '@/lib/contents/nav.json'
-import Burger from './Burger';
+import Burger from '@/components/navbar/Burger';
 
 const Navbar = () => {
   const header = useRef(null)

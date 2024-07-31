@@ -1,0 +1,38 @@
+{
+  "mainColor": "text-blue marker:text-blue bg-blue/15 border-blue/25",
+  "pill": "Sobre nosotros",
+  "about": {
+    "titulo": "Expertos en Propiedad Horizontal desde 1979",
+    "descripcion": "En ConsorciosEnRed™, llevamos más de 45 años dedicados exclusivamente a brindar servicios para Administradores de Propiedad Horizontal. Nuestra extensa experiencia nos ha permitido comprender a fondo la complejidad y los desafíos diarios que enfrentan las Administraciones y los Consorcios de Propietarios.",
+    "mision": {
+      "titulo": "Nuestra Misión",
+      "descripcion": "Maximizar la gestión administrativa y crear nuevas oportunidades de negocios para el sector de la propiedad horizontal, optimizando tiempos y costos para todos los usuarios."
+    },
+    "porQueElegirnos": [
+      {
+        "titulo": "Experiencia",
+        "descripcion": "Más de cuatro décadas especializándonos en el sector."
+      },
+      {
+        "titulo": "Innovación",
+        "descripcion": "Plataforma integral que agiliza la comunicación en la comunidad consorcial."
+      },
+      {
+        "titulo": "Soluciones Personalizadas",
+        "descripcion": "Atención adaptada a las necesidades específicas de cada usuario."
+      },
+      {
+        "titulo": "Digitalización",
+        "descripcion": "Herramientas avanzadas para la gestión de expensas, reclamos y documentación."
+      },
+      {
+        "titulo": "Información Actualizada",
+        "descripcion": "Acceso a las últimas noticias y normativas del sector."
+      }
+    ],
+    "nuestroEquipo": {
+      "titulo": "Nuestro Equipo",
+      "descripcion": "Contamos con un equipo de profesionales dedicados, cuyo objetivo principal es brindar soluciones adecuadas a las necesidades y requerimientos de nuestros usuarios, desde administradores hasta propietarios e inquilinos."
+    }
+  }
+}

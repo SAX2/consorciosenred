@@ -19,6 +19,12 @@
     "description": "Captura del panel de administrador"
   },
   "experience": {
+    "page": {
+      "path": "/sobre-nosotros",
+      "title": "Sobre nosotros",
+      "button": "Saber mas",
+      "mainColor": "text-green hover:bg-green/15"
+    },
     "title": "Nuestra Experiencia de más de 45 Años",
     "content": "Nos dedicamos exclusivamente a brindar servicios especializados para Administradores de Propiedad Horizontal. Entendemos la complejidad y los desafíos diarios que enfrentan las Administraciones y Consorcios de Propietarios. Nuestra experiencia nos ha permitido desarrollar ConsorciosEnRed™, una herramienta integral que optimiza la gestión y comunicación dentro de la comunidad consorcial."
   },

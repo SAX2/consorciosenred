@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { IconLogout, IconSettings } from '@tabler/icons-react';
 import Image from 'next/image';
 import React from 'react'
+import ButtonLogout from './ButtonLogout';
 
 interface UserCardProps {
   className?: string;
@@ -34,9 +35,7 @@ const UserCard: React.FC<UserCardProps> = ({ className }) => {
         <button className="p-2 rounded-md hover:bg-grey-sec hover:dark:bg-grey-sec-dark text-text-grey">
           <IconSettings width={22} height={22} />
         </button>
-        <button className="p-2 rounded-md hover:bg-grey-sec hover:dark:bg-grey-sec-dark text-text-grey">
-          <IconLogout width={22} height={22} />
-        </button>
+        <ButtonLogout />
       </div>
     </div>
   );

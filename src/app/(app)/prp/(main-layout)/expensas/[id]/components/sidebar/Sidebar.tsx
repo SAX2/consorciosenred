@@ -5,7 +5,7 @@ import NavLink from "@/app/(app)/components/sidebar/NavLink";
 import { sidebar } from "@/lib/contents/(app)/sidebar";
 import useSidebar from "@/lib/hooks/useSIdebar";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import React from "react";
 
 const Sidebar = () => {

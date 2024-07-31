@@ -7,11 +7,13 @@ import auth from '@/lib/contents/auth.json'
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { login } from '../actions';
+import { Switch } from '@/components/ui/switch';
 
 const page = () => {
   const [formData, setFormData] = useState({ email: "", password: "", username: "username" });
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState({ status: false, text: "" });
+  const [saveData, setSaveData] = useState<boolean>(false);
 
   const handleChange = (type: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prevState => ({
@@ -30,6 +32,7 @@ const page = () => {
       login({
         password: formData.password,
         username: formData.username,
+        save: saveData,
       }).then((res) => {
         if (res.error) {
           throw new Error(res.error);
@@ -48,7 +51,9 @@ const page = () => {
             {auth.login.title}
           </h1>
         </Header>
-        {error.status && <p className='text-red-600 font-medium'>{error.text}</p>}
+        {error.status && (
+          <p className="text-red-600 font-medium">{error.text}</p>
+        )}
         <form
           action=""
           className="w-full flex flex-col gap-4"
@@ -72,16 +77,29 @@ const page = () => {
             value="Ingresar"
             className="!border-0 bg-green text-white font-medium cursor-pointer"
           />
-          <div className='flex gap-2 flex-wrap'>
-            <span className='text-text-grey'>{auth.login.register.page.title}</span>
-            <Link href={auth.login.register.page.path} className='underline font-medium'>
+          <div className='flex items-center gap-2'>
+            <span className='text-text-grey'>Guardar mis datos</span>
+            <Switch
+              checked={saveData}
+              onCheckedChange={setSaveData}
+              className="data-[state=checked]:bg-blue"
+            />
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <span className="text-text-grey">
+              {auth.login.register.page.title}
+            </span>
+            <Link
+              href={auth.login.register.page.path}
+              className="underline font-medium"
+            >
               {auth.login.register.page.button}
             </Link>
           </div>
         </form>
-        <Separator className='max-md:my-4'/>
-        <div className='flex flex-col gap-2'>
-          {auth.login.links.map(route => {
+        <Separator className="max-md:my-4" />
+        <div className="flex flex-col gap-2">
+          {auth.login.links.map((route) => {
             return (
               <div className="flex gap-2 flex-wrap" key={route.page.path}>
                 <span className="text-text-grey">{route.page.title}</span>

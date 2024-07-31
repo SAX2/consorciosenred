@@ -3,7 +3,7 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation";
 
-export const login = async ({ username, password }: { username: string, password: string }) => {
+export const login = async ({ username, password, save }: { username: string, password: string, save: boolean }) => {
   const cookie = cookies()
 
   try {
@@ -34,7 +34,13 @@ export const login = async ({ username, password }: { username: string, password
 
     let data = await response.json();
 
-    cookie.set("token", data.TOKEN)
+    const month = 30 * 24 * 60 * 60 * 1000;
+
+    cookie.set({
+      name: "token",
+      value: data.TOKEN,
+      expires: save ? new Date(Date.now() + month) : undefined
+    })
     cookie.set("role", data.roles[0])
 
     const role = cookie.get('role')

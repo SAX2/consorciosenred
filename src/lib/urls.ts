@@ -1,1 +1,0 @@
-export const urlControlPanel = "https://www.consorciosenred.com/cerDevelopment/cer_exp.nsf/xsp/.xrest/panel"

@@ -57,6 +57,7 @@ const page = () => {
           {auth.login.inputs.map((item, index) => {
             return (
               <Input
+                type={item.type}
                 key={item.label + index}
                 label={item.label}
                 placeholder={item.placeholder}

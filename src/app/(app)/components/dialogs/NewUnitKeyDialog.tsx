@@ -9,18 +9,24 @@ import {
 } from "@/components/ui/dialog"
 import { IconChevronRight } from '@tabler/icons-react';
 import Input from '@/app/(auth)/components/Input';
+import { cn } from '@/lib/utils';
 
 
-const NewUnitKeyDialog = () => {
+const NewUnitKeyDialog = ({ className, classSpan }:  { className?: string, classSpan?: string }) => {
   return (
     <Dialog>
-      <DialogTrigger className="w-fit px-2 py-1 flex items-center gap-[6px] border border-[#75B838]/25 bg-[#75B838]/25 dark:text-green text-green-sec rounded-md  max-md:w-full  max-md:justify-center">
-        <span className="font-medium">Agregar / Modificar unidades</span>
+      <DialogTrigger
+        className={cn(
+          "w-fit px-2 py-1 flex items-center gap-[6px] border border-[#75B838]/25 bg-[#75B838]/25 dark:text-green text-green-sec rounded-md  max-lg:w-full  max-lg:justify-center",
+          className
+        )}
+      >
+        <span className={cn("font-medium", classSpan)}>Agregar / Modificar unidades</span>
         <IconChevronRight width={20} height={20} />
       </DialogTrigger>
-      <DialogContent className="bg-white dark:bg-grey-sec-dark border-outline dark:border-outline-dark max-w-[425px]">
+      <DialogContent className="bg-white dark:bg-grey-sec-dark border-outline dark:border-outline-dark max-w-[425px] !text-start">
         <DialogHeader>
-          <DialogTitle className="font-geist text-2xl">
+          <DialogTitle className="font-geist text-2xl dark:text-white">
             Vinculación de Unidades Funcionales
           </DialogTitle>
           <DialogDescription className="text-text-grey text-md">

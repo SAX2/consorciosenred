@@ -3,11 +3,12 @@ import React from 'react'
 
 export interface PillProps {
   className?: string;
+  classNameText?: string;
   text: string;
   icon?: React.ReactElement;
 }
 
-const Pill: React.FC<PillProps> = ({ text, className, icon }) => {
+const Pill: React.FC<PillProps> = ({ text, className, icon, classNameText }) => {
   return (
     <div
       className={cn(
@@ -16,7 +17,7 @@ const Pill: React.FC<PillProps> = ({ text, className, icon }) => {
       )}
     >
       {icon}
-      <span className='text-black dark:text-white font-medium'>{text}</span>
+      <span className={cn('text-black dark:text-white font-medium', classNameText)}>{text}</span>
     </div>
   );
 };

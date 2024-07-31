@@ -9,7 +9,7 @@ const layout: React.FC<layoutProps> = ({ children }) => {
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme=""
+      defaultTheme="dark"
       enableSystem
       disableTransitionOnChange
     >

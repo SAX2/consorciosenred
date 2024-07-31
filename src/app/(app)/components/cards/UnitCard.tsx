@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { acrobatLogo } from '@/lib/images';
 import Link from 'next/link';
+import ShortcutsGrid from '../sections/ShortcutsGrid';
+import { shortcuts } from '@/lib/contents/(app)/shortcuts';
 
 interface UnitCardProps {
   unit: any;
@@ -15,21 +17,28 @@ interface SemiSectionCardProps {
   mainColors: "icon-yellow" | "icon-green" | "icon-blue" | "icon-purple";
   icon: React.ReactElement;
   children: React.ReactNode;
+  className?: string;
 }
 
-const SemiSectionCard: React.FC<SemiSectionCardProps> = ({
+export const SemiSectionCard: React.FC<SemiSectionCardProps> = ({
   children,
   icon,
   mainColors,
   titles,
+  className
 }) => {
   return (
-    <div className="p-3 rounded-lg border-outline-dark text-black bg-grey-sec dark:bg-grey-sec-dark dark:text-white flex items-center gap-1 justify-between">
+    <div
+      className={cn(
+        "p-3 rounded-xl border-outline-dark text-black bg-grey-sec dark:bg-grey-sec-dark dark:text-white flex items-center gap-1 justify-between",
+        className
+      )}
+    >
       <div className="flex items-center gap-3">
-        <div className={cn(mainColors, "p-1 rounded-md border")}>{icon}</div>
-        <div className='flex flex-col'>
+        <div className={cn(mainColors, "p-1 rounded-lg border")}>{icon}</div>
+        <div className="flex flex-col">
           {titles.map((title) => (
-            <p className="text-md">{title}</p>
+            <p className="text-md font-medium">{title}</p>
           ))}
         </div>
       </div>
@@ -92,27 +101,32 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit }) => {
               )}
             </div>
           </SemiSectionCard>
-          <SemiSectionCard
-            titles={["Ultima liquidacion"]}
-            key={"Ultima liquidacion"}
-            icon={<IconMailFast width={32} height={32} />}
-            mainColors="icon-yellow"
-          >
-            <Link target='_blank' href={`/file/uf_liquidaciones/${mostRecentLiquidation.id}/${mostRecentLiquidation.nombreAdjunto}`}>
-              <Pill
-                text={`${mostRecentLiquidation.titulo}`}
-                icon={
-                  <Image
-                    src={acrobatLogo}
-                    width={15}
-                    height={15}
-                    alt="pdf logo"
-                  />
-                }
-                className="text-sm"
-              />
-            </Link>
-          </SemiSectionCard>
+          {mostRecentLiquidation && (
+            <SemiSectionCard
+              titles={["Ultima liquidacion"]}
+              key={"Ultima liquidacion"}
+              icon={<IconMailFast width={32} height={32} />}
+              mainColors="icon-yellow"
+            >
+              <Link
+                target="_blank"
+                href={`/file/uf_liquidaciones/${mostRecentLiquidation.id}/${mostRecentLiquidation.nombreAdjunto}`}
+              >
+                <Pill
+                  text={`${mostRecentLiquidation.titulo}`}
+                  icon={
+                    <Image
+                      src={acrobatLogo}
+                      width={15}
+                      height={15}
+                      alt="pdf logo"
+                    />
+                  }
+                  className="text-sm"
+                />
+              </Link>
+            </SemiSectionCard>
+          )}
           {unit.uf_aviso.length > 0 && (
             <SemiSectionCard
               titles={["Aviso de pago"]}
@@ -120,7 +134,10 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit }) => {
               icon={<IconAlertCircle width={32} height={32} />}
               mainColors="icon-green"
             >
-              <Link target='_blank' href={`/file/uf_aviso/${unit.uf_aviso[0].id}/${unit.uf_aviso[0].nombreAdjunto}`}>
+              <Link
+                target="_blank"
+                href={`/file/uf_aviso/${unit.uf_aviso[0].id}/${unit.uf_aviso[0].nombreAdjunto}`}
+              >
                 <Pill
                   text={`${unit.uf_aviso[0].titulo}`}
                   icon={
@@ -138,12 +155,15 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit }) => {
           )}
         </div>
       </div>
-      <Link
-        href={`/expensas/uni/${unit.uf_id}?cde=${unit.uf_codEdificio}`}
-        className="bg-grey-sec border border-outline dark:bg-grey-sec-dark dark:border-outline-dark flex items-center justify-center w-full rounded-md py-2 gap-1 font-medium"
-      >
-        Mas informacion <IconArrowRight width={18} height={18} />
-      </Link>
+      <div className='flex flex-col gap-3'>
+        <ShortcutsGrid data={shortcuts} addShortcuts={false} />
+        <Link
+          href={`/prp/expensas/${unit.uf_id}`}
+          className="bg-grey-sec border border-outline dark:bg-grey-sec-dark dark:border-outline-dark flex items-center justify-center w-full rounded-md py-2 gap-1 font-medium"
+        >
+          Ver mas <IconArrowRight width={18} height={18} />
+        </Link>
+      </div>
     </div>
   );
 }

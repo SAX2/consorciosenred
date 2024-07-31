@@ -2,31 +2,25 @@ import {
   IconArticle,
   IconBell,
   IconBook,
+  IconBox,
   IconGavel,
   IconHelpHexagon,
   IconLayout,
   IconLogout,
+  IconPackages,
   IconReceipt2,
   IconUsers,
 } from "@tabler/icons-react";
 
-export const verticalPrp = {
+export const sidebar = {
   top: [
     {
-      descripcion: "Panel de control",
+      descripcion: "Unidad",
       posicion: 1,
       colorFondo: "",
-      titulo: "PANEL",
-      iconoWeb: <IconLayout width={22} height={22} />,
-      url: "/",
-    },
-    {
-      descripcion: "Mis expensas",
-      posicion: 1,
-      colorFondo: "",
-      titulo: "EXPENSAS",
-      iconoWeb: <IconReceipt2 width={22} height={22} />,
-      url: "/expensas",
+      titulo: "UNIDAD",
+      iconoWeb: <IconBox width={22} height={22} />,
+      url: "",
     },
     {
       descripcion: "Novedades",
@@ -68,23 +62,31 @@ export const verticalPrp = {
       iconoWeb: <IconBook width={22} height={22} />,
       url: "/reglamento",
     },
-  ],
-  bottom: [
     {
-      descripcion: "Ayuda",
+      descripcion: "Todas las unidades",
       posicion: 1,
       colorFondo: "",
-      titulo: "AYUDA",
-      iconoWeb: <IconHelpHexagon width={22} height={22} />,
-      url: "/ayuda",
-    },
-    {
-      descripcion: "Desconectarse",
-      posicion: 1,
-      colorFondo: "",
-      titulo: "LOGOUT",
-      iconoWeb: <IconLogout width={22} height={22} />,
-      url: "/sign-out",
+      titulo: "TODAS LAS UNIDADES",
+      iconoWeb: <IconPackages width={22} height={22} />,
+      url: "/prp/expensas",
     },
   ],
+  // bottom: [
+  //   {
+  //     descripcion: "Ayuda",
+  //     posicion: 1,
+  //     colorFondo: "",
+  //     titulo: "AYUDA",
+  //     iconoWeb: <IconHelpHexagon width={22} height={22} />,
+  //     url: "/ayuda",
+  //   },
+  //   {
+  //     descripcion: "Desconectarse",
+  //     posicion: 1,
+  //     colorFondo: "",
+  //     titulo: "LOGOUT",
+  //     iconoWeb: <IconLogout width={22} height={22} />,
+  //     url: "/sign-out",
+  //   },
+  // ],
 };

@@ -7,7 +7,7 @@ interface SidebarStore {
 }
 
 const useSidebar = create<SidebarStore>((set) => ({
-  isOpen: true, // Initial value for SSR
+  isOpen: false, // Initial value for SSR
   toggle: () => set((state) => {
     const newState = !state.isOpen;
     if (typeof window !== 'undefined') {

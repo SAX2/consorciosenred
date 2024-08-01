@@ -136,16 +136,27 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
   if (data.length <= 0) return <div>Not found</div>
 
   return (
-    <TitleSection
-      pageTitle="Mis expensas"
-      className="w-full col-span-1 pb-8 max-md:pb-0 mt-0"
-      backUrl={true}
-      isFirst={true}
-      unitPage
-      // link={{ href: "/expensas", title: "Ver todos los edificios" }}
-    >
-      <UnitInfo unit={data[0]} key={data[0].uf_id}/>
-    </TitleSection>
+    <div className='flex flex-col gap-8'>
+      <TitleSection
+        pageTitle="Mis expensas"
+        className="w-full col-span-1 pb-8 max-md:pb-0 mt-0"
+        backUrl={true}
+        isFirst={true}
+        unitPage
+        // link={{ href: "/expensas", title: "Ver todos los edificios" }}
+      >
+        <UnitInfo unit={data[0]} key={data[0].uf_id} />
+      </TitleSection>
+      <TitleSection
+        title="Histórico de Expensas"
+        className="w-full col-span-1 pb-8 max-md:pb-0 mt-0"
+        pills={[{ text: data[0].uf_liquidaciones.length }]}
+        unitPage
+        // link={{ href: "/expensas", title: "Ver todos los edificios" }}
+      >
+        table
+      </TitleSection>
+    </div>
   );
 };
 

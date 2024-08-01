@@ -7,8 +7,6 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
   const token = cookie.get('token')?.value as string;
 
-  const decoded = token ? atob(token) : null;
-
   if (request.nextUrl.pathname.startsWith('/ingresar')) {
     if (token) {
       return NextResponse.redirect(new URL('/prp/expensas', request.url))

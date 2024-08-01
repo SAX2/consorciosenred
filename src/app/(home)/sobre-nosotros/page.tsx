@@ -44,7 +44,7 @@ const page = () => {
             </h2>
             <ul className={cn('list-disc ml-4', about.mainColor.split(" ")[1])}>
               {about.about.porQueElegirnos.map((razon, index) => (
-                <li key={index} className='py-1'>
+                <li key={razon.titulo + index} className='py-1'>
                   <p className='text-xl'>
                     <b className='font-semibold'>{razon.titulo}: </b>{' '}
                     {razon.descripcion}

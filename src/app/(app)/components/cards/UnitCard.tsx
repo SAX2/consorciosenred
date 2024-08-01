@@ -38,7 +38,7 @@ export const SemiSectionCard: React.FC<SemiSectionCardProps> = ({
         <div className={cn(mainColors, "p-1 rounded-lg border")}>{icon}</div>
         <div className="flex flex-col">
           {titles.map((title) => (
-            <p className="text-md font-medium">{title}</p>
+            <p className="text-md font-medium" key={title}>{title}</p>
           ))}
         </div>
       </div>

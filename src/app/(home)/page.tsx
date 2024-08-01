@@ -8,7 +8,7 @@ import { caba1, desktopAdminPreview, mobileAdminPreviewIphone } from "@/lib/imag
 import { IconArrowNarrowRight, IconChevronRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { useInView } from "framer-motion"
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import main from '@/lib/contents/main.json'
 import Link from "next/link";
@@ -134,10 +134,9 @@ export default function Home() {
       <article className="flex flex-col items-center bg-white w-full px-8 max-md:px-4">
         {services.map((service, index) => {
           return (
-            <>
+            <React.Fragment key={service.title}>
               <Service
                 service={service}
-                key={service.title}
                 className={cn(
                   (index + 1) % 2 == 0 ? "flex-row-reverse" : "flex-row"
                 )}
@@ -145,7 +144,7 @@ export default function Home() {
               <div className="max-w-[1000px] w-full py-8">
                 {index + 1 !== services.length && <Separator />}
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </article>
@@ -163,11 +162,8 @@ export default function Home() {
             <div className="flex justify-center gap-3 w-full max-md:flex-col max-md:gap-4">
               {main.metrics.content.map((metric, index: number) => {
                 return (
-                  <>
-                    <div
-                      className="flex flex-col gap-2 w-full items-center"
-                      key={metric.content + index}
-                    >
+                  <React.Fragment key={metric.content + index}>
+                    <div className="flex flex-col gap-2 w-full items-center">
                       <AnimatedCounter
                         plus={true}
                         from={0}
@@ -181,7 +177,7 @@ export default function Home() {
                       </h3>
                     </div>
                     <Separator orientation="vertical" />
-                  </>
+                  </React.Fragment>
                 );
               })}
             </div>

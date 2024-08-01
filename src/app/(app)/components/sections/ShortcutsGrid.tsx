@@ -46,6 +46,7 @@ const ShortcutsGrid = ({ data, addShortcuts = true }: ShortcutGridProps) => {
               color={shortcut.color}
               title={shortcut.title}
               icon={shortcut.icon}
+              key={shortcut.title}
             />
           );
         }

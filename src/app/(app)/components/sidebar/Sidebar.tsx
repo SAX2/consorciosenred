@@ -90,7 +90,8 @@ const Sidebar: React.FC<SidebarProps> = ({ items, type, mainPath }) => {
             {items.top.map((item) => {
               return (
                 <li className="flex w-full" key={item.url}>
-                  <NavLink
+                  <NavLink 
+                    key={item.path}
                     href={item.url !== "/" ? mainPath + item.url : mainPath}
                     className={cn(
                       "max-lg:p-2 max-lg:flex-col rounded-md py-2 px-3 hover:bg-grey-sec hover:dark:bg-grey-sec-dark w-full font-medium flex items-center gap-3",

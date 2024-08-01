@@ -33,7 +33,7 @@ const TitleSection: React.FC<TitleSectionProps> = ({
   unitPage = false,
 }) => {
   return (
-    <section
+    <div
       className={cn(
         "flex flex-col gap-4 max-md:gap-3 text-black dark:text-white",
         className,
@@ -71,7 +71,7 @@ const TitleSection: React.FC<TitleSectionProps> = ({
             </h3>
           )}
           {pills?.map((pill) => {
-            return <Pill text={pill.text} />;
+            return <Pill text={pill.text} key={pill.text}/>;
           })}
         </div>
         {unitPage && <OpenSidebarUnit />}
@@ -86,7 +86,7 @@ const TitleSection: React.FC<TitleSectionProps> = ({
         )}
       </div>
       {children}
-    </section>
+    </div>
   );
 };
 

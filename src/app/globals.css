@@ -179,3 +179,7 @@
   .icon-green {
     @apply bg-green/25 border-green/25 text-green-sec dark:text-green
   }
+
+  .icon-red {
+    @apply bg-red-200 border-red-300 text-red-900
+  }

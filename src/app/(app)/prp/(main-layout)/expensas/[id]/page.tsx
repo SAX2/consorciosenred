@@ -1,9 +1,10 @@
 import { SemiSectionCard } from '@/app/(app)/components/cards/UnitCard';
 import TitleSection from '@/app/(app)/components/sections/TitleSection';
 import Pill from '@/components/pill/Pill';
+import getParams from '@/lib/hooks/getParams';
 import { acrobatLogo } from '@/lib/images';
 import { getUnit } from '@/lib/queries/queries';
-import { IconAlarmAverage, IconAlertCircle, IconBuilding, IconCoins, IconMailFast, IconReceipt2 } from '@tabler/icons-react';
+import { IconAlarmAverage, IconAlertCircle, IconBuilding, IconCoins, IconInfoSquareRounded, IconMailFast, IconReceipt2 } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
@@ -54,6 +55,18 @@ const UnitInfo = ({ unit }: { unit: any }) => {
               ? unit.uf_importeUltimaExpensa
               : `$ ${unit.uf_importeUltimaExpensa}`}
           </span>
+        </SemiSectionCard>
+        <SemiSectionCard
+          className="bg-grey border border-outline  dark:bg-grey-dark dark:border-outline-dark"
+          titles={["Expensas adeudadas", "Intereses acumulados"]}
+          key={"Intereses"}
+          icon={<IconInfoSquareRounded width={32} height={32} />}
+          mainColors="icon-yellow"
+        >
+          <div className="flex flex-col gap-1">
+            <Pill text={unit.uf_importeExpensasAcumulado} className="text-sm" />
+            <Pill text={unit.uf_importeInteresAcumulado} className="text-sm" />
+          </div>
         </SemiSectionCard>
         <SemiSectionCard
           className="bg-grey border border-outline  dark:bg-grey-dark dark:border-outline-dark"
@@ -129,7 +142,9 @@ const UnitInfo = ({ unit }: { unit: any }) => {
 };
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
-  const data = await getUnit({ id });
+  const unitId = getParams({ params: id, type: "id" });
+  
+  const data = await getUnit({ id: unitId });
 
   if (data.length <= 0) return <div>Not found</div>;
 

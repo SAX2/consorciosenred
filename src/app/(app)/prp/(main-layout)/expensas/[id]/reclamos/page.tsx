@@ -1,8 +1,11 @@
 import TitleSection from '@/app/(app)/components/sections/TitleSection';
+import getParams from '@/lib/hooks/getParams';
 import React from 'react'
 
 const page = ({ params: { id } }: { params: { id: string } }) => {
-  console.log(id)
+  const unitCode = getParams({ params: id, type: "code" });
+
+  
 
   return (
     <TitleSection

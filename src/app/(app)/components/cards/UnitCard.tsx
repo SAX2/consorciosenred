@@ -158,7 +158,7 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit }) => {
       <div className='flex flex-col gap-3'>
         <ShortcutsGrid data={shortcuts} addShortcuts={false} />
         <Link
-          href={`/prp/expensas/${unit.uf_id}`}
+          href={`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`}
           className="bg-grey-sec border border-outline dark:bg-grey-sec-dark dark:border-outline-dark flex items-center justify-center w-full rounded-md py-2 gap-1 font-medium"
         >
           Ver mas <IconArrowRight width={18} height={18} />

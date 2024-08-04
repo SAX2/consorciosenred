@@ -1,7 +1,14 @@
 import { cn } from '@/lib/utils';
 import React from 'react'
 
-const Burger = ({ isMenuOpen, size = 'md' }: { isMenuOpen: boolean; size?: "md" | "sm" }) => {
+interface BurgerProps {
+  isMenuOpen: boolean;
+  size?: "md" | "sm";
+  className?: string;
+}
+
+
+const Burger = ({ isMenuOpen, size = 'md', className }: BurgerProps) => {
   return (
     <>
       <span
@@ -9,7 +16,8 @@ const Burger = ({ isMenuOpen, size = 'md' }: { isMenuOpen: boolean; size?: "md" 
           "block absolute h-0.5 bg-white transform transition duration-300 ease-in-out",
           size === 'md' && "w-6",
           size === 'sm' && "w-4",
-          isMenuOpen ? "rotate-45" : (size === 'md' ? "-translate-y-1.5" : size === 'sm' && "-translate-y-1")
+          isMenuOpen ? "rotate-45" : (size === 'md' ? "-translate-y-1.5" : size === 'sm' && "-translate-y-1"),
+          className
         )}
       ></span>
       <span
@@ -17,7 +25,8 @@ const Burger = ({ isMenuOpen, size = 'md' }: { isMenuOpen: boolean; size?: "md" 
           "block absolute h-0.5 w-6 bg-white transform transition duration-300 ease-in-out",
           size === 'md' && "w-6",
           size === 'sm' && "w-4",
-          isMenuOpen ? "-rotate-45" : (size === 'md' ? "translate-y-1.5" : size === 'sm' && "translate-y-1.5")
+          isMenuOpen ? "-rotate-45" : (size === 'md' ? "translate-y-1.5" : size === 'sm' && "translate-y-1.5"),
+          className
         )}
       ></span>
     </>

@@ -9,7 +9,7 @@ const OpenSidebarUnit = () => {
 
   return (
     <button className="max-md:flex hidden w-6" onClick={toggle}>
-      <Burger isMenuOpen={isOpen} size='sm'/>
+      <Burger isMenuOpen={isOpen} size='sm' className='bg-black dark:bg-white'/>
     </button>
   );
 }

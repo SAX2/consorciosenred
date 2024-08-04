@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
       const unit = await getAllUnits();
       
       if (unit.length <= 1) {
-        const route = '/prp/expensas/' + unit[0].uf_id
+        const route = '/prp/expensas/' + unit[0].uf_id + "_" + unit[0].uf_codEdificio
         return NextResponse.redirect(new URL(route, request.url));
       }
     }

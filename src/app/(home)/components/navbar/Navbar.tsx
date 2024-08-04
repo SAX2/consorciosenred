@@ -101,7 +101,7 @@ const Navbar = () => {
             {navigation.routes.map((route) => {
               if (route.type === "link")
                 return (
-                  <li key={route.path}>
+                  <li key={route.path} onClick={() => setIsMenuOpen(false)}>
                     <Link href={route.path}>{route.title}</Link>
                   </li>
                 );
@@ -119,7 +119,7 @@ const Navbar = () => {
               {navigation.routes.map((route) => {
                 if (route.type === "button-download")
                   return (
-                    <li key={route.path} className="max-md:w-full">
+                    <li key={route.path} className="max-md:w-full" onClick={() => setIsMenuOpen(false)}>
                       <Link
                         href={route.path}
                         className="border border-white rounded-sm px-2 py-1 max-md:bg-white max-md:text-black max-md:flex max-md:justify-center"

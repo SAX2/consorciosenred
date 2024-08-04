@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { IconChevronLeft } from '@tabler/icons-react';
 import { cn } from '@/lib/utils';
 import { getPathsAndTitles } from '@/lib/contents/(app)/pathTitles';
@@ -24,9 +24,6 @@ interface BackButtonProps {
 export const BackButton = ({ className, icon }: BackButtonProps) => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams()
-
-  const isUniqueUnit = searchParams.get("unique")
 
   const onClick = () => {
     if (!NO_BACK_ROUTES.includes(pathname)) {
@@ -35,8 +32,6 @@ export const BackButton = ({ className, icon }: BackButtonProps) => {
   };
 
   const showBackButton = !NO_BACK_ROUTES.includes(pathname);
-
-  if (isUniqueUnit) return null;
 
   return showBackButton && (
     <button onClick={onClick} className={cn('flex items-center', className)}>

@@ -23,9 +23,9 @@ export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === '/prp/expensas') {
     if (token) {
       const unit = await getAllUnits();
-  
+      
       if (unit.length <= 1) {
-        const route = `/prp/expensas/${unit[0].uf_id}`
+        const route = '/prp/expensas/' + unit[0].uf_id
         return NextResponse.redirect(new URL(route, request.url));
       }
     }

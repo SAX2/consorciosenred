@@ -18,6 +18,7 @@ interface TitleSectionProps {
   pageTitle?: string;
   backUrl?: boolean;
   unitPage?: boolean;
+  rightContent?: React.ReactElement;
 }
 
 const TitleSection: React.FC<TitleSectionProps> = ({
@@ -31,6 +32,7 @@ const TitleSection: React.FC<TitleSectionProps> = ({
   isFirst = false,
   backUrl = false,
   unitPage = false,
+  rightContent
 }) => {
   return (
     <div
@@ -71,11 +73,11 @@ const TitleSection: React.FC<TitleSectionProps> = ({
             </h3>
           )}
           {pills?.map((pill) => {
-            return <Pill text={pill.text} key={pill.text}/>;
+            return <Pill text={pill.text} key={pill.text} />;
           })}
         </div>
-        {unitPage && <OpenSidebarUnit />}
-        {link && (
+        {unitPage && isFirst && <OpenSidebarUnit />}
+        {!rightContent && link && (
           <Link
             {...link}
             className="font-medium rounded-md flex gap-2 px-2 py-[2px] bg-grey border border-outline dark:bg-grey-dark dark:border-outline-dark items-center max-lg:hidden"
@@ -84,6 +86,7 @@ const TitleSection: React.FC<TitleSectionProps> = ({
             {link.title}
           </Link>
         )}
+        {rightContent && !link && <>{rightContent}</>}
       </div>
       {children}
     </div>

@@ -5,12 +5,15 @@ import { IconLogout, IconSettings } from '@tabler/icons-react';
 import Image from 'next/image';
 import React from 'react'
 import ButtonLogout from './ButtonLogout';
+import { getUser } from '@/lib/queries/queries';
 
 interface UserCardProps {
   className?: string;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ className }) => {
+const UserCard: React.FC<UserCardProps> = async ({ className }) => {
+  const data = await getUser();
+
   return (
     <div
       className={cn(
@@ -27,8 +30,8 @@ const UserCard: React.FC<UserCardProps> = ({ className }) => {
           className="object-fill rounded-md bg-white dark:bg-grey-sec-dark border border-outline dark:border-outline-dark"
         />
         <div className={cn("flex flex-col gap-0 w-full max-w-[80px]")}>
-          <p className="truncate w-full font-medium text-sm">00ASD0A</p>
-          <Pill text="4 Unidades" />
+          <p className="truncate w-full font-medium text-sm">{data.nombre + " " + data.apellido}</p>
+          <Pill text={`${data.total_unidades} Unidad${data.total_unidades > 1 ? "es" : ""}`} />
         </div>
       </div>
       <div className={cn("flex")}>

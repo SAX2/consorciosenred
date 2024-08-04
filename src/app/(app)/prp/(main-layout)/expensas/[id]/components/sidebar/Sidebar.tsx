@@ -23,11 +23,10 @@ const Sidebar = () => {
       {sidebar.top.map((item) => {
         return (
           <NavLink
-            onClick={() => setOpen(false)}
             href={
               item.url.startsWith("/prp")
                 ? item.url
-                : pathname.split("/").slice(0, 4).join("/") + item.url
+                : pathname.split("/").slice(0, 4).join("/") + item.url 
             }
             className={
               "max-xl:p-2 max-xl:flex-col max-md:flex-row max-md:justify-center rounded-md py-[6px] px-3 bg-grey dark:bg-grey-dark hover:bg-grey-sec hover:dark:bg-grey-sec-dark w-full font-medium flex items-center gap-3"

@@ -2,6 +2,7 @@ import React from 'react'
 import ShortcutsGrid from '@/app/(app)/components/sections/ShortcutsGrid';
 import TitleSection from '@/app/(app)/components/sections/TitleSection';
 import { shortcuts } from '@/lib/contents/(app)/shortcuts';
+import EditShortcuts from './shortcuts/EditShortcuts';
 
 const AsideUnit = () => {
   return (
@@ -12,6 +13,7 @@ const AsideUnit = () => {
           text: shortcuts.filter((i) => i.isActive).length.toString(),
         },
       ]}
+      rightContent={<EditShortcuts />}
     >
       <ShortcutsGrid data={shortcuts} />
     </TitleSection>

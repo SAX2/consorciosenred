@@ -8,13 +8,17 @@ import Link from 'next/link';
 import React, { useState, useRef } from 'react'
 import navigation from '@/lib/contents/nav.json'
 import Burger from '@/components/navbar/Burger';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
+  const pathname = usePathname();
   const header = useRef(null)
   const isHeaderInView = useInView(header, { once: true })
   const { scrollY } = useScroll()
   const [scroll, setScroll] = useState<number>(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const isMain = pathname === '/'; 
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScroll(latest)
@@ -32,9 +36,10 @@ const Navbar = () => {
       ref={header}
       className={cn(
         "w-full flex justify-center sticky top-0 px-8 max-md:px-4 z-20 transition-all duration-300",
-        scroll > scrollTo && "bg-black",
+        isScrolled && "bg-black",
         isHeaderInView ? "opacity-100" : "opacity-0",
-        isMenuOpen && "bg-black"
+        isMenuOpen && "bg-black",
+        !isMain && "bg-black",
       )}
     >
       <nav
@@ -59,7 +64,8 @@ const Navbar = () => {
               <span
                 className={cn(
                   "text-white italic font-bold text-lg max-md:!block",
-                  scroll > scrollTo && "hidden"
+                  isScrolled && "hidden",
+                  !isMain && "hidden",
                 )}
               >
                 Consorcios<span className="text-green">en</span>red
@@ -79,7 +85,8 @@ const Navbar = () => {
         <div
           className={cn(
             "flex items-center gap-3 max-md:flex-col max-md:items-start z-50 max-md:gap-8",
-            scroll > scrollTo && "w-full justify-between max-md:!justify-start",
+            isScrolled && "w-full justify-between max-md:!justify-start",
+            !isMain && "w-full justify-between max-md:!justify-start",
             "max-md:absolute max-md:top-full max-md:left-0 max-md:w-full max-md:bg-black max-md:p-8 max-md:transition-all max-md:duration-300 max-md:ease-in-out max-md:h-dvh",
             isMenuOpen
               ? "max-md:opacity-100 max-md:translate-y-0 "
@@ -101,11 +108,12 @@ const Navbar = () => {
               return null;
             })}
           </ul>
-          {(isScrolled || isMenuOpen) && (
+          {(isScrolled || isMenuOpen || !isMain) && (
             <ul
               className={cn(
                 "hidden items-center gap-3 font-medium text-white text-lg max-md:flex max-md:items-start max-md:text-4xl max-md:gap-8 max-md:w-full max-md:flex-col-reverse",
-                isScrolled && "flex"
+                isScrolled && "flex",
+                !isMain && "flex"
               )}
             >
               {navigation.routes.map((route) => {

@@ -129,14 +129,12 @@ const UnitInfo = ({ unit }: { unit: any }) => {
 };
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
-  const decodedId = decodeURIComponent(id);
-  const baseId = decodedId.split(/[?&]/)[0];
-  const data = await getUnit({ id: baseId });
+  const data = await getUnit({ id });
 
-  if (data.length <= 0) return <div>Not found</div>
+  if (data.length <= 0) return <div>Not found</div>;
 
   return (
-    <div className='flex flex-col gap-8'>
+    <div className="flex flex-col gap-8">
       <TitleSection
         pageTitle="Mis expensas"
         className="w-full col-span-1 pb-8 max-md:pb-0 mt-0"

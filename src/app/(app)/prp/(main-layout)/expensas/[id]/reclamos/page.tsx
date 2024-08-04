@@ -1,7 +1,9 @@
 import TitleSection from '@/app/(app)/components/sections/TitleSection';
 import React from 'react'
 
-const page = () => {
+const page = ({ params: { id } }: { params: { id: string } }) => {
+  console.log(id)
+
   return (
     <TitleSection
       pageTitle="Reclamos"

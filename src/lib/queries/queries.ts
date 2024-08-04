@@ -2,7 +2,7 @@
 
 import { getAuthHeaders } from "@/app/actions";
 import { QueryFileProps } from "../types/data.types";
-import { urlControlPanel, urlFile, urlUnit } from "./urls";
+import { urlControlPanel, urlFile, urlUnit, urlUser } from "./urls";
 
 export const getFiles = async ({ id, name, type }: QueryFileProps) => {
   const headers = await getAuthHeaders()
@@ -41,6 +41,20 @@ export const getUnit = async ({ id }: { id: string }) => {
     method: "POST",
     headers: { ...headers },
     body: JSON.stringify({ uf_id: id })
+  });
+
+  if (!res.ok) return;
+
+  const data = await res.json();
+  return data;
+}
+
+export const getUser = async () => {
+  const headers = await getAuthHeaders()
+
+  const res = await fetch(urlUser, {
+    method: "POST",
+    headers: { ...headers },
   });
 
   if (!res.ok) return;

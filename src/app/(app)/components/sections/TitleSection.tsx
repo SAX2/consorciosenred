@@ -3,7 +3,6 @@ import { BackButton } from '@/components/title/MainTitle';
 import { cn } from '@/lib/utils';
 import Link, { LinkProps } from 'next/link';
 import React from 'react'
-import OpenSidebarUnit from './OpenSidebarUnit';
 
 interface TitleSectionProps {
   children: React.ReactNode;
@@ -76,7 +75,6 @@ const TitleSection: React.FC<TitleSectionProps> = ({
             return <Pill text={pill.text} key={pill.text} />;
           })}
         </div>
-        {unitPage && isFirst && <OpenSidebarUnit />}
         {!rightContent && link && (
           <Link
             {...link}

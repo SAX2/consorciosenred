@@ -31,7 +31,7 @@ export default function Home() {
       >
         <section className="items-center h-screen-main-h h-full max-w-[1000px] w-full justify-center flex max-sm:items-end max-sm:pb-28">
           <div className="absolute top-0 left-0 w-full h-screen h-screen-main  select-none">
-            <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-radial-gradient opacity-60"></div>
+            {/* <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-radial-gradient opacity-60"></div> */}
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-radial-gradient"></div>
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-linear"></div>
             <Image
@@ -113,7 +113,7 @@ export default function Home() {
               height={644}
               src={desktopAdminPreview}
               alt="Captura del panel de administrador"
-              className="w-full h-auto rounded-xl border-4 border-outline/25 max-[425px]:hidden"
+              className="w-dvh h-auto rounded-xl border-4 border-outline/25 max-[425px]:hidden"
             />
             <Image
               width={582}

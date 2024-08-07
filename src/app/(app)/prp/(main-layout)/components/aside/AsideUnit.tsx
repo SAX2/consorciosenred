@@ -7,7 +7,7 @@ import EditShortcuts from './shortcuts/EditShortcuts';
 const AsideUnit = () => {
   return (
     <TitleSection
-      title="Atajos"
+      title="Acciones rapidas"
       pills={[
         {
           text: shortcuts.filter((i) => i.isActive).length.toString(),
@@ -15,7 +15,7 @@ const AsideUnit = () => {
       ]}
       rightContent={<EditShortcuts />}
     >
-      <ShortcutsGrid data={shortcuts} />
+      <ShortcutsGrid data={shortcuts} classNameItem='bg-white dark:bg-grey-sec-dark' />
     </TitleSection>
   );
 }

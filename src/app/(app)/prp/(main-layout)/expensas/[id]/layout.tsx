@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from './components/sidebar/Sidebar';
 import { cn } from '@/lib/utils';
+import MediaProvider from '@/lib/context/MediaProvider';
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,7 +11,10 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         "w-full col-span-2 max-md:col-span-1"
       )}
     >
-      <Sidebar />
+      {/* <MediaProvider></MediaProvider> */}
+      <MediaProvider minWidth={768}>
+        <Sidebar />
+      </MediaProvider>
       {children}
     </div>
   );

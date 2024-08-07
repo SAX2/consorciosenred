@@ -1,6 +1,6 @@
 import Logo from "../../public/logo/consorciosenred.svg";
 import LogoWhite from "../../public/logo/consorciosenredwhite.svg";
-import CABA1 from "../../public/images/CABA1.webp";
+import CABA1 from "../../public/images/obelisco_atardecer_9_de_julio_1500x610.webp";
 import CABA2 from "../../public/images/CABA2.webp";
 import CABA3 from "../../public/images/CABA3.webp";
 import DesktopAdminPreview from "../../public/images/desktop-admin-preview.webp";
@@ -9,7 +9,6 @@ import MobileAdminPreviewIphone from "../../public/images/mobile-admin-preview-i
 import MobileBookingPreviewIphone from "../../public/images/mobile-booking-preview-iphone.png";
 import MobileAppInstallPreviewIphone from "../../public/images/app-install-preview-iphone.webp";
 import Pattern from "../../public/utils/pattern1.svg";
-import AcrobatLogo from "../../public/utils/acrobat-logo.svg";
 import UserImage1 from "../../public/utils/user-image/user-image-1.png";
 import UserImage2 from "../../public/utils/user-image/user-image-2.png";
 
@@ -24,6 +23,5 @@ export const mobileAdminPreview = MobileAdminPreview;
 export const mobileAdminPreviewIphone = MobileAdminPreviewIphone;
 export const mobileBookingPreviewIphone = MobileBookingPreviewIphone;
 export const mobileAppInstallPreviewIphone = MobileAppInstallPreviewIphone;
-export const acrobatLogo = AcrobatLogo;
 export const userImage1 = UserImage1;
 export const userImage2 = UserImage2;

@@ -13,7 +13,7 @@ const Aside: React.FC<AsideProps> = ({ children }) => {
   const params = useParams();
 
   return (
-    <aside className="flex flex-col gap-8 w-full col-start-3 min-w-[400px] max-xl:min-w-[300px] max-lg:min-w-[250px] max-md:min-w-fit max-md:col-start-1 sticky top-60">
+    <aside className="flex flex-col gap-8 w-full col-start-3 min-w-[400px] max-xl:min-w-[300px] max-lg:min-w-[250px] max-md:min-w-fit max-md:col-start-1 sticky top-60 max-md:hidden">
       {children}
       {params.id ? <AsideUnit /> : <AsideMain />}
     </aside>

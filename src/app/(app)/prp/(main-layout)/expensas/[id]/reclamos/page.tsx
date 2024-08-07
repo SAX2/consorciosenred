@@ -2,7 +2,6 @@ import TitleSection from '@/app/(app)/components/sections/TitleSection';
 import getParams from '@/lib/hooks/getParams';
 import { getUnitIssues } from '@/lib/queries/queries';
 import React from 'react'
-import RclCard from './components/RclCard';
 import ListRcl from './components/ListRcl';
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {

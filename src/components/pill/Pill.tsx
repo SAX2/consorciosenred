@@ -5,7 +5,7 @@ export interface PillProps {
   className?: string;
   classNameText?: string;
   text: string;
-  icon?: React.ReactElement;
+  icon?: React.ReactNode;
 }
 
 const Pill: React.FC<PillProps> = ({ text, className, icon, classNameText }) => {

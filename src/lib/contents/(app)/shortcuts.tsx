@@ -1,28 +1,28 @@
-import { IconBell, IconPlus, IconStar, IconWallet } from "@tabler/icons-react";
+import { IconAlertTriangle, IconBell, IconBellRinging, IconStar, IconWallet } from "@tabler/icons-react";
 
 export const shortcuts = [
   {
     color: "icon-green",
-    title: "Pagar expensas",
-    icon: <IconWallet width={20} height={20} />,
-    isActive: true,
-  },
-  {
-    color: "icon-yellow",
-    title: "Hacer reclamo",
-    icon: <IconPlus width={20} height={20} />,
+    title: "Pagar expensa",
+    icon: <IconWallet width={32} height={32} className="max-md:h-[28px] max-md:w-[28px]"/>,
     isActive: true,
   },
   {
     color: "icon-purple",
     title: "Reservar",
-    icon: <IconStar width={20} height={20} />,
+    icon: <IconStar width={32} height={32} className="max-md:h-[28px] max-md:w-[28px]"/>,
+    isActive: true,
+  },
+  {
+    color: "icon-yellow",
+    title: "Hacer reclamo",
+    icon: <IconAlertTriangle width={32} height={32} className="max-md:h-[28px] max-md:w-[28px]"/>,
     isActive: true,
   },
   {
     color: "icon-blue",
     title: "Notificar pago",
-    icon: <IconWallet width={20} height={20} />,
+    icon: <IconBellRinging  width={32} height={32} className="max-md:h-[28px] max-md:w-[28px]"/>,
     isActive: true,
   },
 ];

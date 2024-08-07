@@ -1,11 +1,13 @@
 import { SemiSectionCard } from '@/app/(app)/components/cards/UnitCard';
+import ShortcutsGrid from '@/app/(app)/components/sections/ShortcutsGrid';
 import TitleSection from '@/app/(app)/components/sections/TitleSection';
 import Pill from '@/components/pill/Pill';
+import { shortcuts } from '@/lib/contents/(app)/shortcuts';
+import MediaProvider from '@/lib/context/MediaProvider';
 import getParams from '@/lib/hooks/getParams';
-import { acrobatLogo } from '@/lib/images';
+import { AcrobatLogo } from '@/lib/icons';
 import { getUnit } from '@/lib/queries/queries';
 import { IconAlarmAverage, IconAlertCircle, IconBuilding, IconCoins, IconInfoSquareRounded, IconMailFast, IconReceipt2 } from '@tabler/icons-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
@@ -25,30 +27,29 @@ const UnitInfo = ({ unit }: { unit: any }) => {
           <h3 className="font-semibold truncate text-lg">{unit.uf_domiDpto}</h3>
           <div className="flex items-center gap-2">
             <Pill text={`${unit.uf_nroUnidad} ${unit.uf_codDpto}`} />
-            <span className="text-sm text-black/75 dark:text-white/75 truncate">
-              {unit.uf_nombrePropietario}
-            </span>
+            <Pill text={unit.uf_nombrePropietario} className="icon-blue" />
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-3 py-1">
+      <div className="flex flex-col gap-2 py-1">
         <SemiSectionCard
+          isMain
           className="bg-grey border border-outline  dark:bg-grey-dark dark:border-outline-dark"
           titles={["Importe a pagar"]}
           key={"Importe a pagar"}
           icon={<IconReceipt2 width={32} height={32} />}
-          mainColors="icon-blue"
+          // mainColors="icon-blue"
         >
-          <span className="pr-2 font-medium text-lg">
+          <p className="pr-2 font-bold text-4xl max-md:text-3xl font-geist">
             {unit.uf_importeTotal}
-          </span>
+          </p>
         </SemiSectionCard>
         <SemiSectionCard
           className="bg-grey border border-outline  dark:bg-grey-dark dark:border-outline-dark"
           titles={["Expensas del mes"]}
           key={"Expensas del mes"}
           icon={<IconCoins width={32} height={32} />}
-          mainColors="icon-green"
+          // mainColors="icon-green"
         >
           <span className="pr-2 font-medium text-lg">
             {unit.uf_importeUltimaExpensa.includes("$")
@@ -57,15 +58,15 @@ const UnitInfo = ({ unit }: { unit: any }) => {
           </span>
         </SemiSectionCard>
         <SemiSectionCard
-          className="bg-grey border border-outline  dark:bg-grey-dark dark:border-outline-dark"
+          className="bg-grey border   dark:bg-grey-dark dark:-dark"
           titles={["Expensas adeudadas", "Intereses acumulados"]}
           key={"Intereses"}
           icon={<IconInfoSquareRounded width={32} height={32} />}
-          mainColors="icon-yellow"
+          // mainColors="icon-yellow"
         >
           <div className="flex flex-col gap-1">
-            <Pill text={unit.uf_importeExpensasAcumulado} className="text-sm" />
-            <Pill text={unit.uf_importeInteresAcumulado} className="text-sm" />
+            <Pill text={unit.uf_importeExpensasAcumulado} className="text-base" />
+            <Pill text={unit.uf_importeInteresAcumulado} className="text-base" />
           </div>
         </SemiSectionCard>
         <SemiSectionCard
@@ -73,12 +74,12 @@ const UnitInfo = ({ unit }: { unit: any }) => {
           titles={expiresTitle}
           key={"Vencimiento"}
           icon={<IconAlarmAverage width={32} height={32} />}
-          mainColors="icon-purple"
+          // mainColors="icon-purple"
         >
           <div className="flex flex-col gap-1">
-            <Pill text={unit.uf_vtoUltimaExpensa} className="text-sm" />
+            <Pill text={unit.uf_vtoUltimaExpensa} className="text-base" />
             {unit.uf_vto2UltimaExpensa && (
-              <Pill text={unit.uf_vto2UltimaExpensa} className="text-sm" />
+              <Pill text={unit.uf_vto2UltimaExpensa} className="text-base" />
             )}
           </div>
         </SemiSectionCard>
@@ -88,7 +89,7 @@ const UnitInfo = ({ unit }: { unit: any }) => {
             titles={["Ultima liquidacion"]}
             key={"Ultima liquidacion"}
             icon={<IconMailFast width={32} height={32} />}
-            mainColors="icon-yellow"
+            // mainColors="icon-yellow"
           >
             <Link
               target="_blank"
@@ -96,15 +97,8 @@ const UnitInfo = ({ unit }: { unit: any }) => {
             >
               <Pill
                 text={`${unit.uf_liquidaciones[0].titulo}`}
-                icon={
-                  <Image
-                    src={acrobatLogo}
-                    width={15}
-                    height={15}
-                    alt="pdf logo"
-                  />
-                }
-                className="text-sm"
+                icon={<AcrobatLogo width={15} height={15} />}
+                className="text-base"
               />
             </Link>
           </SemiSectionCard>
@@ -115,7 +109,7 @@ const UnitInfo = ({ unit }: { unit: any }) => {
             titles={["Aviso de pago"]}
             key={unit.uf_aviso[0].id}
             icon={<IconAlertCircle width={32} height={32} />}
-            mainColors="icon-green"
+            // mainColors="icon-green"
           >
             <Link
               target="_blank"
@@ -123,20 +117,20 @@ const UnitInfo = ({ unit }: { unit: any }) => {
             >
               <Pill
                 text={`${unit.uf_aviso[0].titulo}`}
-                icon={
-                  <Image
-                    src={acrobatLogo}
-                    width={15}
-                    height={15}
-                    alt="pdf logo"
-                  />
-                }
-                className="text-sm"
+                icon={<AcrobatLogo width={15} height={15} />}
+                className="text-base"
               />
             </Link>
           </SemiSectionCard>
         )}
       </div>
+      <MediaProvider maxWidth={768}>
+        <ShortcutsGrid
+          data={shortcuts}
+          classNameItem="bg-white dark:bg-grey-sec-dark"
+          className="gap-[6px]"
+        />
+      </MediaProvider>
     </div>
   );
 };
@@ -155,8 +149,6 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
         className="w-full col-span-1 pb-8 max-md:pb-0 mt-0"
         backUrl={true}
         isFirst={true}
-        unitPage
-        // link={{ href: "/expensas", title: "Ver todos los edificios" }}
       >
         <UnitInfo unit={data[0]} key={data[0].uf_id} />
       </TitleSection>
@@ -164,8 +156,6 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
         title="Histórico de Expensas"
         className="w-full col-span-1 pb-8 max-md:pb-0 mt-0"
         pills={[{ text: data[0].uf_liquidaciones.length }]}
-        unitPage
-        // link={{ href: "/expensas", title: "Ver todos los edificios" }}
       >
         table
       </TitleSection>

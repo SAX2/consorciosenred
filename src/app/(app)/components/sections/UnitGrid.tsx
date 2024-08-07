@@ -34,7 +34,7 @@ const UnitGrid = ({ data }: { data: any }) => {
   return (
     <div
       className={cn(
-        "grid gap-4 w-full max-md:grid-cols-1",
+        "grid gap-5 w-full max-md:grid-cols-1",
         isSmall ? "grid-cols-1" : "grid-cols-2"
       )}
       ref={divRef}

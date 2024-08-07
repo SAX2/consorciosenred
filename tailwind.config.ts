@@ -97,6 +97,9 @@ const config = {
     fontFamily: {
       "geist": ['var(--font-geist-sans)'],
     },
+    boxShadow: {
+      'shortcut': '0 15px 3px -15px rgba(0, 0, 0, 0.1)' ,
+    }
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config

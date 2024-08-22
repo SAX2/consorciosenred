@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils";
 import Sidebar from "@/components/Navbar/AppNavbars/UnitSidebar";
 import MediaQueryProvider from "@/context/MediaQueryProvider";
-import { Suspense } from "react";
-import Loading from "./loading";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -17,7 +15,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           <Sidebar />
         </div>
       </MediaQueryProvider>
-      <Suspense fallback={<Loading />}>{children}</Suspense>
+      {children}
     </div>
   );
 };

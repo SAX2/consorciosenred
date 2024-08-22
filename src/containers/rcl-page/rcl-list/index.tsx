@@ -1,11 +1,11 @@
 "use client"
 
+import React, { FC, PropsWithChildren, useState } from 'react';
 import RclCard from '@/components/Cards/RclCard';
 import Input from '@/components/Form/Input';
 import { cn } from '@/lib/utils';
-import { IconHexagonPlus, IconSearch, IconSquareRoundedPlus } from '@tabler/icons-react';
+import { IconSearch, IconSquareRoundedPlus } from '@tabler/icons-react';
 import Link from 'next/link';
-import React, { FC, PropsWithChildren, useState } from 'react'
 
 interface RclListProps extends PropsWithChildren {
   max?: number;
@@ -21,26 +21,44 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = ({ title, ...props }: ButtonProps) => {
- return (
-   <button
-     {...props}
-     className="py-1 px-2 text-sm rounded-lg border border-outline bg-grey text-black dark:border-outline-dark dark:bg-grey-dark dark:text-white font-medium shadow-sm"
-   >
-     {title}
-   </button>
- );
-}
+  return (
+    <button
+      {...props}
+      className="py-1 px-2 text-sm rounded-lg border border-outline bg-grey text-black dark:border-outline-dark dark:bg-grey-dark dark:text-white font-medium shadow-sm"
+    >
+      {title}
+    </button>
+  );
+};
 
 const RclList: FC<RclListProps> = ({ max, className, buttonMore = "Ver más", buttonLess = "Mostrar menos", items, children, params }) => {
   const [showAll, setShowAll] = useState(false);
-  
-  const displayedItems = showAll || !max ? items : items.slice(0, max);
+  const [filter, setFilter] = useState<string>("Mas reciente");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const handleFilterChange = (value: string) => {
+    setFilter(value);
+    setShowAll(false);
+  };
+
+  const sortedItems = [...items].sort((a, b) => {
+    const dateA = new Date(a.Rcl_DateTime.split("/").reverse().join("-")).getTime();
+    const dateB = new Date(b.Rcl_DateTime.split("/").reverse().join("-")).getTime();
+
+    return filter === "Mas reciente" ? dateB - dateA : dateA - dateB;
+  });
+
+  const filteredItems = sortedItems.filter((item) =>
+    item.Rcl_DateTime.includes(searchTerm)
+  );
+
+  const displayedItems = showAll || !max ? filteredItems : filteredItems.slice(0, max);
 
   const handleToggle = () => {
     setShowAll(!showAll);
-  }
+  };
 
-  const showToggleButton = max && items.length > max;
+  const showToggleButton = max && filteredItems.length > max;
 
   return (
     <>
@@ -51,20 +69,22 @@ const RclList: FC<RclListProps> = ({ max, className, buttonMore = "Ver más", bu
           </span>
         </Link>
         <Input
-          icon={
-            <IconSearch className="text-text-grey" width={18} height={18} />
-          }
+          icon={<IconSearch className="text-text-grey" width={18} height={18} />}
           type="text"
-          placeholder="Buscar"
+          placeholder="Buscar por fecha (dd/mm/yyyy)"
           orientation="icon-left"
           className="bg-grey dark:bg-grey-dark w-full"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Input 
-          type='select'
-          placeholder='Filtrar'
-          selectValues={[{ arr: ["Mas viejo"] }]}
-          className='!bg-grey dark:!bg-grey-dark w-fit gap-2'
-          classNameContainer='w-fit'
+        <Input
+          type="select"
+          placeholder="Filtrar"
+          selectDefaultValue={filter}
+          selectValues={[{ arr: ["Mas viejo", "Mas reciente"] }]}
+          className="!bg-grey dark:!bg-grey-dark truncate gap-2"
+          classNameContainer="w-fit"
+          selectOnChange={handleFilterChange}
         />
       </div>
       {children}
@@ -98,6 +118,6 @@ const RclList: FC<RclListProps> = ({ max, className, buttonMore = "Ver más", bu
       </div>
     </>
   );
-}
+};
 
-export default RclList
+export default RclList;

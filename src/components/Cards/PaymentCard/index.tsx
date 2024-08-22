@@ -43,7 +43,7 @@ interface PaymentCardProps {
 }
 
 const PaymentCardSection: FC<{ icon: React.ReactElement; } & PropsWithChildren> = ({ icon, children }) => {
-  return <div className="p-3 rounded-xl text-black bg-white dark:bg-black-app-bg dark:text-white flex gap-3">
+  return <div className="p-3 rounded-xl text-black bg-white dark:bg-grey-sec-dark dark:text-white flex gap-3">
     <div
       className={cn(
         "p-1 rounded-lg flex items-center h-fit",
@@ -145,12 +145,12 @@ const PaymentCard: FC<PaymentCardProps> = ({
           {!isShortScreen ? <Trigger /> : !isSelected && <Trigger />}
         </div>
       </div>
-      <AccordionContent className="border-0 bg-grey rounded-b-xl p-3 flex flex-col gap-2 pt-0">
+      <AccordionContent className="border-0 bg-grey dark:bg-grey-dark rounded-b-xl p-3 flex flex-col gap-2 pt-0">
         <AnimatedAccordionContent isSelected={isSelected}>
           <motion.div variants={itemVariants}>
             <SemiSection
               titles={["Codigo de comprobante"]}
-              className="bg-white dark:bg-black-app-bg"
+              className="bg-white dark:bg-grey-sec-dark"
               icon={<IconFileBarcode width={26} height={26} />}
             >
               <Pill
@@ -188,7 +188,7 @@ const PaymentCard: FC<PaymentCardProps> = ({
               <PaymentCardSection icon={<IconMessage width={26} height={26} />}>
                 <div className="flex flex-col gap-[2px]">
                   <p className="text-base font-medium">Comentarios:</p>
-                  <p className="text-black/75">{desc}</p>
+                  <p className="text-black/75 dark:text-white/75">{desc}</p>
                 </div>
               </PaymentCardSection>
             </motion.div>

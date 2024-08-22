@@ -3,8 +3,7 @@
 import PaymentCard from '@/components/Cards/PaymentCard';
 import Input from '@/components/Form/Input';
 import { Accordion, AccordionItem } from '@/components/ui/accordion';
-import { cn } from '@/lib/utils';
-import { IconBellRinging, IconSearch, IconSquareRoundedPlus } from '@tabler/icons-react';
+import { IconBellRinging, IconSearch } from '@tabler/icons-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import React, { FC, PropsWithChildren, useState } from 'react'
@@ -16,24 +15,35 @@ interface PaymentListProps extends PropsWithChildren {
 }
 
 const PaymentList: FC<PaymentListProps> = ({ className, items, children, params }) => {
-
   const [isSelected, setIsSelected] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [filter, setFilter] = useState<string>("Mas reciente");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const itemsPerPage = 7;
 
   const handleValueChange = (value: string) => {
-    setIsSelected(value)
-  }
+    setIsSelected(value);
+  };
 
+  const sortedItems = [...items].sort((a, b) => {
+    const dateA = new Date(a.fecha.split("/").reverse().join("-")).getTime();
+    const dateB = new Date(b.fecha.split("/").reverse().join("-")).getTime();
+    
+    if (filter === "Mas reciente") {
+      return dateB - dateA;
+    } else {
+      return dateA - dateB;
+    }
+  });
 
-  const sortedItems = items.sort(
-    (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime()
+  const filteredItems = sortedItems.filter((item) =>
+    item.fecha.includes(searchTerm)
   );
 
-  const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentItems = sortedItems.slice(startIndex, endIndex);
+  const currentItems = filteredItems.slice(startIndex, endIndex);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -46,6 +56,7 @@ const PaymentList: FC<PaymentListProps> = ({ className, items, children, params 
       setCurrentPage((prevPage) => prevPage - 1);
     }
   };
+
   return (
     <>
       <div className="flex items-center gap-2 w-full">
@@ -58,20 +69,22 @@ const PaymentList: FC<PaymentListProps> = ({ className, items, children, params 
           </span>
         </Link>
         <Input
-          icon={
-            <IconSearch className="text-text-grey" width={18} height={18} />
-          }
+          icon={<IconSearch className="text-text-grey" width={18} height={18} />}
           type="text"
-          placeholder="Buscar"
+          placeholder="Buscar por fecha (dd/mm/yyyy)"
           orientation="icon-left"
           className="bg-grey dark:bg-grey-dark w-full"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <Input
           type="select"
           placeholder="Filtrar"
-          selectValues={[{ arr: ["Mas viejo"] }]}
-          className="!bg-grey dark:!bg-grey-dark w-fit gap-2"
+          selectDefaultValue={filter}
+          selectValues={[{ arr: ["Mas viejo", "Mas reciente"] }]}
+          className="!bg-grey dark:!bg-grey-dark truncate gap-2"
           classNameContainer="w-fit"
+          selectOnChange={setFilter}
         />
       </div>
       <Accordion
@@ -99,7 +112,7 @@ const PaymentList: FC<PaymentListProps> = ({ className, items, children, params 
       </Accordion>
 
       <div className="flex items-center justify-between space-x-2 py-2">
-        {items.length > itemsPerPage && (
+        {filteredItems.length > itemsPerPage && (
           <button
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
@@ -110,11 +123,11 @@ const PaymentList: FC<PaymentListProps> = ({ className, items, children, params 
         )}
 
         <p className="text-center text-text-grey text-sm w-full">
-          Mostrando del {startIndex + 1} al {Math.min(endIndex, items.length)} de{" "}
-          {items.length.toLocaleString()} registros
+          Mostrando del {startIndex + 1} al {Math.min(endIndex, filteredItems.length)} de{" "}
+          {filteredItems.length.toLocaleString()} registros
         </p>
 
-        {items.length > itemsPerPage && (
+        {filteredItems.length > itemsPerPage && (
           <button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
@@ -128,4 +141,4 @@ const PaymentList: FC<PaymentListProps> = ({ className, items, children, params 
   );
 }
 
-export default PaymentList
+export default PaymentList;

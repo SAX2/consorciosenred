@@ -1,46 +1,66 @@
-"use client"
+"use client";
 
-import React, { useState, useTransition } from 'react'
+import React, { useState, useTransition } from 'react';
 import Header from '../components/Header';
-import Input from '../components/Input';
-import auth from '@/lib/contents/auth.json'
+import auth from '@/lib/contents/auth.json';
 import Link from 'next/link';
+import Input from '@/components/Form/Input';
 import { Separator } from '@/components/ui/separator';
-import { login } from '../actions';
 import { Switch } from '@/components/ui/switch';
+import { loginHandler } from '@/actions/auth';
+import { z, ZodFormattedError } from 'zod';
 
-const page = () => {
-  const [formData, setFormData] = useState({ email: "", password: "", username: "username" });
+// Definición del esquema con Zod
+const LoginSchema = z.object({
+  password: z.string().min(1, { message: "La contraseña no puede estar vacía." }),
+  username: z.string().min(1, { message: "El nombre de usuario no puede estar vacío." }),
+  saveData: z.boolean().default(false)
+});
+
+type FetchError = { fetchError: {
+  _errors: string[];
+} | undefined; }
+type LoginFormValues = z.infer<typeof LoginSchema>;
+type LoginFormErrors = ZodFormattedError<LoginFormValues>;
+
+const Page = () => {
+  const [formData, setFormData] = useState<LoginFormValues>({ password: "", username: "", saveData: false, });
+  const [errors, setErrors] = useState<Partial<LoginFormErrors & FetchError>>({});
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState({ status: false, text: "" });
-  const [saveData, setSaveData] = useState<boolean>(false);
 
-  const handleChange = (type: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (type: keyof LoginFormValues) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prevState => ({
       ...prevState,
-      [type]: e.target.value
+      [type]: e.target.type === "checkbox" ? e.target.checked : e.target.value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setError({ status: false, text: "" })
-    if (!formData.password || !formData.username) return;
+    const result = LoginSchema.safeParse(formData);
+    if (!result.success) {
+      const formattedErrors = result.error.format();
+      setErrors(formattedErrors);
+      console.log(formattedErrors);
+      return;
+    }
 
-    startTransition(() => {
-      login({
+    startTransition(async () => {
+      await loginHandler({
         password: formData.password,
         username: formData.username,
-        save: saveData,
-      }).then((res) => {
-        if (res.error) {
-          throw new Error(res.error);
-        }
-      }).catch((error) => {
-        setError({ status: true, text: error.message });
-      });
-    })
+        save: formData.saveData,
+      })
+        .then((res) => {
+          if (res.error) {
+            throw new Error(res.error);
+          }
+        })
+        .catch((error) => {
+          setErrors({ fetchError: { _errors: error.message } })
+        });
+    });
   };
 
   return (
@@ -51,25 +71,21 @@ const page = () => {
             {auth.login.title}
           </h1>
         </Header>
-        {error.status && (
-          <p className="text-red-600 font-medium">{error.text}</p>
-        )}
         <form
           action=""
           className="w-full flex flex-col gap-4"
           onSubmit={handleSubmit}
         >
-          {auth.login.inputs.map((item, index) => {
-            return (
-              <Input
-                type={item.type}
-                key={item.label + index}
-                label={item.label}
-                placeholder={item.placeholder}
-                onChange={handleChange(item.type)}
-              />
-            );
-          })}
+          {auth.login.inputs.map((item, index) => (
+            <Input
+              type={item.type}
+              key={item.label + index}
+              label={item.label}
+              placeholder={item.placeholder}
+              onChange={handleChange(item.type as keyof LoginFormValues)}
+              error={errors?.[item.type as keyof LoginFormValues]?._errors?.[0]}
+            />
+          ))}
           <Input
             disabled={isPending}
             key={"submit"}
@@ -77,11 +93,17 @@ const page = () => {
             value="Ingresar"
             className="!border-0 bg-green text-white font-medium cursor-pointer"
           />
-          <div className='flex items-center gap-2'>
-            <span className='text-text-grey'>Guardar mis datos</span>
+          {errors.fetchError && (
+            <label
+              className={"text-sm font-medium text-red-600 dark:text-white/75"}>
+              {errors.fetchError._errors}
+            </label>
+          )}
+          <div className="flex items-center gap-2">
+            <span className="text-text-grey">Guardar mis datos</span>
             <Switch
-              checked={saveData}
-              onCheckedChange={setSaveData}
+              checked={formData.saveData}
+              onCheckedChange={() => setFormData((prev) => ({ ...prev, saveData: !prev.saveData }))}
               className="data-[state=checked]:bg-blue"
             />
           </div>
@@ -99,20 +121,18 @@ const page = () => {
         </form>
         <Separator className="max-md:my-4" />
         <div className="flex flex-col gap-2">
-          {auth.login.links.map((route) => {
-            return (
-              <div className="flex gap-2 flex-wrap" key={route.page.path}>
-                <span className="text-text-grey">{route.page.title}</span>
-                <Link href={route.page.path} className="underline font-medium">
-                  {route.page.button}
-                </Link>
-              </div>
-            );
-          })}
+          {auth.login.links.map((route) => (
+            <div className="flex gap-2 flex-wrap" key={route.page.path}>
+              <span className="text-text-grey">{route.page.title}</span>
+              <Link href={route.page.path} className="underline font-medium">
+                {route.page.button}
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </main>
   );
-}
+};
 
-export default page
+export default Page;

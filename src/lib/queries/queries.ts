@@ -1,79 +1,9 @@
-"use server"
-
-import { getAuthHeaders } from "@/app/actions";
 import { QueryFileProps } from "../types/data.types";
-import { urlControlPanel, urlFile, urlUnit, urlUnitIssues, urlUser } from "./urls";
+import { fetchWithAuth } from "./global";
 
-export const getFiles = async ({ id, name, type }: QueryFileProps) => {
-  const headers = await getAuthHeaders()
-
-  const res = await fetch(urlFile, {
-    method: "POST",
-    headers: { ...headers },
-    body: JSON.stringify({ id, nombreAdjunto: name, tipo: type })
-  })
-
-  if (!res.ok) return;
-
-  const data = await res.json();
-  return data;
-}
-
-
-export const getAllUnits = async () => {
-  const headers = await getAuthHeaders()
-
-  const res = await fetch(urlControlPanel, {
-    method: "POST",
-    headers: { ...headers },
-  });
-
-  if (!res.ok) return;
-
-  const data = await res.json();
-  return data;
-}
-
-export const getUnit = async ({ id }: { id: string }) => {
-  const headers = await getAuthHeaders()
-
-  const res = await fetch(urlUnit, {
-    method: "POST",
-    headers: { ...headers },
-    body: JSON.stringify({ uf_id: id })
-  });
-
-  if (!res.ok) return;
-
-  const data = await res.json();
-  return data;
-}
-
-export const getUser = async () => {
-  const headers = await getAuthHeaders()
-
-  const res = await fetch(urlUser, {
-    method: "POST",
-    headers: { ...headers },
-  });
-
-  if (!res.ok) return;
-
-  const data = await res.json();
-  return data;
-}
-
-export const getUnitIssues = async ({ code }: { code: string }) => {
-  const headers = await getAuthHeaders()
-
-  const res = await fetch(urlUnitIssues, {
-    method: "POST",
-    headers: { ...headers },
-    body: JSON.stringify({ codEdificio: code })
-  });
-
-  if (!res.ok) return;
-
-  const data = await res.json();
-  return data;
-}
+export const getFiles = ({ id, name, type }: QueryFileProps) => fetchWithAuth("cer_api.nsf/xsp/.xrest/adjunto", { method: 'POST', data: { id, nombreAdjunto: name, tipo: type } });
+export const getUnits = () => fetchWithAuth("cer_exp.nsf/xsp/.xrest/panel", { method: 'POST' });
+export const getUnit = ({ id }: { id: string }) => fetchWithAuth("cer_exp.nsf/xsp/.xrest/unidad", { method: 'POST', data: { uf_id: id} });
+export const getUser = () => fetchWithAuth("cer_api.nsf/xsp/.xrest/usuario", { method: 'POST' });
+export const getUnitIssues = ({ code }: { code: string }) => fetchWithAuth("cer_ied.nsf/xsp/.xrest/rclList", { method: 'POST', data: { codEdificio: code } });
+export const getUnitPayments = ({ id }: { id: string }) => fetchWithAuth("cer_api.nsf/xsp/.xrest/notiPagoList", { method: 'POST', data: { idDepto: id } });

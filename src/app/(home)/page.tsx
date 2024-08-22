@@ -4,11 +4,9 @@ import services, { appInstall } from '@/lib/contents/services'
 import { Separator } from "@/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { caba1, desktopAdminPreview, mobileAdminPreviewIphone } from "@/lib/images";
+import { caba1, desktopAdminPreview, mobileUnit } from "@/lib/images";
 import { IconArrowNarrowRight, IconChevronRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
-import { useInView } from "framer-motion"
-import React, { useRef } from "react";
 import Image from "next/image";
 import main from '@/lib/contents/main.json'
 import Link from "next/link";
@@ -18,20 +16,16 @@ import Section from "./components/hero-sections/Section";
 import Service from "./components/hero-sections/Services";
 import NewsCard from "./components/card/NewsCard";
 import Main from './components/Main';
+import React from 'react';
 
 export default function Home() {
-  const mainSection = useRef(null);
-  const isMainSectionInView = useInView(mainSection, { once: true });
-
   return (
     <Main>
       <article
         className="flex flex-col items-center bg-black w-full px-8 max-md:px-4"
-        ref={mainSection}
       >
         <section className="items-center h-screen-main-h h-full max-w-[1000px] w-full justify-center flex max-sm:items-end max-sm:pb-28">
           <div className="absolute top-0 left-0 w-full h-screen h-screen-main  select-none">
-            {/* <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-radial-gradient opacity-60"></div> */}
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-radial-gradient"></div>
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-linear"></div>
             <Image
@@ -46,30 +40,21 @@ export default function Home() {
           <div className="z-10 relative w-full max-w-[655px] flex flex-col gap-2 max-md:max-w-[500px]">
             <h1
               className={cn(
-                "text-white text-6xl text-center tracking-tight font-geist font-black max-md:text-5xl max-sm:text-4xl max-[425px]:text-3xl transition-all duration-500",
-                isMainSectionInView
-                  ? "none opacity-100"
-                  : "translate-y-16 opacity-0"
+                "text-white text-6xl text-center tracking-tight font-geist font-black max-md:text-5xl max-sm:text-4xl max-[425px]:text-3xl transition-all duration-500 animate-fade-in-up"
               )}
             >
               {main.main.title}
             </h1>
             <p
               className={cn(
-                "text-white text-2xl text-center tracking-tight max-md:text-xl max-sm:text-lg max-[425px]:text-sm max-[425px]:leading-snug transition-all duration-500",
-                isMainSectionInView
-                  ? "none opacity-100"
-                  : "translate-y-16 opacity-0"
+                "text-white text-2xl text-center tracking-tight max-md:text-xl max-sm:text-lg max-[425px]:text-sm max-[425px]:leading-snug transition-all duration-500 animate-fade-in-up delay-75"
               )}
             >
               {main.main.description}
             </p>
             <nav
               className={cn(
-                "mt-4 transition-all duration-500 delay-75",
-                isMainSectionInView
-                  ? "none opacity-100"
-                  : "translate-y-16 opacity-0"
+                "mt-4 transition-all duration-500 delay-100 animate-fade-in-up"
               )}
             >
               <ul className="flex gap-3 justify-center items-center">
@@ -101,10 +86,7 @@ export default function Home() {
         </section>
         <section
           className={cn(
-            "items-center h-full max-w-[1000px] w-full justify-center flex z-10 transition-all duration-500 delay-75",
-            isMainSectionInView
-              ? "none opacity-100"
-              : "translate-y-16 opacity-0"
+            "items-center h-full max-w-[1000px] w-full justify-center flex z-10 transition-all duration-500 delay-75 animate-fade-in-up"
           )}
         >
           <div className="flex flex-col gap-2 items-end max-[425px]:items-center max-[425px]:px-4">
@@ -118,7 +100,7 @@ export default function Home() {
             <Image
               width={582}
               height={1144}
-              src={mobileAdminPreviewIphone}
+              src={mobileUnit}
               alt="Captura del panel de administrador"
               className="w-dvw h-auto max-[425px]:block hidden"
             />
@@ -155,9 +137,9 @@ export default function Home() {
               <div className="px-2 py-[2px] rounded-lg bg-blue w-fit text-white font-medium text-sm">
                 {main.metrics.pill}
               </div>
-              <h2 className="font-geist font-bold text-4xl text-black text-center tracking-tight">
+              <h3 className="font-geist font-bold text-4xl text-black text-center tracking-tight">
                 {main.metrics.title}
-              </h2>
+              </h3>
             </div>
             <div className="flex justify-center gap-3 w-full max-md:flex-col max-md:gap-4">
               {main.metrics.content.map((metric, index: number) => {
@@ -172,9 +154,9 @@ export default function Home() {
                           "text-green font-semibold text-6xl font-geist text-center"
                         )}
                       />
-                      <h3 className="font-bold text-2xl text-center">
+                      <h2 className="font-bold text-2xl text-center">
                         {metric.title}
-                      </h3>
+                      </h2>
                     </div>
                     <Separator orientation="vertical" />
                   </React.Fragment>
@@ -192,9 +174,12 @@ export default function Home() {
                 return (
                   <CarouselItem
                     key={item.title}
-                    className={cn("h-fit max-w-[480px] w-full", index === 1 && "!pl-0")}
+                    className={cn(
+                      "h-fit max-w-[480px] w-full",
+                      index === 1 && "!pl-0"
+                    )}
                   >
-                    <NewsCard content={item} mainPath='/noticias' />
+                    <NewsCard content={item} mainPath="/noticias" />
                   </CarouselItem>
                 );
               })}

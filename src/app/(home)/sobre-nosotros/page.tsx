@@ -1,7 +1,7 @@
 import React from 'react'
 import about from '@/lib/contents/about.json'
 import Main from '../components/Main';
-import Pill from '@/components/pill/Pill';
+import Pill from '@/components/Pill';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
 

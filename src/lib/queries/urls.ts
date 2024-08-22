@@ -1,5 +1,6 @@
-export const urlControlPanel = "https://www.consorciosenred.com/cerDevelopment/cer_exp.nsf/xsp/.xrest/panel";
-export const urlUnit = "https://www.consorciosenred.com/cerDevelopment/cer_exp.nsf/xsp/.xrest/unidad";
-export const urlUnitIssues = "https://www.consorciosenred.com/cerDevelopment/cer_ied.nsf/xsp/.xrest/rclList";
-export const urlUser = "https://www.consorciosenred.com/cerDevelopment/cer_api.nsf/xsp/.xrest/usuario";
-export const urlFile = "https://www.consorciosenred.com/cerDevelopment/cer_api.nsf/xsp/.xrest/adjunto";
+export const urlControlPanel = "/cer_exp.nsf/xsp/.xrest/panel";
+export const urlUnit = process.env.API_URL  + "/cer_exp.nsf/xsp/.xrest/unidad";
+export const urlUnitIssues = process.env.API_URL  + "/cer_ied.nsf/xsp/.xrest/rclList";
+export const urlUser = process.env.API_URL  + "/cer_api.nsf/xsp/.xrest/usuario";
+export const urlFile = process.env.API_URL  + "/cer_api.nsf/xsp/.xrest/adjunto";
+export const urlToken = process.env.BASE_API_URL  + "/cer_api.nsf/xsp/.xrest/token";

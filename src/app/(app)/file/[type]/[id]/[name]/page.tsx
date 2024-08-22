@@ -1,6 +1,6 @@
-import PDFViewer from '@/app/(app)/components/pdf/PdfViewer';
+import PDFViewer from './_components/PdfViewer';
 import { getFiles } from '@/lib/queries/queries';
-import { QueryFileProps } from '@/lib/types/data.types';
+import { QueryFileProps } from '@/types/globals';
 import React from 'react'
 
 interface PageProps {

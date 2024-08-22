@@ -15,9 +15,10 @@ import {
   IconShieldLock,
 } from "@tabler/icons-react";
 import {
-  mobileBookingPreviewIphone,
-  mobileAdminPreviewIphone,
-  mobileAppInstallPreviewIphone,
+  mobileAppInstallPreview,
+  mobileCalendar,
+  mobileRcl,
+  mobileUnit,
 } from "../images";
 
 const services = [
@@ -56,7 +57,7 @@ const services = [
         icon: <IconBook height={24} width={24} />,
       },
     ],
-    image: mobileBookingPreviewIphone,
+    image: mobileCalendar,
     mainColor: "text-green",
   },
   {
@@ -98,7 +99,7 @@ const services = [
         icon: <IconCheck height={24} width={24} />,
       },
     ],
-    image: mobileAdminPreviewIphone,
+    image: mobileRcl,
     mainColor: "text-yellow-sec",
   },
   {
@@ -136,13 +137,13 @@ const services = [
         icon: <div></div>,
       },
     ],
-    image: mobileAdminPreviewIphone,
+    image: mobileUnit,
     mainColor: "text-blue",
   },
 ];
 
 export const appInstall = {
-  image: mobileAppInstallPreviewIphone,
+  image: mobileAppInstallPreview,
   title: "Pruebe Ahora Nuestras Apps \n para una Gestión Simplificada",
   content: [
     {

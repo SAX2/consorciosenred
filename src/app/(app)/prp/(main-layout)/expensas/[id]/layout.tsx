@@ -1,7 +1,8 @@
-import React from 'react'
-import Sidebar from './components/sidebar/Sidebar';
-import { cn } from '@/lib/utils';
-import MediaProvider from '@/lib/context/MediaProvider';
+import { cn } from "@/lib/utils";
+import Sidebar from "@/components/Navbar/AppNavbars/UnitSidebar";
+import MediaQueryProvider from "@/context/MediaQueryProvider";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,13 +12,14 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         "w-full col-span-2 max-md:col-span-1"
       )}
     >
-      {/* <MediaProvider></MediaProvider> */}
-      <MediaProvider minWidth={768}>
-        <Sidebar />
-      </MediaProvider>
-      {children}
+      <MediaQueryProvider minWidth={768}>
+        <div className="relative">
+          <Sidebar />
+        </div>
+      </MediaQueryProvider>
+      <Suspense fallback={<Loading />}>{children}</Suspense>
     </div>
   );
 };
 
-export default layout
+export default layout;

@@ -7,13 +7,12 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React, { useState, useRef } from 'react'
 import navigation from '@/lib/contents/nav.json'
-import Burger from '@/components/navbar/Burger';
 import { usePathname } from 'next/navigation';
+import Burger from '@/components/Icons/Burger';
 
 const Navbar = () => {
   const pathname = usePathname();
   const header = useRef(null)
-  const isHeaderInView = useInView(header, { once: true })
   const { scrollY } = useScroll()
   const [scroll, setScroll] = useState<number>(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,9 +34,8 @@ const Navbar = () => {
     <header
       ref={header}
       className={cn(
-        "w-full flex justify-center sticky top-0 px-8 max-md:px-4 z-20 transition-all duration-300",
+        "w-full flex justify-center sticky top-0 px-8 max-md:px-4 z-20 transition-all duration-300 animate-appear",
         isScrolled && "bg-black",
-        isHeaderInView ? "opacity-100" : "opacity-0",
         isMenuOpen && "bg-black",
         !isMain && "bg-black",
       )}

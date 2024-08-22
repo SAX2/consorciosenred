@@ -183,3 +183,22 @@
   .icon-red {
     @apply bg-red-200 border-red-300 text-red-900
   }
+
+  .max-h-drawer {
+    max-height: calc(100dvh - 10dvh);
+  }
+
+  @keyframes slideInFromTop {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .h-dvh-mobile-header {
+    height: calc(100dvh - 60px);
+  }

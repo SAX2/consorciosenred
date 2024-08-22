@@ -1,5 +1,5 @@
-import { StaticDataType } from '@/lib/types/data.types';
 import { cn } from '@/lib/utils';
+import { StaticDataType } from '@/types/globals';
 import { IconArrowNarrowRight, IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react'

@@ -87,10 +87,20 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        fadeInUp: {
+          from: { opacity: '0', transform: 'translateY(4rem)' },
+          to: { opacity: '1', transform: 'translateY(0)' }
+        },
+        appear: {
+          from: { opacity: '0' },
+          to: { opacity: '1' }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        'fade-in-up': 'fadeInUp 0.5s ease-in-out forwards',
+        'appear': 'appear 1s linear forwards'
       },
       "navbar-heigth": "107px"
     },
@@ -101,7 +111,15 @@ const config = {
       'shortcut': '0 15px 3px -15px rgba(0, 0, 0, 0.1)' ,
     }
   },
-  plugins: [require("tailwindcss-animate")],
+  variants: {
+    extend: {
+      animation: ['responsive', 'motion-safe', 'motion-reduce']
+    }
+  },
+  plugins: [
+    require("tailwindcss-animate"), 
+    require('tailwindcss-children'), 
+  ],
 } satisfies Config
 
 export default config

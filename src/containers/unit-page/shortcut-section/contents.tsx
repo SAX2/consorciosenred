@@ -1,7 +1,4 @@
-import dynamic from "next/dynamic";
 import { IconAlertTriangle, IconBellRinging, IconStar, IconWallet } from "@tabler/icons-react";
-
-const NewRcl = dynamic(() => import("@/containers/rcl-page/new-rcl"), { ssr: false, });
 
 export const shortcutsPayemnt = [
   {
@@ -12,7 +9,7 @@ export const shortcutsPayemnt = [
     isActive: true,
   },
   {
-    path: "#",
+    path: "/pagos/nuevo",
     color: "icon-blue",
     title: "Notificar pago",
     icon: <IconBellRinging  width={32} height={32} className="max-md:h-[28px] max-md:w-[28px]"/>,
@@ -34,7 +31,5 @@ export const shortcuts = [
     title: "Hacer reclamo",
     icon: <IconAlertTriangle width={32} height={32} className="max-md:h-[28px] max-md:w-[28px]"/>,
     isActive: true,
-    isModal: true,
-    modalContent: <NewRcl />
   },
 ]

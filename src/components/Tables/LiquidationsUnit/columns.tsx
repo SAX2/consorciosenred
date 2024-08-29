@@ -1,89 +1,65 @@
 "use client"
 
+import Link from "next/link";
 import Pill from "@/components/Pill";
 import { AcrobatLogo } from "@/lib/icons";
 import { ColumnDef } from "@tanstack/react-table"
-import { Checkbox } from "@/components/ui/checkbox"
-import Link from "next/link";
+import { IconArrowsDown, IconArrowsUpDown, IconChevronRight } from "@tabler/icons-react";
 
 export type Expensa = {
   id: string;
   period: string;
-  title: string;
-  adj: string;
+  comprobantes: string[];
 };
 
 export const columns: ColumnDef<Expensa>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      
-      <Checkbox
-        className="rounded-sm border-text-grey/50 w-fit min-w-4"
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        className="rounded-sm border-text-grey/50 w-fit min-w-4"
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "id",
-    header: "id",
-  },
-  {
-    accessorKey: "title",
-    header: "Periodo",
-    minSize: 125,
-    cell: ({ row }) => {
+    accessorKey: "period",
+    header: ({ column }) => {
       return (
-        <Link
-          href={`/file/uf_liquidaciones/${row.getValue("id")}/${row.getValue(
-            "adj"
-          )}`}
-          target="_blank"
-          className="w-fit flex"
+        <button
+          className="flex items-center gap-2"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          <Pill
-            icon={<AcrobatLogo width={15} height={15} />}
-            text={row.getValue('title')}
-            classNameText="text-sm text-black/75 dark:text-white/75 !font-medium w-full"
-          />
-        </Link>
+          PERIODO / COMPROBANTE
+          {column.getIsSorted() === "asc" ? (
+            <IconArrowsUpDown className="h-4 w-4" />
+          ) : (
+            <IconArrowsDown className="h-4 w-4" />
+          )}
+        </button>
       );
-    }
-  },
-  {
-    accessorKey: "adj",
-    header: "Adjunto",
+    },
     cell: ({ row }) => {
+      const period = row.getValue("period") as string;
+      const comprobantes = row.original.comprobantes;
       return (
-        <Link
-          href={`/file/uf_liquidaciones/${row.getValue("id")}/${row.getValue(
-            "adj"
-          )}`}
-          target="_blank"
-          className="w-fit flex"
-        >
-          <Pill
-            icon={<AcrobatLogo width={15} height={15} />}
-            text={"Comprobante"}
-            classNameText="text-sm text-black/75 dark:text-white/75 !font-medium w-full"
-          />
-        </Link>
+        <div className="flex flex-col gap-[6px]">
+          <div className="flex items-center">
+            <span className="font-medium text-base">{period}</span>
+            <IconChevronRight className="h-4 w-4 text-text-grey" />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {comprobantes.length > 0 ? (
+              comprobantes.map((comprobante, index) => (
+                <Link
+                  key={index}
+                  href={`/file/uf_liquidaciones/${row.original.id}/${comprobante}`}
+                  target="_blank"
+                >
+                  <Pill
+                    icon={<AcrobatLogo width={15} height={15} />}
+                    text="Comprobante"
+                    classNameText="text-sm text-black/75 dark:text-white/75 !font-medium"
+                  />
+                </Link>
+              ))
+            ) : (
+              <span className="text-sm text-text-grey">Sin comprobantes</span>
+            )}
+          </div>
+        </div>
       );
-    }
+    },
   },
-]
+];

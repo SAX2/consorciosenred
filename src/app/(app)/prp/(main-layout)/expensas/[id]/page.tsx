@@ -5,13 +5,14 @@ import UnitInfoSection from '@/containers/unit-page/info-section';
 import { getUnit } from '@/lib/queries/queries';
 import { DataTable } from '@/components/Tables/LiquidationsUnit';
 import { columns } from '@/components/Tables/LiquidationsUnit/columns';
+import { notFound } from 'next/navigation';
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
   const unitId = getParams({ params: id, type: "id" });
   
   const data = await getUnit({ id: unitId });
 
-  if (data.length <= 0) return <div>Not found</div>;
+  if (data.length <= 0) return notFound();
 
   function convertDate(date: string) {
     const months = [
@@ -23,16 +24,15 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
     const monthName = months[parseInt(month) - 1];
     
     return `${year} - ${monthName}`;
-}
+  }
 
   const formatExpensas = (data: any) => {
     const sortedData = data.sort((a: any, b: any) => b.orden - a.orden);
 
     return sortedData.map((item: any) => ({
       id: item.id,
-      period: item.titulo,
-      title: convertDate(item.titulo),
-      adj: item.nombreAdjunto
+      period: convertDate(item.titulo),
+      comprobantes: [item.nombreAdjunto]
     }));
   };
 

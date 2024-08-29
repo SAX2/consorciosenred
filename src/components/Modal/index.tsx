@@ -1,15 +1,19 @@
 "use client"
 
 import { FC, PropsWithChildren } from "react"
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
 import { useRouter } from "next/navigation"
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import useIsLargeScreen from "@/hooks/useIsLargeScreen";
 import { cn } from "@/lib/utils";
+import { IconChevronLeft, IconX } from "@tabler/icons-react";
+import { Separator } from "../ui/separator";
 
 interface ModalProps extends PropsWithChildren {
   hasDrawerResponsive?: boolean;
   isParallel?: boolean;
+  dialogTitle?: string;
+  className?: string;
 }
 
 interface ModalContentProps extends PropsWithChildren {
@@ -58,7 +62,30 @@ export const ModalTrigger: FC<PropsWithChildren> = ({ children }) => {
   return dialog;
 };
 
-const Modal: FC<ModalProps> = ({ children, hasDrawerResponsive = false, isParallel = false }) => {
+export const DialogFull: FC<PropsWithChildren & { onClick: (state: boolean) => void, dialogTitle?: string }> = ({ children, onClick, dialogTitle = 'Modal' }) => {
+  const handleClick = () => {
+    onClick(false);
+  }
+
+  return (
+    <div className="w-full h-dvh absolute top-0 left-0 z-50 bg-white dark:bg-black-app-bg">
+      <div className="flex flex-col">
+        <div className="w-full flex justify-between items-center px-3 py-4">
+          <div className="flex items-center gap-2">
+            <button onClick={handleClick} className="flex items-center gap-1 text-lg font-medium text-text-grey">
+              <IconChevronLeft width={24} height={24} />  
+              Cancelar
+            </button>
+          </div>
+        </div>
+        <Separator />
+        <div className="p-3">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+const Modal: FC<ModalProps> = ({ children, hasDrawerResponsive = false, isParallel = false, dialogTitle, className }) => {
   const router = useRouter();
   const { isLargeScreen } = useIsLargeScreen({ minWidth: 768 })
 
@@ -79,21 +106,25 @@ const Modal: FC<ModalProps> = ({ children, hasDrawerResponsive = false, isParall
   }
 
   const dialog = (
-    <Dialog onOpenChange={handleOpenChange}>
-      {children}
+    <Dialog defaultOpen={true} modal={true} onOpenChange={handleOpenChange}>
+      <ModalContent className={className}>
+        <DialogHeader>
+          <DialogTitle className="font-geist text-2xl dark:text-white">
+            {dialogTitle}
+          </DialogTitle>
+        </DialogHeader>
+        {children}
+      </ModalContent>
     </Dialog>
   );
   
-  const drawer = (
-    <Drawer onOpenChange={handleOpenChangeDrawer}>
+  const dialogFull = (
+    <DialogFull onClick={handleOpenChangeDrawer} dialogTitle={dialogTitle}>
       {children}
-    </Drawer>
+    </DialogFull>
   );
 
-  if (hasDrawerResponsive) {
-    if (!isLargeScreen) return drawer;
-  }
-
+  if (hasDrawerResponsive && !isLargeScreen) return dialogFull;
   return dialog;
 }
 

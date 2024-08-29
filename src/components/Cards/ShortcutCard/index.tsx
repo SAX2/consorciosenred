@@ -48,17 +48,6 @@ const ShortcutCard: FC<ShortcutCardProps> = ({
       </div>
     </>
   );
-
-  if (isModal) {
-    return (
-      <Modal hasDrawerResponsive={true}>
-        <ModalTrigger>
-          <div className={classNameProp}>{content}</div>
-        </ModalTrigger>
-        {modalContent}
-      </Modal>
-    );
-  }
   
   return <Link href={path} className={classNameProp}>{content}</Link>
 };

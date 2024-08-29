@@ -6,6 +6,8 @@ import Input from '@/components/Form/Input';
 import { cn } from '@/lib/utils';
 import { IconSearch, IconSquareRoundedPlus } from '@tabler/icons-react';
 import Link from 'next/link';
+import Modal, { ModalTrigger } from '@/components/Modal';
+import NewRcl from '../new-rcl';
 
 interface RclListProps extends PropsWithChildren {
   max?: number;
@@ -63,13 +65,18 @@ const RclList: FC<RclListProps> = ({ max, className, buttonMore = "Ver más", bu
   return (
     <>
       <div className="flex items-center gap-2 w-full">
-        <Link href={`/prp/expensas/${params}/reclamos/nuevo`} className='icon-green p-2 flex items-center justify-center rounded-lg'>
+        <Link
+          href={`/prp/expensas/${params}/reclamos/nuevo`}
+          className="icon-green p-2 flex items-center justify-center rounded-lg cursor-pointer"
+        >
           <span>
             <IconSquareRoundedPlus width={26} height={26} />{" "}
           </span>
         </Link>
         <Input
-          icon={<IconSearch className="text-text-grey" width={18} height={18} />}
+          icon={
+            <IconSearch className="text-text-grey" width={18} height={18} />
+          }
           type="text"
           placeholder="Buscar por fecha (dd/mm/yyyy)"
           orientation="icon-left"

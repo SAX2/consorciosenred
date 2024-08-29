@@ -16,8 +16,6 @@ const Shortcuts: FC<ShortcutsProps> = ({ data, classNameItem, className, mainPat
         if (shortcut.isActive) {
           return (
             <ShortcutCard
-              isModal={shortcut.isModal}
-              modalContent={shortcut.modalContent}
               className={classNameItem}
               color={shortcut.color}
               title={shortcut.title}

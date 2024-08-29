@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import { loginHandler } from '@/actions/auth';
 import { z, ZodFormattedError } from 'zod';
+import InputSubmit from '@/components/Form/InputSubmit';
 
 // Definición del esquema con Zod
 const LoginSchema = z.object({
@@ -26,7 +27,10 @@ type LoginFormErrors = ZodFormattedError<LoginFormValues>;
 const Page = () => {
   const [formData, setFormData] = useState<LoginFormValues>({ password: "", username: "", saveData: false, });
   const [errors, setErrors] = useState<Partial<LoginFormErrors & FetchError>>({});
+  
   const [isPending, startTransition] = useTransition();
+  const [queryError, setQueryError] = useState<boolean>(false);
+  const [querySuccess, setQuerySuccess] = useState<boolean>(false);
 
   const handleChange = (type: keyof LoginFormValues) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prevState => ({
@@ -47,6 +51,9 @@ const Page = () => {
     }
 
     startTransition(async () => {
+      setQueryError(false);
+      setQuerySuccess(false);
+
       await loginHandler({
         password: formData.password,
         username: formData.username,
@@ -54,11 +61,14 @@ const Page = () => {
       })
         .then((res) => {
           if (res.error) {
+            setQueryError(true);
             throw new Error(res.error);
           }
+          setQuerySuccess(true);
         })
         .catch((error) => {
           setErrors({ fetchError: { _errors: error.message } })
+          setQueryError(true);
         });
     });
   };
@@ -86,19 +96,16 @@ const Page = () => {
               error={errors?.[item.type as keyof LoginFormValues]?._errors?.[0]}
             />
           ))}
-          <Input
-            disabled={isPending}
-            key={"submit"}
+          <InputSubmit
+            status={isPending ? 'loading' : queryError ? 'error' : querySuccess ? 'success' : 'idle'}
+            idleText="Ingresar"
+            loadingText="Verificando..."
+            successText="Ingresando"
+            errorText="Hubo un error, intente nuevamente"
             type="submit"
+            className="!border-0 bg-green text-white font-medium cursor-pointer disabled:opacity-50 disabled:cursor-auto"
             value="Ingresar"
-            className="!border-0 bg-green text-white font-medium cursor-pointer"
           />
-          {errors.fetchError && (
-            <label
-              className={"text-sm font-medium text-red-600 dark:text-white/75"}>
-              {errors.fetchError._errors}
-            </label>
-          )}
           <div className="flex items-center gap-2">
             <span className="text-text-grey">Guardar mis datos</span>
             <Switch

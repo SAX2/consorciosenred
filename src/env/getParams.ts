@@ -1,4 +1,7 @@
 const getParams = ({ params, type }: { params: string, type: "id" | "code" }) => {
+
+  if (!params) return "";
+
   const arr = params.split('_')
 
   if (type === 'id') {

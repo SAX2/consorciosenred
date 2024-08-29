@@ -12,13 +12,11 @@ interface ShortcutsProps {
 
 const Shortcuts: FC<ShortcutsProps> = ({ classNameItem, className, mainPath }) => {
   return (
-    <div className={cn("grid grid-cols-2 gap-2", className)}>
+    <div className={cn("grid grid-cols-2 gap-2 ", className)}>
       {shortcuts.map((shortcut) => {
         if (shortcut.isActive) {
           return (
             <ShortcutCard
-              isModal={shortcut.isModal}
-              modalContent={shortcut.modalContent}
               className={classNameItem}
               color={shortcut.color}
               title={shortcut.title}

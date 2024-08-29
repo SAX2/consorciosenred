@@ -14,7 +14,7 @@ export const shortcuts = [
   {
     path: "#",
     color: "icon-purple",
-    title: "Reservar",
+    title: "Hacer reserva",
     icon: <IconStar width={32} height={32} className="max-md:h-[28px] max-md:w-[28px]"/>,
     isActive: true,
   },
@@ -24,11 +24,9 @@ export const shortcuts = [
     title: "Hacer reclamo",
     icon: <IconAlertTriangle width={32} height={32} className="max-md:h-[28px] max-md:w-[28px]"/>,
     isActive: true,
-    isModal: true,
-    modalContent: <NewRcl />
   },
   {
-    path: "#",
+    path: "/pagos/nuevo",
     color: "icon-blue",
     title: "Notificar pago",
     icon: <IconBellRinging  width={32} height={32} className="max-md:h-[28px] max-md:w-[28px]"/>,

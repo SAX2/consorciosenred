@@ -22,7 +22,7 @@ const Pill: React.FC<PillProps> = ({ text, className, icon, classNameText, isFil
         className
       )}
     >
-      <IconFile type={fileId?.split('.')[2] ?? ""}/>
+      <IconFile type={typeof fileId === 'string' ? fileId.split('.').pop() ?? "" : ""}/>
       <span className={cn('text-black dark:text-white font-medium', classNameText)}>{text}</span>
     </Link>;
   }

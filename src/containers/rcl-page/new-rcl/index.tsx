@@ -1,11 +1,18 @@
 "use client";
 
-import FileSelectorDrag from '@/components/Form/FileSelectorDrag';
-import Input from '@/components/Form/Input';
+import React, { useState, useTransition, FC, PropsWithChildren } from 'react'
 import { ModalContent } from '@/components/Modal';
 import { DialogTitle } from '@/components/ui/dialog';
-import React, { useState } from 'react'
+import { createNewRcl } from '@/lib/queries/queries';
 import { z, ZodFormattedError } from 'zod'
+import FileSelectorDrag from '@/components/Form/FileSelectorDrag';
+import Input from '@/components/Form/Input';
+import getParams from '@/env/getParams';
+import InputSubmit from '@/components/Form/InputSubmit';
+
+interface NewRclProps extends PropsWithChildren {
+  id: string,
+}
 
 const Rcl = z.object({
   Rcl_Sobre: z.string(),
@@ -24,7 +31,7 @@ const Rcl = z.object({
 type RclFormValues = z.infer<typeof Rcl>;
 type RclFormErrors = ZodFormattedError<RclFormValues>;
 
-const NewRcl = () => {
+const NewRcl: FC<NewRclProps> = ({ id, children }) => {
   const [formValues, setFormValues] = useState<RclFormValues>({
     Rcl_Sobre: 'Departamento',
     Rcl_Type: 'Administrativo',
@@ -36,6 +43,12 @@ const NewRcl = () => {
 
   const arrRclAbout = [{ arr: ["Departamento", "Edificio"] }];
   const arrRclType = [{ arr: ["Reparaciones", "Administrativo"] }];
+
+  const [isPending, startTransition] = useTransition();
+  const [queryError, setQueryError] = useState(false);
+  const [querySuccess, setQuerySuccess] = useState(false);
+
+  const unitId = getParams({ params: id, type: "id" });
 
   const onChangeRclAbout = (value: string) => {
     setFormValues((prev) => ({ ...prev, Rcl_Sobre: value }));
@@ -49,27 +62,72 @@ const NewRcl = () => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const result = Rcl.safeParse(formValues);
+
+    setQueryError(false);
+    setQuerySuccess(false);
+
     if (!result.success) {
-      const formattedErrors = result.error.format();
-      setErrors(formattedErrors);
+      setErrors(result.error.format());
       return;
     }
 
-    console.log("Formulario enviado con éxito", formValues);
+    startTransition(async () => {
+      try {
+        const res = await createNewRcl({
+          ...formValues,
+          id: unitId,
+          Rcl_Description: formValues.Rcl_Description.trim(),
+          Rcl_DateTime: new Date(formValues.Rcl_DateTime).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '/'),
+        });
+
+        console.log(res);
+
+        if (res.ERROR || res.ERROR_CATCH === null) {
+          setQueryError(true);
+        } else {
+          setQuerySuccess(true);
+        }
+      } catch (error) {
+        console.error("ERROR CATCH:", error);
+        setQueryError(true);
+      }
+    });
+
     setErrors({});
   };
 
+  const handleFilesSelected = (files: File[]) => {
+    const convertToBase64 = (file: File): Promise<string> => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const base64String = reader.result as string;
+          const base64WithoutPrefix = base64String.split(',')[1];
+          resolve(base64WithoutPrefix);
+        };
+        reader.onerror = error => reject(error);
+      });
+    };
+
+    Promise.all(files.map(file => convertToBase64(file)))
+      .then(base64Files => {
+        setFormValues(prev => ({
+          ...prev,
+          adjuntos: base64Files
+        }));
+      })
+      .catch(error => {
+        console.error('Error al convertir archivos a base64:', error);
+      });
+  };
+
   return (
-    <ModalContent className="gap-6 !max-w-[550px] p-4">
-      <div className="overflow-y-auto flex-col flex gap-6">
-        <DialogTitle className="font-geist text-2xl dark:text-white">
-          Nuevo reclamo
-        </DialogTitle>
-      </div>
+    <>
+      {children}
       <form
         className="flex flex-col gap-4 w-full max-md:py-6"
         onSubmit={handleSubmit}
@@ -114,15 +172,24 @@ const NewRcl = () => {
           <label className="text-sm font-medium text-black/75 px-2 dark:text-white/75">
             Archivos adjuntos (Solo imágenes)
           </label>
-          <FileSelectorDrag />
+          <FileSelectorDrag
+            onFilesSelected={handleFilesSelected}
+            acceptedFileTypes={["image/png", "image/jpeg", "image/jpg"]}
+            className="w-full"
+
+          />
         </div>
-        <Input
-          type="submit"
-          className="!bg-[#FFDF41]/35 icon-yellow border-0 rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-auto"
-          value={"Enviar reclamo"}
+        <InputSubmit
+          status={isPending ? 'loading' : queryError ? 'error' : querySuccess ? 'success' : 'idle'}
+          idleText="Enviar reclamo"
+          loadingText="Enviando reclamo..."
+          successText="Reclamo enviado correctamente"
+          errorText="Error al enviar el reclamo"
+          className="bg-[#FFDF41]/35 icon-yellow border-0 rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-auto"
+          value="Enviar reclamo"
         />
       </form>
-    </ModalContent>
+    </>
   );
 }
 

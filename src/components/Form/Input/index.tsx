@@ -3,9 +3,9 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
-import { ChangeEvent, FC, InputHTMLAttributes, useState } from 'react'
+import { ChangeEvent, FC, InputHTMLAttributes, PropsWithChildren, useState } from 'react'
 
-interface InputProps {
+interface InputProps extends PropsWithChildren {
   icon?: React.ReactElement;
   label?: string;
   orientation?: "icon-left" | "icon-right";
@@ -24,6 +24,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 const Input: FC<InputProps> = ({
   cardInput = false,
+  children,
   orientation,
   icon,
   label,
@@ -84,21 +85,26 @@ const Input: FC<InputProps> = ({
             className={cn(inputClassName, error && "!border-red-700")}
           />
         )}
-        {!cardInput && props.type != "select" && props.type !== "text-area" && (
-          <input
-            {...props}
-            type={props.type === "password" && enabled ? "text" : props.type}
-            className={cn(
-              inputClassName,
-              error &&
-                "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
-            )}
-          />
-        )}
+        {!cardInput &&
+          props.type != "select" &&
+          props.type !== "text-area" &&
+          props.type !== "children" &&
+          props.type !== "currency" && (
+            <input
+              {...props}
+              type={props.type === "password" && enabled ? "text" : props.type}
+              className={cn(
+                inputClassName,
+                error &&
+                  "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
+              )}
+            />
+          )}
         {props.type === "text-area" && (
           <textarea
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange && props.onChange(e as any)}
             placeholder={props.placeholder}
-            name=""
+            name={props.name}
             id=""
             className={cn(
               inputClassName,
@@ -144,6 +150,7 @@ const Input: FC<InputProps> = ({
             </SelectContent>
           </Select>
         )}
+        {props.type === "children" && children}
         {icon && orientation === "icon-right" && (
           <div className="absolute right-0 h-full flex items-center">
             <span className="pr-2 py-1">{icon}</span>

@@ -103,7 +103,7 @@ const UnitCard: FC<UnitCardProps> = ({ unit }) => {
         <Shortcuts
           mainPath={`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`}
           classNameItem="bg-white dark:bg-grey-sec-dark"
-          className='gap-[6px]'
+          className='gap-[6px] max-[390px]:grid-cols-1'
         />
         <Link
           scroll={true}

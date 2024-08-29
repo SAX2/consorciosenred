@@ -61,7 +61,7 @@ const PaymentList: FC<PaymentListProps> = ({ className, items, children, params 
     <>
       <div className="flex items-center gap-2 w-full">
         <Link
-          href={`/prp/expensas/${params}/reclamos/nuevo`}
+          href={`/prp/expensas/${params}/pagos/nuevo`}
           className="icon-blue p-2 flex items-center justify-center rounded-lg"
         >
           <span>

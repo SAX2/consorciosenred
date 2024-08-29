@@ -38,5 +38,9 @@ export const getPathsAndTitles = () => {
       title: "Reglamento",
       paths: [`/prp/expensas/${params.id}/reglamento`]
     },
+    {
+      title: "Reservas",
+      paths: [`/prp/expensas/${params.id}/reservas`]
+    },
   ];
 }

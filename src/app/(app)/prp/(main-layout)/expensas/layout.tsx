@@ -14,8 +14,8 @@ interface LayoutProps extends PropsWithChildren {
 
 const layout: FC<LayoutProps> = ({ children, modal }) => {
   return (
-    <main className="flex overflow-y-auto bg-white dark:bg-black-app-bg justify-center flex-col items-center">
-      <div className="bg-white dark:bg-black-app-bg w-full max-h-dvh h-dvh overflow-y-auto relative">
+    <main className="flex bg-white dark:bg-black-app-bg justify-center flex-col items-center">
+      <div className="bg-white dark:bg-black-app-bg w-full max-h-dvh h-dvh overflow-y-scroll relative">
         <MediaQueryProvider maxWidth={768}>
           <MobileHeader>
             <UserDropdown>

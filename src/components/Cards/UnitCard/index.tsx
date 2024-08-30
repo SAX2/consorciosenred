@@ -106,6 +106,7 @@ const UnitCard: FC<UnitCardProps> = ({ unit }) => {
           className='gap-[6px] max-[390px]:grid-cols-1'
         />
         <Link
+          prefetch
           scroll={true}
           href={`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`}
           className="bg-white border border-outline dark:bg-grey-sec-dark dark:border-outline-dark flex items-center justify-center w-full rounded-md py-[6px] gap-1 font-medium"

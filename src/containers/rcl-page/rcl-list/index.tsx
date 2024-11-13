@@ -1,128 +1,96 @@
-"use client"
+"use client";
 
 import React, { FC, PropsWithChildren, useState } from 'react';
 import RclCard from '@/components/Cards/RclCard';
 import Input from '@/components/Form/Input';
 import { cn } from '@/lib/utils';
-import { IconSearch, IconSquareRoundedPlus } from '@tabler/icons-react';
-import Link from 'next/link';
-import Modal, { ModalTrigger } from '@/components/Modal';
-import NewRcl from '../new-rcl';
+import { IconAlertTriangle, IconSearch } from '@tabler/icons-react';
+import usePagination from '@/hooks/use-pagination';
+import Pagination from '@/components/Sections/AppSections/Pagination';
+import Section from '@/components/Sections/AppSections/Section';
+import Button from '@/components/Buttons/Button';
+import { usePathname } from 'next/navigation';
+import BottomSection from '@/components/Sections/AppSections/BottomSection';
 
 interface RclListProps extends PropsWithChildren {
-  max?: number;
   className?: string;
   buttonMore?: string;
   buttonLess?: string;
-  items: any[];
-  params?: string;
+  items: any;
 }
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  title: string;
-}
-
-const Button = ({ title, ...props }: ButtonProps) => {
-  return (
-    <button
-      {...props}
-      className="py-1 px-2 text-sm rounded-lg border border-outline bg-grey text-black dark:border-outline-dark dark:bg-grey-dark dark:text-white font-medium shadow-sm"
-    >
-      {title}
-    </button>
-  );
-};
-
-const RclList: FC<RclListProps> = ({ max, className, buttonMore = "Ver más", buttonLess = "Mostrar menos", items, children, params }) => {
-  const [showAll, setShowAll] = useState(false);
-  const [filter, setFilter] = useState<string>("Mas reciente");
+const RclList: FC<RclListProps> = ({ className, items }) => {
+  const pathname = usePathname()
+  const [filter, setFilter] = useState<string>("rclDpto"); // Default to "Departamento"
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const itemsPerPage = 7;
 
-  const handleFilterChange = (value: string) => {
-    setFilter(value);
-    setShowAll(false);
-  };
+  const selectedItems = filter === "rclDpto" ? items.rclDpto : items.rclEdif;
 
-  const sortedItems = [...items].sort((a, b) => {
-    const dateA = new Date(a.Rcl_DateTime.split("/").reverse().join("-")).getTime();
-    const dateB = new Date(b.Rcl_DateTime.split("/").reverse().join("-")).getTime();
-
-    return filter === "Mas reciente" ? dateB - dateA : dateA - dateB;
-  });
-
-  const filteredItems = sortedItems.filter((item) =>
+  const filteredItems = selectedItems.filter((item: any) =>
     item.Rcl_DateTime.includes(searchTerm)
   );
 
-  const displayedItems = showAll || !max ? filteredItems : filteredItems.slice(0, max);
-
-  const handleToggle = () => {
-    setShowAll(!showAll);
-  };
-
-  const showToggleButton = max && filteredItems.length > max;
+  const {
+    currentPage,
+    totalPages,
+    currentItems,
+    handleNextPage,
+    handlePreviousPage,
+  } = usePagination({ items: filteredItems, itemsPerPage });
 
   return (
     <>
-      <div className="flex items-center gap-2 w-full">
-        <Link
-          href={`/prp/expensas/${params}/reclamos/nuevo`}
-          className="icon-green p-2 flex items-center justify-center rounded-lg cursor-pointer"
-        >
-          <span>
-            <IconSquareRoundedPlus width={26} height={26} />{" "}
-          </span>
-        </Link>
-        <Input
-          icon={
-            <IconSearch className="text-text-grey" width={18} height={18} />
-          }
-          type="text"
-          placeholder="Buscar por fecha (dd/mm/yyyy)"
-          orientation="icon-left"
-          className="bg-grey dark:bg-grey-dark w-full"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Input
-          type="select"
-          placeholder="Filtrar"
-          selectDefaultValue={filter}
-          selectValues={[{ arr: ["Mas viejo", "Mas reciente"] }]}
-          className="!bg-grey dark:!bg-grey-dark truncate gap-2"
-          classNameContainer="w-fit"
-          selectOnChange={handleFilterChange}
-        />
-      </div>
-      {children}
-      <div className={cn(className, "flex flex-col gap-[10px]")}>
-        {displayedItems.map((item, index) => (
-          <div key={item.Rcl_id} className="relative">
-            {!showAll && showToggleButton && index === max - 1 && (
-              <div className="absolute top-0 w-full h-full flex items-center justify-center bg-gradient-to-t from-white to-white/20 dark:from-black-app-bg dark:to-black-app-bg/20 backdrop-blur-[2px]">
-                <Button title={buttonMore} onClick={handleToggle} />
-              </div>
-            )}
-            <RclCard
-              className={
-                !showAll && showToggleButton && index === max - 1
-                  ? "border-0"
-                  : ""
-              }
-              id={item.Rcl_id}
-              title={item.Rcl_Subject}
-              status={item.Rcl_Status}
-              desc={item.Rcl_Description}
-              createdAt={item.Rcl_DateTime}
+      <Section title={filter}>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2 w-auto">
+            <Input
+              icon={<IconSearch className="text-text-grey" size={20} />}
+              type="text"
+              placeholder="Buscar por fecha (dd/mm/yyyy)"
+              orientation="icon-left"
+              className="bg-transparent border-0"
+              classNameContainerInput="bg-grey dark:bg-grey-dark w-full border-0"
+              classNameContainer="border-0"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <Input
+              type="select"
+              placeholder="Filtrar"
+              selectDefaultValue={filter}
+              selectValues={[{ arr: ["rclDpto", "rclEdif"] }]} // Cambiar opciones de filtro
+              className="bg-transparent border-0 truncate !bg-grey dark:!bg-grey-dark"
+              classNameContainer="w-fit"
+              selectOnChange={setFilter}
             />
           </div>
-        ))}
-        {showAll && showToggleButton && (
-          <div className="flex justify-center mt-4">
-            <Button title={buttonLess} onClick={handleToggle} />
-          </div>
-        )}
-      </div>
+        </div>
+        <div className={cn(className, "flex flex-col gap-[10px] w-auto")}>
+          {currentItems.map((item: any) => (
+            <div key={item.Rcl_id} className="relative">
+              <RclCard item={item} />
+            </div>
+          ))}
+        </div>
+        <Pagination
+          currentPage={currentPage}
+          handleNextPage={handleNextPage}
+          handlePreviousPage={handlePreviousPage}
+          itemsPerPage={itemsPerPage}
+          totalItems={filteredItems.length}
+          totalPages={totalPages}
+        />
+      </Section>
+      <BottomSection>
+        <Button
+          // icon={<IconAlertTriangle size={20} className="text-white" />}
+          title="Reclamar"
+          buttonBackground="bg-orange-icon"
+          classNameText="text-white"
+          href={`${pathname}/nuevo`}
+        />
+      </BottomSection>
     </>
   );
 };

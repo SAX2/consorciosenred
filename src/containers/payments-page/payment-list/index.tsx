@@ -2,24 +2,27 @@
 
 import PaymentCard from '@/components/Cards/PaymentCard';
 import Input from '@/components/Form/Input';
+import BottomSection from '@/components/Sections/AppSections/BottomSection';
+import Pagination from '@/components/Sections/AppSections/Pagination';
 import { Accordion, AccordionItem } from '@/components/ui/accordion';
+import usePagination from '@/hooks/use-pagination';
 import { IconBellRinging, IconSearch } from '@tabler/icons-react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Link from 'next/link';
 import React, { FC, PropsWithChildren, useState } from 'react'
+import Button from '@/components/Buttons/Button';
+import { usePathname } from 'next/navigation';
 
 interface PaymentListProps extends PropsWithChildren {
   className?: string;
   items: any[];
-  params?: string;
 }
 
-const PaymentList: FC<PaymentListProps> = ({ className, items, children, params }) => {
+const PaymentList: FC<PaymentListProps> = ({ className, items }) => {
+  const pathname = usePathname()
   const [isSelected, setIsSelected] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter] = useState<string>("Mas reciente");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const itemsPerPage = 7;
+
+  let itemsPerPage = 7;
 
   const handleValueChange = (value: string) => {
     setIsSelected(value);
@@ -40,40 +43,27 @@ const PaymentList: FC<PaymentListProps> = ({ className, items, children, params 
     item.fecha.includes(searchTerm)
   );
 
-  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = filteredItems.slice(startIndex, endIndex);
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
+  const {
+    currentPage,
+    totalPages,
+    currentItems,
+    handleNextPage,
+    handlePreviousPage,
+    startIndex, 
+    endIndex
+  } = usePagination({ items: filteredItems, itemsPerPage });
 
   return (
     <>
       <div className="flex items-center gap-2 w-full">
-        <Link
-          href={`/prp/expensas/${params}/pagos/nuevo`}
-          className="icon-blue p-2 flex items-center justify-center rounded-lg"
-        >
-          <span>
-            <IconBellRinging width={26} height={26} />{" "}
-          </span>
-        </Link>
         <Input
-          icon={<IconSearch className="text-text-grey" width={18} height={18} />}
+          icon={<IconSearch className="text-text-grey" size={20} />}
           type="text"
           placeholder="Buscar por fecha (dd/mm/yyyy)"
           orientation="icon-left"
-          className="bg-grey dark:bg-grey-dark w-full"
+          className="bg-transparent border-0"
+          classNameContainerInput="bg-grey dark:bg-grey-dark w-full border-0"
+          classNameContainer="border-0"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -82,7 +72,7 @@ const PaymentList: FC<PaymentListProps> = ({ className, items, children, params 
           placeholder="Filtrar"
           selectDefaultValue={filter}
           selectValues={[{ arr: ["Mas viejo", "Mas reciente"] }]}
-          className="!bg-grey dark:!bg-grey-dark truncate gap-2"
+          className="bg-transparent border-0 truncate !bg-grey dark:!bg-grey-dark"
           classNameContainer="w-fit"
           selectOnChange={setFilter}
         />
@@ -101,42 +91,30 @@ const PaymentList: FC<PaymentListProps> = ({ className, items, children, params 
           >
             <PaymentCard
               isSelected={isSelected === item.idNotificacion}
-              desc={item.comentario}
-              files={item.adjuntos}
-              value={item.importe}
-              createdAt={item.fecha}
-              code={item.codComprobante}
+              item={item}
             />
           </AccordionItem>
         ))}
       </Accordion>
 
-      <div className="flex items-center justify-between space-x-2 py-2">
-        {filteredItems.length > itemsPerPage && (
-          <button
-            onClick={handlePreviousPage}
-            disabled={currentPage === 1}
-            className="rounded-md bg-grey border border-outline dark:bg-grey-dark dark:border-outline-dark p-1 text-text-grey"
-          >
-            <ChevronLeft width={20} height={20} />
-          </button>
-        )}
+      <Pagination
+        currentPage={currentPage}
+        handleNextPage={handleNextPage}
+        handlePreviousPage={handlePreviousPage}
+        itemsPerPage={itemsPerPage}
+        totalItems={filteredItems.length}
+        totalPages={totalPages}
+      />
 
-        <p className="text-center text-text-grey text-sm w-full">
-          Mostrando del {startIndex + 1} al {Math.min(endIndex, filteredItems.length)} de{" "}
-          {filteredItems.length.toLocaleString()} registros
-        </p>
-
-        {filteredItems.length > itemsPerPage && (
-          <button
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-            className="rounded-md bg-grey border border-outline dark:bg-grey-dark dark:border-outline-dark p-1 text-text-grey"
-          >
-            <ChevronRight width={20} height={20} />
-          </button>
-        )}
-      </div>
+      <BottomSection>
+        <Button
+          icon={<IconBellRinging size={20} className="text-white" />}
+          title="Notificar pago"
+          buttonBackground="bg-blue-button"
+          classNameText="text-white"
+          href={`${pathname}/nuevo`}
+        />
+      </BottomSection>
     </>
   );
 }

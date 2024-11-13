@@ -1,4 +1,5 @@
 import Section from '@/components/Sections/AppSections/Section';
+import ReserveList from '@/containers/reservation-page/reserve-list';
 import getParams from '@/env/getParams';
 import { getUnitReservations } from '@/lib/queries/queries';
 
@@ -10,9 +11,9 @@ const page = async ({ params: { id }, searchParams }: { params: { id: string }, 
 
   console.log(searchParams);
 
-console.log({ id: unitId, code: unitCode })
   const data = await getUnitReservations({ id: unitId, code: unitCode });
-  console.log(data);
+
+  console.log(data)
 
   return (
     <Section
@@ -20,8 +21,7 @@ console.log({ id: unitId, code: unitCode })
       className="w-full pb-8 max-md:pb-0 mt-0"
       isFirst
     >
-        asd
-      {/* <ReserveList items={data} /> */}
+      <ReserveList items={data?.recursosPorEdificio ?? []} params={`prp/expensas/${id}`} />
     </Section>
   );
 }

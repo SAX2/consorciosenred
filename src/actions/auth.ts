@@ -1,4 +1,4 @@
-"use server"
+'use server';
 
 import { urlToken } from "@/lib/queries/urls";
 import { revalidatePath } from "next/cache";

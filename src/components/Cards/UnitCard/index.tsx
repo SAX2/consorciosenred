@@ -1,16 +1,16 @@
 import Link from "next/link";
 import Pill from "@/components/Pill";
-import SemiSection from "@/components/Sections/AppSections/SemiSection";
-import Shortcuts from "@/containers/expenses-page/shortcut-section";
-import { AcrobatLogo } from "@/lib/icons";
-import { IconAlarmAverage, IconAlertCircle, IconArrowRight, IconBuilding, IconMailFast, IconReceipt2 } from "@tabler/icons-react";
+import SemiSectionData from "@/components/Sections/AppSections/SemiSection";
+import Shortcuts from "@/components/Sections/AppSections/ShortcutSection";
+import { IconBuilding, IconCalendarExclamation, IconChevronRight, IconMailExclamation, IconMailFast, IconMailForward, IconPlus, IconReceipt2 } from "@tabler/icons-react";
 import { FC } from "react";
+import { shortcutsUnit, unitCard } from "@/lib/contents/(app)/contents";
 
-interface UnitCardProps {
+interface unitProps {
   unit: any;
 }
 
-const UnitCard: FC<UnitCardProps> = ({ unit }) => {
+const unit: FC<unitProps> = ({ unit }) => {
 
   const expiresTitle = ["1er vencimiento"];
   if (unit.uf_vto2UltimaExpensa && unit.uf_vto2UltimaExpensa.length > 0) {
@@ -23,99 +23,138 @@ const UnitCard: FC<UnitCardProps> = ({ unit }) => {
 
 
   return (
-    <div className="w-full flex flex-col gap-2 justify-between p-3 rounded-xl border-outline bg-grey dark:border-outline-dark dark:bg-grey-dark">
-      <div className="flex flex-col gap-3">
+    <div className="w-full flex flex-col gap-2 justify-between p-4 rounded-2xl border-outline border dark:border-outline-dark">
+      <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3 w-full">
-          <div className="rounded-md w-14 h-14 flex items-center justify-center border border-outline bg-white dark:bg-grey-sec-dark dark:border-outline-dark">
+          <div className="rounded-[10px] w-14 h-14 flex items-center justify-center border border-outline bg-white dark:bg-grey-sec-dark dark:border-outline-dark">
             <IconBuilding width={32} height={32} className="text-text-grey" />
           </div>
           <div className="flex flex-col gap-[2px] max-w-max w-full">
             <p className="font-semibold truncate">{unit.uf_domiDpto}</p>
-            <div className="flex items-center gap-2">
-              <span className='text-sm text-text-grey font-medium'>Unidad</span>
-              <Pill text={`${unit.uf_nroUnidad} ${unit.uf_codDpto}`} />
-              <Pill text={unit.uf_nombrePropietario} className='icon-blue' />
+            <div className="flex items-center gap-1">
+              <Pill
+                text={`${unit.uf_nroUnidad} ${unit.uf_codDpto}`}
+                className="text-sm"
+              />
+              <Pill
+                text={unit.uf_nombrePropietario}
+                className=""
+                classNameText="text-sm font-bold text-blue"
+              />
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-[6px] py-1">
-          <SemiSection
-            isMain
-            titles={["Importe a pagar"]}
-            key={"Importe a pagar"}
-            icon={<IconReceipt2 width={32} height={32} />}
+        <div className="flex flex-col gap-2 py-1">
+          <SemiSectionData
+            type="main"
+            title={unitCard.import_to_pay}
+            key={unitCard.import_to_pay}
           >
-            <p className="pr-2 font-bold text-4xl max-md:text-3xl font-geist">
+            <p className="font-geist text-4xl font-bold max-md:text-3xl">
               {unit.uf_importeTotal}
             </p>
-          </SemiSection>
-          <SemiSection
-            titles={expiresTitle}
-            key={"Vencimiento"}
-            icon={<IconAlarmAverage width={32} height={32} />}
-          >
-            <div className="flex flex-col gap-1">
-              <Pill text={unit.uf_vtoUltimaExpensa} className="text-base" />
-              {unit.uf_vto2UltimaExpensa && (
-                <Pill text={unit.uf_vto2UltimaExpensa} className="text-base" />
-              )}
-            </div>
-          </SemiSection>
+          </SemiSectionData>
+
+          <SemiSectionData
+            type="multiple"
+            title={unitCard.expirations.title}
+            key={unitCard.expirations.title}
+            icon={
+              <IconCalendarExclamation
+                width={24}
+                height={24}
+                className="text-black dark:text-white"
+              />
+            }
+            content={[
+              {
+                title: unitCard.expirations[0],
+                children: (
+                  <Pill
+                    text={unit.uf_vtoUltimaExpensa}
+                    classNameText="text-sm"
+                  />
+                ),
+              },
+              {
+                title: unitCard.expirations[1],
+                children: (
+                  <Pill
+                    text={
+                      unit.uf_vto2UltimaExpensa.length > 0
+                        ? unit.uf_vto2UltimaExpensa
+                        : "Sin Fecha"
+                    }
+                    classNameText="text-sm"
+                  />
+                ),
+              },
+            ]}
+          />
+          
+        </div>
+        <div className="flex flex-col gap-2">
           {mostRecentLiquidation && (
-            <SemiSection
-              titles={["Ultima liquidacion"]}
-              key={"Ultima liquidacion"}
-              icon={<IconMailFast width={32} height={32} />}
+            <Link
+              target="_blank"
+              href={`/file/uf_liquidaciones/${mostRecentLiquidation.id}/${mostRecentLiquidation.nombreAdjunto}`}
+              className="border border-outline dark:border-outline-dark p-2 flex rounded-lg items-center justify-between"
             >
-              <Link
-                target="_blank"
-                href={`/file/uf_liquidaciones/${mostRecentLiquidation.id}/${mostRecentLiquidation.nombreAdjunto}`}
-              >
-                <Pill
-                  text={`${mostRecentLiquidation.titulo}`}
-                  icon={<AcrobatLogo width={15} height={15}/>}
-                  className="text-sm max-md:text-base"
+              <div className="flex gap-2">
+                <IconMailForward
+                  width={24}
+                  height={24}
+                  className="ios:mr-[6px] android:mr-[6px] text-green"
                 />
-              </Link>
-            </SemiSection>
+                <span className="text-base font-medium">Ver Liquidacion</span>
+              </div>
+              <IconChevronRight
+                width={20}
+                height={20}
+                className="text-text-grey"
+              />
+            </Link>
           )}
           {unit.uf_aviso.length > 0 && (
-            <SemiSection
-              titles={["Aviso de pago"]}
-              key={unit.uf_aviso[0].id}
-              icon={<IconAlertCircle width={32} height={32} />}
+            <Link
+              target="_blank"
+              href={`/file/uf_aviso/${unit.uf_aviso[0].id}/${unit.uf_aviso[0].nombreAdjunto}`}
+              className="border border-outline dark:border-outline-dark p-2 flex rounded-lg items-center justify-between"
             >
-              <Link
-                target="_blank"
-                href={`/file/uf_aviso/${unit.uf_aviso[0].id}/${unit.uf_aviso[0].nombreAdjunto}`}
-              >
-                <Pill
-                  text={`${unit.uf_aviso[0].titulo}`}
-                  className="text-sm max-md:text-base"
-                  icon={<AcrobatLogo width={15} height={15}/>}
+              <div className="flex gap-2">
+                <IconMailExclamation
+                  width={24}
+                  height={24}
+                  className="ios:mr-[6px] android:mr-[6px] text-brown"
                 />
-              </Link>
-            </SemiSection>
+                <span className="text-base font-medium">Ver Aviso de pago</span>
+              </div>
+              <IconChevronRight
+                width={20}
+                height={20}
+                className="text-text-grey"
+              />
+            </Link>
           )}
         </div>
-      </div>
-      <div className="flex flex-col gap-3">
         <Shortcuts
+          data={shortcutsUnit}
+          display="no-styled"
+          className="grid grid-cols-3 gap-2"
           mainPath={`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`}
-          classNameItem="bg-white dark:bg-grey-sec-dark"
-          className='gap-[6px] max-[390px]:grid-cols-1'
         />
         <Link
           prefetch
           scroll={true}
           href={`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`}
-          className="bg-white border border-outline dark:bg-grey-sec-dark dark:border-outline-dark flex items-center justify-center w-full rounded-md py-[6px] gap-1 font-medium"
+          className="bg-blue-button dark:bg-green flex items-center justify-center w-full rounded-lg py-2 gap-1 font-medium text-white"
         >
-          Ver mas <IconArrowRight width={18} height={18} />
+          <IconPlus size={22} />
+          Ver mas
         </Link>
       </div>
     </div>
   );
 }
 
-export default UnitCard
+export default unit

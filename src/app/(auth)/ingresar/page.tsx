@@ -4,7 +4,7 @@ import React, { useState, useTransition } from 'react';
 import Header from '../components/Header';
 import auth from '@/lib/contents/auth.json';
 import Link from 'next/link';
-import Input from '@/components/Form/Input';
+import Input, { InputType } from '@/components/Form/Input';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import { loginHandler } from '@/actions/auth';
@@ -88,7 +88,7 @@ const Page = () => {
         >
           {auth.login.inputs.map((item, index) => (
             <Input
-              type={item.type}
+              type={item.elemenType as InputType}
               key={item.label + index}
               label={item.label}
               placeholder={item.placeholder}

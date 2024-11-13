@@ -1,12 +1,6 @@
 import NewRcl from '@/containers/rcl-page/new-rcl';
 
-interface PageProps {
-  params: {
-    id: string;
-  }
-}
-
-const page = ({ params }: PageProps) => {
+const page = ({ params }: { params: { id: string } }) => {
   return <NewRcl id={params.id} />;
 }
 

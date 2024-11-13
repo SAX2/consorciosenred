@@ -2,7 +2,6 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getAuthHeaders } from './services/config';
-import { getUnits } from './lib/queries/queries'
 
 async function getUnitsEdge() {
   const headers = await getAuthHeaders();

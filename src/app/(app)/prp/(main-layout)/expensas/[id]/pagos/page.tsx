@@ -3,7 +3,6 @@ import NoResult from '@/containers/errors/no-result';
 import PaymentList from '@/containers/payments-page/payment-list';
 import getParams from '@/env/getParams';
 import { getUnitPayments } from '@/lib/queries/queries';
-import { IconSquareRoundedX } from '@tabler/icons-react';
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
   const unitId = getParams({ params: id, type: "id" });
@@ -26,7 +25,6 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
       >
         <PaymentList
           items={data.notificaciones}
-          params={id}
         />
       </Section>
     </div>

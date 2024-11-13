@@ -1,15 +1,8 @@
-import Modal, { ModalContent } from '@/components/Modal';
-import { DialogTitle } from '@/components/ui/dialog';
+import Modal from '@/components/Modal';
 import NewRcl from '@/containers/rcl-page/new-rcl';
 import getParams from '@/env/getParams';
 
-interface PageProps {
-  params: {
-    id: string;
-  }
-}
-
-const page = ({ params }: PageProps) => {
+const page = ({ params }: { params: { id: string } }) => {
   const unitId = getParams({ params: params.id, type: 'id' });
 
   return (

@@ -66,7 +66,7 @@ const Navbar = () => {
                   !isMain && "hidden",
                 )}
               >
-                Consorcios<span className="text-green">en</span>red
+                Consorcios<span className="text-green-logo">en</span>red
               </span>
             </Link>
           </li>

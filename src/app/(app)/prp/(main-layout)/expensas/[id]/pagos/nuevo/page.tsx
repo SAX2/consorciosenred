@@ -1,4 +1,3 @@
-import FormSkeleton from '@/components/Skeletons/Form';
 import NewPayment from '@/containers/payments-page/new-payment'
 import getParams from '@/env/getParams'
 import { getUnit } from '@/lib/queries/queries';

@@ -23,7 +23,7 @@ function useIsLargeScreen({ minWidth }: HookProps) {
     return () => {
       mediaQuery.removeEventListener('change', handleResize);
     };
-  }, []);
+  }, [minWidth]);
 
   return { isLargeScreen }
 };

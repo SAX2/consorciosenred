@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, PropsWithChildren } from "react"
+import { FC, PropsWithChildren, useState } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog"
 import { useRouter } from "next/navigation"
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
@@ -88,6 +88,7 @@ export const DialogFull: FC<PropsWithChildren & { onClick: (state: boolean) => v
 const Modal: FC<ModalProps> = ({ children, hasDrawerResponsive = false, isParallel = false, dialogTitle, className }) => {
   const router = useRouter();
   const { isLargeScreen } = useIsLargeScreen({ minWidth: 768 })
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleOpenChange = () => {
     if (isParallel) {
@@ -106,7 +107,7 @@ const Modal: FC<ModalProps> = ({ children, hasDrawerResponsive = false, isParall
   }
 
   const dialog = (
-    <Dialog defaultOpen={true} modal={true} onOpenChange={handleOpenChange}>
+    <Dialog defaultOpen={isOpen} modal={isOpen} onOpenChange={handleOpenChange}>
       <ModalContent className={className}>
         <DialogHeader>
           <DialogTitle className="font-geist text-2xl dark:text-white">

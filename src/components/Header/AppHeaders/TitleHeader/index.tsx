@@ -3,13 +3,13 @@
 import { FC } from 'react';
 import { usePathname } from 'next/navigation';
 import BackButton from '@/components/Buttons/BackButton';
-import { getPathsAndTitles } from '../MobileHeader/constants';
+import { usePathsAndTitles } from "../MobileHeader/constants";
 
 interface TitleHeaderProps {}
 
 const TitleHeader: FC<TitleHeaderProps> = () => {
   const pathname = usePathname()
-  const pathsAndTitles = getPathsAndTitles()
+  const pathsAndTitles = usePathsAndTitles();
 
   const currentTitle =
     pathsAndTitles.find((item) => item.paths.some((path) => pathname === path))

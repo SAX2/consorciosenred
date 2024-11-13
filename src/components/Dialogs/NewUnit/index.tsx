@@ -74,7 +74,12 @@ const NewUnitDialog = ({ className, classSpan }:  { className?: string, classSpa
 const Form = ({ className }: { className?: string }) => {
   return (
     <form className={cn("pt-8 flex flex-col gap-2 p-4 pb-8", className)}>
-      <Input label={content.label} cardInput inputMode='numeric' />
+      <Input
+        label={content.label}
+        type="pattern"
+        classNameContainerInput="w-full"
+        patternProps={{ format: "#### #### #### #### ####", placeholder: "0000 0000 0000 0000" }}
+      />
       <button className="w-full justify-center px-2 py-1 flex items-center gap-[6px] border border-[#75B838]/25 bg-[#75B838]/25 dark:text-green text-green-sec rounded-md">
         <span className="font-medium">{content.button}</span>
         <IconChevronRight width={20} height={20} />

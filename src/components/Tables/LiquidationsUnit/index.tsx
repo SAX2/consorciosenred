@@ -77,12 +77,15 @@ export function DataTable<TData, TValue>({
   return (
     <div className="flex flex-col gap-3">
       <Input
-        orientation="icon-left"
-        icon={<IconSearch width={18} height={18} className="text-text-grey" />}
+        icon={<IconSearch className="text-text-grey" size={20} />}
+        type="text"
         placeholder="Buscar"
+        orientation="icon-left"
+        className="bg-transparent border-0"
+        classNameContainerInput="bg-grey dark:bg-grey-dark w-full border-0"
+        classNameContainer="border-0"
         value={globalFilter ?? ""}
         onChange={(event) => setGlobalFilter(event.target.value)}
-        className="w-full bg-grey dark:bg-grey-dark"
       />
       <div className={cn("rounded-xl border border-outline dark:border-outline-dark overflow-hidden", className)}>
         <Table>

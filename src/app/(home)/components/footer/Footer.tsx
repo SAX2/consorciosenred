@@ -22,7 +22,7 @@ const Footer = () => {
                 <span
                   className={"text-blue italic font-bold text-lg max-md:!block"}
                 >
-                  Consorcios<span className="text-green">en</span>red
+                  Consorcios<span className="text-green-logo">en</span>red
                 </span>
               </div>
             </div>
@@ -60,7 +60,7 @@ const Footer = () => {
                         return (
                           <Link
                             title={item.page.title}
-                            href={`${Math.random() * 10}_${item.page.path}`}
+                            href={item.page.path}
                             key={item.page.title}
                             className="text-black hover:underline"
                           >

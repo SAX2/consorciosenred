@@ -8,7 +8,7 @@ import FileSelectorDrag from '@/components/Form/FileSelectorDrag';
 import Input from '@/components/Form/Input';
 import InputCalendar from '@/components/Form/InputCalendar';
 import { createNotifyPayment } from "@/lib/queries/queries";
-import toast, { Toaster } from "react-hot-toast";
+import { NumericFormat } from 'react-number-format';
 import InputSubmit from "@/components/Form/InputSubmit";
 
 interface NewPaymentProps extends PropsWithChildren {
@@ -60,7 +60,7 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
 
     setFormValues(prev => ({
       ...prev,
-      [name]: name === 'importe' ? parseFloat(valueImport) : value
+      [name]: value
     }));
   };
 
@@ -68,9 +68,7 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
     setIsCustomAmount(prev => !prev);
     if (isCustomAmount) {
       setFormValues(prev => ({ ...prev, importe: totalImport }));
-      setCustomAmount(totalImport.toFixed(2).replace('.', ','));
     } else {
-      setCustomAmount(totalImport.toFixed(2).replace('.', ','));
       setFormValues(prev => ({ ...prev, importe: totalImport }));
     }
   };
@@ -114,20 +112,31 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
     }
 
     startTransition(async () => {
-      const res = await createNotifyPayment({
+      console.log({
         ...formValues,
         comentario: formValues.comentario.trim(),
         codEdificio: unitCode,
         idDepto: unitId,
         fecha: formValues.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '/'),
         adjuntos: formValues.adjuntos && formValues.adjuntos?.length > 0 ? formValues.adjuntos : [""]
-      });
+      })
+
+      // const res = await createNotifyPayment({
+      //   ...formValues,
+      //   comentario: formValues.comentario.trim(),
+      //   codEdificio: unitCode,
+      //   idDepto: unitId,
+      //   fecha: formValues.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '/'),
+      //   adjuntos: formValues.adjuntos && formValues.adjuntos?.length > 0 ? formValues.adjuntos : [""]
+      // });
+
+      // console.log(res)
   
-      if (!res.CODIGO) {
-        setQueryError(true);
-      } else {
-        setQuerySuccess(true);
-      }
+      // if (!res.CODIGO) {
+      //   setQueryError(true);
+      // } else {
+      //   setQuerySuccess(true);
+      // }
     })
 
     setErrors({});
@@ -140,11 +149,10 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
     >
       {children}
       <Input
+        classNameContainerInput="border border-outline dark:border-outline-dark"
         type="children"
         label="*Fecha de pago (Colocar la misma fecha que la del comprobante)"
-        icon={
-          <IconCalendar width={24} height={24} className="text-text-grey" />
-        }
+        icon={<IconCalendar width={24} height={24} className="text-text-grey" />}
         orientation="icon-right"
       >
         <InputCalendar
@@ -160,22 +168,22 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
           *Importe pagado
         </label>
         <div className="flex items-start gap-1">
-          <span className="text-2xl font-bold text-black/50 px-2 dark:text-white/50">
-            $
-          </span>
-          <input
-            type="number"
+          <Input 
             name="importe"
-            value={formValues.importe}
-            onChange={handleChange}
-            disabled={!isCustomAmount}
-            className="font-bold text-4xl w-auto disabled:opacity-80 disabled:cursor-not-allowed disabled:bg-transparent focus:outline-none transition-all duration-300 ease-in-out !appearance-none active:border-0 active:outline-0"
-            style={{
-              width: `${formValues.importe.toString().length + 0.55}ch`,
-              animation: "typing 0.5s steps(40, end)",
-              WebkitAppearance: "none",
-              MozAppearance: "textfield",
+            type="number"
+            numericProps={{
+              name: "importe",
+              decimalSeparator: ",",
+              thousandSeparator: ".",
+              prefix: "$",
+              placeholder: "$00,00",
+              onChange: handleChange,
+              value: formValues.importe,
+              disabled: !isCustomAmount,
+              className: "!disabled:bg-none"
             }}
+            className="text-center w-fit font-bold text-4xl border-0"
+            classNameContainerInput="border-0"
           />
         </div>
         <div className="flex flex-wrap gap-2 max-w-[300px] justify-center">
@@ -191,8 +199,7 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
               )}
             >
               <IconCheck
-                width={16}
-                height={16}
+                size={16}
                 className={cn(isCustomAmount && "opacity-0")}
               />
             </div>

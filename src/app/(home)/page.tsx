@@ -17,6 +17,7 @@ import Service from "./components/hero-sections/Services";
 import NewsCard from "./components/card/NewsCard";
 import Main from './components/Main';
 import React from 'react';
+import SectionApps from './components/hero-sections/SectionApps';
 
 export default function Home() {
   return (
@@ -252,41 +253,7 @@ export default function Home() {
         </section>
       </article>
       <article className="flex flex-col items-center bg-black w-full px-8 max-md:px-4">
-        <section className="items-center h-full max-w-[1000px] w-full justify-center flex py-16 gap-8 max-md:flex-col">
-          <div className="w-full flex flex-col gap-8 max-md:max-w-[340px]">
-            <h2 className="text-white font-semibold text-6xl max-md:text-4xl max-md:text-center">
-              {appInstall.title}
-            </h2>
-            <ul className="flex flex-col gap-1 max-md:items-center w-full">
-              {appInstall.content.map((route, index) => {
-                return (
-                  <li key={route.page.path + index}>
-                    <Link
-                      href={route.page.path}
-                      className={cn(
-                        route.page.className,
-                        "px-3 py-2 transition-colors rounded-md text-xl font-medium flex items-center gap-1 w-fit"
-                      )}
-                      title={route.page.title}
-                    >
-                      {route.page.button}{" "}
-                      <IconArrowNarrowRight width={24} height={24} />
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className="w-full bg-black-app-bg rounded-lg max-h-[420px] max-md:max-h-[400px] relative flex justify-center overflow-clip">
-            <Image
-              width={291}
-              height={604}
-              src={appInstall.image}
-              alt={appInstall.title}
-              className="h-fit pt-8 relative"
-            />
-          </div>
-        </section>
+        <SectionApps />
       </article>
     </Main>
   );

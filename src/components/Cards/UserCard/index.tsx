@@ -1,12 +1,10 @@
+import Pill from "@/components/Pill";
+import UserDropdown from "@/components/Dropdowns/UserDropdown";
 import { FC } from "react";
 import { cn } from "@/lib/utils";
+import { IconDotsVertical } from "@tabler/icons-react";
 import { getUser } from "@/lib/queries/queries";
-import { userImage2 } from "@/lib/images";
-import { IconDots, IconSettings } from "@tabler/icons-react";
-import Pill from "@/components/Pill";
-import LogoutButton from "@/components/Buttons/LogoutButton";
-import Image from "next/image";
-import UserDropdown from "@/components/Dropdowns/UserDropdown";
+import UserIcon from "@/components/Icons/UserIcon";
 
 interface UserCardProps {
   className?: string;
@@ -15,24 +13,19 @@ interface UserCardProps {
 const UserCard: FC<UserCardProps> = async ({ className }) => {
   const data = await getUser();
 
+
   return (
     <div
       className={cn(
-        "flex justify-between w-full p-2 gap-2 items-center border border-outline bg-grey dark:border-outline-dark rounded-xl dark:bg-grey-sec-dark text-black dark:text-white",
+        "flex justify-between w-full py-2 px-3 gap-2 items-center border border-outline dark:border-outline-dark rounded-xl text-black dark:text-white",
         className
       )}
     >
       <div className="flex gap-3 items-center">
-        <Image
-          src={userImage2}
-          alt="user-image"
-          width={40}
-          height={40}
-          className="object-fill rounded-md bg-white dark:bg-grey-sec-dark border border-outline dark:border-outline-dark"
-        />
+        <UserIcon color="blue" name={data.nombre} />
         <div className={cn("flex flex-col gap-0 w-full")}>
           <p className="truncate w-full font-medium text-sm">
-            {data.nombre + " " + data.apellido}
+            {data.nombre.charAt(0).toUpperCase() + data.nombre.slice(1) + " " + data.apellido}
           </p>
           <Pill
             text={`${data.total_unidades} Unidad${
@@ -43,8 +36,8 @@ const UserCard: FC<UserCardProps> = async ({ className }) => {
       </div>
       <div className={cn("flex")}>
         <UserDropdown>
-          <button className="p-2 rounded-md hover:bg-grey-sec hover:dark:bg-grey-dark text-text-grey">
-            <IconDots width={22} height={22} />
+          <button className="p-2 rounded-md hover:bg-grey-sec hover:dark:bg-grey-dark text-black">
+            <IconDotsVertical width={22} height={22} />
           </button>
         </UserDropdown>
       </div>

@@ -23,6 +23,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ isOpen, setClose, pathname }) => {
       {sidebarMobile.map((item) => {
         return (
           <NavLinkButton
+            key={item.titulo}
             onClick={setClose}
             href={
               item.url.startsWith("/prp")

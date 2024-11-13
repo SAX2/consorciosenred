@@ -7,6 +7,10 @@ interface PageProps {
   params: QueryFileProps;
 }
 
+export async function generateStaticParams() {
+  return [{ id: "1", name: "1", type: "1" }];
+}
+
 const page: React.FC<PageProps> = async ({ params: { id, name, type } }) => {
   const data = await getFiles({ id, name, type });
 

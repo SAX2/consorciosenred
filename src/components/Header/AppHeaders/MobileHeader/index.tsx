@@ -3,7 +3,7 @@
 import BackButton from '@/components/Buttons/BackButton';
 import Pill from '@/components/Pill';
 import { useLayoutStore } from '@/store/useLayoutStore';
-import { getPathsAndTitles } from './constants';
+import { usePathsAndTitles } from './constants';
 import Image from 'next/image';
 import React, { FC, PropsWithChildren } from 'react'
 import { useParams, usePathname } from 'next/navigation';
@@ -14,12 +14,12 @@ import MobileMenu from '@/containers/unit-page/mobile-menu';
 interface MobileHeaderProps extends PropsWithChildren {}
 
 const MobileHeader: FC<MobileHeaderProps> = ({ children }) => {
-  const { hasBuilding, isInView } = useLayoutStore()
+   const { hasBuilding, isInView } = useLayoutStore()
   const { isOpen, toggle, setClose } = useMobileMenuStore()
   
   const params = useParams();
   const pathname = usePathname();
-  const pathsAndTitles = getPathsAndTitles();
+  const pathsAndTitles = usePathsAndTitles();
 
   const currentTitle =
     pathsAndTitles.find((item) => item.paths.some((path) => pathname === path))

@@ -52,26 +52,41 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "black": "#0A0A0A",
+        'black': '#0A0A0A',
+  
+        'black-app-bg': '#121212',
+        'white': '#FFFFFF',
+  
+        'blue-sec': '#00497C',
+        'blue': '#086FB7',
+        "blue-button": '#008AEA',
 
-        "black-app-bg": "#121212",
-        "white": "#FFFFFF",
+        'green': '#1F9163',
+        'green-sec': '#3C7E00',
 
-        "blue-sec": "#00497C",
-        "blue": "#086FB7",
-        "green": "#75B838",
-        "green-sec": "#3C7E00",
-        "yellow-sec": "#C9A700",
-        "yellow": "#FFE564",
+        'yellow-sec': '#C9A700',
+        'yellow': '#FFE564',
+  
+        'brown': "#91694A",
 
-        "text-grey": "#8B8B8B",
-        "grey": "#F9F9F9",
-        "grey-sec": "#F1F1F1",
-        "outline": "#DFDFDF",
-        
-        "grey-dark": "#222222",
-        "grey-sec-dark": "#1C1C1C",
-        "outline-dark": "#4A4A4A",
+        'text-grey': '#8B8B8B',
+        'grey': '#F9F9F9',
+        'grey-sec': '#F1F1F1',
+        'outline': '#DFDFDF',
+        'orange-icon': "#F66600",
+
+        'red': "#DD3246",
+
+        'grey-dark': '#222222',
+        'grey-sec-dark': '#1C1C1C',
+        'outline-dark': '#4A4A4A',
+
+        'icon-blue': '#3FA4EA',
+        'icon-purple': '#A87EFF',
+        'icon-yellow': '#FFDF41',
+        'icon-yellow-border': '#C1A30A',
+        'icon-purple-text': '#A764DC',
+        'icon-yellow-text': '#C1A30A',
       },
       borderRadius: { 
         lg: "var(--radius)",

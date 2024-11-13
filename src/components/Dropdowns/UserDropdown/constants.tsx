@@ -4,7 +4,7 @@ import { logoutHandler } from "@/actions/auth";
 import { IconHelpCircle, IconMoon, IconSettings, IconSquareRoundedMinus, IconSun } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 
-export const userOptions = () => {
+export const useUserOptions = () => {
   const { theme, setTheme, themes} = useTheme()
   
   return [

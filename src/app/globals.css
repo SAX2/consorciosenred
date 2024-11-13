@@ -181,7 +181,7 @@
   }
 
   .icon-red {
-    @apply bg-red-200 border-red-300 text-red-900
+    @apply bg-red/20 border-red/30 text-red/90
   }
 
   .max-h-drawer {

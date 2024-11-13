@@ -4,6 +4,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { cn } from '@/lib/utils';
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
 import { ChangeEvent, FC, InputHTMLAttributes, PropsWithChildren, useState } from 'react'
+import { PatternFormat, PatternFormatProps, NumericFormatProps, NumericFormat } from 'react-number-format';
 
 interface InputProps extends PropsWithChildren {
   icon?: React.ReactElement;
@@ -18,9 +19,40 @@ interface InputProps extends PropsWithChildren {
   selectOnChange?: (value?: any) => void;
   error?: string;
   classNameContainer?: string;
+  classNameContainerInput?: string;
+  patternProps?: PatternFormatProps;
+  numericProps?: NumericFormatProps;
 }
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+const inputClassName = (className?: string) => cn(
+  "w-full p-2 px-3 rounded-lg placeholder:text-text-grey/50 text-black outline-none border border-outline dark:text-white dark:border-outline-dark outline-offset-0",
+  className
+);
+
+export type InputType =  'text' | 'password' | 'textarea' | 'select' | 'number' | 'email' | 'tel' | 'date' | 'currency' | 'text-area' | 'pattern' | 'children';
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  type?: InputType
+}
+
+const InputNumeric = ({ props, error, numericProps }: { numericProps?: NumericFormatProps, error?: string; props: InputProps }) => {
+  return (
+    <NumericFormat
+      {...numericProps}
+      className={cn(inputClassName(props.className), error && "!border-red-700", "disabled:!ng-none")}
+    />
+  );
+}
+
+const InputPattern = ({ props, error, patternProps }: { patternProps?: PatternFormatProps, error?: string; props: InputProps }) => {
+  return (
+    <PatternFormat
+      {...patternProps}
+      format={patternProps?.format ?? ""}
+      className={cn(inputClassName(props.className), error && "!border-red-700")}
+    />
+  );
+}
 
 const Input: FC<InputProps> = ({
   cardInput = false,
@@ -32,29 +64,18 @@ const Input: FC<InputProps> = ({
   selectValues,
   error,
   selectOnChange,
+  classNameContainerInput,
+  patternProps,
+  numericProps,
   ...props
 }) => {
   const [enabled, setEnabled] = useState<boolean>(false);
-
-  const [cardNumber, setCardNumber] = useState("");
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let input = e.target.value.replace(/\D/g, ""); // Elimina caracteres no numéricos
-    input = input.substring(0, 20); // Limita a 16 dígitos
-
-    const formattedInput = input.match(/.{1,4}/g)?.join(" ") || ""; // Agrupa en bloques de 4
-    setCardNumber(formattedInput);
-  };
 
   const onClickPassword = () => {
     setEnabled((prevState) => !prevState);
   };
 
-  const inputClassName = cn(
-    "w-full p-2 px-3 rounded-lg placeholder:text-text-grey/50 text-black outline-none border border-outline dark:text-white dark:border-outline-dark outline-offset-0",
-    props.className,
-    icon && orientation === "icon-left" && "pl-8"
-  );
+  const noTextInput = ["select", "text-area", "children", "currency", "pattern", "number"]
 
   return (
     <div className={cn("flex flex-col gap-1 w-full", props.classNameContainer)}>
@@ -68,41 +89,47 @@ const Input: FC<InputProps> = ({
           {error ? error : label}
         </label>
       )}
-      <div className="flex w-full rounded-md bg-black-sec items-center relative">
+      <div
+        className={cn(
+          "flex w-full rounded-md bg-black-sec items-center relative",
+          classNameContainerInput
+        )}
+      >
         {icon && orientation === "icon-left" && (
-          <div className="absolute h-full flex items-center">
+          <div className="h-full flex items-center">
             <span className="pl-2 py-1">{icon}</span>
           </div>
         )}
-        {cardInput && (
-          <input
-            {...props} // Extiende las props al input
-            type="text"
-            value={cardNumber}
-            onChange={handleInputChange}
-            placeholder="0000 0000 0000 0000 0000"
-            maxLength={24} // Permite espacio entre los grupos
-            className={cn(inputClassName, error && "!border-red-700")}
+        {props.type === "number" && (
+          <InputNumeric
+            props={props}
+            error={error}
+            numericProps={numericProps}
           />
         )}
-        {!cardInput &&
-          props.type != "select" &&
-          props.type !== "text-area" &&
-          props.type !== "children" &&
-          props.type !== "currency" && (
-            <input
-              {...props}
-              type={props.type === "password" && enabled ? "text" : props.type}
-              className={cn(
-                inputClassName,
-                error &&
-                  "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
-              )}
-            />
-          )}
+        {props.type === "pattern" && (
+          <InputPattern
+            props={props}
+            error={error}
+            patternProps={patternProps}
+          />
+        )}
+        {!noTextInput.includes(props.type ?? "select") && (
+          <input
+            {...props}
+            type={props.type === "password" && enabled ? "text" : props.type}
+            className={cn(
+              inputClassName(props.className),
+              error &&
+                "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
+            )}
+          />
+        )}
         {props.type === "text-area" && (
           <textarea
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange && props.onChange(e as any)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              props.onChange && props.onChange(e as any)
+            }
             placeholder={props.placeholder}
             name={props.name}
             id=""
@@ -152,7 +179,7 @@ const Input: FC<InputProps> = ({
         )}
         {props.type === "children" && children}
         {icon && orientation === "icon-right" && (
-          <div className="absolute right-0 h-full flex items-center">
+          <div className="h-full flex items-center">
             <span className="pr-2 py-1">{icon}</span>
           </div>
         )}

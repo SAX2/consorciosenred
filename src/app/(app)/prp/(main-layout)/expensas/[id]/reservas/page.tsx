@@ -1,5 +1,4 @@
 import Section from '@/components/Sections/AppSections/Section';
-import ReserveList from '@/containers/reservation-page/reserve-list';
 import getParams from '@/env/getParams';
 import { getUnitReservations } from '@/lib/queries/queries';
 

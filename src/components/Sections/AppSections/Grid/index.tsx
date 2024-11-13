@@ -20,25 +20,26 @@ const Grid: FC<GridProps> = ({
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const currentRef = divRef.current;
     const checkWidth = () => {
-      if (divRef.current) {
-        setIsSmall(divRef.current.offsetWidth < offsetWidth);
+      if (currentRef) {
+        setIsSmall(currentRef.offsetWidth < offsetWidth);
       }
     };
 
     checkWidth();
 
     const resizeObserver = new ResizeObserver(checkWidth);
-    if (divRef.current) {
-      resizeObserver.observe(divRef.current);
+    if (currentRef) {
+      resizeObserver.observe(currentRef);
     }
 
     return () => {
-      if (divRef.current) {
-        resizeObserver.unobserve(divRef.current);
+      if (currentRef) {
+        resizeObserver.unobserve(currentRef);
       }
     };
-  }, [divRef.current?.offsetWidth]);
+  }, [offsetWidth]);
 
   return (
     <div

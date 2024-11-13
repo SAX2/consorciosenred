@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation"
 
-export const getPathsAndTitles = () => {
+export const usePathsAndTitles = () => {
   const params = useParams()
   
   return [
@@ -18,7 +18,7 @@ export const getPathsAndTitles = () => {
       title: "Reclamos",
       paths: [`/prp/expensas/${params.id}/reclamos`]
     },
-        {
+    {
       title: "Reclamos / Nuevo",
       paths: [`/prp/expensas/${params.id}/reclamos/nuevo`]
     },

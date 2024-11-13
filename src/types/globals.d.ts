@@ -38,3 +38,20 @@ export type MobileNav = {
   title: string;
   path: string;
 }
+
+export type ShortcutButtonDisplayType = 'icon-bg' | 'no-styled' | 'icon-bg-description'
+
+export interface ShortcutProps {
+  title: string
+  description: string
+  icon: React.ReactNode
+  path: string
+  isBottomSheet?: boolean
+  display?: ShortcutButtonDisplayType
+  style?: {
+    background?: string
+    color?: string
+  }
+  handlePress?: () => void
+  index?: number
+}

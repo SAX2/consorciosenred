@@ -1,16 +1,16 @@
 "use client"
 
-import React, { FC, useEffect, PropsWithChildren } from 'react'
 import Pill from '@/components/Pill';
-import { cn } from '@/lib/utils';
-import { IconCalendar, IconCopy, IconFile, IconFileBarcode, IconMessage, IconReceipt } from '@tabler/icons-react';
 import useCurrencyFormat from '@/hooks/useCurrencyFormat';
+import SemiSectionData from '@/components/Sections/AppSections/SemiSection';
+import React, { FC, useEffect, PropsWithChildren } from 'react'
+import { cn } from '@/lib/utils';
+import { IconCalendar, IconChevronRight, IconCopy, IconFile, IconFileBarcode, IconMessage, IconReceipt, IconReceipt2 } from '@tabler/icons-react';
 import { AccordionContent, AccordionTrigger } from '@/components/ui/accordion';
-import SemiSection from '@/components/Sections/AppSections/SemiSection';
-import MediaQueryProvider from '@/context/MediaQueryProvider';
-import useIsShortScreen from '@/hooks/useIsShortScreen';
-
 import { motion } from 'framer-motion';
+import { format, parse } from 'date-fns'
+import { es } from 'date-fns/locale'
+import CardIcon from '@/components/Icons/CardIcon';
 
 const itemVariants = {
   hidden: { opacity: 0, y: -20 },
@@ -33,128 +33,108 @@ const AnimatedAccordionContent = ({
 );
 
 interface PaymentCardProps {
-  value: number;
-  desc: string;
-  code?: string;
-  files?: string[];
-  isSelected?: boolean;
-  createdAt?: string;
+  item: any;
+  isSelected: boolean;
   className?: string;
 }
 
-const PaymentCardSection: FC<{ icon: React.ReactElement; } & PropsWithChildren> = ({ icon, children }) => {
-  return <div className="p-3 rounded-xl text-black bg-white dark:bg-grey-sec-dark dark:text-white flex gap-3">
-    <div
-      className={cn(
-        "p-1 rounded-lg flex items-center h-fit",
-        "max-[425px]:p-[2px] max-[425px]:children:w-7 max-[425px]:children:h-auto",
-        "bg-grey border-outline text-text-grey dark:bg-grey-dark dark:border-outline-dark"
-      )}
-    >
-      {icon}
-    </div>
-    {children}
-  </div>;
-}
-
-const Trigger = () => {
-  return (
-    <AccordionTrigger
-      className={cn(
-        "max-lg:w-full max-lg:justify-center max-lg:mt-2",
-        "lg:max-w-fit",
-        "flex items-center font-medium gap-1 px-2 py-1 rounded-md border border-outline bg-grey-sec dark:bg-grey-sec-dark dark:border-outline-dark hover:!no-underline"
-      )}
-    >
-      <span className="truncate text-base">Ver más</span>
-    </AccordionTrigger>
-  );
-};
-
 const PaymentCard: FC<PaymentCardProps> = ({
-  desc,
-  value,
-  files,
-  code,
-  createdAt,
+  item,
   className,
   isSelected = false,
 }) => {
-  const { isShortScreen } = useIsShortScreen({ maxWidth: 768 })
   const [formattedValue, formatCurrency] = useCurrencyFormat()
 
   useEffect(() => {
-    formatCurrency(value)
-  }, [])
+    formatCurrency(item.importe)
+  }, [item, formatCurrency])
+
+  const parsedDate = parse(item.fecha ?? "", 'dd/MM/yyyy', new Date());
+  const formattedDate = format(parsedDate, "d MMM 'de' yyyy", { locale: es });
 
   return (
     <>
-      <div
-        className={cn(
-          "p-3 bg-grey rounded-xl flex items-center gap-3 justify-between dark:bg-grey-dark max-lg:flex-col max-lg:items-start w-full",
-          isSelected && "rounded-b-none",
-          className
-        )}
-      >
-        <div className="flex items-center gap-3 !w-full max-md:items-start">
-          <div className="p-1 icon-green rounded-xl">
-            <IconReceipt width={56} height={56} />
-          </div>
-          <div className="flex flex-col gap-[2px] !w-full">
-            <p className="font-semibold text-lg md:truncate">
-              {formattedValue}
-            </p>
-            <div className="flex items-center gap-1 flex-wrap">
-              <Pill
-                text={createdAt ?? ""}
-                icon={
-                  <IconCalendar
-                    width={16}
-                    height={16}
-                    className="text-text-grey"
-                  />
-                }
-                classNameText="text-sm text-text-grey"
-              />
-              {!isSelected && (
-                <>
-                  {files && files?.length > 0 && (
-                    <Pill
-                      isFile
-                      fileId={files[0]}
-                      text={"Comprobante"}
-                      classNameText="text-sm"
-                    />
-                  )}
+      <AccordionTrigger className='p-0 no-underline hover:no-underline' iconHidden={true}>
+        <div
+          className={cn(
+            "p-3 bg-grey rounded-xl flex items-center gap-3 justify-between dark:bg-grey-dark max-lg:flex-col max-lg:items-start w-full",
+            isSelected && "rounded-b-none",
+            className
+          )}
+        >
+          <div className="flex items-center gap-3 w-full">
+            <CardIcon className="bg-icon-blue/10">
+              <IconReceipt2 size={48} className="text-icon-blue" />
+            </CardIcon>
+            <div className="flex flex-col gap-[2px] !w-full">
+              <div className="w-full flex items-center justify-between">
+                <div className="flex items-center gap-1">
+                  <IconCalendar size={18} className="text-text-grey" />
+                  <p className="text-text-grey font-medium">{formattedDate}</p>
+                </div>
+                <p className="font-semibold text-lg md:truncate font-geist">
+                  {formattedValue}
+                </p>
+              </div>
+              <div className="w-full flex items-center justify-between">
+                <div className="flex items-center gap-1 flex-wrap">
+                  {!isSelected && (
+                    <>
+                      {item.adjuntos && item.adjuntos?.length === 0 && (
+                        <Pill
+                          text={"No hay adjuntos"}
+                          classNameText="text-sm"
+                        />
+                      )}
 
-                  {files && files?.length > 1 && (
-                    <Pill
-                      isFile
-                      fileId={files[files.length - 1]}
-                      text={`+${files.length - 1}`}
-                      classNameText="text-sm"
-                      className="max-lg:hidden"
-                    />
+                      {item.adjuntos && item.adjuntos?.length > 0 && (
+                        <Pill
+                          isFile
+                          fileId={item.adjuntos[0]}
+                          text={"Comprobante"}
+                          classNameText="text-sm"
+                        />
+                      )}
+
+                      {item.adjuntos && item.adjuntos?.length > 1 && (
+                        <Pill
+                          isFile
+                          fileId={item.adjuntos[item.adjuntos.length - 1]}
+                          text={`+${item.adjuntos.length - 1}`}
+                          classNameText="text-sm"
+                          className="max-lg:hidden"
+                        />
+                      )}
+                    </>
                   )}
-                </>
-              )}
+                </div>
+                <IconChevronRight size={24} className="text-text-grey" />
+              </div>
             </div>
           </div>
         </div>
-        <div className="w-fit max-lg:w-full">
-          {!isShortScreen ? <Trigger /> : !isSelected && <Trigger />}
-        </div>
-      </div>
+      </AccordionTrigger>
       <AccordionContent className="border-0 bg-grey dark:bg-grey-dark rounded-b-xl p-3 flex flex-col gap-2 pt-0">
         <AnimatedAccordionContent isSelected={isSelected}>
           <motion.div variants={itemVariants}>
-            <SemiSection
-              titles={["Codigo de comprobante"]}
-              className="bg-white dark:bg-grey-sec-dark"
-              icon={<IconFileBarcode width={26} height={26} />}
+            <SemiSectionData
+              type="simple"
+              title={"Codigo de comprobante"}
+              background="bg-white dark:bg-grey-sec-dark"
+              icon={
+                <div
+                  className={cn(
+                    "p-1 rounded-lg flex items-center h-fit",
+                    "max-[425px]:p-[2px] max-[425px]:children:w-7 max-[425px]:children:h-auto",
+                    "bg-grey border-outline text-text-grey dark:bg-grey-dark dark:border-outline-dark"
+                  )}
+                >
+                  <IconFileBarcode width={26} height={26} />
+                </div>
+              }
             >
               <Pill
-                text={code ?? ""}
+                text={item.codComprobante}
                 classNameText="text-sm"
                 icon={
                   <button>
@@ -163,43 +143,71 @@ const PaymentCard: FC<PaymentCardProps> = ({
                 }
                 iconOrientation="right"
               />
-            </SemiSection>
+            </SemiSectionData>
           </motion.div>
-          {files && files?.length > 0 && (
+          {item.adjuntos && item.adjuntos?.length > 0 && (
             <motion.div variants={itemVariants}>
-              <PaymentCardSection icon={<IconFile width={26} height={26} />}>
-                <div className="flex items-center gap-2 flex-wrap">
-                  {files?.map((file) => {
-                    return (
-                      <Pill
-                        isFile
-                        fileId={file}
-                        text={file}
-                        classNameText="text-sm"
-                      />
-                    );
-                  })}
+              <SemiSectionData
+                type="custom"
+                title={"Files"}
+                background="bg-white dark:bg-grey-sec-dark"
+              >
+                <div className="flex items-center gap-2">
+                  <div
+                    className={cn(
+                      "p-1 rounded-lg flex items-center h-fit",
+                      "max-[425px]:p-[2px] max-[425px]:children:w-7 max-[425px]:children:h-auto",
+                      "bg-grey border-outline text-text-grey dark:bg-grey-dark dark:border-outline-dark"
+                    )}
+                  >
+                    <IconFile width={26} height={26} />
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {item.adjuntos?.map((file: any) => {
+                      return (
+                        <Pill
+                          key={file}
+                          isFile
+                          fileId={file}
+                          text={file}
+                          classNameText="text-sm"
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
-              </PaymentCardSection>
+              </SemiSectionData>
             </motion.div>
           )}
-          {desc && (
+          {item.comentario && (
             <motion.div variants={itemVariants}>
-              <PaymentCardSection icon={<IconMessage width={26} height={26} />}>
-                <div className="flex flex-col gap-[2px]">
-                  <p className="text-base font-medium">Comentarios:</p>
-                  <p className="text-black/75 dark:text-white/75">{desc}</p>
+              <SemiSectionData
+                title="comments"
+                type="custom"
+                background="bg-white dark:bg-grey-sec-dark"
+              >
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <div
+                      className={cn(
+                        "p-1 rounded-lg flex items-center h-fit",
+                        "max-[425px]:p-[2px] max-[425px]:children:w-7 max-[425px]:children:h-auto",
+                        "bg-grey border-outline text-text-grey dark:bg-grey-dark dark:border-outline-dark"
+                      )}
+                    >
+                      <IconMessage width={26} height={26} />
+                    </div>
+                    <p className="text-base font-semibold">Mensaje</p>
+                  </div>
+                  <div className="flex flex-col gap-[2px]">
+                    <p className="text-black/75 dark:text-white/75 text-base">
+                      {item.comentario}
+                    </p>
+                  </div>
                 </div>
-              </PaymentCardSection>
+              </SemiSectionData>
             </motion.div>
           )}
-          <div className="w-full hidden max-lg:block">
-            <motion.div variants={itemVariants}>
-              <MediaQueryProvider maxWidth={768}>
-                {isSelected && <Trigger />}
-              </MediaQueryProvider>
-            </motion.div>
-          </div>
         </AnimatedAccordionContent>
       </AccordionContent>
     </>

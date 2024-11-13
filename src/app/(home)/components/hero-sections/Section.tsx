@@ -3,6 +3,7 @@ import { StaticDataType } from '@/types/globals';
 import { IconArrowNarrowRight, IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react'
+import ButtonArrow from '../buttons/button-arrow';
 
 interface SectionProps {
   data: StaticDataType;
@@ -35,31 +36,20 @@ const Section: React.FC<SectionProps> = ({ data, children, className, black }) =
             {data.title}
           </h2>
           {data.page && (
-            <Link
+            <ButtonArrow
               href={data.page?.path}
-              title={data?.title}
-              className={cn(
-                "w-fit flex items-center text-lg gap-1 px-3 py-1 rounded-md font-medium transition-colors max-md:hidden",
-                data.page.mainColor
-              )}
-            >
-              {data.page?.button}{" "}
-              <IconArrowNarrowRight width={24} height={24} />
-            </Link>
+              title={data?.page.button}
+              className={cn(data.page.mainColor, "max-md:hidden")}
+            />
           )}
         </div>
         {children}
         {data.page && (
-          <Link
+          <ButtonArrow
             href={data.page?.path}
-            title={data?.title}
-            className={cn(
-              "w-fit hidden items-center text-lg gap-1 px-3 py-1 rounded-md font-medium transition-colors max-md:flex",
-              data.page.mainColor
-            )}
-          >
-            {data.page?.button} <IconArrowNarrowRight width={24} height={24} />
-          </Link>
+            title={data?.page.button}
+            className={cn(data.page.mainColor, "md:hidden")}
+          />
         )}
       </div>
     </section>

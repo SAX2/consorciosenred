@@ -1,22 +1,30 @@
 "use client"
 
+import React, { FC, PropsWithChildren, useEffect, useState } from 'react'
 import BackButton from '@/components/Buttons/BackButton';
-import Pill from '@/components/Pill';
 import { useLayoutStore } from '@/store/useLayoutStore';
 import { usePathsAndTitles } from './constants';
-import Image from 'next/image';
-import React, { FC, PropsWithChildren } from 'react'
 import { useParams, usePathname } from 'next/navigation';
 import { IconBell, IconMenu2, IconX } from '@tabler/icons-react';
 import { useMobileMenuStore } from '@/store/useMobileMenuStore';
 import MobileMenu from '@/containers/unit-page/mobile-menu';
+import UserIcon from '@/components/Icons/UserIcon';
+import UserDropdown from '@/components/Dropdowns/UserDropdown';
+import { getUser } from '@/lib/queries/queries';
 
 interface MobileHeaderProps extends PropsWithChildren {}
 
 const MobileHeader: FC<MobileHeaderProps> = ({ children }) => {
    const { hasBuilding, isInView } = useLayoutStore()
   const { isOpen, toggle, setClose } = useMobileMenuStore()
-  
+  const [user, setUser] = useState<{
+    atajos: any[];
+    roles: string[];
+    apellido: string;
+    total_unidades: number;
+    nombre: string;
+  } | null>(null);
+
   const params = useParams();
   const pathname = usePathname();
   const pathsAndTitles = usePathsAndTitles();
@@ -27,38 +35,36 @@ const MobileHeader: FC<MobileHeaderProps> = ({ children }) => {
 
   const isUnitPage = params.id;
 
+  const isMainPath = pathname === '/prp/expensas'
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await getUser();
+      setUser(res)
+    }
+
+    if (!user) {
+      fetchUser();
+    }
+  }, [])
+
   return (
-    <div className="sticky top-0 w-full px-3 py-4 bg-white dark:bg-black-app-bg z-50 md:hidden text-black dark:text-white border-b border-outline dark:border-outline-dark">
+    <div className="sticky top-0 w-full px-3 py-6 bg-white dark:bg-black-app-bg z-50 md:hidden text-black dark:text-white">
       <div className="flex justify-between items-center gap-2">
         <div className="flex gap-2 items-center">
-          <BackButton />
-          {hasBuilding && !isInView && params.id && (
-            <div className="inline-block w-full transition-all duration-150 ease-out animate-[slideInFromTop_0.3s_ease-out_forwards]">
-              <div className="flex items-center gap-2">
-                <Image
-                  src={hasBuilding.image}
-                  alt="Imagen edificio"
-                  width={22}
-                  height={22}
-                  className="rounded-md"
-                />
-                <span className="font-semibold text-lg max-[425px]:truncate max-[425px]:max-w-[150px]">
-                  {hasBuilding.direction}
-                </span>
-                <Pill text={hasBuilding.unit} classNameText="truncate" />
-              </div>
-            </div>
+          {isMainPath ? (
+            <UserDropdown>
+              <button>
+                <UserIcon color="blue" name={user?.nombre ?? "0"} />
+              </button>
+            </UserDropdown>
+          ) : (
+            <BackButton />
           )}
-          {isInView && params.id && (
-            <span className="font-semibold text-lg">{currentTitle}</span>
-          )}
-          {!params.id && (
-            <span className="font-semibold text-lg">{currentTitle}</span>
-          )}
+          <span className="font-semibold text-xl">{currentTitle}</span>
         </div>
         <div className="flex items-center gap-3">
-          <IconBell width={24} height={24} />
-          {children}
+          {!isUnitPage && <IconBell width={24} height={24} />}
           {isUnitPage && (
             <button onClick={toggle}>
               {isOpen ? (

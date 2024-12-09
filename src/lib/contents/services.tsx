@@ -160,6 +160,7 @@ export const appInstall = {
         title: "administadores",
         button: "Administradores",
         className: "hover:bg-yellow/15 text-yellow",
+        classNameDark: "hover:bg-yellow/15 text-yellow-sec"
       },
     },
   ],

@@ -17,11 +17,7 @@ const layout: FC<LayoutProps> = ({ children, modal }) => {
     <main className="flex bg-white dark:bg-black-app-bg justify-center flex-col items-center">
       <div className="bg-white dark:bg-black-app-bg w-full max-h-dvh h-dvh overflow-y-scroll relative">
         <MediaQueryProvider maxWidth={768}>
-          <MobileHeader>
-            <UserDropdown>
-              <UserImage />
-            </UserDropdown>
-          </MobileHeader>
+          <MobileHeader />
         </MediaQueryProvider>
         <div className="max-md:p-3 flex flex-col gap-8 max-md:gap-4 w-full items-center">
           <MediaQueryProvider minWidth={768}>

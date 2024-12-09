@@ -12,8 +12,8 @@ import MobileRcl from "../../public/images/rcl-mobile.webp";
 import MobileUnit from "../../public/images/unit-mobile.webp";
 
 import Pattern from "../../public/utils/pattern1.svg";
-import UserImage1 from "../../public/utils/user-image/user-image-1.png";
-import UserImage2 from "../../public/utils/user-image/user-image-2.png";
+// import UserImage1 from "../../public/utils/user-image/user-image-1.png";
+// import UserImage2 from "../../public/utils/user-image/user-image-2.png";
 import SisadmImage from "../../public/utils/sisadm-img.jpg";
 
 export const logoBackgroundBlue = Logo;
@@ -24,8 +24,8 @@ export const caba3 = CABA3;
 export const pattern = Pattern;
 export const desktopAdminPreview = DesktopAdminPreview;
 export const mobileAppInstallPreview = MobileAppInstallPreview;
-export const userImage1 = UserImage1;
-export const userImage2 = UserImage2;
+// export const userImage1 = UserImage1;
+// export const userImage2 = UserImage2;
 export const sisAdmImg = SisadmImage;
 
 export const mobileRcl = MobileRcl;

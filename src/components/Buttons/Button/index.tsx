@@ -11,7 +11,7 @@ export interface ButtonProps {
   onClick?: () => void;
   style?: React.CSSProperties;
   buttonType?: 'button' | 'icon';
-  textSize?: 'text-base' | 'text-lg';
+  textSize?: 'text-base' | 'text-lg' | string;
   iconOrientation?: 'left' | 'right';
   buttonBackground?: string;
   buttonPadding?: string;

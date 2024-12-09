@@ -168,9 +168,9 @@ export const reserveIcon = (group: string, size: number = 48) => {
       }
     default:
       return {
-        background: "#F9F9F9",
-        color: "#0a0a0a",
-        icon: <IconStar width={size} height={size} className="text-white" />
+        background: "#FCD800",
+        color: "#FCD800",
+        icon: <IconStar width={size} height={size} className="text-black" />
       }
   }
 }

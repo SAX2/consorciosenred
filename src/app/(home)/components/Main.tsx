@@ -1,12 +1,16 @@
+import { cn } from '@/lib/utils';
 import React from 'react'
 
 interface MainProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
-const Main: React.FC<MainProps> = ({ children }) => {
+export const mainPadding = ``;
+
+const Main: React.FC<MainProps> = ({ children, className }) => {
   return (
-    <main className="flex flex-col items-center justify-between scroll-smooth">
+    <main className={cn("flex flex-col items-center justify-between scroll-smooth", className)}>
       {children}
     </main>
   )

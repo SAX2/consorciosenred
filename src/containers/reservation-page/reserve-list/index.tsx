@@ -9,9 +9,9 @@ interface ReserveListProps extends PropsWithChildren {
 
 const ReserveList: FC<ReserveListProps> = ({ className, items, children, params }) => {
   return (
-    <div className='grid grid-cols-1 gap-4'>
+    <div className="grid grid-cols-2 gap-4 max-lg:grid-cols-1 max-md:grid-cols-2 max-sm:grid-cols-1">
       {items.map((item) => {
-        return <ReserveGroupCard item={item} param={params} />;
+        return <ReserveGroupCard key={item.id} item={item} param={params} />;
       })}
     </div>
   );

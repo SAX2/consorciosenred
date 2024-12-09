@@ -1,16 +1,11 @@
-import { userImage2 } from '@/lib/images';
-import Image from 'next/image';
 
-const UserImage = () => {
-  return (
-    <Image
-      src={userImage2}
-      className="object-cover rounded-full"
-      width={24}
-      height={24}
-      alt="Imagen del usuario"
-    />
-  );
+import UserIcon from '@/components/Icons/UserIcon';
+import { getUser } from '@/lib/queries/queries';
+
+const UserImage = async () => {
+  const data = await getUser();
+
+  return <UserIcon color="blue" name={data.nombre} />;
 }
 
 export default UserImage

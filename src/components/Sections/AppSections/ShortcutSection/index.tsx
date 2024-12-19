@@ -5,8 +5,8 @@ import { FC } from "react";
 interface ShortcutsProps {
   data: any[];
   className?: string;
-  mainPath: string; 
-  display: ShortcutButtonDisplayType
+  mainPath: string;
+  display: ShortcutButtonDisplayType;
 }
 
 const Shortcuts: FC<ShortcutsProps> = ({
@@ -16,13 +16,14 @@ const Shortcuts: FC<ShortcutsProps> = ({
   display,
 }) => {
   return (
-    <div className={className}>
+    <div className={className} key={`SHORTCUTS-${mainPath}`}>
       {data.map((shortcut) => {
         return (
           <ShortcutCard
             {...shortcut}
             display={display}
             path={`${mainPath}${shortcut.path}`}
+            key={shortcut.id}
           />
         );
       })}
@@ -30,4 +31,4 @@ const Shortcuts: FC<ShortcutsProps> = ({
   );
 };
 
-export default Shortcuts
+export default Shortcuts;

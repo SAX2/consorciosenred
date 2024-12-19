@@ -6,7 +6,7 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation";
 
 export const loginHandler  = async ({ username, password, save }: { username: string, password: string, save: boolean }) => {
-  const cookie = cookies()
+  const cookie = await cookies()
 
 
   let response = await fetch(urlToken, {
@@ -55,6 +55,6 @@ export const loginHandler  = async ({ username, password, save }: { username: st
 };
 
 export const logoutHandler = async () => {
-  cookies().delete('token')
+  (await cookies()).delete('token')
   redirect('/ingresar')
 }

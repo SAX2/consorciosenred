@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
   
   
   const cookie = cookies();
-  const session = cookie.get('token')?.value as string;
+  const session = (await cookie).get('token')?.value as string;
 
   if (isProtectedRoute && !session) {
     console.log('entro')

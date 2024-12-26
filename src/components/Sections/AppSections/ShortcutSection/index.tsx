@@ -16,14 +16,14 @@ const Shortcuts: FC<ShortcutsProps> = ({
   display,
 }) => {
   return (
-    <div className={className} key={`SHORTCUTS-${mainPath}`}>
+    <div className={className}>
       {data.map((shortcut) => {
         return (
           <ShortcutCard
             {...shortcut}
             display={display}
             path={`${mainPath}${shortcut.path}`}
-            key={shortcut.id}
+            key={`${shortcut.id}-${crypto.randomUUID()}`}
           />
         );
       })}

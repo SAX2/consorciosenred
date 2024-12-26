@@ -19,10 +19,10 @@ interface InputSubmitProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 const InputSubmit = ({ 
   className, 
   status = 'idle', 
-  idleText = 'Enviar', 
-  loadingText = 'Cargando...', 
-  successText = 'Éxito', 
-  errorText = 'Error', 
+  idleText, 
+  loadingText, 
+  successText, 
+  errorText, 
   idleIcon,
   loadingIcon = <IconLoader className="animate-spin" width={16} height={16} />,
   successIcon,
@@ -45,10 +45,10 @@ const InputSubmit = ({
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 20, opacity: 0 }}
           transition={{ duration: 0.15 }}
-          className="flex items-center justify-center"
+          className="flex items-center justify-center gap-2"
         >
-          {content.icon && <span className="mr-2">{content.icon}</span>}
-          {content.text}
+          {content.icon && <span>{content.icon}</span>}
+          {content.text && content.text}
         </motion.div>
       </AnimatePresence>
     );

@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useTransition, FC, PropsWithChildren } from 'react'
-import { ModalContent } from '@/components/Modal';
-import { DialogTitle } from '@/components/ui/dialog';
 import { createNewRcl } from '@/lib/queries/queries';
 import { z, ZodFormattedError } from 'zod'
 import FileSelectorDrag from '@/components/Form/FileSelectorDrag';
@@ -26,6 +24,7 @@ const Rcl = z.object({
     required_error: "El campo 'Descripción' es obligatorio.",
     invalid_type_error: "La 'Descripción' debe ser un texto válido.",
   }).min(1, { message: "El campo 'Descripción' no puede estar vacío." }),
+  adjuntos: z.array(z.string()).optional(),
 });
 
 type RclFormValues = z.infer<typeof Rcl>;
@@ -38,6 +37,7 @@ const NewRcl: FC<NewRclProps> = ({ id, children }) => {
     Rcl_DateTime: new Date().toISOString(),
     Rcl_Subject: '',
     Rcl_Description: '',
+    adjuntos: [],
   });
   const [errors, setErrors] = useState<Partial<RclFormErrors>>({});
 
@@ -117,7 +117,7 @@ const NewRcl: FC<NewRclProps> = ({ id, children }) => {
       .then(base64Files => {
         setFormValues(prev => ({
           ...prev,
-          adjuntos: base64Files
+          adjuntos: [...(prev.adjuntos || []), ...base64Files],
         }));
       })
       .catch(error => {
@@ -157,6 +157,7 @@ const NewRcl: FC<NewRclProps> = ({ id, children }) => {
           value={formValues.Rcl_Subject}
           onChange={handleChange}
           error={errors?.Rcl_Subject?._errors?.[0]}
+          type='text'
         />
         <Input
           className="min-h-[150px]"
@@ -185,7 +186,7 @@ const NewRcl: FC<NewRclProps> = ({ id, children }) => {
           loadingText="Enviando reclamo..."
           successText="Reclamo enviado correctamente"
           errorText="Error al enviar el reclamo"
-          className="bg-[#FFDF41]/35 icon-yellow border-0 rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-auto"
+          className="bg-orange-icon text-white border-0 rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-auto"
           value="Enviar reclamo"
         />
       </form>

@@ -2,7 +2,7 @@
 
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react'
 import BackButton from '@/components/Buttons/BackButton';
-import { useLayoutStore } from '@/store/useLayoutStore';
+// import { useLayoutStore } from '@/store/useLayoutStore';
 import { usePathsAndTitles } from './constants';
 import { useParams, usePathname } from 'next/navigation';
 import { IconBell, IconMenu2, IconX } from '@tabler/icons-react';
@@ -15,7 +15,7 @@ import { getUser } from '@/lib/queries/queries';
 interface MobileHeaderProps extends PropsWithChildren {}
 
 const MobileHeader: FC<MobileHeaderProps> = ({ children }) => {
-   const { hasBuilding, isInView } = useLayoutStore()
+  //  const { hasBuilding, isInView } = useLayoutStore()
   const { isOpen, toggle, setClose } = useMobileMenuStore()
   const [user, setUser] = useState<{
     atajos: any[];

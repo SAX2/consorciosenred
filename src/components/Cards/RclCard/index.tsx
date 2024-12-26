@@ -19,13 +19,15 @@ const RclCard: React.FC<RclCardProps> = ({
   className,
 }) => {
   const pathname = usePathname();
-  const statusColor = statuscolors[item.Rcl_Status as keyof typeof statuscolors] || "bg-white";
+  const statusColor = statuscolors[item.Rcl_Status as keyof typeof statuscolors] as { container: string, text: string  } || "bg-white";
+
+  console.log(statusColor)
 
   return (
     <Link href={pathname + "/" + item.Rcl_id}>
       <div
         className={cn(
-          "p-3 bg-grey rounded-xl flex items-center gap-3 justify-between dark:bg-grey-dark ",
+          "p-3 bg-grey rounded-2xl flex items-center gap-3 justify-between dark:bg-grey-dark",
           className
         )}
       >
@@ -39,8 +41,8 @@ const RclCard: React.FC<RclCardProps> = ({
               <Pill text={item.Rcl_DateTime} classNameText="text-sm" />
               <Pill
                 text={item.Rcl_Status}
-                className={statusColor}
-                classNameText="text-sm"
+                className={cn(statusColor.container)}
+                classNameText={cn("text-sm", statusColor.text)}
               />
             </div>
           </div>

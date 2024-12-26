@@ -50,18 +50,18 @@ const Navbar = () => {
             <Link
               aria-label='Consorcios en red logo'
               href={"/"}
-              className="flex items-center gap-2 transition-transform"
+              className="flex items-center gap-[6px] transition-transform"
             >
               <Image
                 src={logoBackgroundWhite}
                 alt="Logo"
-                width={38}
-                height={38}
-                className="w-[40px] max-md:w-[36px]"
+                width={26}
+                height={26}
+                // className="w-[24px] max-md:w-[36px]"
               />
               <span
                 className={cn(
-                  "text-white italic font-bold text-lg max-md:!block",
+                  "text-white italic font-bold text-xl max-md:!block",
                   isScrolled && "hidden",
                   !isMain && "hidden",
                 )}

@@ -1,29 +1,36 @@
-import { getColor } from '@/hooks/useRandomColor';
-import { FC } from 'react'
+import { getColor } from "@/hooks/useRandomColor";
+import { cn } from "@/lib/utils";
 
 interface UserIconProps {
   name: string;
   color: string;
+  rounded?: string;
+  textSize?: string
+  dimensions?: string;
 }
 
-const UserIcon: FC<UserIconProps> = ({ color, name}) => {
+const UserIcon = ({
+  color = 'none',
+  name,
+  rounded = 'rounded-full',
+  textSize = 'text-xl',
+  dimensions = 'h-9 w-9',
+}: UserIconProps) => {
   return (
-    <div>
-      <div
-        className="w-9 h-9 items-center justify-center rounded-full flex"
-        style={{
-          backgroundColor: getColor(color ?? "")?.background,
-        }}
+    <div
+      className={cn(dimensions, `flex items-center justify-center`, rounded)}
+      style={{
+        backgroundColor: getColor(color ?? '')?.background,
+      }}
+    >
+      <p
+        className={cn(`font-extrabold`, textSize)}
+        style={{ color: getColor(color ?? '')?.color }}
       >
-        <p
-          className={`text-xl font-extrabold`}
-          style={{ color: getColor(color ?? "")?.color }}
-        >
-          {name?.charAt(0).toUpperCase()}
-        </p>
-      </div>
+        {name?.charAt(0).toUpperCase()}
+      </p>
     </div>
-  );
+  )
 }
 
 export default UserIcon

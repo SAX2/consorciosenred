@@ -19,8 +19,8 @@ interface UnitInfoSectionProps {
 const UnitInfoSection: FC<UnitInfoSectionProps> = ({ unit }) => {
 
   const div = useRef(null)
-  const isDivInView = useInView(div);
-  const { handleHasBuilding, setIsInView } = useLayoutStore()
+  // const isDivInView = useInView(div);
+  // const { handleHasBuilding, setIsInView } = useLayoutStore()
 
   const expiresTitle = ["1er vencimiento"];
   if (unit.uf_vto2UltimaExpensa && unit.uf_vto2UltimaExpensa.length > 0) {
@@ -31,17 +31,17 @@ const UnitInfoSection: FC<UnitInfoSectionProps> = ({ unit }) => {
     (a: any, b: any) => parseInt(b.orden) - parseInt(a.orden)
   )[0];
 
-  useEffect(() => {
-    setIsInView(isDivInView);
-    if (!isDivInView) {
-      handleHasBuilding({
-        direction: unit.uf_domiDpto.split("-")[0],
-        id: unit.uf_id,
-        image: sisAdmImg,
-        unit: `${unit.uf_nroUnidad} ${unit.uf_codDpto}`,
-      });
-    }
-  }, [isDivInView, setIsInView, handleHasBuilding, unit])
+  // useEffect(() => {
+  //   setIsInView(isDivInView);
+  //   if (!isDivInView) {
+  //     handleHasBuilding({
+  //       direction: unit.uf_domiDpto.split("-")[0],
+  //       id: unit.uf_id,
+  //       image: sisAdmImg,
+  //       unit: `${unit.uf_nroUnidad} ${unit.uf_codDpto}`,
+  //     });
+  //   }
+  // }, [isDivInView, setIsInView, handleHasBuilding, unit])
 
   return (
     <div className="w-full flex flex-col gap-4">

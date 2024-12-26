@@ -19,7 +19,11 @@ export const usePathsAndTitles = () => {
       paths: [`/prp/expensas/${params.id}/reclamos`]
     },
     {
-      title: "Reclamos / Nuevo",
+      title: "Reclamo",
+      paths: [`/prp/expensas/${params.id}/reclamos/${params.rclid}`]
+    },
+    {
+      title: "Nuevo reclamo",
       paths: [`/prp/expensas/${params.id}/reclamos/nuevo`]
     },
     {
@@ -41,6 +45,10 @@ export const usePathsAndTitles = () => {
     {
       title: "Reservas",
       paths: [`/prp/expensas/${params.id}/reservas`]
+    },
+    {
+      title: "Reservar",
+      paths: [`/prp/expensas/${params.id}/reservas/reservar`]
     },
   ];
 }

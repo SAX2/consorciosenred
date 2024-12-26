@@ -7,10 +7,17 @@ import MediaQueryProvider from '@/context/MediaQueryProvider';
 import MobileHeader from '@/components/Header/AppHeaders/MobileHeader';
 import UserDropdown from '@/components/Dropdowns/UserDropdown';
 import UserImage from '@/components/Cards/UserImage/UserImage';
+import { Metadata } from 'next';
 
 interface LayoutProps extends PropsWithChildren {
   modal: React.ReactNode
 }
+
+export const metadata: Metadata = {
+  title: "CER Propietarios",
+  category: "website",
+  generator: "Next.js",
+};
 
 const layout: FC<LayoutProps> = ({ children, modal }) => {
   return (

@@ -12,8 +12,7 @@ interface UserCardProps {
 
 const UserCard: FC<UserCardProps> = async ({ className }) => {
   const data = await getUser();
-
-
+  
   return (
     <div
       className={cn(
@@ -22,7 +21,7 @@ const UserCard: FC<UserCardProps> = async ({ className }) => {
       )}
     >
       <div className="flex gap-3 items-center">
-        <UserIcon color="blue" name={data.nombre} />
+        <UserIcon color="blue" name={data.nombre} dimensions="min-w-9 h-9" />
         <div className={cn("flex flex-col gap-0 w-full")}>
           <p className="truncate w-full font-medium text-sm">
             {data.nombre.charAt(0).toUpperCase() + data.nombre.slice(1) + " " + data.apellido}

@@ -7,7 +7,7 @@ interface CardIconProps {
 
 const CardIcon = ({ className, children }: CardIconProps & PropsWithChildren) => {
   return (
-    <div className={cn(className, "flex-shrink-0 self-start rounded-lg p-2")}>
+    <div className={cn(className, "flex-shrink-0 self-start rounded-xl p-2")}>
       {children}
     </div>
   );

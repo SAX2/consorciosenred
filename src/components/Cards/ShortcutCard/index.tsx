@@ -4,26 +4,44 @@ import React, { memo } from 'react';
 import Link from 'next/link';
 import { handlePress as handlePressAction } from './actions';
 import { ShortcutProps } from '@/types/globals'
+import { cn } from '@/lib/utils';
 
-const IconBgDescription = memo(({ title, description, icon, style, handlePress }: ShortcutProps) => (
-  <button
-    onClick={handlePress ?? handlePressAction}
-    className="hover:bg-grey flex w-full items-center justify-start rounded-[12px] p-3"
-    style={{ cursor: 'pointer' }}
-  >
+const IconBgDescription = memo(({ title, description, icon, style, handlePress, path }: ShortcutProps) => {
+  const content = (
     <div className="flex w-full items-center justify-start">
-      <div className="mr-3 rounded-[8px] p-[3px]" style={{ backgroundColor: style?.background }}>
+      <div
+        className={cn("mr-3 rounded-[8px] p-[3px]", style?.background)}
+        style={{ backgroundColor: style?.background }}
+      >
         {icon}
       </div>
       <div className="flex flex-col">
-        <span className="text-base font-medium">{title}</span>
+        <span className="text-base font-medium text-start">{title}</span>
         {description && (
-          <span className="text-text-grey text-sm font-medium">{description}</span>
+          <span className="text-text-grey text-sm font-medium text-start">
+            {description}
+          </span>
         )}
       </div>
     </div>
+  );
+
+  if (handlePress) return <button
+    onClick={handlePress ?? handlePressAction}
+    className="hover:bg-grey flex w-full items-center justify-start rounded-[12px] p-3 cursor-pointer"
+  >
+    {content}
   </button>
-));
+
+return (
+  <Link
+    href={path}
+    className="hover:bg-grey flex w-full items-center justify-start rounded-[12px] p-3 cursor-pointer"
+  >
+    {content}
+  </Link>
+);
+});
 
 const IconBg = memo(({ title, icon, style, handlePress, index, isBottomSheet, path }: ShortcutProps) => {
   const content = (
@@ -88,14 +106,14 @@ const NoStyled = memo(({ title, icon, handlePress, index, isBottomSheet, path }:
   );
 });
 
-const ShortcutButton = memo(({ display = 'no-styled', ...props }: ShortcutProps) => {
+const ShortcutButton = memo(({ display = 'no-styled', customComponent, ...props }: ShortcutProps) => {
   switch (display) {
     case 'icon-bg-description':
-      return <IconBgDescription {...props} />;
+      return customComponent ? customComponent({ shortcut: <IconBgDescription {...props} /> }) : <IconBgDescription {...props} />;
     case 'icon-bg':
-      return <IconBg {...props} />;
+      return customComponent ? customComponent({ shortcut: <IconBg {...props} /> }) : <IconBg {...props} />;
     default:
-      return <NoStyled {...props} />;
+      return customComponent ? customComponent({ shortcut: <NoStyled {...props} /> }) : <NoStyled {...props} />;
   }
 });
 

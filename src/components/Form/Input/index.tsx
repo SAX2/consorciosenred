@@ -3,7 +3,7 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
-import { ChangeEvent, FC, InputHTMLAttributes, PropsWithChildren, useState } from 'react'
+import { Dispatch, FC, InputHTMLAttributes, PropsWithChildren, useState } from 'react'
 import { PatternFormat, PatternFormatProps, NumericFormatProps, NumericFormat } from 'react-number-format';
 
 interface InputProps extends PropsWithChildren {
@@ -39,7 +39,11 @@ const InputNumeric = ({ props, error, numericProps }: { numericProps?: NumericFo
   return (
     <NumericFormat
       {...numericProps}
-      className={cn(inputClassName(props.className), error && "!border-red-700", "disabled:!ng-none")}
+      className={cn(
+        inputClassName(props.className),
+        error && "!border-red-700",
+        "disabled:!ng-none"
+      )}
     />
   );
 }
@@ -49,10 +53,115 @@ const InputPattern = ({ props, error, patternProps }: { patternProps?: PatternFo
     <PatternFormat
       {...patternProps}
       format={patternProps?.format ?? ""}
-      className={cn(inputClassName(props.className), error && "!border-red-700")}
+      className={cn(
+        inputClassName(props.className),
+        error && "!border-red-700"
+      )}
     />
   );
 }
+
+const InputGeneric =  ({ props, error, enabled }: { enabled: boolean; error?: string; props: InputProps }) => {
+  return (
+    <input
+      {...props}
+      type={props.type === "password" && enabled ? "text" : props.type}
+      className={cn(
+        inputClassName(props.className),
+        error &&
+          "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
+      )}
+    />
+  );
+}
+
+export const ButtonPassword = ({ onClickPassword, enabled }: { onClickPassword: Dispatch<React.SetStateAction<boolean>>; enabled: boolean }) => {
+  return (
+    <button
+      onClick={() => onClickPassword(!enabled)}
+      type="button"
+      className="absolute right-0 h-full flex items-center"
+    >
+      <span className="pr-2 py-1 text-text-grey">
+        {enabled ? <IconEye /> : <IconEyeOff />}
+      </span>
+    </button>
+  );
+}
+
+export const Label = ({ label, children, classNameLabel, classname, error }: PropsWithChildren & { label: string, classNameLabel?: string, classname?: string, error?: string }) => {
+  return (
+    <div className={cn(classname)}>
+      {label && (
+        <label className={cn(classNameLabel, "text-text-grey mb-1 text-sm font-medium")}>
+          {label}
+        </label>
+      )}
+      {children}
+      {error && <p className="text-red font-medium mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export const InputTextArea = ({ error, ...props }: InputProps) => {
+  return (
+    <textarea
+      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+        props.onChange && props.onChange(e as any)
+      }
+      placeholder={props.placeholder}
+      name={props.name}
+      className={cn(
+        inputClassName,
+        "h-[150px] resize-none w-full border border-outline dark:border-outline-dark rounded-lg p-3 outline-none",
+        error &&
+          "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
+      )}
+    />
+  );
+};
+
+export const InputSelect = ({
+  error,
+  selectOnChange,
+  selectDefaultValue,
+  selectValues,
+  ...props
+}: InputProps) => {
+  return (
+    <Select onValueChange={selectOnChange} defaultValue={selectDefaultValue}>
+      <SelectTrigger
+        className={cn(
+          inputClassName,
+          props.className,
+          "bg-white dark:bg-black-app-bg border-outline dark:border-outline-dark"
+        )}
+      >
+        <SelectValue placeholder={props.placeholder} />
+      </SelectTrigger>
+      <SelectContent className="bg-white dark:bg-black-app-bg border-outline dark:border-outline-dark">
+        {selectValues?.map((group, index) => {
+          return (
+            <SelectGroup key={index + (group.label ?? "undf")}>
+              {group?.label && <SelectLabel className='text-black'/>}
+              {group?.arr.map((item) => {
+                return (
+                  <SelectItem
+                    className="!hover:bg-grey"
+                    key={item}
+                    value={item}
+                  >
+                    {item}
+                  </SelectItem>
+                );
+              })}
+            </SelectGroup>
+          );
+        })}
+      </SelectContent>
+    </Select>
+  );
+};
 
 const Input: FC<InputProps> = ({
   cardInput = false,
@@ -75,127 +184,52 @@ const Input: FC<InputProps> = ({
     setEnabled((prevState) => !prevState);
   };
 
-  const noTextInput = ["select", "text-area", "children", "currency", "pattern", "number"]
+  const renderInput = () => {
+    if (props.type === "pattern") return <InputPattern props={props} error={error} patternProps={patternProps} />
+    if (props.type === "number") return <InputNumeric props={props} error={error} numericProps={numericProps} />
+    if (props.type === "text-area" || props.type === 'textarea') return <InputTextArea {...props} />
+    if (props.type === "select")
+      return (
+        <InputSelect
+          {...props} selectOnChange={selectOnChange} selectDefaultValue={selectDefaultValue} selectValues={selectValues}
+        />
+      );
+    return <InputGeneric props={props} error={error} enabled={enabled} />
+  }
+
+  const renderIcon = ({ classNameSpan }: {classNameSpan: string}) => {
+    return (
+      <div className="h-full flex items-center">
+        <span className={cn(classNameSpan, "py-1")}>{icon}</span>
+      </div>
+    );
+  }
 
   return (
-    <div className={cn("flex flex-col gap-1 w-full", props.classNameContainer)}>
-      {label && (
-        <label
-          className={cn(
-            "text-sm font-medium text-black/75 px-2 dark:text-white/75",
-            error && "text-red-600 dark:text-red-400"
-          )}
-        >
-          {error ? error : label}
-        </label>
-      )}
+    <Label
+      classname={cn("flex flex-col gap-1 w-full", props.classNameContainer)}
+      label={label ?? ""}
+      error={error}
+    >
       <div
         className={cn(
           "flex w-full rounded-md bg-black-sec items-center relative",
           classNameContainerInput
         )}
       >
-        {icon && orientation === "icon-left" && (
-          <div className="h-full flex items-center">
-            <span className="pl-2 py-1">{icon}</span>
-          </div>
-        )}
-        {props.type === "number" && (
-          <InputNumeric
-            props={props}
-            error={error}
-            numericProps={numericProps}
-          />
-        )}
-        {props.type === "pattern" && (
-          <InputPattern
-            props={props}
-            error={error}
-            patternProps={patternProps}
-          />
-        )}
-        {!noTextInput.includes(props.type ?? "select") && (
-          <input
-            {...props}
-            type={props.type === "password" && enabled ? "text" : props.type}
-            className={cn(
-              inputClassName(props.className),
-              error &&
-                "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
-            )}
-          />
-        )}
-        {props.type === "text-area" && (
-          <textarea
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-              props.onChange && props.onChange(e as any)
-            }
-            placeholder={props.placeholder}
-            name={props.name}
-            id=""
-            className={cn(
-              inputClassName,
-              "max-h-[150px] h-auto resize-none",
-              error &&
-                "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
-            )}
-          ></textarea>
-        )}
-        {props.type === "select" && (
-          <Select
-            onValueChange={selectOnChange}
-            defaultValue={selectDefaultValue}
-          >
-            <SelectTrigger
-              className={cn(
-                inputClassName,
-                props.className,
-                "bg-white dark:bg-black-app-bg border-outline dark:border-outline-dark"
-              )}
-            >
-              <SelectValue placeholder={props.placeholder} />
-            </SelectTrigger>
-            <SelectContent className="bg-white dark:bg-black-app-bg border-outline dark:border-outline-dark">
-              {selectValues?.map((group, index) => {
-                return (
-                  <SelectGroup key={index + (group.label ?? "undf")}>
-                    {group?.label && <SelectLabel />}
-                    {group?.arr.map((item) => {
-                      return (
-                        <SelectItem
-                          className="!hover:bg-grey"
-                          key={item}
-                          value={item}
-                        >
-                          {item}
-                        </SelectItem>
-                      );
-                    })}
-                  </SelectGroup>
-                );
-              })}
-            </SelectContent>
-          </Select>
-        )}
+        {icon &&
+          orientation === "icon-left" &&
+          renderIcon({ classNameSpan: "pl-2" })}
+        {renderInput()}
         {props.type === "children" && children}
-        {icon && orientation === "icon-right" && (
-          <div className="h-full flex items-center">
-            <span className="pr-2 py-1">{icon}</span>
-          </div>
-        )}
+        {icon &&
+          orientation === "icon-right" &&
+          renderIcon({ classNameSpan: "pr-2" })}
         {props.type === "password" && (
-          <button
-            onClick={onClickPassword}
-            type="button"
-            className="absolute right-0 h-full flex items-center"
-          >
-            <span className="pr-2 py-1 text-text-grey">
-              {enabled ? <IconEye /> : <IconEyeOff />}
-            </span>
-          </button>
+          <ButtonPassword enabled={enabled} onClickPassword={onClickPassword} />
         )}
       </div>
-    </div>
+    </Label>
   );
 };
 

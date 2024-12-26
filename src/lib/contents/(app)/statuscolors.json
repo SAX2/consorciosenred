@@ -1,4 +1,10 @@
 {
-  "En proceso": "icon-yellow",
-  "Cancelado": "icon-red"
+  "En proceso": {
+    "container": "bg-yellow/25 border-yellow/25",
+    "text": "text-yellow-sec"
+  },
+  "Cancelado": {
+    "container": "bg-red/10 border-red/10",
+    "text": "text-red"
+  }
 }

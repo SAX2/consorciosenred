@@ -70,7 +70,7 @@ export const DialogFull: FC<PropsWithChildren & { onClick: (state: boolean) => v
   return (
     <div className="w-full h-dvh absolute top-0 left-0 z-50 bg-white dark:bg-black-app-bg">
       <div className="flex flex-col">
-        <div className="w-full flex justify-between items-center px-3 py-4">
+        <div className="w-full flex justify-between items-center px-3 py-6">
           <div className="flex items-center gap-2">
             <button onClick={handleClick} className="flex items-center gap-1 text-lg font-medium text-text-grey">
               <IconChevronLeft width={24} height={24} />  
@@ -78,7 +78,6 @@ export const DialogFull: FC<PropsWithChildren & { onClick: (state: boolean) => v
             </button>
           </div>
         </div>
-        <Separator />
         <div className="p-3">{children}</div>
       </div>
     </div>

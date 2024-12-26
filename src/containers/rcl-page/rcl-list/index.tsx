@@ -42,7 +42,7 @@ const RclList: FC<RclListProps> = ({ className, items }) => {
   return (
     <>
       <Section title={filter}>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 ">
           <div className="flex items-center gap-2 w-auto">
             <Input
               icon={<IconSearch className="text-text-grey" size={20} />}
@@ -59,7 +59,7 @@ const RclList: FC<RclListProps> = ({ className, items }) => {
               type="select"
               placeholder="Filtrar"
               selectDefaultValue={filter}
-              selectValues={[{ arr: ["rclDpto", "rclEdif"] }]} // Cambiar opciones de filtro
+              selectValues={[{ arr: ["rclDpto", "rclEdif"]}]} // Cambiar opciones de filtro
               className="bg-transparent border-0 truncate !bg-grey dark:!bg-grey-dark"
               classNameContainer="w-fit"
               selectOnChange={setFilter}

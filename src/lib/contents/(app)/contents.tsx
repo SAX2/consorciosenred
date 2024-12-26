@@ -2,6 +2,8 @@ import { IconBox, IconAlertTriangle, IconStar, IconDots, IconCalendar, IconSocce
 import { ShortcutProps } from "@/types/globals"
 import { toast } from "sonner"
 import Toast from "@/components/toast"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import ActionsDropdown from "@/components/Dropdowns/ActionsDropdown"
 
 export const unitCard = {
     liquidation: "Ver Liquidación",
@@ -18,6 +20,32 @@ export const unitCard = {
         1: "Intereses acumulados"
     },
     expense: "Expensas del mes"
+}
+
+export const payment = {
+  fecha: "Fecha de pago",
+  comprobante: "Codigo de comprobante",
+  mensaje: "Mensaje",
+  sheetTitle: "Detalles del pago",
+  importe: "Importe pagado",
+  archivos: {
+    title: "Adjuntos",
+    comprobantes: "Comprobante",
+  },
+  notify: {
+    importeTotal: "Importe total a pagar",
+    intereses: "Intereses acumulados",
+    deudas: "Deudas acumuladas",
+    expensa: "Ultima expensa",
+  },
+};
+
+export const details = {
+  issue: {
+    about: "Reclamo sobre",
+    type: "Tipo de reclamo",
+    description: "Descripcion"
+  }
 }
 
 export const unitMenu = [
@@ -70,8 +98,8 @@ export const shortcutsUnit: ShortcutProps[] = [
     icon: (
       <IconAlertTriangle width={32} height={32} className="text-black dark:text-white" />
     ),
-    path: '/reclamos/reclamar',
-    isBottomSheet: true,
+    path: '/reclamos/nuevo',
+    // isBottomSheet: true,
     // handlePress: () => toast.info('hola')
   },
   {
@@ -89,7 +117,10 @@ export const shortcutsUnit: ShortcutProps[] = [
       <IconDots width={32} height={32} className="text-black dark:text-white" />
     ),
     path: '/',
-    isBottomSheet: true
+    isBottomSheet: true,
+    customComponent({ shortcut }) {
+      return <ActionsDropdown shortcut={shortcut} />
+    },
   },
 ]
 
@@ -179,7 +210,8 @@ export const reserveTabs = ['dia', 'mes']
 export const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
 export const toastMessages = {
-  notAvailable: 'Esta acción todavía no está disponible'
+  notAvailable: 'Esta acción todavía no está disponible',
+  successSend: "Se ha enviado correctamente",
 }
 
 
@@ -188,8 +220,8 @@ export const colorNames = ['red', 'blue', 'green', 'yellow', 'purple']
 export const userColors = [
   {
     name: 'blue',
-    background: '#96D4FF',
-    color: '#00497C', 
+    background: '#3FA4EA20',
+    color: '#3FA4EA', 
   },
   {
     name: 'red',

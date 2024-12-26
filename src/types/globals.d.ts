@@ -54,4 +54,5 @@ export interface ShortcutProps {
   }
   handlePress?: () => void
   index?: number
+  customComponent?: ({ shortcut }: { shortcut: React.ReactNode }) => React.ReactNode
 }

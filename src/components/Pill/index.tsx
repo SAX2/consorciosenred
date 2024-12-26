@@ -22,16 +22,18 @@ const Pill: React.FC<PillProps> = ({ text, className, icon, classNameText, isFil
         className
       )}
     >
+      {iconOrientation === "left" && icon}
       <IconFile type={typeof fileId === 'string' ? fileId.split('.').pop() ?? "" : ""}/>
       <span className={cn('text-black dark:text-white font-medium', classNameText)}>{text}</span>
-    </Link>;
+      {iconOrientation === "right" && icon}
+      </Link>;
   }
 
   return (
     <div
       className={cn(
-        "flex items-center gap-1 px-1 py-[2px] border bg-white border-outline dark:bg-grey-sec-dark dark:border-outline-dark w-fit text-xs font-medium rounded-md",
-        className
+        "border-outline bg-white darkk:bg-grey-sec-dark darkk:border-outline-dark flex w-fit items-center justify-center rounded-[6px] border px-1 text-xs font-medium flex-row",
+        className,
       )}
     >
       {iconOrientation === "left" && icon}

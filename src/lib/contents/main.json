@@ -29,28 +29,29 @@
     "content": "Nos dedicamos exclusivamente a brindar servicios especializados para Administradores de Propiedad Horizontal. Entendemos la complejidad y los desafíos diarios que enfrentan las Administraciones y Consorcios de Propietarios. Nuestra experiencia nos ha permitido desarrollar ConsorciosEnRed™, una herramienta integral que optimiza la gestión y comunicación dentro de la comunidad consorcial."
   },
   "metrics": {
-    "title": "Puede confiar en nosotros",
-    "pill": "Metricas",
+    "title": "Confianza y experiencia garantizadas",
+    "description": "Lideramos en gestión de propiedades con décadas de experiencia y resultados comprobados, ofreciendo soluciones que brindan tranquilidad y excelencia.",
+    "pill": "Nuestro Impacto",
     "content": [
       {
-        "content": "+415",
-        "title": "Administraciones"
-      },
-      {
-        "content": "+115000",
-        "title": "Unidades"
+        "content": "+750",
+        "title": "Proyectos gestionados"
       },
       {
         "content": "+45",
         "title": "Años de experiencia"
+      },
+      {
+        "content": "+150K",
+        "title": "Unidades administradas"
       }
     ]
   },
   "faq": {
     "title": "Preguntas Frecuentes",
     "page": {
-      "path": "/faq",
-      "title": "preguntas frecuentes",
+      "path": "/ayuda",
+      "title": "Ver mas",
       "button": "show-more"
     },
     "content": [
@@ -133,7 +134,7 @@
       "path": "/noticias",
       "title": "noticias",
       "button": "Noticias",
-      "mainColor": "text-blue hover:bg-blue/15"
+      "mainColor": "text-blue-button hover:bg-blue-button/15"
     },
     "content": [
       {

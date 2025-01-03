@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { IconArrowNarrowRight } from '@tabler/icons-react';
+import { IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import React, { FC } from 'react'
 
@@ -16,7 +16,7 @@ export const ButtonClassName = "px-3 py-2 transition-colors rounded-md font-medi
 const ButtonArrow: FC<ButtonArrowProps> = ({ title, className, href, onClick, textSize = 'text-lg' }) => {
   const content = (
     <>
-      {title} <IconArrowNarrowRight width={24} height={24} />
+      {title} <IconChevronRight width={24} height={24} />
     </>
   );
 

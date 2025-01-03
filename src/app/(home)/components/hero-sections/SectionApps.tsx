@@ -11,6 +11,7 @@ interface SectionAppsProps {
 const SectionApps: FC<SectionAppsProps> = ({ isLightMode = false }) => {
   return (
     <section
+      id='descargar'
       className={cn(
         isLightMode && "bg-grey",
         "w-full justify-center items-center flex p-4"

@@ -1,5 +1,7 @@
 import { StaticImageData } from "next/image";
 
+export type roles = "[Propietario]" | "[Administrador]";
+
 export type StaticDataType = {
   title: string;
   content?: string | any[];
@@ -20,3 +22,5 @@ export type ServicesStatic = {
   image: StaticImageData;
   mainColor?: string;
 }
+
+export type QueryFileProps = { type: "uf_aviso" | "uf_liquidaciones"; id: string; name: string }

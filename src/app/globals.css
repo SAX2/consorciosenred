@@ -33,6 +33,22 @@
       --ring: 222.2 84% 4.9%;
 
       --radius: 0.5rem;
+
+      --sidebar-background: 0 0% 98%;
+
+      --sidebar-foreground: 240 5.3% 26.1%;
+
+      --sidebar-primary: 240 5.9% 10%;
+
+      --sidebar-primary-foreground: 0 0% 98%;
+
+      --sidebar-accent: 240 4.8% 95.9%;
+
+      --sidebar-accent-foreground: 240 5.9% 10%;
+
+      --sidebar-border: 220 13% 91%;
+
+      --sidebar-ring: 217.2 91.2% 59.8%;
     }
 
     .dark {
@@ -63,6 +79,14 @@
       --border: 217.2 32.6% 17.5%;
       --input: 217.2 32.6% 17.5%;
       --ring: 212.7 26.8% 83.9%;
+      --sidebar-background: 240 5.9% 10%;
+      --sidebar-foreground: 240 4.8% 95.9%;
+      --sidebar-primary: 224.3 76.3% 48%;
+      --sidebar-primary-foreground: 0 0% 100%;
+      --sidebar-accent: 240 3.7% 15.9%;
+      --sidebar-accent-foreground: 240 4.8% 95.9%;
+      --sidebar-border: 240 3.7% 15.9%;
+      --sidebar-ring: 217.2 91.2% 59.8%;
     }
   }
 
@@ -80,7 +104,7 @@
   }
   
   .bg-radial-gradient {
-    background: radial-gradient(circle at 50% 30%, #0a0a0a00 0%, #0A0A0A 80%);
+    background: radial-gradient(circle at 50% 0%, #0a0a0a00 0%, #0A0A0A 80%);
   }
   
   .bg-linear {
@@ -164,6 +188,49 @@
     grid-area: h;
   }
 
-  ::selection {
-    @apply bg-blue/20 text-blue;
+  .icon-blue {
+    @apply bg-[#3FA4EA]/25 border-[#3FA4EA]/25 text-blue dark:text-[#70C4FF]
   }
+
+  .icon-purple {
+    @apply bg-[#A87EFF]/25 border-[#A87EFF]/25 text-[#A764DC]
+  }
+
+  .icon-yellow {
+    @apply bg-[#FFDF41]/25 border-[#C1A30A]/25 text-[#C1A30A] dark:bg-yellow/25 dark:border-yellow/25 dark:text-yellow
+  }
+
+  .icon-green {
+    @apply bg-green/25 border-green/25 text-green-sec dark:text-green
+  }
+
+  .icon-red {
+    @apply bg-red/20 border-red/30 text-red/90
+  }
+
+  .max-h-drawer {
+    max-height: calc(100dvh - 10dvh);
+  }
+
+  @keyframes slideInFromTop {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .h-dvh-mobile-header {
+    height: calc(100dvh - 60px);
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+  input[type=number] { appearance: textfield; }

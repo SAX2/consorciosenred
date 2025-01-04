@@ -1,110 +1,34 @@
-import { IconAutomaticGearbox, IconBook, IconBriefcase, IconBuilding, IconCalendar, IconChartBar, IconCheck, IconCloudDownload, IconCoins, IconFile, IconGavel, IconHeadset, IconMailUp, IconReceipt, IconReceipt2, IconSettings, IconShieldLock } from "@tabler/icons-react";
-import { mobileBookingPreviewIphone, mobileAdminPreviewIphone, mobileAppInstallPreviewIphone } from "../images";
+import {
+  IconAutomaticGearbox,
+  IconBook,
+  IconBriefcase,
+  IconCalendar,
+  IconChartBar,
+  IconCheck,
+  IconFile,
+  IconGavel,
+  IconHeadset,
+  IconMailUp,
+  IconReceipt,
+  IconReceipt2,
+  IconSettings,
+  IconShieldLock,
+} from "@tabler/icons-react";
+import {
+  mobileAppInstallPreview,
+  mobileCalendar,
+  mobileRcl,
+  mobileUnit,
+  mobileUnits,
 
-// const services = {
-//   title: "Nuestros servicios",
-//   page: {
-//     path: "/servicios",
-//     title: "servicios",
-//     button: "know-more"
-//   },
-//   bento: [
-//     {
-//       title: "Gestión de Pagos",
-//       description: "Simplifique sus finanzas: liquidaciones, avisos y notificaciones en un solo lugar",
-//       icon: <div className="flex items-center justify-center w-full h-full max-md:relative max-md:w-[250px]"><IconCoins height={200} width={200} className="w-fit h-auto max-md:w-[160px] max-md:h-[160px] max-md:absolute max-md:top-auto max-md:-right-[45%]  text-blue-sec" /></div>,
-//       page: {
-//         path: "",
-//         name: "",
-//         button: "string",
-//       },
-//       bento: "row-span-4 col-span-1 bg-blue side-a text-white justify-end flex-col gap-1 max-md:flex-row-reverse max-md:!py-6"
-//     },
-//     {
-//       title: "Gestión de Nómina",
-//       description: "Administre sueldos y recibos de consorcios con facilidad",
-//       icon: <div className="flex items-center justify-center w-full h-full pb-4 max-md:relative max-md:w-[250px] max-md:pb-0"><IconReceipt2 height={175} width={175} className="w-fit h-auto max-md:w-[160px] max-md:h-[160px] max-md:absolute max-md:top-auto max-md:-right-[45%] text-green-sec" /></div>,
-//       page: {
-//         path: "",
-//         name: "",
-//         button: "string",
-//       },
-//       bento: "row-span-3 col-span-2 bg-green side-b text-[#183300] flex-col justify-end gap-1 max-md:flex-row-reverse max-md:!py-6"
-//     },
-//     {
-//       title: "Documentación Digital",
-//       description: "Acceso seguro 24/7 a todos sus documentos importantes",
-//       icon: <div className="flex items-center justify-center w-full h-full pb-4 max-md:relative max-md:w-[250px] max-md:pb-0"><IconCloudDownload height={175} width={175} className="w-fit h-auto max-md:w-[160px] max-md:h-[160px] max-md:absolute max-md:top-auto max-md:-right-[45%] text-yellow-sec" /></div>,
-//       page: {
-//         path: "",
-//         name: "",
-//         button: "string",
-//       },
-//       bento: "row-span-3 col-span-3 bg-yellow side-c text-[#826C00] flex-col justify-end gap-1 max-md:flex-row-reverse max-md:!py-6"
-//     },
-//     {
-//       title: "Asambleas y Reglamentos",
-//       description: "Manténgase informado: acceda a actas, notas y reglamentos actualizados",
-//       icon: <div className="flex items-center justify-center relative w-[250px] h-full max-md:relative max-md:w-[250px]"><IconBook height={130} width={130} className="w-fit h-auto text-yellow-sec absolute top-auto -right-[45%] max-md:w-[160px] max-md:h-[160px] max-md:absolute max-md:top-auto max-md:-right-[45%]" /></div>,
-//       page: {
-//         path: "",
-//         name: "",
-//         button: "string",
-//       },
-//       bento: "row-span-1 col-span-2 bg-yellow side-d text-[#826C00] flex-row-reverse max-md:flex-row-reverse max-md:!py-6",
-//     },
-//     {
-//       title: "Reservas de Amenities",
-//       description: "Reserve áreas comunes fácilmente, para propietarios y administradores",
-//       icon: <div className="flex items-center justify-center relative w-[250px] h-full max-md:relative max-md:w-[250px]"><IconCalendar height={130} width={130} className="w-fit h-auto text-green-sec absolute top-auto -right-[45%] max-md:w-[160px] max-md:h-[160px] max-md:absolute max-md:top-auto max-md:-right-[45%]" /></div>,
-//       page: {
-//         path: "",
-//         name: "",
-//         button: "string",
-//       },
-//       bento: "row-span-1 col-span-2 bg-green side-e text-[#183300] flex-row-reverse max-md:flex-row-reverse max-md:!py-6"
-//     },
-//     {
-//       title: "Seguimiento Legal",
-//       description: "Monitoree procesos legales con informes detallados y actualizaciones",
-//       icon: <div className="flex items-center justify-center w-full h-full pb-4 max-md:relative max-md:w-[250px] max-md:pb-0"><IconGavel height={175} width={175} className="w-fit h-auto text-blue-sec max-md:w-[160px] max-md:h-[160px] max-md:absolute max-md:top-auto max-md:-right-[45%]" /></div>,
-//       page: {
-//         path: "",
-//         name: "",
-//         button: "string",
-//       },
-//       bento: "row-span-1 col-span-2 bg-blue side-f text-white flex-col justify-end gap-1 max-md:flex-row-reverse max-md:!py-6"
-//     },
-//     {
-//       title: "Administración de Unidades",
-//       description: "Gestione múltiples propiedades desde una única plataforma",
-//       icon: <div className="flex items-center justify-center w-full h-full pb-4 max-md:relative max-md:w-[250px] max-md:pb-0"><IconBuilding height={175} width={175} className="w-fit h-auto text-green-sec max-md:w-[160px] max-md:h-[160px] max-md:absolute max-md:top-auto max-md:-right-[45%]" /></div>,
-//       page: {
-//         path: "",
-//         name: "",
-//         button: "string",
-//       },
-//       bento: "row-span-1 col-span-2 bg-green side-g text-[#183300] flex-col justify-end gap-1 max-md:flex-row-reverse max-md:!py-6"
-//     },
-//     {
-//       title: "Atención al Cliente",
-//       description: "Resolución eficiente de reclamos y comunicación directa",
-//       icon: <div className="flex items-center justify-center w-full h-full pb-4 max-md:relative max-md:w-[250px] max-md:pb-0"><IconHeadset height={175} width={175} className="w-fit h-auto text-blue-sec max-md:w-[160px] max-md:h-[160px] max-md:absolute max-md:top-auto max-md:-right-[45%]" /></div>,
-//       page: {
-//         path: "",
-//         name: "",
-//         button: "string",
-//       },
-//       bento: "row-span-1 col-span-2 bg-blue side-h text-white flex-col justify-end gap-1 max-md:flex-row-reverse max-md:!py-6"
-//     },
-//   ]
-// }
+} from "../images";
 
 const services = [
   {
     pill: "Integral",
     title: "La mejor manera de gestionar consorcios.",
-    description: "Vea y gestione todos los aspectos de su consorcio en un formato ideal. Soporte completo para todas las funciones, desde pagos y documentos hasta reservas y comunicaciones.",
+    description:
+      "Vea y gestione todos los aspectos de su consorcio en un formato ideal. Soporte completo para todas las funciones, desde pagos y documentos hasta reservas y comunicaciones.",
     items: [
       {
         title: "Gestión de Pagos",
@@ -135,13 +59,14 @@ const services = [
         icon: <IconBook height={24} width={24} />,
       },
     ],
-    image: mobileBookingPreviewIphone,
+    image: mobileCalendar,
     mainColor: "text-green",
   },
   {
     pill: "Sencillo",
     title: "Gestione los consorcios que le importan.",
-    description: "Manténgase al día con consorcios ilimitados en modo de visualización y reciba notificaciones en tiempo real sobre cualquier nueva actividad.",
+    description:
+      "Manténgase al día con consorcios ilimitados en modo de visualización y reciba notificaciones en tiempo real sobre cualquier nueva actividad.",
     items: [
       {
         title: "Acceso Móvil",
@@ -176,13 +101,14 @@ const services = [
         icon: <IconCheck height={24} width={24} />,
       },
     ],
-    image: mobileAdminPreviewIphone,
+    image: mobileRcl,
     mainColor: "text-yellow-sec",
   },
   {
     pill: "Eficiente",
     title: "Optimice sus operaciones diarias.",
-    description: "Automatice tareas rutinarias, reduzca errores y mejore la eficiencia general de la administración de consorcios.",
+    description:
+      "Automatice tareas rutinarias, reduzca errores y mejore la eficiencia general de la administración de consorcios.",
     items: [
       {
         title: "Análisis de Gastos",
@@ -213,13 +139,13 @@ const services = [
         icon: <div></div>,
       },
     ],
-    image: mobileAdminPreviewIphone,
+    image: mobileUnit,
     mainColor: "text-blue",
   },
-]
+];
 
 export const appInstall = {
-  image: mobileAppInstallPreviewIphone,
+  image: mobileAppInstallPreview,
   title: "Pruebe Ahora Nuestras Apps \n para una Gestión Simplificada",
   content: [
     {
@@ -236,7 +162,48 @@ export const appInstall = {
         title: "administadores",
         button: "Administradores",
         className: "hover:bg-yellow/15 text-yellow",
+        classNameDark: "hover:bg-yellow/15 text-yellow-sec"
       },
+    },
+  ],
+};
+
+export const appInstallPropietario = {
+  title: "Tu Consorcio, en la Palma de tu Mano",
+  description: "Consulta tus pagos, vencimientos y notificaciones en tiempo real desde cualquier lugar. Gestión fácil y segura al alcance de todos los propietarios.",
+  Image: mobileUnits,
+  links: [
+    {
+      url: "https://apps.apple.com/ar/app/sisadm-expensas/id1462481911?itscg=30200&itsct=apps_box_badge&mttnsubad=1462481911",
+      title: "Descargar en el App Store",
+      button: "appStore",
+      badge: "https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/es-mx?releaseDate=1558569600"
+    },
+    {
+      url: "https://play.google.com/store/apps/details?id=org.nativescript.SASA",
+      title: "Descargar en el Play Store",
+      button: "playStore",
+      badge: "https://storage.googleapis.com/pe-portal-consumer-prod-wagtail-static/downloads_folder/Google%20Play%20Badge%20guidelines/15Wh6ThE-jQgl55mfxGdhx1M-yg9aRuUw?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wagtail%40pe-portal-consumer-prod.iam.gserviceaccount.com%2F20250103%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250103T194927Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3DGetItOnGooglePlay_Badge_Web_color_Spanish-LATAM.png&X-Goog-Signature=014e4a6575e4086fb40a2df9ae1fd470b50bae40b8a134b3655f76d7da31eef1b10bc0d041b9a0d8c85b3e0d9221428e11e00d0ff440fcbaba1a469076d2a902c1da65fd0c384837fa7ae93b4330324d4d3bb11b8efc1c9128dc7b735bcc06a90d081e82b74bad92ec3338e4383ad272c00908a912ad02f92a9fac6fbfcaf938eff99543558deaef4526f290081e147266d478a6452cb0854b1b741bf2ac1f617bec15f7e03e7d43448dba2816eeec5e8c94e22b6fb3d388bc36167144ebec41d08afb61043027c6d237b6e59d160c869cfb469d073cab8473ebbed3c21a36f63966739fc10474f2ab0cedb5cd0d340eb720a06c749792969f1396dd6c067c6a"
+    },
+  ],
+};
+
+export const appInstallAdministrador = {
+  title: "Administra Consorcios de Forma Eficiente",
+  description: "Optimiza tus tareas diarias con herramientas avanzadas para liquidaciones, reportes y comunicación efectiva. Simplifica tu gestión desde cualquier dispositivo.",
+  Image: mobileUnits,
+  links: [
+    {
+      url: "https://apps.apple.com/ar/app/sisadm-expensas/id1462481911?itscg=30200&itsct=apps_box_badge&mttnsubad=1462481911",
+      title: "Descargar en el App Store",
+      button: "appStore",
+      badge: "https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/es-mx?releaseDate=1558569600"
+    },
+    {
+      url: "https://play.google.com/store/apps/details?id=org.nativescript.SASA",
+      title: "Descargar en el Play Store",
+      button: "playStore",
+      badge: "https://storage.googleapis.com/pe-portal-consumer-prod-wagtail-static/downloads_folder/Google%20Play%20Badge%20guidelines/15Wh6ThE-jQgl55mfxGdhx1M-yg9aRuUw?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wagtail%40pe-portal-consumer-prod.iam.gserviceaccount.com%2F20250103%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250103T194927Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3DGetItOnGooglePlay_Badge_Web_color_Spanish-LATAM.png&X-Goog-Signature=014e4a6575e4086fb40a2df9ae1fd470b50bae40b8a134b3655f76d7da31eef1b10bc0d041b9a0d8c85b3e0d9221428e11e00d0ff440fcbaba1a469076d2a902c1da65fd0c384837fa7ae93b4330324d4d3bb11b8efc1c9128dc7b735bcc06a90d081e82b74bad92ec3338e4383ad272c00908a912ad02f92a9fac6fbfcaf938eff99543558deaef4526f290081e147266d478a6452cb0854b1b741bf2ac1f617bec15f7e03e7d43448dba2816eeec5e8c94e22b6fb3d388bc36167144ebec41d08afb61043027c6d237b6e59d160c869cfb469d073cab8473ebbed3c21a36f63966739fc10474f2ab0cedb5cd0d340eb720a06c749792969f1396dd6c067c6a"
     },
   ],
 };

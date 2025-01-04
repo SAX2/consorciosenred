@@ -3,7 +3,6 @@ import footer from '@/lib/contents/footer';
 import Link from 'next/link';
 import Image from 'next/image';
 import { logoBackgroundBlue } from '@/lib/images';
-import { randomUUID } from 'crypto';
 
 const Footer = () => {
   return (
@@ -23,7 +22,7 @@ const Footer = () => {
                 <span
                   className={"text-blue italic font-bold text-lg max-md:!block"}
                 >
-                  Consorcios<span className="text-green">en</span>red
+                  Consorcios<span className="text-green-logo">en</span>red
                 </span>
               </div>
             </div>
@@ -61,7 +60,7 @@ const Footer = () => {
                         return (
                           <Link
                             title={item.page.title}
-                            href={`${randomUUID()}_${item.page.path}`}
+                            href={item.page.path}
                             key={item.page.title}
                             className="text-black hover:underline"
                           >

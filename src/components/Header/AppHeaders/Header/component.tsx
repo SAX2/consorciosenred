@@ -1,6 +1,6 @@
 "use client"
 
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import { usePathname } from 'next/navigation';
 import BackButton from '@/components/Buttons/BackButton';
 import { usePathsAndTitles } from "../constants";
@@ -43,11 +43,11 @@ const HeaderComponent: FC<HeaderProps> = ({ isSingleUnit }) => {
           const isPage = index === subRoutes.length - 1 
 
           if (isPage) {
-            return <h1 className="text-black dark:text-white font-semibold text-2xl">{item.title}</h1>
+            return <h1 key={item.path} className="text-black dark:text-white font-semibold text-2xl">{item.title}</h1>
           }
 
           return (
-            <>
+            <Fragment key={item.path}>
               <Link
                 className="text-text-grey dark:text-text-grey font-medium text-2xl"
                 href={item.path}
@@ -55,7 +55,7 @@ const HeaderComponent: FC<HeaderProps> = ({ isSingleUnit }) => {
                 {item.title}
               </Link>
               <span className='text-text-grey dark:text-text-grey font-medium text-2xl'>/</span>
-            </>
+            </Fragment>
           );
         })}
       </div>

@@ -105,16 +105,6 @@ const PaymentList: FC<PaymentListProps> = ({ className, items }) => {
         totalItems={filteredItems.length}
         totalPages={totalPages}
       />
-
-      <BottomSection>
-        <Button
-          icon={<IconBellRinging size={20} className="text-white" />}
-          title="Notificar pago"
-          buttonBackground="bg-blue-button"
-          classNameText="text-white"
-          href={`${pathname}/nuevo`}
-        />
-      </BottomSection>
     </>
   );
 }

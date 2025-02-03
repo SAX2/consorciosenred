@@ -82,15 +82,6 @@ const RclList: FC<RclListProps> = ({ className, items }) => {
           totalPages={totalPages}
         />
       </Section>
-      <BottomSection>
-        <Button
-          // icon={<IconAlertTriangle size={20} className="text-white" />}
-          title="Reclamar"
-          buttonBackground="bg-orange-icon"
-          classNameText="text-white"
-          href={`${pathname}/nuevo`}
-        />
-      </BottomSection>
     </>
   );
 };

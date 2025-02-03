@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import Pill from "@/components/Pill";
 import SemiSectionData from "@/components/Sections/AppSections/SemiSection";

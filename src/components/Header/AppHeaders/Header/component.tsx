@@ -3,7 +3,7 @@
 import { FC } from 'react';
 import { usePathname } from 'next/navigation';
 import BackButton from '@/components/Buttons/BackButton';
-import { usePathsAndTitles } from "../MobileHeader/constants";
+import { usePathsAndTitles } from "../constants";
 import { cn } from '@/lib/utils';
 import Button from '@/components/Buttons/Button';
 import Link from 'next/link';

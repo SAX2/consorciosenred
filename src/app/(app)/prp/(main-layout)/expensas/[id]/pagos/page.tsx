@@ -1,5 +1,5 @@
+import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
 import Section from '@/components/Sections/AppSections/Section';
-import NoResult from '@/containers/errors/no-result';
 import PaymentList from '@/containers/payments-page/payment-list';
 import getParams from '@/env/getParams';
 import { getUnitPayments } from '@/lib/queries/queries';
@@ -12,7 +12,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
   const data = await getUnitPayments({ id: unitId });
 
   if (data.ERRMSG) {
-    return <NoResult message={data.ERRMSG}/>
+    return <EmptySection />
   }
 
   return (

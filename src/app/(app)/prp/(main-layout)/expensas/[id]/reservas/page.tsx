@@ -1,4 +1,5 @@
 import Button from "@/components/Buttons/Button";
+import EmptySection from "@/components/Sections/AppSections/Errors/EmptySection";
 import Section from "@/components/Sections/AppSections/Section";
 import getParams from "@/env/getParams";
 import { getUnitReservations } from "@/lib/queries/queries";
@@ -22,22 +23,7 @@ const page = ({
 
   return (
     <Section className="w-full pb-8 max  -md:pb-0 mt-0" isFirst>
-      <div className="flex flex-col h-screen-main-h gap-2 justify-center items-center">
-        <p className="text-lg text-text-grey font-medium text-center">
-          Listado de reservas no disponible
-        </p>
-        <Button
-          href={`/prp/expensas/${id}/reservas/reservar`}
-          classNameContainer="w-fit"
-          title="Hacer una nueva reserva"
-          textSize="text-lg"
-          buttonBackground="bg-blue-button"
-          classNameText="text-white"
-          icon={<IconChevronRight size={24} className="text-white" />}
-          iconOrientation="right"
-        />
-      </div>
-      {/* <ReserveList items={data} /> */}
+      <EmptySection />
     </Section>
   );
 };

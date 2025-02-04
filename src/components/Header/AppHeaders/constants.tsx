@@ -55,7 +55,9 @@ export const usePathsAndTitles = () => {
     },
     {
       isSubroute: true,
-      backPaths: [{ path: `/prp/expensas/${params.id}/reclamos`, title: "Reclamos" }],
+      backPaths: [
+        { path: `/prp/expensas/${params.id}/reclamos`, title: "Reclamos" },
+      ],
       title: "Reclamo",
       paths: [`/prp/expensas/${params.id}/reclamos/${params.rclid}`],
       rightContent: {
@@ -127,9 +129,23 @@ export const usePathsAndTitles = () => {
     },
     {
       isSubroute: true,
-      backPaths: [{ path: `/prp/expensas/${params.id}/reservas`, title: "Reservas" }],
+      backPaths: [
+        { path: `/prp/expensas/${params.id}/reservas`, title: "Reservas" },
+      ],
       title: "Reservar",
       paths: [`/prp/expensas/${params.id}/reservas/reservar`],
+    },
+    {
+      isSubroute: true,
+      backPaths: [
+        { path: `/prp/expensas/${params.id}/reservas`, title: "Reservas" },
+        {
+          path: `/prp/expensas/${params.id}/reservas/reservar`,
+          title: "Reservar",
+        },
+      ],
+      title: params.group,
+      paths: [`/prp/expensas/${params.id}/reservas/reservar/${params.group}`],
     },
   ] as HeaderPath[];
 }

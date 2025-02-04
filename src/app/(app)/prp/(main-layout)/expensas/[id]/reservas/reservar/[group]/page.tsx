@@ -1,9 +1,32 @@
 import React from 'react'
+import Section from '@/components/Sections/AppSections/Section';
+import { getUnitReservationsByGroupCalendar } from '@/lib/queries/queries';
+import getParams from '@/env/getParams';
+import ReserveTurnsScreen from '@/containers/reservation-page/reserve-turn-screen';
 
-const page = () => {
+type Props = {
+  params: Promise<{ group: string; id: string }>;
+  searchParams: Promise<{ [code: string]: string }>;
+};
+
+const page =  async ({ params, searchParams }: Props) => {
+  const { id, group } = await params
+  const search = await searchParams
+
+  const unitId = getParams({ params: id, type: "id" });
+  const unitCode = getParams({ params: id, type: "code" });
+  
+  const data = await getUnitReservationsByGroupCalendar({
+    id: unitId,
+    group: group,
+    code: unitCode,
+  });
+
   return (
-    <div>page</div>
-  )
+    <Section className="w-full pb-8 max-md:pb-0 mt-0">
+      <ReserveTurnsScreen data={data as any[]} pathParams={id} group={group} resource={search['code'].toString() ?? ""}/>
+    </Section>
+  );
 }
 
 export default page

@@ -9,11 +9,7 @@ const page = async ({ params: { id }, searchParams }: { params: { id: string }, 
 
   if (!unitId) return null;
 
-  console.log(searchParams);
-
   const data = await getUnitReservations({ id: unitId, code: unitCode });
-
-  console.log(data)
 
   return (
     <Section

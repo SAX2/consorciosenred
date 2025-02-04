@@ -1,4 +1,4 @@
-export type StatusValue = 'warning' | 'success' | 'error' | 'neutral' | "default" | "custom";
+export type StatusValue = 'warning' | 'success' | 'error' | 'neutral' | "default" | "info" | "custom";
 
 type StatusMap = {
   [key: string]: {
@@ -16,7 +16,14 @@ const statusTypes: StatusMap = {
     "Abierto": "success",
     "En proceso": "warning",
     "Rechazado": "error",
-    "Cancelado": "neutral",
+    "Cancelado": "neutral", 
+  },
+  reservas: {
+    "Aprobado": "success",
+    "Pendiente": "warning",
+    "Rechazado": "error",
+    "Anuló Prop.": "neutral",
+    "Por Liquidar": "info",
   }
 };
 

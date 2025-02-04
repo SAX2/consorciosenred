@@ -1,11 +1,13 @@
 import Button from "@/components/Buttons/Button";
 import EmptySection from "@/components/Sections/AppSections/Errors/EmptySection";
 import Section from "@/components/Sections/AppSections/Section";
+import ListSkeleton from "@/components/Skeletons/List";
+import ReservationsScreen from "@/containers/reservation-page/reservations-list";
 import getParams from "@/env/getParams";
-import { getUnitReservations } from "@/lib/queries/queries";
+import { getUnitReservations, getUnitReservationsList } from "@/lib/queries/queries";
 import { IconChevronRight } from "@tabler/icons-react";
 
-const page = ({
+const page = async ({
   params: { id },
   searchParams,
 }: {
@@ -13,17 +15,19 @@ const page = ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const unitId = getParams({ params: id, type: "id" });
-  const unitCode = getParams({ params: id, type: "code" });
 
   if (!unitId) return null;
 
-  console.log(searchParams);
+  const data = await getUnitReservationsList({ id: unitId, orden: "ascendente" })
 
-  console.log({ id: unitId, code: unitCode });
+  if (!data && !data.Reservas && data.Reservas.length === 0) return <EmptySection reload/>
 
   return (
     <Section className="w-full pb-8 max  -md:pb-0 mt-0" isFirst>
-      <EmptySection />
+      <ReservationsScreen
+        data={data.Reservas}
+        param={id}
+      />
     </Section>
   );
 };

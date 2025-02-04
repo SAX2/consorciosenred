@@ -1,64 +1,109 @@
 import Pill from '@/components/Pill'
-import Button from '@/components/Buttons/Button'
-import { useCallback } from 'react'
+import Button, { ButtonProps } from '@/components/Buttons/Button'
 import { reserveIcon } from '@/lib/contents/(app)/contents'
-import { IconEye, IconPlus } from '@tabler/icons-react'
+import { IconPlus, IconProps } from '@tabler/icons-react'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { ShortcutProps } from '@/types/globals'
+import ShortcutButton from '../ShortcutCard'
+import { cn } from '@/lib/utils'
+
+export const ReserveButtonOptions = ({
+  options,
+  param,
+  Icon,
+  buttonProps,
+  classNameTrigger
+}: {
+  options: ShortcutProps[];
+  param: string;
+  Icon?: React.ElementType<IconProps>;
+  buttonProps: ButtonProps;
+  classNameTrigger?: string;
+}) => {
+  return (
+    <Popover>
+      <PopoverTrigger className={cn(classNameTrigger)}>
+        <Button
+          isDiv
+          {...buttonProps}
+          classNameContainer={cn(buttonProps.classNameContainer, "cursor-pointer")}
+          icon={Icon && <Icon className={buttonProps.classNameText} size={24} strokeWidth={2} />}
+        />
+      </PopoverTrigger>
+      <PopoverContent className="p-1 border-outline rounded-xl w-full max-w-[350px]">
+        {options.map((action) => (
+          <ShortcutButton
+            {...action}
+            path={`/${param}/reservas/reservar` + action.path}
+            key={`/${param}/reservas/reservar` + action.path}
+          />
+        ))}
+      </PopoverContent>
+    </Popover>
+  );
+};
 
 interface ReserveGroupCardProps {
   item: any
-  param?: string
+  param?: string;
 } 
 
 const ReserveGroupCard = ({ item, param }: ReserveGroupCardProps) => {
+  const options = item.recursos.map((recurso: any) => {
+    return {
+      id: recurso.codigo,
+      title: recurso.descripcion,
+      description: `Reserva con ${recurso.diasReservaAnticipada} días de anticipación`,
+      path: `/${recurso.recuGrupo }/?code=${recurso.codigo}`,
+      icon: reserveIcon(recurso.recuGrupo, 36).icon,
+      display: "icon-bg-description",
+      style: {
+        background: reserveIcon(recurso.recuGrupo).background,
+        color: reserveIcon(recurso.recuGrupo).color,
+      },
+      isBottomSheet: true,
+    } as ShortcutProps;
+  })
+
   return (
     <div
-      className="border-outline gap-2 w-full flex-col rounded-[16px] border p-4 flex justify-center"
+      className="border-outline gap-4 w-full flex-col rounded-xl border p-4 flex justify-center"
       key={`${item.recuGrupo}`}
     >
-      <div className="w-full flex justify-center">
+      <div className="flex gap-3 w-full items-center flex-row">
         <div
-          className="flex-shrink-0 self-start rounded-[16px] p-3"
+          className="flex-shrink-0 self-start rounded-xl p-2"
           style={{
             backgroundColor: reserveIcon(item.recuGrupo).background,
           }}
         >
-          {reserveIcon(item.recuGrupo).icon}
+          {reserveIcon(item.recuGrupo, 48).icon}
         </div>
-      </div>
-      <div
-        key={item.recuGrupo}
-        className="flex gap-[6px] w-full flex-col justify-center"
-      >
-        <p className="text-base leading-3 font-bold text-black text-center truncate">
-          {item.descripcion}
-        </p>
-        <div className="flex gap-2 flex-wrap justify-center w-full">
-          <p className="text-text-grey text-base font-medium text-center">
-            Turnos disponibles
+        <div key={item.recuGrupo} className="flex gap-[6px] w-full flex-col">
+          <p className="text-base leading-3 font-bold text-black truncate">
+            {item.descripcion}
           </p>
-          <Pill
-            text={item.cantidadHabilitados}
-            classNameText="text-xs"
-            className="px-2"
-          />
+          <div className="flex gap-[6px] flex-wrap w-full">
+            <p className="text-text-grey text-base font-medium">
+              Turnos disponibles
+            </p>
+            <Pill
+              text={item.cantidadHabilitados}
+              classNameText="text-sm"
+              className="px-2 py-0"
+            />
+          </div>
         </div>
       </div>
-      <Button
-        buttonPadding="p-1"
-        classNameContainer="flex-row items-center justify-center rounded-[8px] px-4 py-2"
-        buttonBackground="bg-grey"
-        classNameText="text-text-grey"
-        textSize="text-sm"
-        title="Ver recursos"
-        icon={<IconEye className="text-text-grey" size={18} strokeWidth={2} />}
-      />
-      <Button
-        href={`/${param}/reservas/reservar/${item.recuGrupo}`}
-        classNameContainer="flex-row items-center justify-center rounded-[8px] px-4 py-2"
-        buttonBackground="bg-green/25"
-        classNameText="text-green"
-        title="Reservar"
-        icon={<IconPlus className="text-green" size={22} strokeWidth={2} />}
+      <ReserveButtonOptions
+        options={options}
+        param={param ?? ""}
+        buttonProps={{
+          classNameText: "text-green",
+          buttonBackground: "bg-green/15",
+          title: "Reservar",
+        }}
+        Icon={IconPlus}
       />
     </div>
   );

@@ -16,6 +16,7 @@ export interface ButtonProps {
   buttonBackground?: string;
   buttonPadding?: string;
   buttonJustifyContent?: string;
+  isDiv?: boolean;
 }
 
 export const classNameButton = 'flex flex-row items-center rounded-[8px] transition-colors gap-1';
@@ -35,6 +36,7 @@ const Button: React.FC<ButtonProps> = ({
   buttonBackground = 'bg-grey',
   buttonPadding = 'p-2',
   buttonJustifyContent = 'justify-center',
+  isDiv = false,
 }) => {
   const content = (
     <>
@@ -54,6 +56,22 @@ const Button: React.FC<ButtonProps> = ({
       {icon && iconOrientation === 'right' && icon}
     </>
   );
+
+  if (isDiv) {
+    return (
+      <div
+        className={cn(
+          classNameContainer,
+          buttonBackground,
+          buttonPadding,
+          buttonJustifyContent,
+          classNameButton
+        )}
+      >
+        {content}
+      </div>
+    );
+  }
 
   if (href) {
     return (

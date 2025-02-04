@@ -3,12 +3,6 @@ import React from 'react'
 const ListSkeleton = () => {
   return (
     <div className="w-full flex flex-col gap-4">
-      <div className="max-w-[250px] h-[25px] rounded-sm bg-grey-sec dark:bg-grey-sec-dark animate-pulse"></div>
-      <div className="w-full flex gap-2">
-        <div className="min-w-[42px] h-[42px] rounded-md bg-grey-sec dark:bg-grey-sec-dark animate-pulse"></div>
-        <div className="w-full h-[42px] rounded-md bg-grey-sec dark:bg-grey-sec-dark animate-pulse"></div>
-        <div className="min-w-[89px] h-[42px] rounded-md bg-grey-sec dark:bg-grey-sec-dark animate-pulse"></div>
-      </div>
       <div className="flex flex-col gap-[10px]">
         {Array.from({ length: 10 }, (_, index) => {
           return (

@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" dir="ltr" className={`${GeistSans.variable}`}>
-      <body className={inter.className} style={{ background: "#0a0a0a" }}>
+    <html lang="es" dir="ltr" className={`${GeistSans.variable}`} suppressHydrationWarning>
+      <body className={inter.className} style={{ background: "#0a0a0a" }} suppressHydrationWarning>
         {children}
       </body>
     </html>

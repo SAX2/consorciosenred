@@ -190,7 +190,6 @@ interface ReservationsScreenProps {
 }
 
 const ReservationsScreen = ({ data, param }: ReservationsScreenProps) => {
-  const { isLargeScreen } = useIsLargeScreen({ minWidth: 768 });
 
   return (
     <>
@@ -206,6 +205,15 @@ const ReservationsScreen = ({ data, param }: ReservationsScreenProps) => {
           );
         })}
       </div>
+    </>
+  );
+}
+
+export const BottomSectionReserve = ({ param }: { param: string }) => {
+  const { isLargeScreen } = useIsLargeScreen({ minWidth: 768 });
+
+  return (
+    <>
       {!isLargeScreen && (
         <BottomSection>
           <Button
@@ -214,12 +222,7 @@ const ReservationsScreen = ({ data, param }: ReservationsScreenProps) => {
             classNameContainer="w-full"
             buttonBackground="bg-green"
             classNameText="text-white"
-            icon={
-              <IconPlus
-                size={24}
-                className="text-white"
-              />
-            }
+            icon={<IconPlus size={24} className="text-white" />}
           />
         </BottomSection>
       )}

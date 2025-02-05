@@ -4,22 +4,24 @@ import React, { FC, PropsWithChildren, useState } from 'react';
 import RclCard from '@/components/Cards/RclCard';
 import Input from '@/components/Form/Input';
 import { cn } from '@/lib/utils';
-import { IconAlertTriangle, IconSearch } from '@tabler/icons-react';
+import { IconPlus, IconSearch } from '@tabler/icons-react';
 import usePagination from '@/hooks/use-pagination';
 import Pagination from '@/components/Sections/AppSections/Pagination';
 import Section from '@/components/Sections/AppSections/Section';
 import Button from '@/components/Buttons/Button';
 import { usePathname } from 'next/navigation';
 import BottomSection from '@/components/Sections/AppSections/BottomSection';
+import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 
 interface RclListProps extends PropsWithChildren {
   className?: string;
   buttonMore?: string;
   buttonLess?: string;
   items: any;
+  param?: string;
 }
 
-const RclList: FC<RclListProps> = ({ className, items }) => {
+const RclList: FC<RclListProps> = ({ className, items, param }) => {
   const pathname = usePathname()
   const [filter, setFilter] = useState<string>("rclDpto"); // Default to "Departamento"
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -85,5 +87,26 @@ const RclList: FC<RclListProps> = ({ className, items }) => {
     </>
   );
 };
+
+export const BottomSectionRcl  = ({ param }: { param: string }) => {
+  const { isLargeScreen } = useIsLargeScreen({ minWidth: 768 });
+
+  return (
+    <>
+      {!isLargeScreen && (
+        <BottomSection>
+          <Button
+            href={`/prp/expensas/${param}/reservas/reservar`}
+            title="Nuevo reclamo"
+            classNameContainer="w-full"
+            buttonBackground="bg-orange-icon"
+            classNameText="text-white"
+            icon={<IconPlus size={24} className="text-white" />}
+          />
+        </BottomSection>
+      )}
+    </>
+  );
+}
 
 export default RclList;

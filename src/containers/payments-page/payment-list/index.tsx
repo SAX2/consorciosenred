@@ -10,6 +10,7 @@ import { IconBellRinging, IconSearch } from '@tabler/icons-react';
 import React, { FC, PropsWithChildren, useState } from 'react'
 import Button from '@/components/Buttons/Button';
 import { usePathname } from 'next/navigation';
+import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 
 interface PaymentListProps extends PropsWithChildren {
   className?: string;
@@ -105,6 +106,28 @@ const PaymentList: FC<PaymentListProps> = ({ className, items }) => {
         totalItems={filteredItems.length}
         totalPages={totalPages}
       />
+    </>
+  );
+}
+
+
+export const BottomSectionPayments = ({ param }: { param: string }) => {
+  const { isLargeScreen } = useIsLargeScreen({ minWidth: 768 });
+
+  return (
+    <>
+      {!isLargeScreen && (
+        <BottomSection>
+          <Button
+            href={`/prp/expensas/${param}/pagos/nuevo`}
+            title="Notificar pago"
+            classNameContainer="w-full"
+            buttonBackground="bg-blue-button"
+            classNameText="text-white"
+            icon={<IconBellRinging size={24} className="text-white" />}
+          />
+        </BottomSection>
+      )}
     </>
   );
 }

@@ -1,8 +1,9 @@
 "use client"
 
+import { classNameButton, classNameButtonText } from "@/components/Buttons/Button";
 import { cn } from "@/lib/utils";
-import { IconLoader } from "@tabler/icons-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { IconCircleCheckFilled, IconCircleXFilled, IconLoader } from "@tabler/icons-react";
+import { motion, AnimatePresence,HTMLMotionProps } from "framer-motion";
 
 interface InputSubmitProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   status?: 'idle' | 'loading' | 'success' | 'error';
@@ -24,9 +25,9 @@ const InputSubmit = ({
   successText, 
   errorText, 
   idleIcon,
-  loadingIcon = <IconLoader className="animate-spin" width={16} height={16} />,
-  successIcon,
-  errorIcon,
+  loadingIcon = <IconLoader className="animate-spin" size={24} />,
+  successIcon = <IconCircleCheckFilled className="text-white" size={24} />,
+  errorIcon = <IconCircleXFilled className="text-white" size={24}/>,
   ...props 
 }: InputSubmitProps) => {
   const getContent = () => {
@@ -45,10 +46,10 @@ const InputSubmit = ({
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 20, opacity: 0 }}
           transition={{ duration: 0.15 }}
-          className="flex items-center justify-center gap-2"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
         >
           {content.icon && <span>{content.icon}</span>}
-          {content.text && content.text}
+          {content.text && <span className={classNameButtonText}>{content.text}</span>}
         </motion.div>
       </AnimatePresence>
     );
@@ -59,15 +60,16 @@ const InputSubmit = ({
       type="submit"
       disabled={status === 'loading'}
       className={cn(
-        "w-full p-2 px-3 rounded-lg outline-none border outline-offset-0 flex items-center justify-center",
-        status === 'loading' && "opacity-75 cursor-not-allowed",
-        status === 'success' && "!bg-green-500/15",
-        status === 'error' && "!bg-red-500/15 dark:!bg-red-500/15 !text-red-600 dark:!text-red-400",
+        classNameButton,
+        "w-full p-2 outline-none border outline-offset-0 flex items-center justify-center",
+        status === 'loading' && "!bg-grey !text-text-grey cursor-not-allowed",
+        status === 'success' && "!bg-green",
+        status === 'error' && "!bg-red dark:!bg-red-500/15 !text-white",
         className
       )}
       animate={{
         backgroundColor: status === 'error' ? 'rgba(239, 68, 68, 0.15)' : status === 'success' ? 'rgba(16, 185, 129, 0.15)' : '',
-        color: status === 'error' ? '#dc2626' : status === 'success' ? '#10b981' : '',
+        color: status === 'error' ? '#fff' : status === 'success' ? '#fff' : '',
       }}
       transition={{ duration: 0.150 }}
     >

@@ -24,7 +24,7 @@ interface InputProps extends PropsWithChildren {
   numericProps?: NumericFormatProps;
 }
 
-const inputClassName = (className?: string) => cn(
+export const inputClassName = (className?: string) => cn(
   "w-full p-2 px-3 rounded-lg placeholder:text-text-grey/50 text-black outline-none border border-outline dark:text-white dark:border-outline-dark outline-offset-0",
   className
 );
@@ -42,7 +42,7 @@ const InputNumeric = ({ props, error, numericProps }: { numericProps?: NumericFo
       className={cn(
         inputClassName(props.className),
         error && "!border-red-700",
-        "disabled:!ng-none"
+        "disabled:!bg-none"
       )}
     />
   );
@@ -69,7 +69,7 @@ const InputGeneric =  ({ props, error, enabled }: { enabled: boolean; error?: st
       className={cn(
         inputClassName(props.className),
         error &&
-          "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
+          "!outline-4 !outline-red/5 !dark:outline-red/30 !border-red !dark:border-red-400"
       )}
     />
   );
@@ -112,10 +112,10 @@ export const InputTextArea = ({ error, ...props }: InputProps) => {
       placeholder={props.placeholder}
       name={props.name}
       className={cn(
-        inputClassName,
-        "h-[150px] resize-none w-full border border-outline dark:border-outline-dark rounded-lg p-3 outline-none",
+        inputClassName(props.className),
+        "resize-none",
         error &&
-          "outline-4 outline-red-600/15 dark:outline-red-600/30 border-red-600 dark:border-red-400"
+          "!outline-4 !outline-red/5 !dark:outline-red/30 !border-red !dark:border-red-400"
       )}
     />
   );
@@ -132,8 +132,7 @@ export const InputSelect = ({
     <Select onValueChange={selectOnChange} defaultValue={selectDefaultValue}>
       <SelectTrigger
         className={cn(
-          inputClassName,
-          props.className,
+          inputClassName(props.className),
           "bg-white dark:bg-black-app-bg border-outline dark:border-outline-dark"
         )}
       >
@@ -187,7 +186,7 @@ const Input: FC<InputProps> = ({
   const renderInput = () => {
     if (props.type === "pattern") return <InputPattern props={props} error={error} patternProps={patternProps} />
     if (props.type === "number") return <InputNumeric props={props} error={error} numericProps={numericProps} />
-    if (props.type === "text-area" || props.type === 'textarea') return <InputTextArea {...props} />
+    if (props.type === "text-area" || props.type === 'textarea') return <InputTextArea {...props} error={error} />
     if (props.type === "select")
       return (
         <InputSelect

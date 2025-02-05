@@ -68,7 +68,7 @@ const config = {
   			'grey-sec': '#F1F1F1',
   			outline: '#DFDFDF',
   			'orange-icon': '#F66600',
-  			red: '#DD3246',
+  			red: '#B30B00',
   			'grey-dark': '#222222',
   			'grey-sec-dark': '#1C1C1C',
   			'outline-dark': '#4A4A4A',

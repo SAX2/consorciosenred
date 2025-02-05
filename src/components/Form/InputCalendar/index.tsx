@@ -4,14 +4,17 @@ import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { es } from "date-fns/locale"
 import React from 'react';
+import { inputClassName } from '../Input';
+import { IconCalendarFilled } from '@tabler/icons-react';
 
-const InputCalendar = ({ field }: { field: any }) => {
+const InputCalendar = ({ field, className }: { field: any, className?: string }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
         <button
           className={cn(
-            "text-start w-full p-2 px-3 rounded-lg placeholder:text-text-grey/50 text-black outline-none dark:text-white dark:border-outline-dark outline-offset-0 flex items-center",
+            inputClassName(className),
+            "!text-start flex justify-between",
             !field.value && "text-muted-foreground"
           )}
         >
@@ -20,9 +23,15 @@ const InputCalendar = ({ field }: { field: any }) => {
           ) : (
             <span>Elige una fecha</span>
           )}
+          <span>
+            <IconCalendarFilled className='text-text-grey' size={24}/>
+          </span>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0 dark:bg-black-app-bg dark:border-outline-dark border-outline bg-white" align="start">
+      <PopoverContent
+        className="w-auto p-0 dark:bg-black-app-bg dark:border-outline-dark border-outline bg-white"
+        align="start"
+      >
         <Calendar
           locale={es}
           initialFocus
@@ -34,7 +43,7 @@ const InputCalendar = ({ field }: { field: any }) => {
           }
         />
       </PopoverContent>
-    </Popover>  
+    </Popover>
   );
 };
 

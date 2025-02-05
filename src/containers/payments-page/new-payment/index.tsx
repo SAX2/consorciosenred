@@ -2,14 +2,16 @@
 
 import React, { FC, PropsWithChildren, useEffect, useState, useTransition } from "react";
 import { z, ZodFormattedError } from 'zod';
-import { IconCalendar, IconCheck } from '@tabler/icons-react';
+import { IconCalendar, IconCheck, IconChevronDown } from '@tabler/icons-react';
 import { cn } from '@/lib/utils';
 import FileSelectorDrag from '@/components/Form/FileSelectorDrag';
-import Input from '@/components/Form/Input';
+import Input, { inputClassName, Label } from '@/components/Form/Input';
 import InputCalendar from '@/components/Form/InputCalendar';
 import { createNotifyPayment } from "@/lib/queries/queries";
 import { NumericFormat } from 'react-number-format';
 import InputSubmit from "@/components/Form/InputSubmit";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import IconUnit from "@/components/Icons/IconUnit";
 
 interface NewPaymentProps extends PropsWithChildren {
   totalImport: number;
@@ -18,10 +20,10 @@ interface NewPaymentProps extends PropsWithChildren {
 }
 
 const Rcl = z.object({
-  importe: z.number(),
+  importe: z.number().min(1, "Debe ingresar una cantidad mayor a $0"),
   fecha: z.date({ required_error: "Selecciona una fecha" }),
   comentario: z.string({ invalid_type_error: "La 'Descripción' debe ser un texto válido." }),
-  adjuntos: z.array(z.string()).optional(),
+  adjuntos: z.array(z.string()).min(1, { message: "Es obligatório que envíe una foto del comprobante" }),
   pagoTotal: z.boolean(),
 });
 
@@ -54,9 +56,6 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-
-    let valueImport = value;
-    if (value.length === 0) valueImport = "0";
 
     setFormValues(prev => ({
       ...prev,
@@ -102,41 +101,32 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = Rcl.safeParse(formValues);
-
+    
     setQueryError(false);
     setQuerySuccess(false);
-
+    
     if (!result.success) {
       setErrors(result.error.format());
       return;
     }
 
     startTransition(async () => {
-      console.log({
+      const res = await createNotifyPayment({
         ...formValues,
         comentario: formValues.comentario.trim(),
         codEdificio: unitCode,
         idDepto: unitId,
         fecha: formValues.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '/'),
         adjuntos: formValues.adjuntos && formValues.adjuntos?.length > 0 ? formValues.adjuntos : [""]
-      })
+      });
 
-      // const res = await createNotifyPayment({
-      //   ...formValues,
-      //   comentario: formValues.comentario.trim(),
-      //   codEdificio: unitCode,
-      //   idDepto: unitId,
-      //   fecha: formValues.fecha.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '/'),
-      //   adjuntos: formValues.adjuntos && formValues.adjuntos?.length > 0 ? formValues.adjuntos : [""]
-      // });
+      console.log(res)
 
-      // console.log(res)
-  
-      // if (!res.CODIGO) {
-      //   setQueryError(true);
-      // } else {
-      //   setQuerySuccess(true);
-      // }
+      if (!res.CODIGO) {
+        setQueryError(true);
+      } else {
+        setQuerySuccess(true);
+      }
     })
 
     setErrors({});
@@ -148,12 +138,9 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
       onSubmit={handleSubmit}
     >
       {children}
-      <Input
-        classNameContainerInput="border border-outline dark:border-outline-dark"
-        type="children"
+      <Label
         label="*Fecha de pago (Colocar la misma fecha que la del comprobante)"
-        icon={<IconCalendar width={24} height={24} className="text-text-grey" />}
-        orientation="icon-right"
+        classname="flex flex-col gap-1"
       >
         <InputCalendar
           field={{
@@ -162,13 +149,20 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
               setFormValues((prev) => ({ ...prev, fecha: date ?? new Date() })),
           }}
         />
-      </Input>
-      <div className="text-start w-full p-3 rounded-lg placeholder:text-text-grey/50 text-black outline-none border border-outline dark:text-white dark:border-outline-dark outline-offset-0 flex flex-col justify-center items-center gap-4">
-        <label className="text-sm font-medium text-black/75 px-2 dark:text-white/75">
-          *Importe pagado
-        </label>
-        <div className="flex items-start gap-1">
-          <Input 
+      </Label>
+      <Label
+        label="Importe a pagar*"
+        classname="flex flex-col gap-1"
+        error={errors.importe?._errors[0]}
+      >
+        <div
+          className={cn(
+            inputClassName(""),
+            "flex flex-col gap-1 justify-center items-center",
+            errors.importe?._errors[0] && "!outline-4 !outline-red/5 !dark:outline-red/30 !border-red !dark:border-red-400"
+          )}
+        >
+          <Input
             name="importe"
             type="number"
             numericProps={{
@@ -177,43 +171,52 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
               thousandSeparator: ".",
               prefix: "$",
               placeholder: "$00,00",
-              onChange: handleChange,
+              onChange: (e) => {
+                const normalized = e.target.value
+                  .replace(/\$/g, "")
+                  .replace(/\./g, "")
+                  .replace(",", ".");
+                return setFormValues((prev) => ({
+                  ...prev,
+                  importe: parseFloat(normalized),
+                }));
+              },
               value: formValues.importe,
               disabled: !isCustomAmount,
-              className: "!disabled:bg-none"
             }}
-            className="text-center w-fit font-bold text-4xl border-0"
+            className="text-center font-bold text-4xl border-0 disabled:bg-white disabled:text-text-grey/75 disabled:cursor-not-allowed"
             classNameContainerInput="border-0"
           />
-        </div>
-        <div className="flex flex-wrap gap-2 max-w-[300px] justify-center">
-          <button
-            className="flex items-center gap-2"
-            onClick={handleToggleCustomAmount}
-            type="button"
-          >
-            <div
-              className={cn(
-                "rounded-sm border border-outline dark:border-outline-dark",
-                !isCustomAmount && "bg-blue text-white !border-blueda dark:!border-blue"
-              )}
+          <div className="flex flex-wrap gap-2 max-w-[300px] justify-center">
+            <button
+              className="flex items-center gap-2"
+              onClick={handleToggleCustomAmount}
+              type="button"
             >
-              <IconCheck
-                size={16}
-                className={cn(isCustomAmount && "opacity-0")}
-              />
-            </div>
-            <p
-              className={cn(
-                "font-medium text-text-grey",
-                !isCustomAmount && "text-blue dark:text-[#70C4FF]"
-              )}
-            >
-              Abono el importe total
-            </p>
-          </button>
+              <div
+                className={cn(
+                  "rounded-sm border border-outline dark:border-outline-dark",
+                  !isCustomAmount &&
+                    "bg-blue text-white !border-blueda dark:!border-blue"
+                )}
+              >
+                <IconCheck
+                  size={16}
+                  className={cn(isCustomAmount && "opacity-0")}
+                />
+              </div>
+              <p
+                className={cn(
+                  "font-medium text-text-grey",
+                  !isCustomAmount && "text-blue dark:text-[#70C4FF]"
+                )}
+              >
+                Abono el importe total
+              </p>
+            </button>
+          </div>
         </div>
-      </div>
+      </Label>
       <Input
         className="min-h-[150px]"
         label="Mensaje"
@@ -225,32 +228,88 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
         error={errors?.comentario?._errors?.[0]}
       />
       <div className="flex flex-col gap-1 w-full">
-        <label
-          className={cn(
-            "text-sm font-medium text-black/75 px-2 dark:text-white/75",
-            errors?.adjuntos?._errors?.[0] && "text-red-600 dark:text-red-400"
-          )}
+        <Label
+          label="*Archivos adjuntos"
+          classname="flex flex-col gap-1"
+          error={errors.adjuntos?._errors[0]}
         >
-          Archivos adjuntos (Opcional)
-        </label>
-        <FileSelectorDrag
-          error={errors?.adjuntos?._errors?.[0]}
-          onFilesSelected={handleFilesSelected}
-          acceptedFileTypes={["image/jpeg", "image/png", "application/pdf"]}
-        />
+          <FileSelectorDrag
+            error={errors?.adjuntos?._errors?.[0]}
+            onFilesSelected={handleFilesSelected}
+            acceptedFileTypes={["image/jpeg", "image/png", "application/pdf"]}
+          />
+        </Label>
       </div>
       <InputSubmit
-        status={isPending ? 'loading' : queryError ? 'error' : querySuccess ? 'success' : 'idle'}
+        status={
+          isPending
+            ? "loading"
+            : queryError
+            ? "error"
+            : querySuccess
+            ? "success"
+            : "idle"
+        }
         idleText="Notificar"
-        loadingText="Notificando..."
+        loadingText="Notificando"
         successText="Pago notificado correctamente"
         errorText="Error al notificar el pago"
         type="submit"
-        className="mb-8 icon-blue border-0 rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-auto"
+        className="mb-8 bg-blue-button text-white border-0 rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-auto"
         value="Notificar"
       />
     </form>
   );
 };
+
+interface AccordionNewPaymentDetailsProps {
+  unit: any;
+  id: string;
+}
+
+export const AccordionNewPaymentDetails: FC<AccordionNewPaymentDetailsProps> = ({ unit, id }) => {
+  return (
+    <Accordion type="multiple">
+      <AccordionItem
+        value={id}
+        className="!p-3 rounded-xl bg-grey dark:bg-grey-dark w-full flex flex-col h-fit gap-[6px]"
+      >
+        <AccordionTrigger className="w-full [&>svg]:hidden hover:no-underline flex flex-col gap-2 !p-0">
+          <div className="flex items-center justify-between w-full">
+            <div className="flex gap-2 items-center">
+              <IconUnit
+                id={unit.id}
+                name=""
+                iconSize={14}
+                size={24}
+                padding="p-1"
+              />
+              <p className="text-black font-semibold">{unit.uf_domiDpto}</p>
+            </div>
+            <IconChevronDown size={24} className="text-text-grey" />
+          </div>
+          <div className="flex items-center justify-between w-full">
+            <p className="text-text-grey font-medium">Importe a pagar</p>
+            <p className="font-semibold font-geist">{unit.uf_importeTotal}</p>
+          </div>
+        </AccordionTrigger>
+        <AccordionContent className="p-0 flex flex-col gap-[6px]">
+          <div className="flex items-center justify-between w-full">
+            <p className="text-text-grey font-medium text-base">Ultima expensa</p>
+            <p className="text-text-grey font-semibold font-geist text-base">$ {unit.uf_importeUltimaExpensa}</p>
+          </div>
+          <div className="flex items-center justify-between w-full">
+            <p className="text-text-grey font-medium text-base">Intereses acumulados</p>
+            <p className="text-text-grey font-semibold font-geist text-base">{unit.uf_importeInteresAcumulado}</p>
+          </div>
+          <div className="flex items-center justify-between w-full">
+            <p className="text-text-grey font-medium text-base">Deudas acumuladas</p>
+            <p className="text-text-grey font-semibold font-geist text-base">{unit.uf_importeExpensasAcumulado}</p>
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
 
 export default NewPayment;

@@ -1,6 +1,8 @@
-import NewPayment from '@/containers/payments-page/new-payment'
+import { Accordion, AccordionContent, AccordionTrigger } from '@/components/ui/accordion';
+import NewPayment, { AccordionNewPaymentDetails } from '@/containers/payments-page/new-payment'
 import getParams from '@/env/getParams'
 import { getUnit } from '@/lib/queries/queries';
+import { AccordionHeader } from '@radix-ui/react-accordion';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
@@ -23,10 +25,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
       unitId={unitId}
       unitCode={unit.uf_codEdificio}
     >
-      <div className="p-3 rounded-xl bg-grey flex justify-between mb-3 dark:bg-grey-dark">
-        <p className="text-text-grey font-medium">Importe a pagar</p>
-        <p className="font-semibold font-geist">{expenseTotal}</p>
-      </div>
+      <AccordionNewPaymentDetails unit={unit} id={id}/>
     </NewPayment>
   );
 }

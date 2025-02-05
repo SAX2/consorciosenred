@@ -376,7 +376,7 @@ const TurnPicker = ({ turns, selectedTurns, setSelectedTurns, header }: TurnPick
     <div className="flex flex-col gap-4">
       {header}
       <div className="grid grid-cols-1 gap-2">
-        {turns.map((turn) => (
+        {Array.from(new Map(turns.map(turn => [turn.id, turn])).values()).map((turn) => (
           <button
             key={turn.start}
             onClick={() => toggleTurn(turn)}

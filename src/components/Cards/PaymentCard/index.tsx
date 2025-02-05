@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
 import { format, parse } from 'date-fns'
 import { es } from 'date-fns/locale'
 import CardIcon from '@/components/Icons/CardIcon';
+import { PopoverFiles } from '@/components/Dropdowns/PopoverFiles';
 
 const itemVariants = {
   hidden: { opacity: 0, y: -20 },
@@ -54,7 +55,10 @@ const PaymentCard: FC<PaymentCardProps> = ({
 
   return (
     <>
-      <AccordionTrigger className='p-0 no-underline hover:no-underline' iconHidden={true}>
+      <AccordionTrigger
+        className="p-0 no-underline hover:no-underline"
+        iconHidden={true}
+      >
         <div
           className={cn(
             "p-3 bg-grey rounded-xl flex items-center gap-3 justify-between dark:bg-grey-dark max-lg:flex-col max-lg:items-start w-full",
@@ -80,31 +84,45 @@ const PaymentCard: FC<PaymentCardProps> = ({
                 <div className="flex items-center gap-1 flex-wrap">
                   {!isSelected && (
                     <>
-                      {item.adjuntos && item.adjuntos?.length === 0 && (
-                        <Pill
-                          text={"No hay adjuntos"}
-                          classNameText="text-sm"
-                        />
-                      )}
+                      {item.adjuntosMobile &&
+                        item.adjuntosMobile?.length === 0 && (
+                          <Pill
+                            text={"No hay adjuntos"}
+                            classNameText="text-sm"
+                          />
+                        )}
 
-                      {item.adjuntos && item.adjuntos?.length > 0 && (
-                        <Pill
-                          isFile
-                          fileId={item.adjuntos[0]}
-                          text={"Comprobante"}
-                          classNameText="text-sm"
-                        />
-                      )}
+                      {item.adjuntosMobile &&
+                        item.adjuntosMobile?.length > 0 && (
+                          <Pill
+                            isFile
+                            fileId={item.adjuntosMobile[0].id}
+                            fileName={item.adjuntosMobile[0].nombre}
+                            fileType={item.adjuntosMobile[0].tipo}
+                            text={"Comprobante"}
+                            classNameText="text-sm"
+                          />
+                        )}
 
-                      {item.adjuntos && item.adjuntos?.length > 1 && (
-                        <Pill
-                          isFile
-                          fileId={item.adjuntos[item.adjuntos.length - 1]}
-                          text={`+${item.adjuntos.length - 1}`}
-                          classNameText="text-sm"
-                          className="max-lg:hidden"
-                        />
-                      )}
+                      {item.adjuntosMobile &&
+                        item.adjuntosMobile?.length > 1 && (
+                          <Pill
+                            isFile
+                            fileId={
+                              item.adjuntos[item.adjuntosMobile.length - 1].id
+                            }
+                            fileName={
+                              item.adjuntos[item.adjuntosMobile.length - 1]
+                                .nombre
+                            }
+                            fileType={
+                              item.adjuntos[item.adjuntosMobile.length - 1].tipo
+                            }
+                            text={`+${item.adjuntos.length - 1}`}
+                            classNameText="text-sm"
+                            className="max-lg:hidden"
+                          />
+                        )}
                     </>
                   )}
                 </div>
@@ -162,19 +180,10 @@ const PaymentCard: FC<PaymentCardProps> = ({
                   >
                     <IconFile width={26} height={26} />
                   </div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {item.adjuntos?.map((file: any) => {
-                      return (
-                        <Pill
-                          key={file}
-                          isFile
-                          fileId={file}
-                          text={file}
-                          classNameText="text-sm"
-                        />
-                      );
-                    })}
-                  </div>
+                  <PopoverFiles
+                    files={item.adjuntosMobile}
+                    totalLength={item.adjuntosMobile.length}
+                  />
                 </div>
               </SemiSectionData>
             </motion.div>

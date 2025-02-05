@@ -1,64 +1,21 @@
 "use client"
 
+import { PopoverFiles } from '@/components/Dropdowns/PopoverFiles';
 import Input from '@/components/Form/Input';
 import InputSubmit from '@/components/Form/InputSubmit';
 import UserIcon from '@/components/Icons/UserIcon';
 import Pill from '@/components/Pill';
 import SemiSection from '@/components/Sections/AppSections/SemiSection';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Separator } from '@/components/ui/separator';
 import NoResult from '@/containers/errors/no-result';
 import { details } from '@/lib/contents/(app)/contents';
 import { createNewCommentRcl } from '@/lib/queries/queries';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/packages/ui/badge';
-import { IconAlertTriangle, IconArrowUp, IconArrowUpRight, IconChevronDown, IconCircleCheckFilled, IconClipboard, IconFile, IconInfoSquareRounded, IconInfoTriangle, IconLoader, IconMessage, IconPaperclip } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowUp, IconCircleCheckFilled, IconInfoSquareRounded, IconInfoTriangle, IconLoader, IconMessage, IconPaperclip } from '@tabler/icons-react';
 import { format, formatDistanceToNow, isToday, parse } from 'date-fns';
 import { es } from 'date-fns/locale';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useActionState, useEffect, useState } from 'react'
-
-const PopoverFiles = ({ files, totalLength }: { files: any[], totalLength: number }) => {
-  return (
-    <Popover>
-      <PopoverTrigger>
-        <div className="flex flex-row mt-2 w-full flex-wrap">
-          <button className="bg-white border border-outline flex flex-row gap-2 p-1 rounded-lg">
-            <span className="p-[2px] bg-grey-sec rounded-md">
-              <IconFile size={20} className="text-text-grey" />
-            </span>
-            <p className="text-black">
-              {totalLength} Adjunto
-              {totalLength > 1 ? "s" : ""}
-            </p>
-            <Separator orientation="vertical" />
-            <span className="font-medium text-text-grey flex flex-row items-center gap-1">
-              Ver <IconChevronDown size={20} />
-            </span>
-          </button>
-        </div>
-      </PopoverTrigger>
-      <PopoverContent align="start" className="p-1 flex-col w-fit rounded-lg">
-        {files.map((file, index) => (
-          <Link
-            href={`/file/${file.tipo}/${file.id}/${file.nombre}`}
-            className="w-[250px] flex flex-row justify-between items-center p-1 hover:bg-grey rounded-md group"
-            key={file.id}
-          >
-            <div className="flex flex-row items-center gap-2 flex-1">
-              <span className="p-[2px] bg-grey-sec rounded-md">
-                <IconFile size={20} className="text-text-grey" />
-              </span>
-              <p className="truncate flex-1">{file.nombre}</p>
-            </div>
-            <IconArrowUpRight size={20} className="text-text-grey group-hover:rotate-45 group-hover:text-black transition-all" />
-          </Link>
-        ))}
-      </PopoverContent>
-    </Popover>
-  );
-}
 
 const InfoHeader = ({ issue }: { issue: any }) => {
   const issueDate = parse(issue.Rcl_DateTime, 'dd/MM/yyyy', new Date());

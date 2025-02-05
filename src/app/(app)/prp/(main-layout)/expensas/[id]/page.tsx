@@ -31,8 +31,8 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
 
     return sortedData.map((item: any) => ({
       id: item.id,
+      nombreAdjunto: item.nombreAdjunto,
       period: convertDate(item.titulo),
-      comprobantes: [item.nombreAdjunto]
     }));
   };
 

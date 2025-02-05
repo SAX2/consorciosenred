@@ -183,7 +183,7 @@ const NewRcl: FC<NewRclProps> = ({ id, children }) => {
         <InputSubmit
           status={isPending ? 'loading' : queryError ? 'error' : querySuccess ? 'success' : 'idle'}
           idleText="Enviar reclamo"
-          loadingText="Enviando reclamo..."
+          loadingText="Enviando reclamo"
           successText="Reclamo enviado correctamente"
           errorText="Error al enviar el reclamo"
           className="bg-orange-icon text-white border-0 rounded-lg cursor-pointer disabled:opacity-50 disabled:cursor-auto"

@@ -74,6 +74,8 @@ export const usePathsAndTitles = () => {
       },
     },
     {
+      isSubroute: true,
+      backPaths: [{ path: `/prp/expensas/${params.id}/reclamos`, title: "Reclamos" }],
       title: "Nuevo reclamo",
       paths: [`/prp/expensas/${params.id}/reclamos/nuevo`],
     },
@@ -102,6 +104,14 @@ export const usePathsAndTitles = () => {
     {
       title: "Juicios",
       paths: [`/prp/expensas/${params.id}/juicios`],
+    },
+    {
+      title: "Detalles del juicio",
+      isSubroute: true,
+      backPaths: [
+        { path: `/prp/expensas/${params.id}/juicios`, title: "Juicios" },
+      ],
+      paths: [`/prp/expensas/${params.id}/juicios/${params.jid}`],
     },
     {
       title: "Asambleas",

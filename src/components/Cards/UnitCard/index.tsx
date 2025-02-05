@@ -4,9 +4,11 @@ import Link from "next/link";
 import Pill from "@/components/Pill";
 import SemiSectionData from "@/components/Sections/AppSections/SemiSection";
 import Shortcuts from "@/components/Sections/AppSections/ShortcutSection";
-import { IconBuilding, IconCalendarExclamation, IconChevronRight, IconMailExclamation, IconMailFast, IconMailForward, IconPlus, IconReceipt2 } from "@tabler/icons-react";
+import { IconCalendarExclamation, IconMailExclamation, IconMailForward, IconPlus } from "@tabler/icons-react";
 import { FC } from "react";
 import { shortcutsUnit, unitCard } from "@/lib/contents/(app)/contents";
+import IconUnit from "@/components/Icons/IconUnit";
+import ButtonFile from "@/components/Buttons/ButtonFile";
 
 interface unitProps {
   unit: any;
@@ -28,9 +30,7 @@ const unit: FC<unitProps> = ({ unit }) => {
     <div className="w-full flex flex-col gap-2 justify-between p-4 rounded-2xl border-outline border dark:border-outline-dark">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3 w-full">
-          <div className="rounded-[10px] w-14 h-14 flex items-center justify-center border border-outline bg-white dark:bg-grey-sec-dark dark:border-outline-dark">
-            <IconBuilding width={32} height={32} className="text-text-grey" />
-          </div>
+          <IconUnit id={unit.edf_id} name={unit.nombreAdjunto ?? null} padding="p-2" rounded="rounded-lg" iconSize={36} size={54}/>
           <div className="flex flex-col gap-[2px] max-w-max w-full">
             <p className="font-semibold truncate">{unit.uf_domiDpto}</p>
             <div className="flex items-center gap-1">
@@ -93,51 +93,38 @@ const unit: FC<unitProps> = ({ unit }) => {
               },
             ]}
           />
-          
         </div>
         <div className="flex flex-col gap-2">
-          {mostRecentLiquidation && (
-            <Link
-              target="_blank"
-              href={`/file/uf_liquidaciones/${mostRecentLiquidation.id}/${mostRecentLiquidation.nombreAdjunto}`}
-              className="border border-outline dark:border-outline-dark p-2 flex rounded-lg items-center justify-between"
-            >
-              <div className="flex gap-2">
-                <IconMailForward
-                  width={24}
-                  height={24}
-                  className="ios:mr-[6px] android:mr-[6px] text-green"
-                />
-                <span className="text-base font-medium">Ver Liquidacion</span>
-              </div>
-              <IconChevronRight
-                width={20}
-                height={20}
-                className="text-text-grey"
-              />
-            </Link>
-          )}
-          {unit.uf_aviso.length > 0 && (
-            <Link
-              target="_blank"
-              href={`/file/uf_aviso/${unit.uf_aviso[0].id}/${unit.uf_aviso[0].nombreAdjunto}`}
-              className="border border-outline dark:border-outline-dark p-2 flex rounded-lg items-center justify-between"
-            >
-              <div className="flex gap-2">
-                <IconMailExclamation
-                  width={24}
-                  height={24}
-                  className="ios:mr-[6px] android:mr-[6px] text-brown"
-                />
-                <span className="text-base font-medium">Ver Aviso de pago</span>
-              </div>
-              <IconChevronRight
-                width={20}
-                height={20}
-                className="text-text-grey"
-              />
-            </Link>
-          )}
+        {mostRecentLiquidation && (
+                  <ButtonFile
+                    fileType="uf_liquidaciones"
+                    key={mostRecentLiquidation.id}
+                    fileId={mostRecentLiquidation.id}
+                    fileName={mostRecentLiquidation.nombreAdjunto}
+                    title="Ver Ultima Liquidación"
+                    icon={
+                      <IconMailForward
+                        size={24}
+                        className="text-[#1f9163]"
+                      />
+                    }
+                  />
+                )}
+                {unit.uf_aviso.length > 0 && (
+                  <ButtonFile
+                    fileType="uf_aviso"
+                    key={unit.uf_aviso[0].id}
+                    fileId={unit.uf_aviso[0].id}
+                    fileName={unit.uf_aviso[0].nombreAdjunto}
+                    title="Ver Aviso de pago"
+                    icon={
+                      <IconMailExclamation
+                        size={24}
+                        className="text-[#91694a]"
+                      />
+                    }
+                  />
+                )}
         </div>
         <Shortcuts
           data={shortcutsUnit}

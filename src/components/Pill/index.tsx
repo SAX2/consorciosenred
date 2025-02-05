@@ -13,6 +13,8 @@ export interface PillProps {
   isFile?: boolean;
   fileId?: string;
   variant?: StatusValue;
+  fileType?: string;
+  fileName?: string;
 }
 
 export const variantContainerClassName = (variant: StatusValue) => variant === "warning" ? "border-yellow-sec/15 bg-yellow/15" : variant === "error" ? "border-red/25 bg-red/15" : variant === "success" ? "border-green/15 bg-green/15" : variant === "neutral" ? "border-outline bg-grey-sec" : variant === "default" ? "border-outline bg-white" : variant === "info" ? "bg-blue-button/15 border-blue-button/15": "" 
@@ -25,13 +27,15 @@ const Pill: React.FC<PillProps> = ({
   classNameText,
   isFile = false,
   fileId,
+  fileType,
+  fileName,
   iconOrientation = "left",
-  variant = "default"
+  variant = "default",
 }) => {
   if (isFile) {
     return (
       <Link
-        href={`/file/type/${fileId}/${fileId}`}
+        href={`/file/${fileType}/${fileId}/${fileName}`}
         className={cn(
           "flex items-center gap-1 px-1 py-[2px] border bg-white border-outline dark:bg-grey-sec-dark dark:border-outline-dark w-fit text-xs font-medium rounded-md",
           className

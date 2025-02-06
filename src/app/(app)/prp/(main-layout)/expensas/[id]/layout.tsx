@@ -1,8 +1,14 @@
 import { cn } from "@/lib/utils";
-import Sidebar from "@/components/Navbar/AppNavbars/UnitSidebar";
+import Sidebar from "@/components/navbar/AppNavbars/UnitSidebar";
 import MediaQueryProvider from "@/context/MediaQueryProvider";
+import getParams from "@/env/getParams";
+import { getUnitPermissions } from "@/store/permissions/unit-permissions";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const layout = async ({ children, params }: { children: React.ReactNode, params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  const unitId = getParams({ params: id, type: "id" })
+  const permissions = await getUnitPermissions(unitId)
+
   return (
     <div
       className={cn(
@@ -12,7 +18,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     >
       <MediaQueryProvider minWidth={768}>
         <div className="relative">
-          <Sidebar />
+          <Sidebar permissions={permissions}/>
         </div>
       </MediaQueryProvider>
       {children}

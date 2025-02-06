@@ -1,5 +1,5 @@
 import { ShortcutProps } from "@/types/globals";
-import { IconAlertTriangle, IconBell, IconBellRinging, IconBook, IconCalendar, IconCreditCard, IconGavel, IconPackages, IconUsers, IconWallet, IconCalendarFilled } from "@tabler/icons-react";
+import { IconAlertTriangle, IconBell, IconBellRinging, IconBook, IconCalendar, IconCreditCard, IconGavel, IconPackages, IconUsers, IconWallet, IconCalendarFilled, IconBox } from "@tabler/icons-react";
 
 export interface ShortcutPropsMapping {
   simpleShortcut?: ShortcutProps;
@@ -7,7 +7,13 @@ export interface ShortcutPropsMapping {
   backgroundShortcut?: ShortcutProps;
 }
 
-export type ActionsProps = Record<string, ShortcutPropsMapping>;
+export interface ActionsProps {
+  [key: string]: {
+    simpleShortcut?: ShortcutProps;
+    descriptionShortcut?: ShortcutProps;
+    backgroundShortcut?: ShortcutProps;
+  }
+}
 
 export const ACTIONS: ActionsProps = {
   ver_rcl: {
@@ -148,137 +154,120 @@ export const ACTIONS: ActionsProps = {
   },
 };
 
-export const DEFAULT_ROUTES = [
+export const DEFAULT_ROUTES = ({ size = 22 }: {size?: number}) => ([
   {
-    "[id]/asambleas/index": {
+    "/[id]": {
       unitMenuItem: {
-        title: "Asambleas",
-        icon: <IconUsers size={36} className="text-black" />,
-        path: "/asambleas",
-        display: "icon-bg-description",
-        style: {
-          background: "#F9F9F9",
-          color: "#0a0a0a",
-        },
-        isBottomSheet: true,
-        classNameTitleMainIconBgDesc: "!text-xl font-semibold",
+        descripcion: "Unidad",
+        posicion: 1,
+        colorFondo: "",
+        titulo: "UNIDAD",
+        iconoWeb: <IconBox size={size} />,
+        url: "",
+      }
+    }
+  },
+  {
+    "/asambleas": {
+      unitMenuItem: {
+        descripcion: "Asambleas",
+        posicion: 1,
+        colorFondo: "",
+        titulo: "ASAMBLEAS",
+        iconoWeb: <IconUsers size={size} />,
+        url: "/asambleas",
       },
     },
   },
   {
-    "[id]/novedades/index": {
+    "/novedades": {
       unitMenuItem: {
-        title: "Novedades",
-        icon: <IconBell size={36} className="text-black" />,
-        path: "/novedades",
-        display: "icon-bg-description",
-        style: {
-          background: "#F9F9F9",
-          color: "#0a0a0a",
-        },
-        classNameTitleMainIconBgDesc: "!text-xl font-semibold",
+        descripcion: "Novedades",
+        posicion: 1,
+        colorFondo: "",
+        titulo: "NOVEDADES",
+        iconoWeb: <IconBell size={size} />,
+        url: "/novedades",
       },
     },
   },
   {
-    "[id]/reglamento/index": {
+    "/reglamento": {
       unitMenuItem: {
-        title: "Reglamento",
-        icon: <IconBook size={36} className="text-black" />,
-        path: "/reglamento",
-        display: "icon-bg-description",
-        style: {
-          background: "#F9F9F9",
-          color: "#0a0a0a",
-        },
-        isBottomSheet: true,
-        classNameTitleMainIconBgDesc: "!text-xl font-semibold",
+        descripcion: "Reglamento",
+        posicion: 1,
+        colorFondo: "",
+        titulo: "REGLAMENTO",
+        iconoWeb: <IconBook size={size} />,
+        url: "/reglamento",
       },
     },
   },
   {
     "/": {
       unitMenuItem: {
-        title: "Todas las unidades",
-        icon: <IconPackages size={36} className="text-black" />,
-        display: "icon-bg-description",
-        path: "",
-        style: {
-          background: "#F9F9F9",
-          color: "#0a0a0a",
-        },
-        // handlePress: popToTop,
-        isBottomSheet: true,
-        classNameTitleMainIconBgDesc: "!text-xl font-semibold",
+        descripcion: "Todas las unidades",
+        posicion: 1,
+        colorFondo: "",
+        titulo: "TODAS LAS UNIDADES",
+        iconoWeb: <IconPackages size={size} />,
+        url: "/prp/expensas",
       },
     },
   },
-];
+])
 
-export const NAVIGATION_TABS = {
+export const NAVIGATION_TABS = ({ size = 22 }: {size?: number}) => ({
   ver_jui: {
     route: {
-      name: "[id]/juicios",
+      name: "/juicios",
     },
     unitMenuItem: {
-      title: "Juicios",
-      icon: <IconGavel size={36} className="text-black" />,
-      path: "/juicios",
-      display: "icon-bg-description",
-      style: {
-        background: "#F9F9F9",
-        color: "#0a0a0a",
-      },
-      isBottomSheet: true,
-      classNameTitleMainIconBgDesc: "!text-xl font-semibold",
+      descripcion: "Juicios",
+      posicion: 1,
+      colorFondo: "",
+      titulo: "JUICIOS",
+      iconoWeb: <IconGavel size={size}/>,
+      url: "/juicios",
     },
   },
   ver_rcl: {
     route: {
-      name: "[id]/reclamos",
+      name: "/reclamos",
     },
     unitMenuItem: {
-      title: "Reclamos",
-      icon: <IconAlertTriangle size={36} className="text-black" />,
-      display: "icon-bg-description",
-      style: {
-        background: "#F9F9F9",
-        color: "#0a0a0a",
-      },
-      path: "/reclamos",
-      classNameTitleMainIconBgDesc: "!text-xl font-semibold",
+      descripcion: "Reclamos",
+      posicion: 1,
+      colorFondo: "",
+      titulo: "RECLAMOS",
+      iconoWeb: <IconAlertTriangle size={size} />,
+      url: "/reclamos",
     },
   },
   ver_res: {
     route: {
-      name: "[id]/reservas",
+      name: "/reservas",
     },
     unitMenuItem: {
-      title: "Reservas",
-      icon: <IconCalendar size={36} className="text-black" />,
-      path: "/reservas",
-      display: "icon-bg-description",
-      style: {
-        background: "#F9F9F9",
-        color: "#0a0a0a",
-      },
-      classNameTitleMainIconBgDesc: "!text-xl font-semibold",
+      descripcion: "Reservas",
+      posicion: 1,
+      colorFondo: "",
+      titulo: "RESERVAS",
+      iconoWeb: <IconCalendar size={size}/>,
+      url: "/reservas",
     },
   },
   ver_cob: {
     route: {
-      name: "[id]/pagos",
+      name: "/pagos",
     },
     unitMenuItem: {
-      title: "Pagos",
-      icon: <IconCreditCard size={36} className="text-black" />,
-      path: "/pagos",
-      display: "icon-bg-description",
-      style: {
-        background: "#F9F9F9",
-        color: "#0a0a0a",
-      },
-      classNameTitleMainIconBgDesc: "!text-xl font-semibold",
+      descripcion: "Pagos",
+      posicion: 1,
+      colorFondo: "",
+      titulo: "PAGOS",
+      iconoWeb: <IconCreditCard size={size} />,
+      url: "/pagos",
     },
   },
-};
+});

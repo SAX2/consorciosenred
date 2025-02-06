@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo } from "react";
-import { ACTIONS, ActionsProps, ShortcutPropsMapping } from "./permission-routes";
+import { ACTIONS, ActionsProps, DEFAULT_ROUTES, NAVIGATION_TABS, ShortcutPropsMapping } from "./permission-routes";
 import { UnitPermissions } from "./unit-permissions";
 import { ShortcutProps } from "@/types/globals";
 import { IconDots } from "@tabler/icons-react";
@@ -68,3 +68,21 @@ export const getPaymentShortcutsRoutes = (unitPermissions: UnitPermissions | nul
 
   return navigationRoutes;
 }
+
+export const getSidebarRoutes = (permissions: UnitPermissions, size?: number): any[] => {
+  size = size ?? 22 
+
+  if (!permissions) return [];
+  
+  const defaultRoutes = DEFAULT_ROUTES({ size }).map((route) =>
+    Object.values(route)[0].unitMenuItem
+  );
+
+  console.log(defaultRoutes)
+
+  const navigationRoutes = Object.entries(NAVIGATION_TABS({ size }))
+    .filter(([permission]) => permissions[permission as keyof typeof permissions])
+    .map(([_, value]) => value.unitMenuItem);
+
+  return [defaultRoutes[0], ...navigationRoutes, ...defaultRoutes.slice(1, defaultRoutes.length)];
+};

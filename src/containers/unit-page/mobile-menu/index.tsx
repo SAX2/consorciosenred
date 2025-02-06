@@ -1,7 +1,10 @@
 import NavLinkButton from '@/components/Buttons/NavLinkButton';
-import { sidebarMobile } from '@/components/Navbar/AppNavbars/UnitSidebar/content';
+import getParams from '@/env/getParams';
 import { cn } from '@/lib/utils';
-import React, { FC } from 'react'
+import { getUnitPermissions } from '@/store/permissions/unit-permissions';
+import { getSidebarRoutes } from '@/store/permissions/useUnitPermissions';
+import { useParams } from 'next/navigation';
+import React, { FC, useEffect, useState } from 'react'
 
 interface MobileMenuProps {
   pathname: string;
@@ -10,6 +13,23 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: FC<MobileMenuProps> = ({ isOpen, setClose, pathname }) => {
+  const params = useParams()
+  const unitId = getParams({ params: params.id as string, type: "id" })
+  const [permissions, setPermissions] = useState<any | null>(null)
+  
+  useEffect(() => {
+    const getPermissions = async () => {
+      const data = await getUnitPermissions(unitId)
+      if (data) {
+        setPermissions(data)
+      }
+    }
+    
+    getPermissions();
+  }, [unitId])
+
+  const sidebarMobile = getSidebarRoutes(permissions, 28)
+
   return (
     <div
       className={cn(
@@ -20,7 +40,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ isOpen, setClose, pathname }) => {
           : "max-md:opacity-0 max-md:translate-y-[-20px] max-md:pointer-events-none"
       )}
     >
-      {sidebarMobile.map((item) => {
+      {sidebarMobile.length > 0 && sidebarMobile.map((item) => {
         return (
           <NavLinkButton
             key={item.titulo}

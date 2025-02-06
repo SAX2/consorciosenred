@@ -2,12 +2,14 @@
 
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { sidebar } from "./content";
 import NavLinkButton from "@/components/Buttons/NavLinkButton";
 import NewUnitDialog from "@/components/Dialogs/NewUnit";
+import { getSidebarRoutes } from "@/store/permissions/useUnitPermissions";
 
-const Sidebar = () => {
+const Sidebar = ({ permissions }: { permissions: any }) => {
   const pathname = usePathname();
+
+  const sidebar = getSidebarRoutes(permissions)
 
   return (
     <div

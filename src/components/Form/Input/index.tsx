@@ -55,7 +55,8 @@ const InputPattern = ({ props, error, patternProps }: { patternProps?: PatternFo
       format={patternProps?.format ?? ""}
       className={cn(
         inputClassName(props.className),
-        error && "!border-red-700"
+        error &&
+          "!outline-4 !outline-red/5 !dark:outline-red/30 !border-red !dark:border-red-400"
       )}
     />
   );

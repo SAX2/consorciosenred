@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getAuthHeaders } from './services/config';
+import { saveUnitPermissions } from './store/permissions/unit-permissions';
 
 async function getUnitsEdge() {
   const headers = await getAuthHeaders();
@@ -49,6 +50,8 @@ export async function middleware(request: NextRequest) {
       const units = await getUnitsEdge();
       const unit = units[0];
       (await cookie).set('unit', JSON.stringify(units.length));
+
+      await saveUnitPermissions(units);
       
       if (units.length === 1) {
         return NextResponse.redirect(new URL(`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`, request.url));

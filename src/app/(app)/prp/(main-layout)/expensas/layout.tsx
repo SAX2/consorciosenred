@@ -9,6 +9,7 @@ import { Metadata } from 'next';
 
 interface LayoutProps extends PropsWithChildren {
   modal: React.ReactNode
+  params: Promise<{ id: string }>
 }
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   generator: "Next.js",
 };
 
-const layout: FC<LayoutProps> = ({ children, modal }) => {
+const layout: FC<LayoutProps> = async ({ children, modal }) => {
   return (
     <main className="flex bg-white dark:bg-black-app-bg justify-center flex-col items-center">
       <div className="bg-white dark:bg-black-app-bg w-full max-h-dvh h-dvh overflow-y-scroll relative">
@@ -32,7 +33,7 @@ const layout: FC<LayoutProps> = ({ children, modal }) => {
           <div className="grid grid-cols-[1fr_auto] max-md:grid-cols-[1fr] w-full gap-8 px-8 max-md:p-0 max-w-[1440px]">
             <Suspense fallback={<p>Loading...</p>}>{children}</Suspense>
             <MediaQueryProvider minWidth={768}>
-              <AsideSection>
+              <AsideSection >
                 <UserCard />
               </AsideSection>
             </MediaQueryProvider>

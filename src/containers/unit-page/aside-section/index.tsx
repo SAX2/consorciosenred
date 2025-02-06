@@ -1,22 +1,43 @@
-import Section from '@/components/Sections/AppSections/Section'
-import React from 'react'
-import Shortcuts from '../../../components/Sections/AppSections/ShortcutSection'
-import { shortcutsUnit } from '@/lib/contents/(app)/contents';
+"use client"
 
-const AsideSection = ({ id, isChildPath }: { id: string, isChildPath: boolean }) => {
+import Section from '@/components/Sections/AppSections/Section'
+import React, { useEffect, useState } from 'react'
+import Shortcuts, { getShortcutCols } from '@/components/Sections/AppSections/ShortcutSection';
+import { getShortcutRoutesWithPermissions } from '@/store/permissions/useUnitPermissions';
+import { getUnitPermissions } from '@/store/permissions/unit-permissions';
+import { cn } from '@/lib/utils';
+
+const AsideSection = ({ id }: { id: string }) => {
+  const [permissions, setPermissions] = useState<any | null>(null)
+  
+  useEffect(() => {
+    const getPermissions = async () => {
+      const data = await getUnitPermissions(id)
+      if (data) {
+        setPermissions(data)
+      }
+    }
+    
+    getPermissions();
+  }, [id])
+
+  const shortcutsUnit = getShortcutRoutesWithPermissions(permissions)
+  
   return (
     <>
-      <Section
-        title="Acciones rapidas"
-        pills={[{ text: shortcutsUnit.length.toLocaleString() }]}
-      >
-        <Shortcuts
-          className='grid grid-cols-3 gap-2'
-          display="no-styled"
-          mainPath={`/prp/expensas/${id}`}
-          data={isChildPath ? shortcutsUnit : shortcutsUnit}
-        />
-      </Section>
+      {permissions && shortcutsUnit.length > 0 && (
+        <Section
+          title="Acciones"
+          pills={[{ text: shortcutsUnit.length.toLocaleString() }]}
+        >
+          <Shortcuts
+            className={cn("grid gap-2", getShortcutCols(shortcutsUnit.length))}
+            display="no-styled"
+            mainPath={`/prp/expensas/${id}`}
+            data={shortcutsUnit}
+          />
+        </Section>
+      )}
     </>
   );
 }

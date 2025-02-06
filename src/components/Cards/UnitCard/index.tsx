@@ -3,12 +3,14 @@
 import Link from "next/link";
 import Pill from "@/components/Pill";
 import SemiSectionData from "@/components/Sections/AppSections/SemiSection";
-import Shortcuts from "@/components/Sections/AppSections/ShortcutSection";
+import Shortcuts, { getShortcutCols } from "@/components/Sections/AppSections/ShortcutSection";
 import { IconCalendarExclamation, IconMailExclamation, IconMailForward, IconPlus } from "@tabler/icons-react";
 import { FC } from "react";
 import { shortcutsUnit, unitCard } from "@/lib/contents/(app)/contents";
 import IconUnit from "@/components/Icons/IconUnit";
 import ButtonFile from "@/components/Buttons/ButtonFile";
+import { formatUnitPermissions, getShortcutRoutesWithPermissions } from "@/store/permissions/useUnitPermissions";
+import { cn } from "@/lib/utils";
 
 interface unitProps {
   unit: any;
@@ -25,6 +27,8 @@ const unit: FC<unitProps> = ({ unit }) => {
     (a: any, b: any) => parseInt(b.orden) - parseInt(a.orden)
   )[0];
 
+  const permissions = formatUnitPermissions(unit)
+  const shortcutsUnit = getShortcutRoutesWithPermissions(permissions)
 
   return (
     <div className="w-full flex flex-col gap-2 justify-between p-4 rounded-2xl border-outline border dark:border-outline-dark">
@@ -129,7 +133,7 @@ const unit: FC<unitProps> = ({ unit }) => {
         <Shortcuts
           data={shortcutsUnit}
           display="no-styled"
-          className="grid grid-cols-3 gap-2"
+          className={cn("grid gap-2", getShortcutCols(shortcutsUnit.length))}
           mainPath={`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`}
         />
         <Link

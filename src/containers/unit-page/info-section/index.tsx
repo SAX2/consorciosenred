@@ -3,16 +3,18 @@
 import SemiSectionData from "@/components/Sections/AppSections/SemiSection";
 import Pill from "@/components/Pill";
 import Link from "next/link";
-import Shortcuts from "../../../components/Sections/AppSections/ShortcutSection";
+import Shortcuts, { getShortcutCols } from "../../../components/Sections/AppSections/ShortcutSection";
 import MediaQueryProvider from "@/context/MediaQueryProvider";
 import { IconBuilding, IconCalendarExclamation, IconChevronRight, IconCoins, IconExclamationCircle, IconInfoSquareRounded, IconMailExclamation, IconMailFast, IconMailForward, IconReceipt2 } from "@tabler/icons-react";
 import { FC, useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
 import { sisAdmImg } from "@/lib/images";
 import { useLayoutStore } from "@/store/useLayoutStore";
-import { shortcutsPaymentUnit, shortcutsUnit, unitCard } from "@/lib/contents/(app)/contents";
+import { shortcutsPaymentUnit, unitCard } from "@/lib/contents/(app)/contents";
 import IconUnit from "@/components/Icons/IconUnit";
 import ButtonFile from "@/components/Buttons/ButtonFile";
+import { formatUnitPermissions, getPaymentShortcutsRoutes, getShortcutRoutesWithPermissions } from "@/store/permissions/useUnitPermissions";
+import { cn } from "@/lib/utils";
 
 interface UnitInfoSectionProps {
   unit: any;
@@ -44,6 +46,10 @@ const UnitInfoSection: FC<UnitInfoSectionProps> = ({ unit }) => {
   //     });
   //   }
   // }, [isDivInView, setIsInView, handleHasBuilding, unit])
+
+  const permissions = formatUnitPermissions(unit)
+  const shortcutsUnit = getShortcutRoutesWithPermissions(permissions)
+  const shortcutsPaymentUnit = getPaymentShortcutsRoutes(permissions)
 
   return (
     <div className="w-full flex flex-col gap-4">
@@ -77,12 +83,14 @@ const UnitInfoSection: FC<UnitInfoSectionProps> = ({ unit }) => {
           <p className="font-geist text-4xl font-bold max-md:text-3xl">
             {unit.uf_importeTotal}
           </p>
-          <Shortcuts
-            display="icon-bg"
-            className="mt-2 grid grid-cols-2 w-full gap-2"
-            data={shortcutsPaymentUnit}
-            mainPath={`/prp/expensas/${unit.uf_id + "_" + unit.uf_codEdificio}`}
-          />
+          {shortcutsPaymentUnit.length > 0 && (
+            <Shortcuts
+              display="icon-bg"
+              className={cn("mt-2 grid w-full gap-2", getShortcutCols(shortcutsPaymentUnit.length))}
+              data={shortcutsPaymentUnit}
+              mainPath={`/prp/expensas/${unit.uf_id + "_" + unit.uf_codEdificio}`}
+            />
+          )}
         </SemiSectionData>
 
         <SemiSectionData
@@ -201,7 +209,7 @@ const UnitInfoSection: FC<UnitInfoSectionProps> = ({ unit }) => {
         <Shortcuts
           mainPath={`/prp/expensas/${unit.uf_id}`}
           data={shortcutsUnit}
-          className="grid grid-cols-3 gap-2 w-full"
+          className={cn("grid gap-2 w-full", getShortcutCols(shortcutsUnit.length))}
           display="no-styled"
         />
       </MediaQueryProvider>

@@ -46,8 +46,9 @@ const DialogMessage: FC<DialogMessageProps> = ({
   status = "default",
   isResponsive = true,
   classNameDialogContent,
+  CustomIcon
 }) => {
-  const StatusData = GET_STATUS(status);
+  const StatusData = GET_STATUS(status, CustomIcon);
   const Icon = StatusData?.icon as React.ElementType<IconProps>;
   const classNameText = StatusData?.classNameText as string;
 

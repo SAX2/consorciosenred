@@ -47,9 +47,10 @@ export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === '/prp/expensas' && session) {
     try {
       const units = await getUnitsEdge();
+      const unit = units[0];
+      (await cookie).set('unit', JSON.stringify(units.length));
+      
       if (units.length === 1) {
-        const unit = units[0];
-        (await cookie).set('unit', JSON.stringify(units.length));
         return NextResponse.redirect(new URL(`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`, request.url));
       }
     } catch (error) {

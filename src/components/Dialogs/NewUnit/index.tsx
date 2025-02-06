@@ -1,89 +1,101 @@
 "use client"
 
-import React from 'react'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import useIsLargeScreen from '@/hooks/useIsLargeScreen';
+import React, { useState, useTransition } from 'react'
 import Input from '@/components/Form/Input';
-import { IconChevronRight } from '@tabler/icons-react';
-import { cn } from '@/lib/utils';
-import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
-import { content } from './constans';
+import { IconApps, IconChevronRight } from '@tabler/icons-react';
+import DialogMessage from '../Message';
+import Button from '@/components/Buttons/Button';
+import SemiSection from '@/components/Sections/AppSections/SemiSection';
+import { z, ZodFormattedError } from 'zod';
+import InputSubmit from '@/components/Form/InputSubmit';
+import { addNewUnit } from '@/lib/queries/queries';
 
+export const content = {
+  description: "Si desea vincularse a otra unidad como Propietario o Inquilino, puede ingresar el P.I.N. de activación que se adjunta en el recibo de expensas que usted recibe todos los meses. En caso de no poseerlo solicítelo a su Administración.",
+  title: "Vinculación de Unidades Funcionales",
+  label: "Se deben ingresar los 20 dígitos, sin espacios ni guiones", 
+  button: "Procesar P.I.N. de activación",
+  trigger: "Agregar / Modificar unidades"
+}
 
-const NewUnitDialog = ({ className, classSpan }:  { className?: string, classSpan?: string }) => {
-  const { isLargeScreen } = useIsLargeScreen({ minWidth: 768 })
-
-  if (isLargeScreen) {
-    return (
-      <Dialog>
-        <DialogTrigger
-          className={cn(
-            "w-fit px-2 py-1 flex items-center gap-[6px] border border-[#75B838]/25 bg-[#75B838]/25 dark:text-green text-green-sec rounded-md  max-lg:w-full  max-lg:justify-center",
-            className
-          )}
-        >
-          <span className={cn("font-medium", classSpan)}>
-            {content.trigger}
-          </span>
-          <IconChevronRight width={20} height={20} />
-        </DialogTrigger>
-        <DialogContent className="bg-white dark:bg-grey-sec-dark border-outline dark:border-outline-dark max-w-[425px] !text-start gap-6">
-          <DialogHeader>
-            <DialogTitle className="font-geist text-2xl dark:text-white">{content.title}</DialogTitle>
-            <DialogDescription className="text-text-grey text-md">{content.description}</DialogDescription>
-          </DialogHeader>
-          <Form className="!p-0" />
-        </DialogContent>
-      </Dialog>
-    );
-  }
-
+const NewUnitDialog = () => {
   return (
-    <Drawer>
-      <DrawerTrigger
-        className={cn(
-          "!outline-none w-fit px-2 py-1 flex items-center gap-[6px] border border-[#75B838]/25 bg-[#75B838]/25 dark:text-green text-green-sec rounded-md  max-lg:w-full  max-lg:justify-center",
-          className
-        )}
-      >
-        <span className={cn("font-medium", classSpan)}>{content.trigger}</span>
-        <IconChevronRight width={20} height={20} />
-      </DrawerTrigger>
-      <DrawerContent className="bg-white dark:bg-grey-sec-dark border-outline dark:border-outline-dark !text-start">
-        <DrawerHeader>
-          <DrawerTitle className="font-geist text-2xl dark:text-white text-start">
-            {content.title}
-          </DrawerTitle>
-          <DrawerDescription className="text-text-grey text-md text-start">
-            {content.description}
-          </DrawerDescription>
-        </DrawerHeader>
-        <Form />
-      </DrawerContent>
-    </Drawer>
+    <DialogMessage
+      message={content.title}
+      CustomIcon={IconApps}
+      trigger={
+        <Button
+          iconOrientation='right'
+          title={content.trigger}
+          icon={<IconChevronRight size={24} className='text-green' />}
+          classNameContainer="border border-green/15 max-lg:w-full"
+          buttonPadding='p-2 max-md:p-3'
+          buttonBackground="bg-green/15"
+          classNameText="text-green truncate max-lg:hidden max-md:block max-md:text-lg"
+        />
+      }
+    >
+      <SemiSection type='custom' title='' className='flex flex-col gap-3'>
+        <p className='hyphens-auto' lang='es'>{content.description}</p>
+      </SemiSection>
+      <Form />
+    </DialogMessage>
   );
 }
 
-const Form = ({ className }: { className?: string }) => {
+const NewUnitSchema = z.object({
+  pin: z.string().min(20, { message: "El pin debe ser de 24 numeros" }),
+});
+
+type NewUnitFormValues = z.infer<typeof NewUnitSchema>;
+type NewUnitFormErrors = ZodFormattedError<NewUnitFormValues>;
+
+
+const Form = () => {
+  const [formValues, setFormValues] = useState<NewUnitFormValues>({ pin: "" });
+  const [errors, setErrors] = useState<Partial<NewUnitFormErrors>>({});
+  const [isPending, startTransition] = useTransition();
+  const [queryError, setQueryError] = useState<boolean>(false);
+  const [querySuccess, setQuerySuccess] = useState<boolean>(false);
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\s+/g, '');
+    setFormValues(prev => ({ ...prev, pin: value }))
+  }
+
+  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const result = NewUnitSchema.safeParse(formValues);
+
+    if (!result.success) {
+      setErrors(result.error.format());
+      return;
+    }
+
+    startTransition(async () => {
+      const data = await addNewUnit({ pin: formValues.pin })
+      if (data.PROCESS) return setQuerySuccess(true);
+      setQueryError(true)
+    })
+
+    setErrors({});
+  }
+
   return (
-    <form className={cn("pt-8 flex flex-col gap-2 p-4 pb-8", className)}>
+    <form className={"flex flex-col gap-2"} onSubmit={handleOnSubmit}>
       <Input
-        label={content.label}
         type="pattern"
-        classNameContainerInput="w-full"
-        patternProps={{ format: "#### #### #### #### ####", placeholder: "0000 0000 0000 0000" }}
+        error={errors.pin?._errors[0]}
+        label={content.label}
+        classNameContainerInput="w-full text-center"
+        patternProps={{ format: "#### #### #### #### ####", placeholder: "0000 0000 0000 0000", onChange: handleOnChange }}
       />
-      <button className="w-full justify-center px-2 py-1 flex items-center gap-[6px] border border-[#75B838]/25 bg-[#75B838]/25 dark:text-green text-green-sec rounded-md">
-        <span className="font-medium">{content.button}</span>
-        <IconChevronRight width={20} height={20} />
-      </button>
+      <InputSubmit 
+        status={ isPending ? "loading" : queryError ? "error" : querySuccess ? "success" : "idle" }
+        idleText={content.button}
+        idleIcon={<IconChevronRight size={24} className='text-green' />}
+        className="border border-green/15 max-lg:w-full bg-green/15 text-green"
+      />
     </form>
   );
 }

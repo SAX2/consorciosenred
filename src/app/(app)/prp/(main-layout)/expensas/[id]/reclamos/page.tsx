@@ -13,17 +13,17 @@ const page = async ({ params }: {  params: Promise<{ group: string; id: string }
 
   return (
     <div className="flex flex-col gap-4">
-      {!data || data.rclDpto.length === 0 && data.rclEdif.length === 0 && (
-        <EmptySection />
-      )}
-      {data.rclDpto.length > 0 ||
-        (data.rclEdif.length > 0 && (
-          <RclList
-            items={data}
-            buttonMore="Ver todos los reclamos"
-            buttonLess="Mostrar menos"
-          />
+      {!data ||
+        (data.rclDpto.length === 0 && data.rclEdif.length === 0 && (
+          <EmptySection />
         ))}
+      {(data.rclDpto.length > 0 || data.rclEdif.length > 0) && (
+        <RclList
+          items={data}
+          buttonMore="Ver todos los reclamos"
+          buttonLess="Mostrar menos"
+        />
+      )}
       <BottomSectionRcl param={id} />
     </div>
   );

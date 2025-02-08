@@ -100,35 +100,36 @@ const unit: FC<unitProps> = ({ unit }) => {
         </div>
         <div className="flex flex-col gap-2">
         {mostRecentLiquidation && (
-                  <ButtonFile
-                    fileType="uf_liquidaciones"
-                    key={mostRecentLiquidation.id}
-                    fileId={mostRecentLiquidation.id}
-                    fileName={mostRecentLiquidation.nombreAdjunto}
-                    title="Ver Ultima Liquidación"
-                    icon={
-                      <IconMailForward
-                        size={24}
-                        className="text-[#1f9163]"
-                      />
-                    }
-                  />
-                )}
-                {unit.uf_aviso.length > 0 && (
-                  <ButtonFile
-                    fileType="uf_aviso"
-                    key={unit.uf_aviso[0].id}
-                    fileId={unit.uf_aviso[0].id}
-                    fileName={unit.uf_aviso[0].nombreAdjunto}
-                    title="Ver Aviso de pago"
-                    icon={
-                      <IconMailExclamation
-                        size={24}
-                        className="text-[#91694a]"
-                      />
-                    }
-                  />
-                )}
+          <ButtonFile
+            fileType="uf_liquidaciones"
+            key={mostRecentLiquidation.id}
+            fileId={mostRecentLiquidation.id}
+            fileName={mostRecentLiquidation.nombreAdjunto}
+            title="Ver Ultima Liquidación"
+            icon={
+              <IconMailForward
+                size={24}
+                className="text-[#1f9163]"
+              />
+            }
+          />
+        )}
+        {/* {unit.uf_aviso.length > 0 && ( */}
+          <ButtonFile
+            classname={!(unit.uf_aviso[0]) ? "pointer-events-none opacity-25 blur-sm" : ""}
+            fileType="uf_aviso"
+            key={unit.uf_aviso[0]?.id ?? ""}
+            fileId={unit.uf_aviso[0]?.id ?? ""}
+            fileName={unit.uf_aviso[0]?.nombreAdjunto ?? ""}
+            title="Ver Aviso de pago"
+            icon={
+              <IconMailExclamation
+                size={24}
+                className="text-[#91694a]"
+              />
+            }
+          />
+        {/* )} */}
         </div>
         <Shortcuts
           data={shortcutsUnit}

@@ -1,10 +1,9 @@
 "use client"
 
+import ButtonFile from "@/components/Buttons/ButtonFile";
 import UserIcon from "@/components/Icons/UserIcon";
 import Pill from "@/components/Pill";
-import IconFile from "@/components/Pill/IconFile";
 import SemiSection from "@/components/Sections/AppSections/SemiSection";
-import { Separator } from "@/components/ui/separator";
 import { getStatusType } from "@/hooks/use-status";
 import { cn } from "@/lib/utils";
 import { IconAlertTriangle, IconChevronRight, IconFolderDollar, IconGavel, IconId, IconInfoCircle, IconMailExclamation, IconMessage, IconUserSquareRounded } from "@tabler/icons-react";
@@ -23,15 +22,15 @@ const InfoHeader = ({ item }: InfoHeader) => {
 
   return (
     <div className="flex items-center">
-      <div className="flex flex-col bg-brown/10 mr-3 flex-shrink-0 self-start rounded-[16px] p-3">
-        <IconAlertTriangle size={50} className="text-brown" />
+      <div className="flex flex-col bg-brown/10 dark:bg-brown-dark/10 mr-3 flex-shrink-0 self-start rounded-[16px] p-3">
+        <IconAlertTriangle size={50} className="text-brown dark:text-brown-dark" />
       </div>
       <div className="flex flex-1 flex-col gap-1">
         <p className="text-sm font-medium text-text-grey leading-none">
           Expendiente: {item.Jui_Caratula}
         </p>
         <div className="flex items-center justify-between">
-          <p className="text-lg font-bold text-black">
+          <p className="text-lg font-bold">
             {item.Jui_Caratula}
           </p>
         </div>
@@ -137,10 +136,7 @@ const PageDatos = ({ item }: { item: any }) => {
                 <IconMessage size={24} />
                 <p className="text-base font-semibold">Descripcion</p>
               </div>
-              {/* <SeeMoreText className='text-base text-black/75' seeMoreClassName='font-medium text-black/75'  numberOfLines={2}>
-                  {item.Jui_Observaciones}
-                </SeeMoreText> */}
-              <p className="text-base text-black/75">
+              <p className="text-base text-black/75 dark:text-white/75">
                 {item.Jui_Observaciones}
               </p>
             </div>
@@ -151,33 +147,14 @@ const PageDatos = ({ item }: { item: any }) => {
         <div className="flex flex-col gap-2 mt-2">
           <p className="text-xl font-semibold">Archivos Adjuntos</p>
           {item.adjuntosMobile.map((file: any) => (
-            <Link
-              target="_blank"
-              href={`/file/uf_aviso/${file.id}/${file.nombre}`}
-              className="border border-outline dark:border-outline-dark p-2 flex rounded-lg items-center justify-between"
-            >
-              <div className="flex gap-2">
-                <IconMailExclamation
-                  width={24}
-                  height={24}
-                  className="ios:mr-[6px] android:mr-[6px] text-brown"
-                />
-                <span className="text-base font-medium">Ver Aviso de pago</span>
-              </div>
-              <IconChevronRight
-                width={20}
-                height={20}
-                className="text-text-grey"
-              />
-            </Link>
-            // <ButtonFile
-            //   fileId={file.id}
-            //   fileName={file.nombre}
-            //   fileType={file.tipo}
-            //   title={file.nombre}
-            //   icon={<IconFile type='image/png' size={18} />}
-            //   chevron
-            // />
+            <ButtonFile
+              fileId={file.id}
+              fileName={file.nombre}
+              fileType={file.tipo}
+              title={file.nombre}
+              icon={<IconMailExclamation type='image/png' size={18} />}
+              chevron
+            />
           ))}
         </div>
       )}
@@ -225,16 +202,16 @@ const PageAvances = ({ avances }: { avances: any }) => {
   return (
     <div className="flex flex-col">
       {/* {avances.length === 0 && <NoResultsFound title='No hay movimientos' />} */}
-      {avances.map((item: any) => {
+      {avances.map((item: any, index: number) => {
         const itemDate = parse(item.Jui_DateTime, "dd/MM/yyyy", new Date());
         const formattedDateTime = format(itemDate, "d'/'M", { locale: es });
 
         return (
-          <div className="flex gap-6 items-center px-2">
+          <div className="flex gap-6 items-center px-2" key={item.Jui_UserCreated + index}>
             <div className="flex flex-col items-center justify-center gap-1 h-full">
-              <div className="flex flex-col flex-1 w-[1px] bg-outline"></div>
+              <div className="flex flex-col flex-1 w-[1px] bg-outline dark:bg-outline-dark"></div>
               <p>{formattedDateTime}</p>
-              <div className="flex flex-col flex-1 w-[1px] bg-outline"></div>
+              <div className="flex flex-col flex-1 w-[1px] bg-outline dark:bg-outline-dark"></div>
             </div>
             <div className="flex flex-col gap-1 py-2">
               <div className="flex items-center gap-2">
@@ -251,15 +228,15 @@ const PageAvances = ({ avances }: { avances: any }) => {
               </div>
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2">
-                  <p className="text-base font-medium text-black/75">
+                  <p className="text-base font-medium text-black/75 dark:text-white/75">
                     {item.Jui_Asunto}
                   </p>
-                  <p className="text-base text-black/75">
+                  <p className="text-base text-black/75 dark:text-white/75">
                     {item.Jui_ComentarioShort}
                   </p>
                 </div>
                 {item.Jui_ComentarioLong && (
-                  <p className="text-base text-black/75">
+                  <p className="text-base text-black/75 dark:text-white/75">
                     {item.Jui_ComentarioLong}
                   </p>
                 )}
@@ -284,12 +261,12 @@ const Tabs = ({ tabs }: TabsProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex gap-2 p-1 rounded-xl border border-outline">
+      <div className="flex gap-2 p-1 rounded-xl border border-outline dark:border-outline-dark">
         {tabs.map((tab, index) => (
           <button
             className={cn(
               "flex flex-1 items-center justify-center py-1 rounded-md",
-              activeTab === index ? "bg-brown/10" : ""
+              activeTab === index ? "bg-brown/10 dark:bg-brown-dark/10" : ""
             )}
             key={index}
             onClick={() => setActiveTab(index)}
@@ -297,7 +274,7 @@ const Tabs = ({ tabs }: TabsProps) => {
             <p
               className={cn(
                 "text-lg font-semibold text-center",
-                activeTab === index ? "text-brown" : "text-text-grey"
+                activeTab === index ? "text-brown dark:text-brown-dark" : "text-text-grey"
               )}
             >
               {tab.title}

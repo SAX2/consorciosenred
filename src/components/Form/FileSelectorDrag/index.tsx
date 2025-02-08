@@ -62,7 +62,7 @@ const FileSelectorDrag: FC<FileSelectorDragProps> = ({
             "flex flex-col gap-1 justify-center items-center py-8 px-4 min-h-[150px] h-full border rounded-lg border-dashed border-outline dark:border-outline-dark transition-colors outline outline-transparent",
             isOver ? "bg-grey/40 dark:bg-grey-dark/40" : "",
             error &&
-              "!outline-4 !outline-red/5 !dark:outline-red/30 !border-red !dark:border-red-400 border-solid"
+              "!outline-4 !outline-red/5 dark:!outline-red-dark/20 !border-red dark:!border-red-dark border-solid"
           )}
         >
           <div className="bg-grey dark:bg-grey-dark p-1 rounded-lg text-text-grey mb-2">

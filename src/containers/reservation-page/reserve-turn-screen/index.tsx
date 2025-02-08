@@ -122,7 +122,7 @@ const ItemBottomSheetConfirmBook = ({
   }, [turn]);
 
   return (
-    <div className="flex p-3 rounded-xl bg-grey flex-col gap-3">
+    <div className="flex p-3 rounded-xl bg-grey dark:bg-grey-dark flex-col gap-3">
       <div className="flex items-center justify-between gap-3">
         <div className="flex flex-1 items-center gap-2">
           <p className="flex-1 text-base font-semibold truncate">
@@ -160,7 +160,7 @@ const ItemBottomSheetConfirmBook = ({
                 value={turn.costoChequed === "1" ? "on" : "off"}
               />
               <div className="flex items-center justify-between gap-1 flex-1 flex-wrap">
-                <p className="text-black/85">
+                <p className="text-black/85 dark:text-white/85">
                   Acepto que la reserva tiene un costo de:
                 </p>
                 <Pill
@@ -180,7 +180,7 @@ const ItemBottomSheetConfirmBook = ({
                 value={turn.tycs === "1" ? "on" : "off"}
               />
               <div className="flex items-center gap-1 flex-1 flex-wrap">
-                <p className="text-black/85">
+                <p className="text-black/85 dark:text-white/85">
                   {turn.tycs}. Acepto los Términos y condiciones adjuntos a
                   continuación:
                 </p>
@@ -310,22 +310,22 @@ const DayPicker = ({ days, selectedDay, setSelectedDay }: DayPickerProps) => {
             onClick={() => hasAvailableTurns && setSelectedDay(fullDay as Day)}
             className={`flex-1 text-center border-b-2 p-2 py-1 ${
               selectedDay?.day === format(date, "yyyy-MM-dd")
-                ? "border-green"
-                : "border-gray-300"
+                ? "border-green dark:border-green-dark"
+                : "border-outline dark:border-outline-dark"
             } ${!hasAvailableTurns ? "opacity-25" : ""}`}
             disabled={!hasAvailableTurns}
           >
             <span className={`text-xs font-medium ${
               selectedDay?.day === format(date, "yyyy-MM-dd")
-                ? "text-green"
-                : "text-black"
+                ? "text-green dark:text-green-dark"
+                : ""
             }`}>
               {day.toUpperCase()}
             </span>
             <p className={`text-lg font-medium ${
               selectedDay?.day === format(date, "yyyy-MM-dd")
-                ? "text-green"
-                : "text-black"
+                ? "text-green dark:text-green-dark"
+                : ""
             }`}>
               {format(date, "dd")}
             </p>
@@ -383,15 +383,15 @@ const TurnPicker = ({ turns, selectedTurns, setSelectedTurns, header }: TurnPick
             disabled={turn.estado !== "disponible"}
             className={`p-3 rounded-lg border ${
               selectedTurns.some(t => t.start === turn.start)
-                ? "border-green/15 bg-green/10"
-                : "border-outline"
+                ? "border-green/15 dark:border-green-dark/15 bg-green/10 dark:bg-green-dark/10"
+                : "border-outline dark:border-outline-dark"
             } ${turn.estado !== "disponible" ? "opacity-50" : ""}`}
           >
             <div className="flex items-center justify-center gap-2">
               <span className={`text-lg ${
                 selectedTurns.some(t => t.start === turn.start)
-                  ? "text-green font-medium"
-                  : "text-black/75"
+                  ? "text-green dark:text-green-dark font-medium"
+                  : "text-black/75 dark:text-white/75"
               }`}>
                 {format(turn.start, "p")} - {format(turn.end, "p")}
               </span>

@@ -74,7 +74,7 @@ const Page = () => {
   };
 
   return (
-    <main className="w-full h-dvh p-8 max-md:p-4 flex max-md:flex-col gap-8 bg-white items-center justify-center">
+    <main className="w-full h-dvh p-8 max-md:p-4 flex max-md:flex-col gap-8 bg-white dark:bg-black-app-bg items-center justify-center">
       <div className="max-w-[500px] w-full p-8 max-md:p-0 flex flex-col gap-8 max-md:gap-4">
         <Header>
           <h1 className="font-semibold text-lg font-geist">

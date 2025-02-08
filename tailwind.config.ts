@@ -52,26 +52,40 @@ const config = {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
   			},
-  			black: '#0A0A0A',
+  			'white': '#FFFFFF',
+  			'black': '#0A0A0A',
   			'black-app-bg': '#121212',
-  			white: '#FFFFFF',
+
+  			'blue': '#086FB7',
   			'blue-sec': '#00497C',
-  			blue: '#086FB7',
   			'blue-button': '#008AEA',
-  			green: '#1F9163',
+
+  			'green': '#1F9163',
+				'green-dark': "#12C67D",
   			'green-sec': '#3C7E00',
+
+  			'yellow': '#FFE564',
   			'yellow-sec': '#B09300',
-  			yellow: '#FFDF41',
-  			brown: '#91694A',
-  			'text-grey': '#8B8B8B',
-  			grey: '#F9F9F9',
-  			'grey-sec': '#F1F1F1',
-  			outline: '#DFDFDF',
-  			'orange-icon': '#F66600',
-  			red: '#B30B00',
+
+  			'brown': '#91694A',
+  			'brown-dark': '#BB865D',
+
+  			'grey': '#F9F9F9',
   			'grey-dark': '#222222',
+  			'grey-sec': '#F1F1F1',
   			'grey-sec-dark': '#1C1C1C',
+
+
+  			'text-grey': '#8B8B8B',
+
+  			'outline': '#DFDFDF',
   			'outline-dark': '#4A4A4A',
+
+  			'orange-icon': '#F66600',
+
+  			'red': '#B30B00',
+				'red-dark': "#DD3246",
+				
   			'icon-blue': '#3FA4EA',
   			'icon-purple': '#A87EFF',
   			'icon-yellow': '#FFDF41',

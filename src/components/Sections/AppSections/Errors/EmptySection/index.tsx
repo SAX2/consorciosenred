@@ -32,7 +32,7 @@ const EmptySection: FC<EmptySection> = ({
   return (
     <div className="w-full flex justify-center">
       <div className="flex flex-col gap-[10px] max-w-[425px] w-full items-center">
-        <Icon size={44} className="text-black" />
+        <Icon size={44} />
         <h3 className="font-semibold text-xl text-center">{title}</h3>
         <p className="text-text-grey text-center">{description}</p>
         {reload && !button && (

@@ -28,7 +28,7 @@ const IconBgDescription = memo(({ title, description, icon, style, handlePress, 
 
   if (handlePress) return <button
     onClick={handlePress ?? handlePressAction}
-    className="hover:bg-grey flex w-full items-center justify-start rounded-[12px] p-3 cursor-pointer"
+    className="hover:bg-grey hover:dark:bg-grey-dark flex w-full items-center justify-start rounded-[12px] p-3 cursor-pointer"
   >
     {content}
   </button>
@@ -36,7 +36,7 @@ const IconBgDescription = memo(({ title, description, icon, style, handlePress, 
 return (
   <Link
     href={path}
-    className="hover:bg-grey flex w-full items-center justify-start rounded-[12px] p-3 cursor-pointer"
+    className="hover:bg-grey hover:dark:bg-grey-dark flex w-full items-center justify-start rounded-[12px] p-3 cursor-pointer"
   >
     {content}
   </Link>

@@ -30,7 +30,7 @@ export const ReserveButtonOptions = ({
           icon={Icon && <Icon className={buttonProps.classNameText} size={24} strokeWidth={2} />}
         />
       </PopoverTrigger>
-      <PopoverContent className="p-1 border-outline rounded-xl w-full max-w-[350px]">
+      <PopoverContent className="p-1 border-outline dark:border-outline-dark bg-white dark:bg-black-app-bg rounded-xl w-full max-w-[350px]">
         {options.map((action) => (
           <ShortcutButton
             {...action}
@@ -67,7 +67,7 @@ const ReserveGroupCard = ({ item, param }: ReserveGroupCardProps) => {
 
   return (
     <div
-      className="border-outline gap-4 w-full flex-col rounded-xl border p-4 flex justify-center"
+      className="border-outline dark:border-outline-dark gap-4 w-full flex-col rounded-xl border p-4 flex justify-center"
       key={`${item.recuGrupo}`}
     >
       <div className="flex gap-3 w-full items-center flex-row">
@@ -80,7 +80,7 @@ const ReserveGroupCard = ({ item, param }: ReserveGroupCardProps) => {
           {reserveIcon(item.recuGrupo, 48).icon}
         </div>
         <div key={item.recuGrupo} className="flex gap-[6px] w-full flex-col">
-          <p className="text-base leading-3 font-bold text-black truncate">
+          <p className="text-base leading-3 font-bold truncate">
             {item.descripcion}
           </p>
           <div className="flex gap-[6px] flex-wrap w-full">
@@ -99,8 +99,8 @@ const ReserveGroupCard = ({ item, param }: ReserveGroupCardProps) => {
         options={options}
         param={param ?? ""}
         buttonProps={{
-          classNameText: "text-green",
-          buttonBackground: "bg-green/15",
+          classNameText: "text-green dark:text-green-dark",
+          buttonBackground: "bg-green/15 dark:bg-green-dark/15",
           title: "Reservar",
         }}
         Icon={IconPlus}

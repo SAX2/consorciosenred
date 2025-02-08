@@ -35,8 +35,8 @@ const UserCard: FC<UserCardProps> = async ({ className }) => {
       </div>
       <div className={cn("flex")}>
         <UserDropdown>
-          <button className="p-2 rounded-md hover:bg-grey-sec hover:dark:bg-grey-dark text-black">
-            <IconDotsVertical width={22} height={22} />
+          <button className="p-2 rounded-md hover:bg-grey-sec hover:dark:bg-grey-dark">
+            <IconDotsVertical size={24} />
           </button>
         </UserDropdown>
       </div>

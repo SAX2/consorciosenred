@@ -27,7 +27,7 @@ const ButtonFile = ({ fileId, fileName, fileType, title, chevron = true, icon, p
   const containerClassName = cn(
     classname,
     positionWithIcon,
-    "border-outline flex w-full flex-row justify-between items-center rounded-[6px] border p-2"
+    "border-outline dark:border-outline-dark flex w-full flex-row justify-between items-center rounded-[6px] border p-2"
   )
   
   const content = (

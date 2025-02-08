@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { IconAlertTriangle, IconChevronRight } from '@tabler/icons-react';
 import { usePathname } from 'next/navigation';
 import CardIcon from '@/components/Icons/CardIcon';
+import { getStatusType } from '@/hooks/use-status';
 
 interface RclCardProps {
   item: any;
@@ -19,9 +20,6 @@ const RclCard: React.FC<RclCardProps> = ({
   className,
 }) => {
   const pathname = usePathname();
-  const statusColor = statuscolors[item.Rcl_Status as keyof typeof statuscolors] as { container: string, text: string  } || "bg-white";
-
-  console.log(statusColor)
 
   return (
     <Link href={pathname + "/" + item.Rcl_id}>
@@ -41,8 +39,8 @@ const RclCard: React.FC<RclCardProps> = ({
               <Pill text={item.Rcl_DateTime} classNameText="text-sm" />
               <Pill
                 text={item.Rcl_Status}
-                className={cn(statusColor.container)}
-                classNameText={cn("text-sm", statusColor.text)}
+                variant={getStatusType("reclamos", item.Rcl_Status)}
+                classNameText="text-sm"
               />
             </div>
           </div>

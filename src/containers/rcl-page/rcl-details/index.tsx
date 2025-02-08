@@ -7,11 +7,10 @@ import UserIcon from '@/components/Icons/UserIcon';
 import Pill from '@/components/Pill';
 import SemiSection from '@/components/Sections/AppSections/SemiSection';
 import NoResult from '@/containers/errors/no-result';
+import { getStatusType } from '@/hooks/use-status';
 import { details } from '@/lib/contents/(app)/contents';
 import { createNewCommentRcl } from '@/lib/queries/queries';
-import { cn } from '@/lib/utils';
-import { Badge } from '@/packages/ui/badge';
-import { IconAlertTriangle, IconArrowUp, IconCircleCheckFilled, IconInfoSquareRounded, IconInfoTriangle, IconLoader, IconMessage, IconPaperclip } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowUp, IconInfoSquareRounded, IconInfoTriangle, IconMessage, IconPaperclip } from '@tabler/icons-react';
 import { format, formatDistanceToNow, isToday, parse } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { useRouter } from 'next/navigation';
@@ -22,33 +21,23 @@ const InfoHeader = ({ issue }: { issue: any }) => {
   const formattedDateTime = format(issueDate, "dd 'de' MMMM, yyyy", { locale: es })
 
   return (
-    <div
-      className="flex flex-col bg-white gap-3"
-      key={`header-${issue.Rcl_id}`}
-    >
+    <div className="flex flex-col gap-3" key={`header-${issue.Rcl_id}`}>
       <div className="flex flex-row items-center">
         <div className="flex bg-orange-icon/10 mr-3 flex-shrink-0 self-start rounded-[16px] p-3">
           <IconAlertTriangle size={46} className="text-orange-icon" />
         </div>
         <div className="flex flex-1 flex-col">
           <div className="flex flex-row items-center justify-between">
-            <p className="text-lg font-bold text-black">{issue.Rcl_Subject}</p>
+            <p className="text-lg font-bold">{issue.Rcl_Subject}</p>
           </div>
           <div className="flex flex-row mt-[4px] items-center justify-between">
             <div className="flex flex-row flex-wrap items-center gap-2">
-              <Badge variant="neutral" className="text-sm bg-white py-[2px]">
-                {formattedDateTime}
-              </Badge>
+              <Pill text={formattedDateTime} classNameText="text-sm" />
               <Pill
                 key="status-pill"
                 text={issue.Rcl_Status}
-                classNameText={cn(
-                  "text-sm py-[2px]",
-                  issue.Rcl_Status === "En proceso" && "text-yellow-sec",
-                  issue.Rcl_Status === "Cerrado" && "text-green",
-                  issue.Rcl_Status === "Cancelado" && "text-red"
-                )}
-                className={cn("border-yellow/15 bg-yellow/20")}
+                variant={getStatusType("reclamos", issue.Rcl_Status)}
+                classNameText="text-sm"
               />
             </div>
           </div>
@@ -59,7 +48,7 @@ const InfoHeader = ({ issue }: { issue: any }) => {
           key="Rcl_About"
           type="simple"
           title={details.issue.about}
-          icon={<IconInfoTriangle size={24} className="text-black" />}
+          icon={<IconInfoTriangle size={24} />}
         >
           <Pill
             key="about-pill"
@@ -71,7 +60,7 @@ const InfoHeader = ({ issue }: { issue: any }) => {
           key="Rcl_Type"
           type="simple"
           title={details.issue.type}
-          icon={<IconInfoSquareRounded size={24} className="text-black" />}
+          icon={<IconInfoSquareRounded size={24} />}
         >
           <Pill
             key="type-pill"
@@ -87,16 +76,19 @@ const InfoHeader = ({ issue }: { issue: any }) => {
         >
           <div className="flex w-full flex-col">
             <div className="flex flex-row items-center gap-2">
-              <IconMessage size={24} className="text-black" />
+              <IconMessage size={24} />
               <p className="ios:ml-[6px] android:ml-[6px] text-base font-semibold">
                 {details.issue.description}
               </p>
             </div>
-            <p className="mt-3 text-base text-black/75">
+            <p className="mt-3 text-base text-black/75 dark:text-white/75">
               {issue.Rcl_Description}
             </p>
             {issue.adjuntosMobile.length > 0 && (
-              <PopoverFiles files={issue.adjuntosMobile} totalLength={issue.adjuntosMobile.length}/>
+              <PopoverFiles
+                files={issue.adjuntosMobile}
+                totalLength={issue.adjuntosMobile.length}
+              />
             )}
           </div>
         </SemiSection>
@@ -194,7 +186,7 @@ const RclDetails = ({ data }: RclDetailsProps) => {
         </div>
       )}
       <form
-        className="flex flex-row items-center gap-2 sticky bottom-0 bg-white pb-4 py-2"
+        className="flex flex-row items-center gap-2 sticky bottom-0 pb-4 py-2"
         action={submitAction}
       >
         <label className="cursor-pointer">
@@ -202,13 +194,14 @@ const RclDetails = ({ data }: RclDetailsProps) => {
           <input type="file" className="hidden" />
         </label>
         <Input
-          className="bg-grey border-0"
+          className="bg-grey dark:bg-grey-dark border-0"
           placeholder="Escribe aquí tu mensaje"
           name="input"
         />
         <InputSubmit
-          loadingIcon={<IconLoader className="animate-spin text-white" />}
-          successIcon={<IconCircleCheckFilled />}
+          loadingText=''
+          errorText=''
+          successText=''
           idleIcon={<IconArrowUp className="text-white" />}
           status={isPending ? "loading" : error ? "error" : "idle"}
           className="border-0 w-fit bg-orange-icon px-2"

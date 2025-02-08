@@ -19,20 +19,20 @@ const JudgmentCard = ({ item, pathParam, index }: JudgmentCardProps) => {
 
   return (
     <Link href={`/prp/expensas/${pathParam}/juicios/${item.Jui_id}`} className="w-full">
-      <div className="flex gap-2 bg-grey w-full flex-1 flex-col rounded-2xl p-3">
-        <div className="flex flex-row items-center gap-2">
-          <CardIcon className="bg-brown/10">
-            <IconGavel size={48} className="text-brown" />
+      <div className="flex gap-2 bg-grey dark:bg-grey-dark w-full flex-1 flex-col rounded-2xl p-3">
+        <div className="flex flex-row items-center gap-3">
+          <CardIcon className="bg-brown/10 dark:bg-brown-dark/10">
+            <IconGavel size={48} className="text-brown dark:text-brown-dark" />
           </CardIcon>
           <div className="flex flex-1 flex-col">
-            <div className="flex items-center justify-between">
-              <p className="text-lg font-bold text-black">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-lg font-bold">
                 {item.Jui_Caratula}
               </p>
               <Button
-                buttonPadding="pl-2"
                 iconOrientation="right"
                 classNameText="text-text-grey"
+                buttonBackground=""
                 icon={<IconChevronRight size={22} className="text-text-grey" />}
               />
             </div>

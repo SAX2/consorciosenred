@@ -31,7 +31,7 @@ export const usePathsAndTitles = () => {
   return [
     {
       title: "Mis expensas",
-      paths: [`/prp/expensas/`, `/prp/expensas/${params.id}`],
+      paths: [`/prp/expensas`, `/prp/expensas/${params.id}`],
     },
     {
       title: "Novedades",

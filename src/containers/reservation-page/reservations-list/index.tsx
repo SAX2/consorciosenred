@@ -57,7 +57,7 @@ const ReservationCard = ({ item, param }: { item: any, index: number, param: str
 
   return (
     <>
-      <div className="flex gap-2 p-3 bg-grey w-full flex-1 flex-col overflow-hidden rounded-2xl">
+      <div className="flex gap-2 p-3 bg-grey dark:bg-grey-dark w-full flex-1 flex-col overflow-hidden rounded-2xl">
         <div className="flex gap-3 items-center flex-1">
           <div
             style={{
@@ -95,7 +95,7 @@ const ReservationCard = ({ item, param }: { item: any, index: number, param: str
             iconOrientation="right"
             title="Ver detalles"
             textSize="text-lg"
-            buttonBackground="bg-grey-sec"
+            buttonBackground="bg-grey-sec dark:bg-grey-sec-dark"
             classNameText="text-text-grey"
             classNameContainer="flex-1"
           />
@@ -123,7 +123,7 @@ const ReservationCard = ({ item, param }: { item: any, index: number, param: str
           <SemiSection
             type="simple"
             title="Estado de la reservas"
-            icon={<IconActivity size={24} className="text-black" />}
+            icon={<IconActivity size={24} />}
           >
             <Pill
               text={item.estado}
@@ -135,7 +135,7 @@ const ReservationCard = ({ item, param }: { item: any, index: number, param: str
           <SemiSection
             type="simple"
             title="Estado de la reservas"
-            icon={<IconMoneybag size={24} className="text-black" />}
+            icon={<IconMoneybag size={24} />}
           >
             <Pill
               text={new Intl.NumberFormat("es-ES", {
@@ -151,14 +151,14 @@ const ReservationCard = ({ item, param }: { item: any, index: number, param: str
           <SemiSection
             type="simple"
             title="Dia de la reserva"
-            icon={<IconCalendar size={24} className="text-black" />}
+            icon={<IconCalendar size={24} />}
           >
             <Pill text={date} className="py-0" classNameText="text-base" />
           </SemiSection>
           <SemiSection
             type="multiple"
             title="Horarios"
-            icon={<IconClockHour5 size={24} className="text-black" />}
+            icon={<IconClockHour5 size={24} />}
             content={[
               {
                 title: "Desde",

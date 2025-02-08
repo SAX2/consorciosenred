@@ -20,7 +20,7 @@ const ActionsDropdown = ({ shortcut, actions }: ActionsDropdownProps) => {
         <div>{shortcut}</div>
       </PopoverTrigger>
       <PopoverContent
-        className="p-1 border-outline rounded-xl w-fit"
+        className="p-1 border-outline dark:border-outline-dark bg-white dark:bg-black-app-bg rounded-xl w-fit"
         align="end"
       >
         {actions && actions.map((action) => (

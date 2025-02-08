@@ -20,7 +20,7 @@ export const ACTIONS: ActionsProps = {
     simpleShortcut: {
       title: "Reclamar",
       description: "Reclamar",
-      icon: <IconAlertTriangle width={32} height={32} className="text-black" />,
+      icon: <IconAlertTriangle width={32} height={32}  />,
       path: "/reclamos/reclamar",
     },
     descriptionShortcut: {
@@ -41,7 +41,7 @@ export const ACTIONS: ActionsProps = {
     simpleShortcut: {
       title: "Reservar",
       description: "Reservar",
-      icon: <IconCalendar width={32} height={32} className="text-black" />,
+      icon: <IconCalendar width={32} height={32}  />,
       path: "/reservas/reservar",
     },
     descriptionShortcut: {
@@ -60,7 +60,7 @@ export const ACTIONS: ActionsProps = {
     simpleShortcut: {
       title: "Reservar",
       description: "Reservar",
-      icon: <IconWallet width={32} height={32} className="text-black" />,
+      icon: <IconWallet width={32} height={32}  />,
       path: "/pagos/pagar",
     },
     descriptionShortcut: {
@@ -92,7 +92,7 @@ export const ACTIONS: ActionsProps = {
     simpleShortcut: {
       title: "Reservar",
       description: "Reservar",
-      icon: <IconWallet width={32} height={32} className="text-black" />,
+      icon: <IconWallet width={32} height={32}  />,
       path: "/pagos/pagar",
     },
     descriptionShortcut: {
@@ -124,7 +124,7 @@ export const ACTIONS: ActionsProps = {
     simpleShortcut: {
       title: "Notificar pago",
       description: "Notificar pago",
-      icon: <IconBellRinging width={32} height={32} className="text-black" />,
+      icon: <IconBellRinging width={32} height={32}  />,
       path: "/pagos/nuevo",
     },
     descriptionShortcut: {
@@ -148,7 +148,7 @@ export const ACTIONS: ActionsProps = {
       display: "icon-bg",
       style: {
         background: "#008AEA",
-        color: "#086FB7",
+        color: "#008AEA",
       },
     }
   },

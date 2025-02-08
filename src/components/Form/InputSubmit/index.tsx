@@ -62,9 +62,9 @@ const InputSubmit = ({
       className={cn(
         classNameButton,
         "w-full p-2 outline-none border outline-offset-0 flex items-center justify-center",
-        status === 'loading' && "!bg-grey !text-text-grey cursor-not-allowed",
+        status === 'loading' && "!bg-grey dark:!bg-grey-dark !text-text-grey cursor-not-allowed",
         status === 'success' && "!bg-green",
-        status === 'error' && "!bg-red dark:!bg-red-500/15 !text-white",
+        status === 'error' && "!bg-red dark:!bg-red-dark !text-white",
         className
       )}
       animate={{

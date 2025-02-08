@@ -56,7 +56,7 @@ const InputPattern = ({ props, error, patternProps }: { patternProps?: PatternFo
       className={cn(
         inputClassName(props.className),
         error &&
-          "!outline-4 !outline-red/5 !dark:outline-red/30 !border-red !dark:border-red-400"
+          "!outline-4 !outline-red/5 dark:!outline-red-dark/20 !border-red dark:!border-red-dark"
       )}
     />
   );
@@ -70,7 +70,7 @@ const InputGeneric =  ({ props, error, enabled }: { enabled: boolean; error?: st
       className={cn(
         inputClassName(props.className),
         error &&
-          "!outline-4 !outline-red/5 !dark:outline-red/30 !border-red !dark:border-red-400"
+          "!outline-4 !outline-red/5 dark:!outline-red-dark/20 !border-red dark:!border-red-dark"
       )}
     />
   );
@@ -99,7 +99,7 @@ export const Label = ({ label, children, classNameLabel, classname, error }: Pro
         </label>
       )}
       {children}
-      {error && <p className="text-red font-medium mt-1">{error}</p>}
+      {error && <p className="text-red dark:text-red-dark font-medium mt-1">{error}</p>}
     </div>
   );
 }
@@ -116,7 +116,7 @@ export const InputTextArea = ({ error, ...props }: InputProps) => {
         inputClassName(props.className),
         "resize-none",
         error &&
-          "!outline-4 !outline-red/5 !dark:outline-red/30 !border-red !dark:border-red-400"
+          "!outline-4 !outline-red/5 dark:!outline-red-dark/20 !border-red dark:!border-red-dark"
       )}
     />
   );

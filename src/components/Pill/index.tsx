@@ -17,8 +17,34 @@ export interface PillProps {
   fileName?: string;
 }
 
-export const variantContainerClassName = (variant: StatusValue) => variant === "warning" ? "border-yellow-sec/15 bg-yellow/15" : variant === "error" ? "border-red/25 bg-red/15" : variant === "success" ? "border-green/15 bg-green/15" : variant === "neutral" ? "border-outline bg-grey-sec" : variant === "default" ? "border-outline bg-white" : variant === "info" ? "bg-blue-button/15 border-blue-button/15": "" 
-export const variantTextClassName = (variant: StatusValue) => variant === "warning" ? "text-yellow-sec" : variant === "error" ? "text-red" : variant === "success" ? "text-green" : variant === "neutral" ? "text-text-grey" : variant === "default" ? "text-black" : variant === "info" ? "text-blue-button": ""
+export const variantContainerClassName = (variant: StatusValue) =>
+  variant === "warning"
+    ? "border-yellow-sec/15 bg-yellow/15"
+    : variant === "error"
+    ? "border-red/25 bg-red/15"
+    : variant === "success"
+    ? "border-green/15 bg-green/15"
+    : variant === "neutral"
+    ? "border-outline bg-grey-sec"
+    : variant === "default"
+    ? "border-outline bg-white dark:border-outline-dark dark:bg-grey-dark"
+    : variant === "info"
+    ? "bg-blue-button/15 border-blue-button/15"
+    : ""; 
+export const variantTextClassName = (variant: StatusValue) =>
+  variant === "warning"
+    ? "text-yellow-sec dark:text-yellow"
+    : variant === "error"
+    ? "text-red"
+    : variant === "success"
+    ? "text-green dark:text-green-dark"
+    : variant === "neutral"
+    ? "text-text-grey"
+    : variant === "default"
+    ? "text-black"
+    : variant === "info"
+    ? "text-blue-button"
+    : "";
 
 const Pill: React.FC<PillProps> = ({
   text,

@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export const getApiUrl = (endpoint: string) => `${process.env.BASE_API_URL}/${endpoint}`;
+export const getApiUrl = (endpoint: string) => `https://www.consorciosenred.com/cerDevelopment/${endpoint}`;
 
 export const getAuthHeaders = async () => {
   const cookie = await cookies();

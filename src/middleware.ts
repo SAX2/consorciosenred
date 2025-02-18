@@ -53,9 +53,9 @@ export async function middleware(request: NextRequest) {
 
       await saveUnitPermissions(units);
       
-      if (units.length === 1) {
-        return NextResponse.redirect(new URL(`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`, request.url));
-      }
+      //if (units.length === 1) {
+      //  return NextResponse.redirect(new URL(`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`, request.url));
+      //}
     } catch (error) {
       console.error('Error al obtener unidades:', error);
     }

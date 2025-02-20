@@ -26,6 +26,7 @@ export const PopoverFiles = ({ files, totalLength }: { files: any[], totalLength
       <PopoverContent align="start" className="p-1 flex-col w-fit rounded-lg">
         {files.map((file, index) => (
           <Link
+            target="_blank"
             href={`/file/${file.tipo}/${file.id}/${file.nombre}`}
             className="w-[250px] flex flex-row justify-between items-center p-1 hover:bg-grey rounded-md group"
             key={file.id}

@@ -64,6 +64,7 @@ const ButtonFile = ({ fileId, fileName, fileType, title, chevron = true, icon, p
 
   return (
     <Link
+      target="_blank"
       href={`/file/${fileType}/${fileId}/${fileName}`}
       // onPress={handlePress}
       className={containerClassName}

@@ -61,6 +61,7 @@ const Pill: React.FC<PillProps> = ({
   if (isFile) {
     return (
       <Link
+        target="_blank"
         href={`/file/${fileType}/${fileId}/${fileName}`}
         className={cn(
           "flex items-center gap-1 px-1 py-[2px] border bg-white border-outline dark:bg-grey-sec-dark dark:border-outline-dark w-fit text-xs font-medium rounded-md",

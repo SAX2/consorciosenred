@@ -155,19 +155,16 @@ const UnitInfoSection: FC<UnitInfoSectionProps> = ({ unit }) => {
                 <Pill text={unit.uf_vtoUltimaExpensa} classNameText="text-sm" />
               ),
             },
-            {
-              title: unitCard.expirations[1],
-              children: (
-                <Pill
-                  text={
-                    unit.uf_vto2UltimaExpensa.length > 0
-                      ? unit.uf_vto2UltimaExpensa
-                      : "Sin Fecha"
-                  }
-                  classNameText="text-sm"
-                />
-              ),
-            },
+            ...(unit.uf_vto2UltimaExpensa.length > 0
+              ? [
+                  {
+                    title: unitCard.expirations[1],
+                    children: (
+                      <Pill text={unit.uf_vto2UltimaExpensa} classNameText="text-sm" />
+                    ),
+                  },
+                ]
+              : []),
           ]}
         />
       </div>

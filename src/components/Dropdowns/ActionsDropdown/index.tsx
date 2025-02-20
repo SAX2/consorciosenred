@@ -9,10 +9,13 @@ import React from 'react'
 interface ActionsDropdownProps {
   shortcut: React.ReactNode;
   actions?: ShortcutProps[]
+  path?: string
 }
 
-const ActionsDropdown = ({ shortcut, actions }: ActionsDropdownProps) => {
+const ActionsDropdown = ({ shortcut, actions, path }: ActionsDropdownProps) => {
   const params = useParams()
+
+  const resolvedPath = params.id ? params.id : path as string
 
   return (
     <Popover>
@@ -23,11 +26,11 @@ const ActionsDropdown = ({ shortcut, actions }: ActionsDropdownProps) => {
         className="p-1 border-outline dark:border-outline-dark bg-white dark:bg-black-app-bg rounded-xl w-fit"
         align="end"
       >
-        {actions && actions.map((action) => (
+        {actions && actions.map((action, index) => (
           <ShortcutButton
             {...action}
-            path={`/prp/expensas/` + params.id + action.path}
-            key={`/prp/expensas/` + params.id + action.path}
+            path={`/prp/expensas/` + resolvedPath + action.path}
+            key={`/prp/expensas/` + resolvedPath + action.path + index}
           />
         ))}
       </PopoverContent>

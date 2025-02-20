@@ -21,7 +21,7 @@ export const ACTIONS: ActionsProps = {
       title: "Reclamar",
       description: "Reclamar",
       icon: <IconAlertTriangle width={32} height={32}  />,
-      path: "/reclamos/reclamar",
+      path: "/reclamos/nuevo",
     },
     descriptionShortcut: {
       title: "Hacer un reclamo",
@@ -58,8 +58,8 @@ export const ACTIONS: ActionsProps = {
   },
   ver_pagarHomeBanking: {
     simpleShortcut: {
-      title: "Reservar",
-      description: "Reservar",
+      title: "Pagar expensa",
+      description: "Abonar expensa de la unidad",
       icon: <IconWallet width={32} height={32}  />,
       path: "/pagos/pagar",
     },
@@ -90,14 +90,14 @@ export const ACTIONS: ActionsProps = {
   },
   ver_pagarMercadoPago: {
     simpleShortcut: {
-      title: "Reservar",
-      description: "Reservar",
+      title: "Pagar expensa",
+      description: "Abonar expensa con mercado pago",
       icon: <IconWallet width={32} height={32}  />,
       path: "/pagos/pagar",
     },
     descriptionShortcut: {
       title: "Pagar expensa",
-      description: "Abonar expensa de la unidad",
+      description: "Abonar expensa con mercado pago",
       icon: <IconWallet width={36} height={36} className="text-[#1F9163]" />,
       path: "/pagos/pagar",
       display: "icon-bg-description",
@@ -109,7 +109,7 @@ export const ACTIONS: ActionsProps = {
     },
     backgroundShortcut: {
       title: "Pagar expensa",
-      description: "Pagar expensa",
+      description: "Abonar expensa con mercado pago",
       icon: <IconWallet width={24} height={24} className="text-white" />,
       path: "/",
       display: "icon-bg",

@@ -33,7 +33,7 @@ export const getNavigationRoutes = (
 };
 
 
-export const getShortcutRoutesWithPermissions = (unitPermissions: UnitPermissions | null) => {
+export const getShortcutRoutesWithPermissions = (unitPermissions: UnitPermissions | null, path?: string) => {
   if (!unitPermissions) return [];
   
   const navigationRoutes = getNavigationRoutes(unitPermissions, "simpleShortcut", ACTIONS)
@@ -52,7 +52,7 @@ export const getShortcutRoutesWithPermissions = (unitPermissions: UnitPermission
         path: '/',
         isBottomSheet: true,
         customComponent({ shortcut }) {
-          return <ActionsDropdown shortcut={shortcut} actions={navigationDescription as ShortcutProps[]} />;
+          return <ActionsDropdown shortcut={shortcut} actions={navigationDescription as ShortcutProps[]} path={path}/>;
         },
       },
     ] as ShortcutProps[];
@@ -77,8 +77,6 @@ export const getSidebarRoutes = (permissions: UnitPermissions, size?: number): a
   const defaultRoutes = DEFAULT_ROUTES({ size }).map((route) =>
     Object.values(route)[0].unitMenuItem
   );
-
-  console.log(defaultRoutes)
 
   const navigationRoutes = Object.entries(NAVIGATION_TABS({ size }))
     .filter(([permission]) => permissions[permission as keyof typeof permissions])

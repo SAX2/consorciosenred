@@ -28,7 +28,7 @@ const unit: FC<unitProps> = ({ unit }) => {
   )[0];
 
   const permissions = formatUnitPermissions(unit)
-  const shortcutsUnit = getShortcutRoutesWithPermissions(permissions)
+  const shortcutsUnit = getShortcutRoutesWithPermissions(permissions, unit.uf_id + '_' + unit.uf_codEdificio)
 
   return (
     <div className="w-full flex flex-col gap-2 justify-between p-4 rounded-2xl border-outline border dark:border-outline-dark">

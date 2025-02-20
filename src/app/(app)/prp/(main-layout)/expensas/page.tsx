@@ -4,9 +4,14 @@ import Section from '@/components/Sections/AppSections/Section';
 import Grid from '@/components/Sections/AppSections/Grid';
 import UnitCard from '@/components/Cards/UnitCard';
 import NewUnitDialog from '@/components/Dialogs/NewUnit';
+import { redirect } from 'next/navigation';
 
 const page = async () => {
   const data = await getUnits();
+
+  if (data.length === 1) {
+    return redirect('/prp/expensas/' + data[0].uf_id + '_' + data[0].uf_codEdificio);
+  }
 
   return (
     <Section

@@ -1,4 +1,4 @@
-import Button, { ButtonProps } from '@/components/Buttons/Button'
+import Button, { ButtonProps } from '../../../../packages/components/Buttons/Button'
 import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Drawer, DrawerClose, DrawerContent, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
 import useIsLargeScreen from '@/hooks/useIsLargeScreen';

@@ -8,7 +8,7 @@ import { IconCalendarExclamation, IconMailExclamation, IconMailForward, IconPlus
 import { FC } from "react";
 import { shortcutsUnit, unitCard } from "@/lib/contents/(app)/contents";
 import IconUnit from "@/components/Icons/IconUnit";
-import ButtonFile from "@/components/Buttons/ButtonFile";
+import ButtonFile from "../../../../packages/components/Buttons/ButtonFile";
 import { formatUnitPermissions, getShortcutRoutesWithPermissions } from "@/store/permissions/useUnitPermissions";
 import { cn } from "@/lib/utils";
 

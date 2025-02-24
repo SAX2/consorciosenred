@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import NavLinkButton from "@/components/Buttons/NavLinkButton";
+import NavLinkButton from "../../../../../packages/components/Buttons/ButtonNavLink";
 import NewUnitDialog from "@/components/Dialogs/NewUnit";
 import { getSidebarRoutes } from "@/store/permissions/useUnitPermissions";
 

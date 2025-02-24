@@ -46,22 +46,6 @@ const ButtonFile = ({ fileId, fileName, fileType, title, chevron = true, icon, p
     </div>
   );
 
-  // const handleOnPress = () => {
-  //   console.log('EXECUTE')
-
-  //   router.navigate(`../file/${fileType}/${fileId}${fileName}`, {
-  //     relativeToDirectory: true,
-  //   });
-  // }
-
-  // if (replace) {
-  //   return (
-  //     <Pressable className={containerClassName} onPress={handleOnPress}>
-  //       {content}
-  //     </Pressable>
-  //   );
-  // }
-
   return (
     <Link
       target="_blank"

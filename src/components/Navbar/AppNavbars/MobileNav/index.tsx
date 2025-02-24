@@ -1,6 +1,6 @@
 import React from 'react';
 import { MobileNavs } from './constants';
-import NavLinkButton from '@/components/Buttons/NavLinkButton';
+import NavLinkButton from '../../../../../packages/components/Buttons/ButtonNavLink';
 
 const MobileNav = () => {
   return (

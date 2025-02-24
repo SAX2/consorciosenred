@@ -7,7 +7,7 @@ import getParams from '@/env/getParams';
 import { reserveIcon } from '@/lib/contents/(app)/contents';
 import Pill from '@/components/Pill';
 import { getStatusType } from '@/hooks/use-status';
-import Button from '@/components/Buttons/Button';
+import Button from '../../../../packages/components/Buttons/Button';
 import { IconActivity, IconCalendar, IconChevronUp, IconCircleXFilled, IconClockHour5, IconInfoCircle, IconInfoCircleFilled, IconMoneybag, IconPlus } from '@tabler/icons-react';
 import DialogMessage from '@/components/Dialogs/Message';
 import SemiSection from '@/components/Sections/AppSections/SemiSection';

@@ -21,6 +21,7 @@ const layout = async ({ children, params }: { children: React.ReactNode, params:
           <Sidebar permissions={permissions}/>
         </div>
       </MediaQueryProvider>
+      
       {children}
     </div>
   );

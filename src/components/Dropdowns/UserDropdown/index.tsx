@@ -3,7 +3,7 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useUserOptions } from './constants'
 import React, { FC, PropsWithChildren } from 'react'
-import NavLinkButton from '@/components/Buttons/NavLinkButton'
+import NavLinkButton from '../../../../packages/components/Buttons/ButtonNavLink'
 
 interface UserDropdownProps extends PropsWithChildren {}
 

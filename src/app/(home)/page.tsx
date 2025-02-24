@@ -10,14 +10,14 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import main from '@/lib/contents/main.json'
 import Link from "next/link";
-import HoverPopover from "@/components/button/HoverPopover";
+import HoverPopover from "@/app/(home)/components/HoverPopover";
 import Section from "./components/hero-sections/Section";
 import Service from "./components/hero-sections/Services";
 import NewsCard from "./components/card/NewsCard";
 import Main from './components/Main';
 import React from 'react';
 import ButtonArrow from './components/buttons/button-arrow';
-import Button from '@/components/Buttons/Button';
+import Button from '../../../packages/components/Buttons/Button';
 import SectionApps from './components/hero-sections/SectionApps';
 
 const SectionMetrics = () => {

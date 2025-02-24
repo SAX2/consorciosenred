@@ -5,7 +5,7 @@ import { es } from 'date-fns/locale';
 import { IconChevronRight, IconJpg } from '@tabler/icons-react';
 import Pill from '@/components/Pill';
 import Image from 'next/image';
-import ButtonFile from '@/components/Buttons/ButtonFile';
+import ButtonFile from '../../../../packages/components/Buttons/ButtonFile';
 import IconUnit from '@/components/Icons/IconUnit';
 
 const RegulationItem = ({ item }: { item: any }) => {

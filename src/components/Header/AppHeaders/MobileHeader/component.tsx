@@ -1,7 +1,7 @@
 "use client"
 
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react'
-import BackButton from '../../../../../packages/components/Buttons/BackButton';
+import BackButton from 'app/components/Buttons/BackButton';
 // import { useLayoutStore } from '@/store/useLayoutStore';
 import { usePathsAndTitles } from '../constants';
 import { useParams, usePathname } from 'next/navigation';

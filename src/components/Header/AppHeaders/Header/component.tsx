@@ -2,10 +2,10 @@
 
 import { FC, Fragment } from 'react';
 import { usePathname } from 'next/navigation';
-import BackButton from '../../../../../packages/components/Buttons/BackButton';
+import BackButton from 'app/components/Buttons/BackButton';
 import { usePathsAndTitles } from "../constants";
 import { cn } from '@/lib/utils';
-import Button from '../../../../../packages/components/Buttons/Button';
+import Button from 'app/components/Buttons/Button';
 import Link from 'next/link';
 
 interface HeaderProps {

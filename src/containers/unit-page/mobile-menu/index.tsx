@@ -1,4 +1,4 @@
-import NavLinkButton from '../../../../packages/components/Buttons/ButtonNavLink';
+import NavLinkButton from 'app/components/Buttons/ButtonNavLink';
 import NewUnitDialog from '@/components/Dialogs/NewUnit';
 import getParams from '@/env/getParams';
 import { cn } from '@/lib/utils';

@@ -1,4 +1,4 @@
-import Button from "../../../../packages/components/Buttons/Button";
+import Button from "app/components/Buttons/Button";
 import Pill from "@/components/Pill";
 import { getStatusType } from "@/hooks/use-status";
 import { IconChevronRight, IconGavel } from "@tabler/icons-react";

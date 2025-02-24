@@ -8,7 +8,7 @@ import { IconPlus, IconSearch } from '@tabler/icons-react';
 import usePagination from '@/hooks/use-pagination';
 import Pagination from '@/components/Sections/AppSections/Pagination';
 import Section from '@/components/Sections/AppSections/Section';
-import Button from '../../../../packages/components/Buttons/Button';
+import Button from 'app/components/Buttons/Button';
 import { usePathname } from 'next/navigation';
 import BottomSection from '@/components/Sections/AppSections/BottomSection';
 import useIsLargeScreen from '@/hooks/useIsLargeScreen';

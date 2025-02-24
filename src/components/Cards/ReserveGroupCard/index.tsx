@@ -1,5 +1,5 @@
 import Pill from '@/components/Pill'
-import Button, { ButtonProps } from '../../../../packages/components/Buttons/Button'
+import Button, { ButtonProps } from 'app/components/Buttons/Button'
 import { reserveIcon } from '@/lib/contents/(app)/contents'
 import { IconPlus, IconProps } from '@tabler/icons-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'

@@ -2,7 +2,7 @@ import React from 'react'
 import SectionArticle from '../../components/section';
 import { appInstallAdministrador } from '@/lib/contents/services';
 import Image from 'next/image';
-import Button from '../../../../../packages/components/Buttons/Button';
+import Button from 'app/components/Buttons/Button';
 import { IconChevronRight } from '@tabler/icons-react';
 
 const page = () => {

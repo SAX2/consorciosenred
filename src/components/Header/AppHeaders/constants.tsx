@@ -1,6 +1,6 @@
 "use client"
 
-import { ButtonProps } from "../../../../packages/components/Buttons/Button";
+import { ButtonProps } from "app/components/Buttons/Button";
 import { IconBellRinging, IconPlus } from "@tabler/icons-react";
 import { useParams } from "next/navigation"
 import React from "react";

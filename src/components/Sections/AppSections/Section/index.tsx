@@ -1,4 +1,4 @@
-import BackButton from '../../../../../packages/components/Buttons/BackButton';
+import BackButton from 'app/components/Buttons/BackButton';
 import Pill, { PillProps } from '@/components/Pill';
 import MediaQueryProvider from '@/context/MediaQueryProvider';
 import { cn } from '@/lib/utils';

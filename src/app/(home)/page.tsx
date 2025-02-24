@@ -17,7 +17,7 @@ import NewsCard from "./components/card/NewsCard";
 import Main from './components/Main';
 import React from 'react';
 import ButtonArrow from './components/buttons/button-arrow';
-import Button from '../../../packages/components/Buttons/Button';
+import Button from 'app/components/Buttons/Button';
 import SectionApps from './components/hero-sections/SectionApps';
 
 const SectionMetrics = () => {

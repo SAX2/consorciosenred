@@ -8,7 +8,7 @@ import { Accordion, AccordionItem } from '@/components/ui/accordion';
 import usePagination from '@/hooks/use-pagination';
 import { IconBellRinging, IconSearch } from '@tabler/icons-react';
 import React, { FC, PropsWithChildren, useState } from 'react'
-import Button from '../../../../packages/components/Buttons/Button';
+import Button from 'app/components/Buttons/Button';
 import { usePathname } from 'next/navigation';
 import useIsLargeScreen from '@/hooks/useIsLargeScreen';
 

@@ -12,7 +12,7 @@ import { sisAdmImg } from "@/lib/images";
 import { useLayoutStore } from "@/store/useLayoutStore";
 import { shortcutsPaymentUnit, unitCard } from "@/lib/contents/(app)/contents";
 import IconUnit from "@/components/Icons/IconUnit";
-import ButtonFile from "../../../../packages/components/Buttons/ButtonFile";
+import ButtonFile from "app/components/Buttons/ButtonFile";
 import { formatUnitPermissions, getPaymentShortcutsRoutes, getShortcutRoutesWithPermissions } from "@/store/permissions/useUnitPermissions";
 import { cn } from "@/lib/utils";
 

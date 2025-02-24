@@ -1,6 +1,6 @@
 "use client"
 
-import { classNameButton, classNameButtonText } from "../../../../packages/components/Buttons/Button";
+import { classNameButton, classNameButtonText } from "app/components/Buttons/Button";
 import { cn } from "@/lib/utils";
 import { IconCircleCheckFilled, IconCircleXFilled, IconLoader } from "@tabler/icons-react";
 import { motion, AnimatePresence,HTMLMotionProps } from "framer-motion";

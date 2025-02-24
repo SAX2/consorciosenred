@@ -1,6 +1,6 @@
 "use client"
 
-import Button, { ButtonProps } from '../../../../../../packages/components/Buttons/Button';
+import Button, { ButtonProps } from 'app/components/Buttons/Button';
 import { IconPlaylistX, IconProps, IconRotateClockwise2 } from '@tabler/icons-react'
 import { useRouter } from 'next/navigation';
 import React, { FC } from 'react'

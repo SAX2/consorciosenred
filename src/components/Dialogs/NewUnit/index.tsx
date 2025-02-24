@@ -4,7 +4,7 @@ import React, { useState, useTransition } from 'react'
 import Input from '@/components/Form/Input';
 import { IconApps, IconChevronRight } from '@tabler/icons-react';
 import DialogMessage from '../Message';
-import Button from '../../../../packages/components/Buttons/Button';
+import Button from 'app/components/Buttons/Button';
 import SemiSection from '@/components/Sections/AppSections/SemiSection';
 import { z, ZodFormattedError } from 'zod';
 import InputSubmit from '@/components/Form/InputSubmit';

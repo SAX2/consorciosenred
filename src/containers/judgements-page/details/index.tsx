@@ -1,6 +1,6 @@
 "use client"
 
-import ButtonFile from "../../../../packages/components/Buttons/ButtonFile";
+import ButtonFile from "app/components/Buttons/ButtonFile";
 import UserIcon from "@/components/Icons/UserIcon";
 import Pill from "@/components/Pill";
 import SemiSection from "@/components/Sections/AppSections/SemiSection";

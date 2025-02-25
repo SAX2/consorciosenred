@@ -4,7 +4,7 @@ import PaymentCard from 'app/features/Payments/List/PaymentCard';
 import Input from 'app/components/Form/Input';
 import BottomSection from 'app/components/Sections/SectionBottom';
 import Pagination from 'app/components/Sections/Pagination';
-import { Accordion, AccordionItem } from '@/components/ui/accordion';
+import { Accordion, AccordionItem } from 'app/components/ui/accordion';
 import usePagination from 'app/hooks/use-pagination';
 import { IconBellRinging, IconSearch } from '@tabler/icons-react';
 import React, { FC, PropsWithChildren, useState } from 'react'

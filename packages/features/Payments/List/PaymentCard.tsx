@@ -6,7 +6,7 @@ import SemiSectionData from 'app/components/Sections/SemiSection';
 import React, { FC, useEffect, PropsWithChildren } from 'react'
 import { cn } from 'app/lib/utils';
 import { IconCalendar, IconChevronRight, IconCopy, IconFile, IconFileBarcode, IconMessage, IconReceipt, IconReceipt2 } from '@tabler/icons-react';
-import { AccordionContent, AccordionTrigger } from '@/components/ui/accordion';
+import { AccordionContent, AccordionTrigger } from 'app/components/ui/accordion';
 import { motion } from 'framer-motion';
 import { format, parse } from 'date-fns'
 import { es } from 'date-fns/locale'

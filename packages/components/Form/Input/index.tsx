@@ -1,6 +1,6 @@
 "use client"
 
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from 'app/components/ui/select';
 import { cn } from 'app/lib/utils';
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
 import { Dispatch, FC, InputHTMLAttributes, PropsWithChildren, useState } from 'react'

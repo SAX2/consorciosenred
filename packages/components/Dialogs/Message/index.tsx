@@ -1,6 +1,6 @@
 import Button, { ButtonProps } from 'app/components/Buttons/Button'
-import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Drawer, DrawerClose, DrawerContent, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
+import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from 'app/components/ui/dialog';
+import { Drawer, DrawerClose, DrawerContent, DrawerTitle, DrawerTrigger } from 'app/components/ui/drawer';
 import useIsLargeScreen from 'app/hooks/useIsLargeScreen';
 import { cn } from 'app/lib/utils';
 import { IconAlertCircleFilled, IconAlertSmall, IconAlertTriangleFilled, IconCircleCheckFilled, IconCircleXFilled, IconHelpCircleFilled, IconProps } from '@tabler/icons-react';

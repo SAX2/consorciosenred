@@ -26,7 +26,7 @@ import EmptySection from "app/components/Messages/EmptySection";
 import MoreOptionsEmpty from "./ReserveTurnListEmptyOptions";
 import useIsLargeScreen from "app/hooks/useIsLargeScreen";
 import Pill from "app/components/Pill";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "app/components/ui/checkbox";
 import BottomSection from "app/components/Sections/SectionBottom";
 import DialogMessage from "app/components/Dialogs/Message";
 

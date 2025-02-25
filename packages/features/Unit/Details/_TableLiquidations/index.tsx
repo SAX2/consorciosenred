@@ -21,7 +21,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "app/components/ui/table"
 import { cn } from "app/lib/utils"
 import Input from "app/components/Form/Input"
 import React, { useState } from "react"

@@ -1,5 +1,5 @@
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
+import { Popover, PopoverContent, PopoverTrigger } from "app/components/ui/popover";
+import { Separator } from "app/components/ui/separator";
 import { IconArrowUpRight, IconChevronDown, IconFile } from "@tabler/icons-react";
 import Link from "next/link";
 

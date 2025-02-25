@@ -1,6 +1,6 @@
 "use client"
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from 'app/components/ui/dropdown-menu'
 import { useUserOptions } from './constants'
 import React, { FC, PropsWithChildren } from 'react'
 import NavLinkButton from 'app/components/Buttons/ButtonNavLink'

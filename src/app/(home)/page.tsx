@@ -1,9 +1,9 @@
 "use client"
 
 import services, { appInstall } from 'app/assets/constants/services'
-import { Separator } from "@/components/ui/separator";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Separator } from "app/components/ui/separator";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "app/components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "app/components/ui/carousel";
 import { caba1, desktopAdminPreview, mobileUnit } from "app/assets/images";
 import { IconChevronRight } from "@tabler/icons-react";
 import { cn } from "app/lib/utils";

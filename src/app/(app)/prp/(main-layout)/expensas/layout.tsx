@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, FC, Suspense } from 'react'
-import { Separator } from '@/components/ui/separator';
+import { Separator } from 'app/components/ui/separator';
 import AsideSection from 'app/features/MLayout/Aside';
 import UserCard from 'app/features/MLayout/Aside/_UserCard';
 import Header from 'app/features/MLayout/Headers/Header';

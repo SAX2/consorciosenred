@@ -2,7 +2,7 @@ import { IconBox, IconAlertTriangle, IconStar, IconDots, IconCalendar, IconSocce
 import { ShortcutProps } from "app/types/globals"
 import { toast } from "sonner"
 import Toast from "@/components/toast"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "app/components/ui/popover"
 import ActionsDropdown from "app/components/Buttons/ButtonShortcut/List/_ActionsDropdown"
 
 export const unitCard = {

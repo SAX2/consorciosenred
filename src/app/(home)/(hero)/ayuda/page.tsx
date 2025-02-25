@@ -1,4 +1,4 @@
-import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { AccordionContent, AccordionItem, AccordionTrigger } from 'app/components/ui/accordion';
 import { Accordion } from '@radix-ui/react-accordion';
 import React from 'react'
 import SectionArticle from '../../components/section';

@@ -10,7 +10,7 @@ import InputCalendar from 'app/components/Form/InputCalendar';
 import { createNotifyPayment } from "@/lib/queries/queries";
 import { NumericFormat } from 'react-number-format';
 import InputSubmit from "app/components/Form/InputSubmit";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "app/components/ui/accordion";
 import IconUnit from "app/components/Icons/IconUnit";
 
 interface NewPaymentProps extends PropsWithChildren {

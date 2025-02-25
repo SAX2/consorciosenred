@@ -1,4 +1,4 @@
-import JudgmentDetails from '@/containers/judgements-page/details';
+import JudgmentDetails from 'app/features/Judgement/Details';
 import getParams from '@/env/getParams';
 import { getUnitJudgments } from '@/lib/queries/queries';
 import React from 'react'

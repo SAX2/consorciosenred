@@ -1,6 +1,6 @@
 import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
 import Section from '@/components/Sections/AppSections/Section';
-import AssemblyScreen from '@/containers/asambley-page/assembly-screen';
+import AssemblyScreen from 'app/features/Assembley/List';
 import getParams from '@/env/getParams';
 import { getUnitAssembly } from '@/lib/queries/queries';
 import React from 'react'

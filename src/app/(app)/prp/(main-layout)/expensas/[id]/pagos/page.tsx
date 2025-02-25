@@ -1,6 +1,6 @@
 import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
 import Section from '@/components/Sections/AppSections/Section';
-import PaymentList, { BottomSectionPayments } from '@/containers/payments-page/payment-list';
+import PaymentList, { BottomSectionPayments } from 'app/features/Payments/List';
 import getParams from '@/env/getParams';
 import { getUnitPayments } from '@/lib/queries/queries';
 

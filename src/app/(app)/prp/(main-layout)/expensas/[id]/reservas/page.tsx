@@ -1,6 +1,6 @@
 import EmptySection from "@/components/Sections/AppSections/Errors/EmptySection";
 import Section from "@/components/Sections/AppSections/Section";
-import ReservationsScreen, { BottomSectionReserve } from "@/containers/reservation-page/reservations-list";
+import ReservationsScreen, { BottomSectionReserve } from "app/features/Reserves/List";
 import getParams from "@/env/getParams";
 import { getUnitReservationsList } from "@/lib/queries/queries";
 

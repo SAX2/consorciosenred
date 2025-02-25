@@ -1,7 +1,7 @@
 import React from 'react'
 import getParams from '@/env/getParams';
 import Section from '@/components/Sections/AppSections/Section';
-import UnitInfoSection from '@/containers/unit-page/info-section';
+import UnitInfoSection from 'app/features/Unit/Details';
 import { getUnit } from '@/lib/queries/queries';
 import { DataTable } from '@/components/Tables/LiquidationsUnit';
 import { columns } from '@/components/Tables/LiquidationsUnit/columns';
@@ -16,8 +16,8 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
 
   function convertDate(date: string) {
     const months = [
-        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
-        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     ];
     
     const [month, year] = date.split(" - ");

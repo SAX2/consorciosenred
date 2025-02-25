@@ -2,7 +2,7 @@ import React from 'react'
 import Section from '@/components/Sections/AppSections/Section';
 import { getUnitReservationsByGroupCalendar } from '@/lib/queries/queries';
 import getParams from '@/env/getParams';
-import ReserveTurnsScreen from '@/containers/reservation-page/reserve-turn-screen';
+import ReserveTurnList from 'app/features/Reserves/Create/ReserveTurnList';
 
 type Props = {
   params: Promise<{ group: string; id: string }>;
@@ -24,7 +24,7 @@ const page =  async ({ params, searchParams }: Props) => {
 
   return (
     <Section className="w-full pb-8 max-md:pb-0 mt-0">
-      <ReserveTurnsScreen data={data as any[]} pathParams={id} group={group} resource={search['code'].toString() ?? ""}/>
+      <ReserveTurnList data={data as any[]} pathParams={id} group={group} resource={search['code'].toString() ?? ""}/>
     </Section>
   );
 }

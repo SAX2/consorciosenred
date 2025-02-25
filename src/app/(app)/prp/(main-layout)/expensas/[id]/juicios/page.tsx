@@ -1,5 +1,5 @@
 import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection'
-import JudgmentsScreen from '@/containers/judgements-page/judgements'
+import JudgmentsScreen from 'app/features/Judgement/List'
 import getParams from '@/env/getParams'
 import { getUnitJudgments } from '@/lib/queries/queries'
 import React from 'react'

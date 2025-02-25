@@ -1,6 +1,6 @@
 import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
 import Section from '@/components/Sections/AppSections/Section';
-import RegulationScreen from '@/containers/regulation-page/regulation-screen';
+import RegulationScreen from 'app/features/Regulation/List';
 import getParams from '@/env/getParams';
 import { getUnitRegulation } from '@/lib/queries/queries';
 import React from 'react'

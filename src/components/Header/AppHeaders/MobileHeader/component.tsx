@@ -7,7 +7,7 @@ import { usePathsAndTitles } from '../constants';
 import { useParams, usePathname } from 'next/navigation';
 import { IconBell, IconMenu2, IconX } from '@tabler/icons-react';
 import { useMobileMenuStore } from '@/store/useMobileMenuStore';
-import MobileMenu from '@/containers/unit-page/mobile-menu';
+import MobileMenu from 'app/features/Unit/Details/_SidebarMenuMobile';
 import UserIcon from '@/components/Icons/UserIcon';
 import UserDropdown from '@/components/Dropdowns/UserDropdown';
 import { getUser } from '@/lib/queries/queries';

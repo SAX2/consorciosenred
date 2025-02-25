@@ -1,8 +1,6 @@
-import { Accordion, AccordionContent, AccordionTrigger } from '@/components/ui/accordion';
-import NewPayment, { AccordionNewPaymentDetails } from '@/containers/payments-page/new-payment'
+import NewPayment, { AccordionNewPaymentDetails } from 'app/features/Payments/Create'
 import getParams from '@/env/getParams'
 import { getUnit } from '@/lib/queries/queries';
-import { AccordionHeader } from '@radix-ui/react-accordion';
 import { notFound } from 'next/navigation';
 import React from 'react'
 

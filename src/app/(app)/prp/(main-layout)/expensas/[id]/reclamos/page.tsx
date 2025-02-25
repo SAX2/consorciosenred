@@ -1,6 +1,6 @@
 import getParams from "@/env/getParams";
 import { getUnitIssues } from "@/lib/queries/queries";
-import RclList, { BottomSectionRcl } from "@/containers/rcl-page/rcl-list";
+import RclList, { BottomSectionRcl } from "app/features/Issues/List";
 import EmptySection from "@/components/Sections/AppSections/Errors/EmptySection";
 
 const page = async ({ params }: {  params: Promise<{ group: string; id: string }> }) => {

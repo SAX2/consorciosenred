@@ -1,9 +1,8 @@
 import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
 import Section from '@/components/Sections/AppSections/Section';
-import NewsScreen from '@/containers/news-page/news-list';
-import PaymentList from '@/containers/payments-page/payment-list';
+import NewsScreen from 'app/features/News/List';
 import getParams from '@/env/getParams';
-import { getUnitNews, getUnitPayments } from '@/lib/queries/queries';
+import { getUnitNews } from '@/lib/queries/queries';
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
   const code = getParams({ params: id, type: "code" });

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, FC, Suspense } from 'react'
 import { Separator } from '@/components/ui/separator';
-import AsideSection from '@/components/Sections/AppSections/AsideSection';
+import AsideSection from 'app/features/MLayout/Aside';
 import UserCard from '@/components/Cards/UserCard';
 import Header from '@/components/Header/AppHeaders/Header';
 import MediaQueryProvider from '@/context/MediaQueryProvider';

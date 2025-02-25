@@ -1,6 +1,6 @@
 import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
 import Section from '@/components/Sections/AppSections/Section';
-import ReserveList from '@/containers/reservation-page/reserve-list';
+import ReserveResourceList from 'app/features/Reserves/Create/ReserveResourceList';
 import getParams from '@/env/getParams';
 import { getUnitReservations } from '@/lib/queries/queries';
 
@@ -15,7 +15,7 @@ const page = async ({ params: { id }, searchParams }: { params: { id: string }, 
   return (
     <Section className="w-full pb-8 max-md:pb-0 mt-0">
       {data.recursosPorEdificio.length === 0 && <EmptySection title='Este edificio no tiene amenities'/>}
-      <ReserveList items={data?.recursosPorEdificio ?? []} params={`prp/expensas/${id}`} />
+      <ReserveResourceList items={data?.recursosPorEdificio ?? []} params={`prp/expensas/${id}`} />
     </Section>
   );
 }

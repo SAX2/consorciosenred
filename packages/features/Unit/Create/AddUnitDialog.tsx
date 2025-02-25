@@ -1,14 +1,14 @@
 "use client"
 
 import React, { useState, useTransition } from 'react'
-import Input from '@/components/Form/Input';
+import Input from 'app/components/Form/Input';
 import { IconApps, IconChevronRight } from '@tabler/icons-react';
-import DialogMessage from '@/components/Dialogs/Message';
+import DialogMessage from 'app/components/Dialogs/Message';
 import Button from 'app/components/Buttons/Button';
-import SemiSection from '@/components/Sections/AppSections/SemiSection';
+import SemiSection from 'app/components/Sections/SemiSection';
 import { z, ZodFormattedError } from 'zod';
-import InputSubmit from '@/components/Form/InputSubmit';
-import { addNewUnit } from '@/lib/queries/queries';
+import InputSubmit from 'app/components/Form/InputSubmit';
+import { addNewUnit } from "app/services/queries";
 
 export const content = {
   description: "Si desea vincularse a otra unidad como Propietario o Inquilino, puede ingresar el P.I.N. de activación que se adjunta en el recibo de expensas que usted recibe todos los meses. En caso de no poseerlo solicítelo a su Administración.",

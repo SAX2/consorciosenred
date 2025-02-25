@@ -1,7 +1,7 @@
 "use client"
 
-import { pattern } from '@/lib/images';
-import { cn } from '@/lib/utils';
+import { pattern } from 'app/assets/images';
+import { cn } from 'app/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'

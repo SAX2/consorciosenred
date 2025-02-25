@@ -1,11 +1,11 @@
 "use client"
 
 import ButtonFile from "app/components/Buttons/ButtonFile";
-import UserIcon from "@/components/Icons/UserIcon";
-import Pill from "@/components/Pill";
-import SemiSection from "@/components/Sections/AppSections/SemiSection";
-import { getStatusType } from "@/hooks/use-status";
-import { cn } from "@/lib/utils";
+import UserIcon from "app/components/Icons/IconUser";
+import Pill from "app/components/Pill";
+import SemiSection from "app/components/Sections/SemiSection";
+import { getStatusType } from "app/hooks/use-status";
+import { cn } from "app/lib/utils";
 import { IconAlertTriangle, IconChevronRight, IconFolderDollar, IconGavel, IconId, IconInfoCircle, IconMailExclamation, IconMessage, IconUserSquareRounded } from "@tabler/icons-react";
 import { format, parse } from "date-fns";
 import { es } from "date-fns/locale";

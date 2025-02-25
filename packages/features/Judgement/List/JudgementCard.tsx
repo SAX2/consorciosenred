@@ -1,11 +1,11 @@
 import Button from "app/components/Buttons/Button";
-import Pill from "@/components/Pill";
-import { getStatusType } from "@/hooks/use-status";
+import Pill from "app/components/Pill";
+import { getStatusType } from "app/hooks/use-status";
 import { IconChevronRight, IconGavel } from "@tabler/icons-react";
 import Link from "next/link";
 import { format, parse } from "date-fns";
 import { es } from "date-fns/locale";
-import CardIcon from "@/components/Icons/CardIcon";
+import CardIcon from "app/components/Icons/IconCard";
 
 interface JudgmentCardProps {
   item: any;

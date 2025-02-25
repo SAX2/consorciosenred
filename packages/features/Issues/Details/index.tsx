@@ -1,15 +1,15 @@
 "use client"
 
-import { PopoverFiles } from '@/components/Dropdowns/PopoverFiles';
-import Input from '@/components/Form/Input';
-import InputSubmit from '@/components/Form/InputSubmit';
-import UserIcon from '@/components/Icons/UserIcon';
-import Pill from '@/components/Pill';
-import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
-import SemiSection from '@/components/Sections/AppSections/SemiSection';
-import { getStatusType } from '@/hooks/use-status';
-import { details } from '@/lib/contents/(app)/contents';
-import { createNewCommentRcl } from '@/lib/queries/queries';
+import { DropdownFiles } from 'app/components/Dropdowns/DropdownFiles';
+import Input from 'app/components/Form/Input';
+import InputSubmit from 'app/components/Form/InputSubmit';
+import UserIcon from 'app/components/Icons/IconUser';
+import Pill from 'app/components/Pill';
+import EmptySection from 'app/components/Messages/EmptySection';
+import SemiSection from 'app/components/Sections/SemiSection';
+import { getStatusType } from 'app/hooks/use-status';
+import { details } from 'app/assets/constants/(app)/contents';
+import { createNewCommentRcl } from "app/services/queries";
 import { IconAlertTriangle, IconArrowUp, IconInfoSquareRounded, IconInfoTriangle, IconMessage, IconMessagesOff, IconPaperclip } from '@tabler/icons-react';
 import { format, formatDistanceToNow, isToday, parse } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -85,7 +85,7 @@ const InfoHeader = ({ issue }: { issue: any }) => {
               {issue.Rcl_Description}
             </p>
             {issue.adjuntosMobile.length > 0 && (
-              <PopoverFiles
+              <DropdownFiles
                 files={issue.adjuntosMobile}
                 totalLength={issue.adjuntosMobile.length}
               />

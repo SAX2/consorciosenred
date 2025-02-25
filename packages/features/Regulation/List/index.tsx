@@ -3,10 +3,10 @@ import React from 'react'
 import { format, isSameYear, parse } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { IconChevronRight, IconJpg } from '@tabler/icons-react';
-import Pill from '@/components/Pill';
+import Pill from 'app/components/Pill';
 import Image from 'next/image';
 import ButtonFile from 'app/components/Buttons/ButtonFile';
-import IconUnit from '@/components/Icons/IconUnit';
+import IconUnit from 'app/components/Icons/IconUnit';
 
 const RegulationItem = ({ item }: { item: any }) => {
   const itemDate = parse(item.fecha, "dd/MM/yyyy", new Date());

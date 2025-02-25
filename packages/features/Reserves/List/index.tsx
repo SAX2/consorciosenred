@@ -3,18 +3,18 @@
 import React, { useState } from 'react'
 import { format, parse } from 'date-fns';
 import { es } from 'date-fns/locale';
-import getParams from '@/env/getParams';
-import { reserveIcon } from '@/lib/contents/(app)/contents';
-import Pill from '@/components/Pill';
-import { getStatusType } from '@/hooks/use-status';
+import getParams from 'app/hooks/use-get-params';
+import { reserveIcon } from 'app/assets/constants/(app)/contents';
+import Pill from 'app/components/Pill';
+import { getStatusType } from 'app/hooks/use-status';
 import Button from 'app/components/Buttons/Button';
 import { IconActivity, IconCalendar, IconChevronUp, IconCircleXFilled, IconClockHour5, IconInfoCircle, IconInfoCircleFilled, IconMoneybag, IconPlus } from '@tabler/icons-react';
-import DialogMessage from '@/components/Dialogs/Message';
-import SemiSection from '@/components/Sections/AppSections/SemiSection';
-import { cancelTurn } from '@/lib/queries/queries';
+import DialogMessage from 'app/components/Dialogs/Message';
+import SemiSection from 'app/components/Sections/SemiSection';
+import { cancelTurn } from "app/services/queries";
 import { useRouter } from 'next/navigation';
-import useIsLargeScreen from '@/hooks/useIsLargeScreen';
-import BottomSection from '@/components/Sections/AppSections/BottomSection';
+import useIsLargeScreen from 'app/hooks/useIsLargeScreen';
+import BottomSection from 'app/components/Sections/SectionBottom';
 
 
 const ReservationCard = ({ item, param }: { item: any, index: number, param: string }) => {

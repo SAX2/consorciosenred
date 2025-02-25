@@ -3,12 +3,12 @@
 import React from 'react'
 import { format, formatDistanceToNow, isToday, parse } from 'date-fns'
 import { es } from 'date-fns/locale'
-import DialogMessage from '@/components/Dialogs/Message'
+import DialogMessage from 'app/components/Dialogs/Message'
 import Button from 'app/components/Buttons/Button'
-import { cn } from '@/lib/utils'
+import { cn } from 'app/lib/utils'
 import { IconBellFilled, IconBellRingingFilled, IconCalendarFilled, IconChevronRight, IconFile, IconSettings } from '@tabler/icons-react'
-import Pill from '@/components/Pill'
-import SemiSection from '@/components/Sections/AppSections/SemiSection'
+import Pill from 'app/components/Pill'
+import SemiSection from 'app/components/Sections/SemiSection'
 
 const NewDetail = ({ item }: { item: any }) => {
   const itemDate = parse(item.fecha, 'dd/MM/yyyy', new Date());
@@ -63,7 +63,7 @@ const NewDetail = ({ item }: { item: any }) => {
               {item.adjuntosMobile.map((item: any) => {
                 return <Pill text={"Adjunto"} isFile fileId={item.id} fileName={item.nombre} fileType={item.tipo} className='text-sm'/>;
               })}
-              {/* <PopoverFiles files={item.adjuntosMobile} totalLength={item.adjuntosMobile.length}/> */}
+              {/* <DropdownFiles files={item.adjuntosMobile} totalLength={item.adjuntosMobile.length}/> */}
             </div>
           </SemiSection>
         )}

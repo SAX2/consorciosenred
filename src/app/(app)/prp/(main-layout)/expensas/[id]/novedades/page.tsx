@@ -1,8 +1,8 @@
-import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
-import Section from '@/components/Sections/AppSections/Section';
+import EmptySection from 'app/components/Messages/EmptySection';
+import Section from 'app/components/Sections/Section';
 import NewsScreen from 'app/features/News/List';
-import getParams from '@/env/getParams';
-import { getUnitNews } from '@/lib/queries/queries';
+import getParams from 'app/hooks/use-get-params';
+import { getUnitNews } from "app/services/queries";
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
   const code = getParams({ params: id, type: "code" });

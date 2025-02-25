@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { getAuthHeaders } from './services/config';
-import { saveUnitPermissions } from './store/permissions/unit-permissions';
+import { getAuthHeaders } from '../packages/services/config';
+import { saveUnitPermissions } from '../packages/hooks/permissions/unit-permissions';
 
 async function getUnitsEdge() {
   const headers = await getAuthHeaders();
@@ -48,7 +48,6 @@ export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === '/prp/expensas' && session) {
     try {
       const units = await getUnitsEdge();
-      const unit = units[0];
       (await cookie).set('unit', JSON.stringify(units.length));
 
       await saveUnitPermissions(units);

@@ -1,16 +1,16 @@
 "use client"
 
 import Link from "next/link";
-import Pill from "@/components/Pill";
-import SemiSectionData from "@/components/Sections/AppSections/SemiSection";
+import Pill from "app/components/Pill";
+import SemiSectionData from "app/components/Sections/SemiSection";
 import Shortcuts, { getShortcutCols } from "app/components/Buttons/ButtonShortcut/List";
 import { IconCalendarExclamation, IconMailExclamation, IconMailForward, IconPlus } from "@tabler/icons-react";
 import { FC } from "react";
-import { shortcutsUnit, unitCard } from "@/lib/contents/(app)/contents";
-import IconUnit from "@/components/Icons/IconUnit";
+import { shortcutsUnit, unitCard } from "app/assets/constants/(app)/contents";
+import IconUnit from "app/components/Icons/IconUnit";
 import ButtonFile from "app/components/Buttons/ButtonFile";
-import { formatUnitPermissions, getShortcutRoutesWithPermissions } from "@/store/permissions/useUnitPermissions";
-import { cn } from "@/lib/utils";
+import { formatUnitPermissions, getShortcutRoutesWithPermissions } from "app/hooks/permissions/useUnitPermissions";
+import { cn } from "app/lib/utils";
 
 interface unitProps {
   unit: any;

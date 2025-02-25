@@ -1,6 +1,6 @@
 import React from 'react'
-import Section from '@/components/Sections/AppSections/Section';
-import { getUnits } from '@/lib/queries/queries';
+import Section from 'app/components/Sections/Section';
+import { getUnits } from "app/services/queries";
 import { redirect } from 'next/navigation';
 import UnitList from 'app/features/Unit/List';
 

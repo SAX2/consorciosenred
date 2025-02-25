@@ -1,7 +1,7 @@
-import getParams from "@/env/getParams";
+import getParams from "app/hooks/use-get-params";
 import { getUnitIssues } from "@/lib/queries/queries";
 import RclList, { BottomSectionRcl } from "app/features/Issues/List";
-import EmptySection from "@/components/Sections/AppSections/Errors/EmptySection";
+import EmptySection from "app/components/Messages/EmptySection";
 
 const page = async ({ params }: {  params: Promise<{ group: string; id: string }> }) => {
   const { id } = await params

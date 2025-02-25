@@ -1,7 +1,7 @@
 "use client"
 
 import React, { memo } from 'react';
-import { ShortcutProps } from '@/types/globals'
+import { ShortcutProps } from 'app/types/globals'
 import IconBgDescription from './_IconBgDescription';
 import IconBg from './_IconBg';
 import NoStyled from './_NoStyled';

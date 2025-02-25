@@ -1,7 +1,7 @@
 import React from 'react'
-import Section from '@/components/Sections/AppSections/Section';
-import { getUnitReservationsByGroupCalendar } from '@/lib/queries/queries';
-import getParams from '@/env/getParams';
+import Section from 'app/components/Sections/Section';
+import { getUnitReservationsByGroupCalendar } from "app/services/queries";
+import getParams from 'app/hooks/use-get-params';
 import ReserveTurnList from 'app/features/Reserves/Create/ReserveTurnList';
 
 type Props = {

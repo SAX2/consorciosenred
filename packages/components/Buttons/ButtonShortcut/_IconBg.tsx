@@ -1,6 +1,6 @@
 import { handlePress as handlePressAction } from './actions';
 import { memo } from "react";
-import { ShortcutProps } from "@/types/globals";
+import { ShortcutProps } from "app/types/globals";
 import Link from "next/link";
 
 const IconBg = memo(({ title, icon, style, handlePress, index, isBottomSheet, path }: ShortcutProps) => {

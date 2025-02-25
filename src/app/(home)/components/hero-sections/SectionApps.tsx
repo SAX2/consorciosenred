@@ -1,5 +1,5 @@
-import { appInstall } from '@/lib/contents/services';
-import { cn } from '@/lib/utils';
+import { appInstall } from 'app/assets/constants/services';
+import { cn } from 'app/lib/utils';
 import Image from 'next/image';
 import React, { FC } from 'react'
 import ButtonArrow from '../buttons/button-arrow';

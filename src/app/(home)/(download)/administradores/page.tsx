@@ -1,6 +1,6 @@
 import React from 'react'
 import SectionArticle from '../../components/section';
-import { appInstallAdministrador } from '@/lib/contents/services';
+import { appInstallAdministrador } from 'app/assets/constants/services';
 import Image from 'next/image';
 import Button from 'app/components/Buttons/Button';
 import { IconChevronRight } from '@tabler/icons-react';

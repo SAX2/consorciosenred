@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
-import { ShortcutProps } from '@/types/globals';
+import { cn } from 'app/lib/utils';
+import { ShortcutProps } from 'app/types/globals';
 import { handlePress as handlePressAction } from './actions';
 import Link from 'next/link';
 import React, { memo } from 'react'

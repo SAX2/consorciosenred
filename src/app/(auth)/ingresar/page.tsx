@@ -2,14 +2,14 @@
 
 import React, { useState, useTransition } from 'react';
 import Header from '../components/Header';
-import auth from '@/lib/contents/auth.json';
+import auth from 'app/assets/constants//auth.json';
 import Link from 'next/link';
-import Input, { InputType } from '@/components/Form/Input';
+import Input, { InputType } from 'app/components/Form/Input';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
-import { loginHandler } from '@/actions/auth';
+import { loginHandler } from 'app/services/auth';
 import { z, ZodFormattedError } from 'zod';
-import InputSubmit from '@/components/Form/InputSubmit';
+import InputSubmit from 'app/components/Form/InputSubmit';
 
 // Definición del esquema con Zod
 const LoginSchema = z.object({

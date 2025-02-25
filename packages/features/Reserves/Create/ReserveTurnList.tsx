@@ -20,15 +20,15 @@ import { format, parseISO } from "date-fns";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { createNewReservation } from "@/lib/queries/queries";
-import getParams from '@/env/getParams';
+import getParams from 'app/hooks/use-get-params';
 import { es } from "date-fns/locale";
-import EmptySection from "@/components/Sections/AppSections/Errors/EmptySection";
+import EmptySection from "app/components/Messages/EmptySection";
 import MoreOptionsEmpty from "./ReserveTurnListEmptyOptions";
-import useIsLargeScreen from "@/hooks/useIsLargeScreen";
-import Pill from "@/components/Pill";
+import useIsLargeScreen from "app/hooks/useIsLargeScreen";
+import Pill from "app/components/Pill";
 import { Checkbox } from "@/components/ui/checkbox";
-import BottomSection from "@/components/Sections/AppSections/BottomSection";
-import DialogMessage from "@/components/Dialogs/Message";
+import BottomSection from "app/components/Sections/SectionBottom";
+import DialogMessage from "app/components/Dialogs/Message";
 
 export type Turn = {
   id: string;

@@ -2,7 +2,7 @@
 
 import ShortcutButton from 'app/components/Buttons/ButtonShortcut';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { ShortcutProps } from '@/types/globals';
+import { ShortcutProps } from 'app/types/globals';
 import { useParams } from 'next/navigation';
 import React from 'react'
 

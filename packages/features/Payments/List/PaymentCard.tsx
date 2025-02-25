@@ -1,17 +1,17 @@
 "use client"
 
-import Pill from '@/components/Pill';
-import useCurrencyFormat from '@/hooks/useCurrencyFormat';
-import SemiSectionData from '@/components/Sections/AppSections/SemiSection';
+import Pill from 'app/components/Pill';
+import useCurrencyFormat from 'app/hooks/useCurrencyFormat';
+import SemiSectionData from 'app/components/Sections/SemiSection';
 import React, { FC, useEffect, PropsWithChildren } from 'react'
-import { cn } from '@/lib/utils';
+import { cn } from 'app/lib/utils';
 import { IconCalendar, IconChevronRight, IconCopy, IconFile, IconFileBarcode, IconMessage, IconReceipt, IconReceipt2 } from '@tabler/icons-react';
 import { AccordionContent, AccordionTrigger } from '@/components/ui/accordion';
 import { motion } from 'framer-motion';
 import { format, parse } from 'date-fns'
 import { es } from 'date-fns/locale'
-import CardIcon from '@/components/Icons/CardIcon';
-import { PopoverFiles } from '@/components/Dropdowns/PopoverFiles';
+import CardIcon from 'app/components/Icons/IconCard';
+import { DropdownFiles } from 'app/components/Dropdowns/DropdownFiles';
 
 const itemVariants = {
   hidden: { opacity: 0, y: -20 },
@@ -180,7 +180,7 @@ const PaymentCard: FC<PaymentCardProps> = ({
                   >
                     <IconFile width={26} height={26} />
                   </div>
-                  <PopoverFiles
+                  <DropdownFiles
                     files={item.adjuntosMobile}
                     totalLength={item.adjuntosMobile.length}
                   />

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { IconSelector } from '@tabler/icons-react'
-import getParams from '@/env/getParams'
-import { getUnitReservationsByGroup } from '@/lib/queries/queries'
-import { reserveIcon } from '@/lib/contents/(app)/contents'
-import { ShortcutProps } from '@/types/globals'
+import getParams from 'app/hooks/use-get-params'
+import { getUnitReservationsByGroup } from "app/services/queries"
+import { reserveIcon } from 'app/assets/constants/(app)/contents'
+import { ShortcutProps } from 'app/types/globals'
 import { ReserveButtonOptions } from 'app/features/Reserves/Create/ReserveResourceCard'
 
 const MoreOptionsEmpty = ({ params, group }: { params: string, group: string }) => {

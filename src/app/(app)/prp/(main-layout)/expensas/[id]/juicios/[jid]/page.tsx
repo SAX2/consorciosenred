@@ -1,6 +1,6 @@
 import JudgmentDetails from 'app/features/Judgement/Details';
-import getParams from '@/env/getParams';
-import { getUnitJudgments } from '@/lib/queries/queries';
+import getParams from 'app/hooks/use-get-params';
+import { getUnitJudgments } from "app/services/queries";
 import React from 'react'
 
 const page = async ({ params }: { params: { jid: string; id: string } }) => {

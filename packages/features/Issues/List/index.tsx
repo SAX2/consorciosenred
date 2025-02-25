@@ -2,16 +2,16 @@
 
 import React, { FC, PropsWithChildren, useState } from 'react';
 import IssueCard from 'app/features/Issues/List/IssueCard';
-import Input from '@/components/Form/Input';
-import { cn } from '@/lib/utils';
+import Input from 'app/components/Form/Input';
+import { cn } from 'app/lib/utils';
 import { IconPlus, IconSearch } from '@tabler/icons-react';
-import usePagination from '@/hooks/use-pagination';
-import Pagination from '@/components/Sections/AppSections/Pagination';
-import Section from '@/components/Sections/AppSections/Section';
+import usePagination from 'app/hooks/use-pagination';
+import Pagination from 'app/components/Sections/Pagination';
+import Section from 'app/components/Sections/Section';
 import Button from 'app/components/Buttons/Button';
 import { usePathname } from 'next/navigation';
-import BottomSection from '@/components/Sections/AppSections/BottomSection';
-import useIsLargeScreen from '@/hooks/useIsLargeScreen';
+import BottomSection from 'app/components/Sections/SectionBottom';
+import useIsLargeScreen from 'app/hooks/useIsLargeScreen';
 
 interface RclListProps extends PropsWithChildren {
   className?: string;

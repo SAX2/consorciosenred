@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useTransition, FC, PropsWithChildren } from 'react'
-import { createNewRcl } from '@/lib/queries/queries';
+import { createNewRcl } from "app/services/queries";
 import { z, ZodFormattedError } from 'zod'
-import FileSelectorDrag from '@/components/Form/FileSelectorDrag';
-import Input from '@/components/Form/Input';
-import getParams from '@/env/getParams';
-import InputSubmit from '@/components/Form/InputSubmit';
+import FileSelectorDrag from 'app/components/Form/InputFileSelector';
+import Input from 'app/components/Form/Input';
+import getParams from 'app/hooks/use-get-params';
+import InputSubmit from 'app/components/Form/InputSubmit';
 
 interface NewRclProps extends PropsWithChildren {
   id: string,

@@ -1,14 +1,14 @@
 "use client"
 
 import React from 'react'
-import Pill from '@/components/Pill';
+import Pill from 'app/components/Pill';
 import Link from 'next/link';
-import statuscolors from '@/lib/contents/(app)/statuscolors.json'
-import { cn } from '@/lib/utils';
+import statuscolors from 'app/assets/constants//(app)/statuscolors.json'
+import { cn } from 'app/lib/utils';
 import { IconAlertTriangle, IconChevronRight } from '@tabler/icons-react';
 import { usePathname } from 'next/navigation';
-import CardIcon from '@/components/Icons/CardIcon';
-import { getStatusType } from '@/hooks/use-status';
+import CardIcon from 'app/components/Icons/IconCard';
+import { getStatusType } from 'app/hooks/use-status';
 
 interface RclCardProps {
   item: any;

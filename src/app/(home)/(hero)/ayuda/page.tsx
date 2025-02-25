@@ -2,7 +2,7 @@ import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/
 import { Accordion } from '@radix-ui/react-accordion';
 import React from 'react'
 import SectionArticle from '../../components/section';
-import faq from '@/lib/contents/faq.json'
+import faq from 'app/assets/constants//faq.json'
 
 const page = () => {
   return (

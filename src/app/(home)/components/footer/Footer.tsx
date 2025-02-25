@@ -1,8 +1,8 @@
 import React from 'react'
-import footer from '@/lib/contents/footer';
+import footer from 'app/assets/constants/footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { logoBackgroundBlue } from '@/lib/images';
+import { logoBackgroundBlue } from 'app/assets/images';
 
 const Footer = () => {
   return (

@@ -1,6 +1,6 @@
 import NewPayment, { AccordionNewPaymentDetails } from 'app/features/Payments/Create'
-import getParams from '@/env/getParams'
-import { getUnit } from '@/lib/queries/queries';
+import getParams from 'app/hooks/use-get-params'
+import { getUnit } from "app/services/queries";
 import { notFound } from 'next/navigation';
 import React from 'react'
 

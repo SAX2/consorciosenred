@@ -1,10 +1,10 @@
 import React, { PropsWithChildren, FC, Suspense } from 'react'
 import { Separator } from '@/components/ui/separator';
 import AsideSection from 'app/features/MLayout/Aside';
-import UserCard from '@/components/Cards/UserCard';
-import Header from '@/components/Header/AppHeaders/Header';
-import MediaQueryProvider from '@/context/MediaQueryProvider';
-import MobileHeader from '@/components/Header/AppHeaders/MobileHeader';
+import UserCard from 'app/features/MLayout/Aside/_UserCard';
+import Header from 'app/features/MLayout/Headers/Header';
+import MediaQueryProvider from 'app/contexts/MediaQueryProvider';
+import MobileHeader from 'app/features/MLayout/Headers/MobileHeader';
 import { Metadata } from 'next';
 
 interface LayoutProps extends PropsWithChildren {

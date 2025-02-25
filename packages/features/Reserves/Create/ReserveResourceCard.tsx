@@ -1,11 +1,11 @@
-import Pill from '@/components/Pill'
+import Pill from 'app/components/Pill'
 import Button, { ButtonProps } from 'app/components/Buttons/Button'
-import { reserveIcon } from '@/lib/contents/(app)/contents'
+import { reserveIcon } from 'app/assets/constants/(app)/contents'
 import { IconPlus, IconProps } from '@tabler/icons-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { ShortcutProps } from '@/types/globals'
+import { ShortcutProps } from 'app/types/globals'
 import ShortcutButton from '../../../components/Buttons/ButtonShortcut'
-import { cn } from '@/lib/utils'
+import { cn } from 'app/lib/utils'
 
 export const ReserveButtonOptions = ({
   options,

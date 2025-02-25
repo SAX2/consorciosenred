@@ -1,8 +1,8 @@
-import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
-import Section from '@/components/Sections/AppSections/Section';
+import EmptySection from 'app/components/Messages/EmptySection';
+import Section from 'app/components/Sections/Section';
 import ReserveResourceList from 'app/features/Reserves/Create/ReserveResourceList';
-import getParams from '@/env/getParams';
-import { getUnitReservations } from '@/lib/queries/queries';
+import getParams from 'app/hooks/use-get-params';
+import { getUnitReservations } from "app/services/queries";
 
 const page = async ({ params: { id }, searchParams }: { params: { id: string }, searchParams: { [key: string]: string | string[] | undefined } }) => {
   const unitId = getParams({ params: id, type: "id" });

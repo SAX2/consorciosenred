@@ -1,16 +1,16 @@
 "use client"
 
 import PaymentCard from 'app/features/Payments/List/PaymentCard';
-import Input from '@/components/Form/Input';
-import BottomSection from '@/components/Sections/AppSections/BottomSection';
-import Pagination from '@/components/Sections/AppSections/Pagination';
+import Input from 'app/components/Form/Input';
+import BottomSection from 'app/components/Sections/SectionBottom';
+import Pagination from 'app/components/Sections/Pagination';
 import { Accordion, AccordionItem } from '@/components/ui/accordion';
-import usePagination from '@/hooks/use-pagination';
+import usePagination from 'app/hooks/use-pagination';
 import { IconBellRinging, IconSearch } from '@tabler/icons-react';
 import React, { FC, PropsWithChildren, useState } from 'react'
 import Button from 'app/components/Buttons/Button';
 import { usePathname } from 'next/navigation';
-import useIsLargeScreen from '@/hooks/useIsLargeScreen';
+import useIsLargeScreen from 'app/hooks/useIsLargeScreen';
 
 interface PaymentListProps extends PropsWithChildren {
   className?: string;

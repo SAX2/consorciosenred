@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { cn } from 'app/lib/utils';
 import { IconChevronRight } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import React from 'react';

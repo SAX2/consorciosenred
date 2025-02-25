@@ -1,5 +1,5 @@
 import ShortcutCard from "app/components/Buttons/ButtonShortcut";
-import { ShortcutButtonDisplayType } from "@/types/globals";
+import { ShortcutButtonDisplayType } from "app/types/globals";
 import { FC } from "react";
 
 export interface ShortcutsProps {

@@ -3,15 +3,15 @@
 import React, { FC, PropsWithChildren, useEffect, useState, useTransition } from "react";
 import { z, ZodFormattedError } from 'zod';
 import { IconCalendar, IconCheck, IconChevronDown } from '@tabler/icons-react';
-import { cn } from '@/lib/utils';
-import FileSelectorDrag from '@/components/Form/FileSelectorDrag';
-import Input, { inputClassName, Label } from '@/components/Form/Input';
-import InputCalendar from '@/components/Form/InputCalendar';
+import { cn } from 'app/lib/utils';
+import FileSelectorDrag from 'app/components/Form/InputFileSelector';
+import Input, { inputClassName, Label } from 'app/components/Form/Input';
+import InputCalendar from 'app/components/Form/InputCalendar';
 import { createNotifyPayment } from "@/lib/queries/queries";
 import { NumericFormat } from 'react-number-format';
-import InputSubmit from "@/components/Form/InputSubmit";
+import InputSubmit from "app/components/Form/InputSubmit";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import IconUnit from "@/components/Icons/IconUnit";
+import IconUnit from "app/components/Icons/IconUnit";
 
 interface NewPaymentProps extends PropsWithChildren {
   totalImport: number;

@@ -2,7 +2,7 @@ import React from 'react'
 import { format, isSameYear, parse } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { IconUsersGroup } from '@tabler/icons-react';
-import { PopoverFiles } from '@/components/Dropdowns/PopoverFiles';
+import { DropdownFiles } from 'app/components/Dropdowns/DropdownFiles';
 
 const AssemblyCard = ({ item }: { item: any }) => {
   const itemDate = parse(item.fecha, "dd/MM/yyyy", new Date());
@@ -29,7 +29,7 @@ const AssemblyCard = ({ item }: { item: any }) => {
             <p className="text-black/75 text-base">{item.detalle}</p>
             {item.adjuntosMobile.length > 0 && (
               <div className="flex">
-                <PopoverFiles files={item.adjuntosMobile} totalLength={item.adjuntosMobile.length} />
+                <DropdownFiles files={item.adjuntosMobile} totalLength={item.adjuntosMobile.length} />
               </div>
             )}
           </div>

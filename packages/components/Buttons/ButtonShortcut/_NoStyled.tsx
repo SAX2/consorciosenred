@@ -1,5 +1,5 @@
 import { handlePress as handlePressAction } from './actions';
-import { ShortcutProps } from '@/types/globals';
+import { ShortcutProps } from 'app/types/globals';
 import Link from 'next/link';
 import React, { memo } from 'react'
 

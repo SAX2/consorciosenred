@@ -1,4 +1,4 @@
-import Grid from '@/components/Sections/AppSections/Grid';
+import Grid from 'app/features/Unit/List/_Grid';
 import UnitCard from 'app/features/Unit/List/_UnitCard';
 import React, { FC } from 'react'
 import AddUnitDialog from '../Create/AddUnitDialog';

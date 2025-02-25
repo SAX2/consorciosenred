@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
-import { ServicesStatic } from '@/types/globals';
+import { cn } from 'app/lib/utils';
+import { ServicesStatic } from 'app/types/globals';
 import Image from 'next/image';
 import React from 'react'
 

@@ -2,7 +2,7 @@
 
 import SemiSectionData from "@/components/Sections/AppSections/SemiSection";
 import Pill from "@/components/Pill";
-import Shortcuts, { getShortcutCols } from "../../../../src/components/Sections/AppSections/ShortcutSection";
+import Shortcuts, { getShortcutCols } from "../../../components/Buttons/ButtonShortcut/List";
 import MediaQueryProvider from "@/context/MediaQueryProvider";
 import { IconCalendarExclamation, IconCoins, IconExclamationCircle, IconMailExclamation, IconMailForward } from "@tabler/icons-react";
 import { FC, useRef } from "react";

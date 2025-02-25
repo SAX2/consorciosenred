@@ -2,7 +2,7 @@
 
 import Section from '@/components/Sections/AppSections/Section'
 import React, { useEffect, useState } from 'react'
-import Shortcuts, { getShortcutCols } from '@/components/Sections/AppSections/ShortcutSection';
+import Shortcuts, { getShortcutCols } from 'app/components/Buttons/ButtonShortcut/List';
 import { getShortcutRoutesWithPermissions } from '@/store/permissions/useUnitPermissions';
 import { getUnitPermissions } from '@/store/permissions/unit-permissions';
 import { cn } from '@/lib/utils';

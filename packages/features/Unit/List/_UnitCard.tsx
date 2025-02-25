@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Pill from "@/components/Pill";
 import SemiSectionData from "@/components/Sections/AppSections/SemiSection";
-import Shortcuts, { getShortcutCols } from "@/components/Sections/AppSections/ShortcutSection";
+import Shortcuts, { getShortcutCols } from "app/components/Buttons/ButtonShortcut/List";
 import { IconCalendarExclamation, IconMailExclamation, IconMailForward, IconPlus } from "@tabler/icons-react";
 import { FC } from "react";
 import { shortcutsUnit, unitCard } from "@/lib/contents/(app)/contents";

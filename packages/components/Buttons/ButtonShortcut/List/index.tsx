@@ -1,4 +1,4 @@
-import ShortcutCard from "@/components/Cards/ShortcutCard";
+import ShortcutCard from "app/components/Buttons/ButtonShortcut";
 import { ShortcutButtonDisplayType } from "@/types/globals";
 import { FC } from "react";
 

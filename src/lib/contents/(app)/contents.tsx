@@ -3,7 +3,7 @@ import { ShortcutProps } from "@/types/globals"
 import { toast } from "sonner"
 import Toast from "@/components/toast"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import ActionsDropdown from "@/components/Dropdowns/ActionsDropdown"
+import ActionsDropdown from "app/components/Buttons/ButtonShortcut/List/_ActionsDropdown"
 
 export const unitCard = {
     liquidation: "Ver Liquidación",

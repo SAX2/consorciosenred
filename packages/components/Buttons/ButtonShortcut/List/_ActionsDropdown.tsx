@@ -1,6 +1,6 @@
 "use client"
 
-import ShortcutButton from '@/components/Cards/ShortcutCard';
+import ShortcutButton from 'app/components/Buttons/ButtonShortcut';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { ShortcutProps } from '@/types/globals';
 import { useParams } from 'next/navigation';

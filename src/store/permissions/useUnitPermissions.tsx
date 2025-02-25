@@ -5,7 +5,7 @@ import { ACTIONS, ActionsProps, DEFAULT_ROUTES, NAVIGATION_TABS, ShortcutPropsMa
 import { UnitPermissions } from "./unit-permissions";
 import { ShortcutProps } from "@/types/globals";
 import { IconDots } from "@tabler/icons-react";
-import ActionsDropdown from "@/components/Dropdowns/ActionsDropdown";
+import ActionsDropdown from "app/components/Buttons/ButtonShortcut/List/_ActionsDropdown";
 
 export const formatUnitPermissions = (unit: any) => {
   return {

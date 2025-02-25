@@ -4,7 +4,7 @@ import { reserveIcon } from '@/lib/contents/(app)/contents'
 import { IconPlus, IconProps } from '@tabler/icons-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { ShortcutProps } from '@/types/globals'
-import ShortcutButton from '../../../../src/components/Cards/ShortcutCard'
+import ShortcutButton from '../../../components/Buttons/ButtonShortcut'
 import { cn } from '@/lib/utils'
 
 export const ReserveButtonOptions = ({

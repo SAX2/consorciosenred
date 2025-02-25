@@ -1,7 +1,7 @@
-import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
+import EmptySection from 'app/components/Messages/EmptySection';
 import PDFViewer from './_components/PdfViewer';
-import { getFiles } from '@/lib/queries/queries';
-import { QueryFileProps } from '@/types/globals';
+import { getFiles } from "app/services/queries";
+import { QueryFileProps } from 'app/types/globals';
 import Image from 'next/image';
 import React from 'react'
 import { IconFaceIdError } from '@tabler/icons-react';

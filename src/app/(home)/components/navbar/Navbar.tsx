@@ -1,14 +1,14 @@
 "use client"
 
-import { logoBackgroundWhite } from '@/lib/images'
+import { logoBackgroundWhite } from 'app/assets/images'
 import { useMotionValueEvent, useScroll, useInView } from "framer-motion"
-import { cn } from '@/lib/utils';
+import { cn } from 'app/lib/utils';
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useState, useRef } from 'react'
-import navigation from '@/lib/contents/nav.json'
+import navigation from 'app/assets/constants//nav.json'
 import { usePathname } from 'next/navigation';
-import Burger from '@/components/Icons/Burger';
+import Burger from 'app/components/Icons/IconBurger';
 
 const Navbar = () => {
   const pathname = usePathname();

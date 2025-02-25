@@ -1,8 +1,8 @@
-import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
-import Section from '@/components/Sections/AppSections/Section';
-import AssemblyScreen from '@/containers/asambley-page/assembly-screen';
-import getParams from '@/env/getParams';
-import { getUnitAssembly } from '@/lib/queries/queries';
+import EmptySection from 'app/components/Messages/EmptySection';
+import Section from 'app/components/Sections/Section';
+import AssemblyScreen from 'app/features/Assembley/List';
+import getParams from 'app/hooks/use-get-params';
+import { getUnitAssembly } from "app/services/queries";
 import React from 'react'
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {

@@ -1,8 +1,8 @@
 import React from 'react'
 import SectionArticle from '../../components/section';
-import { appInstallPropietario } from '@/lib/contents/services';
+import { appInstallPropietario } from 'app/assets/constants/services';
 import Image from 'next/image';
-import Button from '@/components/Buttons/Button';
+import Button from 'app/components/Buttons/Button';
 import { IconChevronRight } from '@tabler/icons-react';
 
 const page = () => {

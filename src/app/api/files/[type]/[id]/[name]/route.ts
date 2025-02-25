@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getFiles } from "@/lib/queries/queries";
-import { QueryFileProps } from "@/types/globals";
+import { QueryFileProps } from "app/types/globals";
 
 export async function GET(
   req: NextRequest,

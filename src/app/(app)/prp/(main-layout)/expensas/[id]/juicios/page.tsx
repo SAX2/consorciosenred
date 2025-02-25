@@ -1,7 +1,7 @@
-import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection'
-import JudgmentsScreen from '@/containers/judgements-page/judgements'
-import getParams from '@/env/getParams'
-import { getUnitJudgments } from '@/lib/queries/queries'
+import EmptySection from 'app/components/Messages/EmptySection'
+import JudgmentsScreen from 'app/features/Judgement/List'
+import getParams from 'app/hooks/use-get-params'
+import { getUnitJudgments } from "app/services/queries"
 import React from 'react'
 
 const page = async ({ params }: { params: { id: string } }) => {

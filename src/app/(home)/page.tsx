@@ -1,23 +1,23 @@
 "use client"
 
-import services, { appInstall } from '@/lib/contents/services'
-import { Separator } from "@/components/ui/separator";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { caba1, desktopAdminPreview, mobileUnit } from "@/lib/images";
+import services, { appInstall } from 'app/assets/constants/services'
+import { Separator } from "app/components/ui/separator";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "app/components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "app/components/ui/carousel";
+import { caba1, desktopAdminPreview, mobileUnit } from "app/assets/images";
 import { IconChevronRight } from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
+import { cn } from "app/lib/utils";
 import Image from "next/image";
-import main from '@/lib/contents/main.json'
+import main from 'app/assets/constants//main.json'
 import Link from "next/link";
-import HoverPopover from "@/components/button/HoverPopover";
+import HoverPopover from "@/app/(home)/components/HoverPopover";
 import Section from "./components/hero-sections/Section";
 import Service from "./components/hero-sections/Services";
 import NewsCard from "./components/card/NewsCard";
 import Main from './components/Main';
 import React from 'react';
 import ButtonArrow from './components/buttons/button-arrow';
-import Button from '@/components/Buttons/Button';
+import Button from 'app/components/Buttons/Button';
 import SectionApps from './components/hero-sections/SectionApps';
 
 const SectionMetrics = () => {

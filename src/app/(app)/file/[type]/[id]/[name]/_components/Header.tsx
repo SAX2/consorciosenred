@@ -1,6 +1,6 @@
 "use client"
 
-import Button from '@/components/Buttons/Button';
+import Button from 'app/components/Buttons/Button';
 import { IconChevronLeft, IconShare } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import React from 'react'

@@ -1,8 +1,8 @@
 import React from 'react'
-import about from '@/lib/contents/about.json'
+import about from 'app/assets/constants//about.json'
 import Main from '../../components/Main';
-import Pill from '@/components/Pill';
-import { cn } from '@/lib/utils';
+import Pill from 'app/components/Pill';
+import { cn } from 'app/lib/utils';
 
 
 const SemiSection = ({ children }: { children: React.ReactNode }) => {

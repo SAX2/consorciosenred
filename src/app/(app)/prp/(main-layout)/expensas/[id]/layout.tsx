@@ -1,8 +1,8 @@
-import { cn } from "@/lib/utils";
-import Sidebar from "@/components/navbar/AppNavbars/UnitSidebar";
-import MediaQueryProvider from "@/context/MediaQueryProvider";
-import getParams from "@/env/getParams";
-import { getUnitPermissions } from "@/store/permissions/unit-permissions";
+import { cn } from "app/lib/utils";
+import Sidebar from "app/features/Unit/Sidebar";
+import MediaQueryProvider from "app/contexts/MediaQueryProvider";
+import getParams from "app/hooks/use-get-params";
+import { getUnitPermissions } from "app/hooks/permissions/unit-permissions";
 
 const layout = async ({ children, params }: { children: React.ReactNode, params: Promise<{ id: string }> }) => {
   const { id } = await params;

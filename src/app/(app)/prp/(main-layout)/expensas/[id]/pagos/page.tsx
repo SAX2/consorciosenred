@@ -1,8 +1,8 @@
-import EmptySection from '@/components/Sections/AppSections/Errors/EmptySection';
-import Section from '@/components/Sections/AppSections/Section';
-import PaymentList, { BottomSectionPayments } from '@/containers/payments-page/payment-list';
-import getParams from '@/env/getParams';
-import { getUnitPayments } from '@/lib/queries/queries';
+import EmptySection from 'app/components/Messages/EmptySection';
+import Section from 'app/components/Sections/Section';
+import PaymentList, { BottomSectionPayments } from 'app/features/Payments/List';
+import getParams from 'app/hooks/use-get-params';
+import { getUnitPayments } from "app/services/queries";
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
   const unitId = getParams({ params: id, type: "id" });

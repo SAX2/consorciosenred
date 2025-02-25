@@ -1,4 +1,4 @@
-import { logoBackgroundBlue } from '@/lib/images';
+import { logoBackgroundBlue } from 'app/assets/images';
 import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react'

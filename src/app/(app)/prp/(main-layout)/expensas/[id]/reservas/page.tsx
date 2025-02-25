@@ -1,8 +1,8 @@
-import EmptySection from "@/components/Sections/AppSections/Errors/EmptySection";
-import Section from "@/components/Sections/AppSections/Section";
-import ReservationsScreen, { BottomSectionReserve } from "@/containers/reservation-page/reservations-list";
-import getParams from "@/env/getParams";
-import { getUnitReservationsList } from "@/lib/queries/queries";
+import EmptySection from "app/components/Messages/EmptySection";
+import Section from "app/components/Sections/Section";
+import ReservationsScreen, { BottomSectionReserve } from "app/features/Reserves/List";
+import getParams from "app/hooks/use-get-params";
+import { getUnitReservationsList } from "app/services/queries";
 
 const page = async ({
   params: { id },

@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-import { ThemeProvider } from "@/context/ThemeProvider"
+import { ThemeProvider } from "app/contexts/ThemeProvider"
 import NextTopLoader from 'nextjs-toploader';
-import { Toaster } from '@/components/ui/sonner';
+import { Toaster } from 'app/components/ui/sonner';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 
 interface layoutProps {

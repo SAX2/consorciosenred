@@ -9,6 +9,8 @@ export type SessionUser = {
 
 export type roles = "[Propietario]" | "[Administrador]";
 
+export type InputSubmitStatus = "idle" | "loading" | "success" | "error";
+
 export type StaticDataType = {
   title: string;
   content?: string | any[];

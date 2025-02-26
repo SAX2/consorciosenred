@@ -3,10 +3,11 @@
 import { classNameButton, classNameButtonText } from "app/components/Buttons/Button";
 import { cn } from "app/lib/utils";
 import { IconCircleCheckFilled, IconCircleXFilled, IconLoader } from "@tabler/icons-react";
-import { motion, AnimatePresence,HTMLMotionProps } from "framer-motion";
+import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion";
+import { InputSubmitStatus } from "app/types/globals";
 
 interface InputSubmitProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  status?: 'idle' | 'loading' | 'success' | 'error';
+  status?: InputSubmitStatus;
   idleText?: string;
   loadingText?: string;
   successText?: string;
@@ -55,10 +56,12 @@ const InputSubmit = ({
     );
   };
 
+  const MButton = motion.button as React.ComponentType<React.ButtonHTMLAttributes<HTMLButtonElement> & HTMLMotionProps<"button">>;
+
   return (
-    <motion.button
+    <MButton
       type="submit"
-      disabled={status === 'loading'}
+      disabled={status === 'loading' || props.disabled}
       className={cn(
         classNameButton,
         "w-full p-2 outline-none border outline-offset-0 flex items-center justify-center",
@@ -74,7 +77,7 @@ const InputSubmit = ({
       transition={{ duration: 0.150 }}
     >
       {getContent()}
-    </motion.button>
+    </MButton>
   );
 };
 

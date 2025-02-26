@@ -134,20 +134,20 @@ export const InputSelect = ({
       <SelectTrigger
         className={cn(
           inputClassName(props.className),
-          "bg-white dark:bg-black-app-bg border-outline dark:border-outline-dark"
+          "bg-white dark:bg-black-app-bg border-outline dark:border-outline-dark data-[placeholder]:text-text-grey/50 text-base"
         )}
       >
-        <SelectValue placeholder={props.placeholder} />
+        <SelectValue placeholder={props.placeholder} className='' />
       </SelectTrigger>
       <SelectContent className="bg-white dark:bg-black-app-bg border-outline dark:border-outline-dark">
         {selectValues?.map((group, index) => {
           return (
-            <SelectGroup key={index + (group.label ?? "undf")}>
+            <SelectGroup key={index + (group.label ?? "undf")} className='gap-0'>
               {group?.label && <SelectLabel className='text-black'/>}
               {group?.arr.map((item) => {
                 return (
                   <SelectItem
-                    className="!hover:bg-grey"
+                    className="hover:!bg-grey text-base"
                     key={item}
                     value={item}
                   >

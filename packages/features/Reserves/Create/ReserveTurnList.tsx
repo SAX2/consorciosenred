@@ -19,7 +19,7 @@ import {
 import { format, parseISO } from "date-fns";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { createNewReservation } from "@/lib/queries/queries";
+import { createNewReservation } from "app/services/queries";
 import getParams from 'app/hooks/use-get-params';
 import { es } from "date-fns/locale";
 import EmptySection from "app/components/Messages/EmptySection";

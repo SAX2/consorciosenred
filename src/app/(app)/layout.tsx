@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { ThemeProvider } from "app/contexts/ThemeProvider"
+//@ts-ignore
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from 'app/components/ui/sonner';
 import { IconCircleCheckFilled } from '@tabler/icons-react';

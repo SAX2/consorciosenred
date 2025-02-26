@@ -1,5 +1,5 @@
 import getParams from "app/hooks/use-get-params";
-import { getUnitIssues } from "@/lib/queries/queries";
+import { getUnitIssues } from "app/services/queries";
 import RclList, { BottomSectionRcl } from "app/features/Issues/List";
 import EmptySection from "app/components/Messages/EmptySection";
 

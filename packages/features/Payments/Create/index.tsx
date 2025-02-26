@@ -7,8 +7,7 @@ import { cn } from 'app/lib/utils';
 import FileSelectorDrag from 'app/components/Form/InputFileSelector';
 import Input, { inputClassName, Label } from 'app/components/Form/Input';
 import InputCalendar from 'app/components/Form/InputCalendar';
-import { createNotifyPayment } from "@/lib/queries/queries";
-import { NumericFormat } from 'react-number-format';
+import { createNotifyPayment } from "app/services/queries";
 import InputSubmit from "app/components/Form/InputSubmit";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "app/components/ui/accordion";
 import IconUnit from "app/components/Icons/IconUnit";
@@ -171,7 +170,7 @@ const NewPayment: FC<NewPaymentProps> = ({ children, totalImport, unitId, unitCo
               thousandSeparator: ".",
               prefix: "$",
               placeholder: "$00,00",
-              onChange: (e) => {
+              onChange: (e: any) => {
                 const normalized = e.target.value
                   .replace(/\$/g, "")
                   .replace(/\./g, "")

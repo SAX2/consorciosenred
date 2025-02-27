@@ -11,7 +11,10 @@ import MobileMenu from 'app/features/Unit/Details/_SidebarMenuMobile';
 import UserIcon from 'app/components/Icons/IconUser';
 import { getUser } from "app/services/queries";
 import MobileMenuUser from 'app/features/User/Sidebar/_SidebarMenuMobile';
+<<<<<<< HEAD
 import Link from 'next/link';
+=======
+>>>>>>> 8ba683bcb3fbb500b3d24fc913fce889b8d6765b
 
 interface MobileHeaderProps extends PropsWithChildren {
   isSingleUnit: boolean;
@@ -62,6 +65,7 @@ const MobileHeaderComponent: FC<MobileHeaderProps> = ({ children, isSingleUnit }
       <div className="flex justify-between items-center gap-2">
         <div className="flex gap-2 items-center">
           {isMainPath || showUserButton ? (
+<<<<<<< HEAD
             <Link href={"/prp/usuario"}>
               <UserIcon
                 color="blue"
@@ -70,6 +74,18 @@ const MobileHeaderComponent: FC<MobileHeaderProps> = ({ children, isSingleUnit }
                 textSize="text-md"
               />
             </Link>
+=======
+            <UserDropdown>
+              <button>
+                <UserIcon
+                  color="blue"
+                  name={user?.nombre ?? "0"}
+                  dimensions="h-7 w-7"
+                  textSize="text-md"
+                />
+              </button>
+            </UserDropdown>
+>>>>>>> 8ba683bcb3fbb500b3d24fc913fce889b8d6765b
           ) : (
             <BackButton singleUnit={isSingleUnit} />
           )}
@@ -97,11 +113,15 @@ const MobileHeaderComponent: FC<MobileHeaderProps> = ({ children, isSingleUnit }
           )}
         </div>
       </div>
+<<<<<<< HEAD
       <MobileMenuUser
         isOpen={isOpenUser}
         setClose={setCloseUser}
         pathname={pathname}
       />
+=======
+      <MobileMenuUser isOpen={isOpenUser} setClose={setCloseUser} pathname={pathname}/>
+>>>>>>> 8ba683bcb3fbb500b3d24fc913fce889b8d6765b
       <MobileMenu isOpen={isOpen} setClose={setClose} pathname={pathname} />
     </div>
   );

@@ -11,7 +11,7 @@ interface BackButtonProps {
   singleUnit: boolean;
 }
 
-const NO_BACK_ROUTES = ['/prp/expensas', '/', '/ingresar'];
+const NO_BACK_ROUTES = ['/prp/expensas', '/', '/ingresar', '/prp/usuario'];
 
 const BackButton: FC<BackButtonProps> = ({ className, singleUnit }) => {
   const router = useRouter();

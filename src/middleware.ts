@@ -14,7 +14,7 @@ async function getUnitsEdge() {
   return response.json();
 }
 
-const protectedRoutes = ['/prp/expensas', '/prp/expensas/*']
+const protectedRoutes = ['/prp', '/prp/*']
 const publicRoutes = ['/ingresar', '/registrarse', '/']
 
 export async function middleware(request: NextRequest) {
@@ -33,7 +33,6 @@ export async function middleware(request: NextRequest) {
   const session = (await cookie).get('token')?.value as string;
 
   if (isProtectedRoute && !session) {
-    console.log('entro')
     return NextResponse.redirect(new URL('/ingresar', request.url))
   }
 

@@ -9,7 +9,7 @@ export const useUserOptions = () => {
   
   return [
     {
-      url: `/prp/usuario/configuracion`,
+      url: `/prp/usuario`,
       title: "Configuracion del usuario",
       description: "Configuracion",
       iconoWeb: <IconSettings width={24} height={24} />,

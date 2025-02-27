@@ -6,6 +6,8 @@ import Shortcuts, { getShortcutCols } from 'app/components/Buttons/ButtonShortcu
 import { getShortcutRoutesWithPermissions } from 'app/hooks/permissions/useUnitPermissions';
 import { getUnitPermissions } from 'app/hooks/permissions/unit-permissions';
 import { cn } from 'app/lib/utils';
+import { useParams } from 'next/navigation';
+import getParams from 'app/hooks/use-get-params';
 
 const AsideSection = ({ id }: { id: string }) => {
   const [permissions, setPermissions] = useState<any | null>(null)
@@ -43,3 +45,14 @@ const AsideSection = ({ id }: { id: string }) => {
 }
 
 export default AsideSection
+
+export const AsideUnit = () => {
+  const params = useParams();
+  const unitId = getParams({ params: params.id as string, type: "id" })
+  
+  if (params.id) {
+    return <AsideSection id={unitId}/>
+  }
+
+  return null;
+}

@@ -34,6 +34,24 @@ export const usePathsAndTitles = () => {
       paths: [`/prp/expensas`, `/prp/expensas/${params.id}`],
     },
     {
+      isSubroute: true,
+      title: "Configuración de usuario",
+      paths: [`/prp/usuario`],
+      backPaths: [{ path: `/prp/expensas`, title: "Expensas" }],
+    },
+    {
+      isSubroute: true,
+      title: "Editar datos personales",
+      backPaths: [{ path: `/prp/usuario`, title: "Configuración de usuario" }],
+      paths: [`/prp/usuario/editar`],
+    },
+    {
+      isSubroute: true,
+      title: "Cambiar contraseña",
+      backPaths: [{ path: `/prp/usuario`, title: "Configuración de usuario" }],
+      paths: [`/prp/usuario/cambiar-clave`],
+    },
+    {
       title: "Novedades",
       paths: [`/prp/expensas/${params.id}/novedades`],
     },

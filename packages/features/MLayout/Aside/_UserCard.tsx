@@ -1,10 +1,10 @@
 import Pill from "app/components/Pill";
-import UserDropdown from "app/components/Dropdowns/DropdownUser";
 import { FC } from "react";
 import { cn } from "app/lib/utils";
-import { IconDotsVertical } from "@tabler/icons-react";
+import { IconHelp, IconSettings } from "@tabler/icons-react";
 import { getUser } from "app/services/queries";
 import UserIcon from "app/components/Icons/IconUser";
+import Link from "next/link";
 
 interface UserCardProps {
   className?: string;
@@ -34,11 +34,12 @@ const UserCard: FC<UserCardProps> = async ({ className }) => {
         </div>
       </div>
       <div className={cn("flex")}>
-        <UserDropdown>
-          <button className="p-2 rounded-md hover:bg-grey-sec hover:dark:bg-grey-dark">
-            <IconDotsVertical size={24} />
-          </button>
-        </UserDropdown>
+        <Link href={'/prp/usuario'} className="p-2 rounded-md hover:bg-grey-sec hover:dark:bg-grey-dark">
+          <IconSettings size={24} className="text-text-grey" />
+        </Link>
+        <Link href={'/ayuda'} className="p-2 rounded-md hover:bg-grey-sec hover:dark:bg-grey-dark">
+          <IconHelp size={24} className="text-text-grey" />
+        </Link>
       </div>
     </div>
   );

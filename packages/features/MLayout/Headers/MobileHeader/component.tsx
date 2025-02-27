@@ -9,8 +9,9 @@ import { IconBell, IconMenu2, IconX } from '@tabler/icons-react';
 import { useUnitMenuStore, useUserMenuStore } from 'app/store/useMobileMenuStore';
 import MobileMenu from 'app/features/Unit/Details/_SidebarMenuMobile';
 import UserIcon from 'app/components/Icons/IconUser';
-import UserDropdown from 'app/components/Dropdowns/DropdownUser';
 import { getUser } from "app/services/queries";
+import MobileMenuUser from 'app/features/User/Sidebar/_SidebarMenuMobile';
+import Link from 'next/link';
 
 interface MobileHeaderProps extends PropsWithChildren {
   isSingleUnit: boolean;
@@ -38,6 +39,7 @@ const MobileHeaderComponent: FC<MobileHeaderProps> = ({ children, isSingleUnit }
       ?.title || "Mis Expensas";
 
   const isUnitPage = params.id;
+  const isUserPage = pathname.startsWith('/prp/usuario');
 
   const isMainPath = pathname === '/prp/expensas'
 
@@ -60,18 +62,30 @@ const MobileHeaderComponent: FC<MobileHeaderProps> = ({ children, isSingleUnit }
       <div className="flex justify-between items-center gap-2">
         <div className="flex gap-2 items-center">
           {isMainPath || showUserButton ? (
-            <UserDropdown>
-              <button>
-                <UserIcon color="blue" name={user?.nombre ?? "0"} dimensions='h-7 w-7' textSize='text-md' />
-              </button>
-            </UserDropdown>
+            <Link href={"/prp/usuario"}>
+              <UserIcon
+                color="blue"
+                name={user?.nombre ?? "0"}
+                dimensions="h-7 w-7"
+                textSize="text-md"
+              />
+            </Link>
           ) : (
             <BackButton singleUnit={isSingleUnit} />
           )}
           <span className="font-semibold text-xl">{currentTitle}</span>
         </div>
         <div className="flex items-center gap-3">
-          {!isUnitPage && <IconBell width={24} height={24} />}
+          {!isUnitPage && !isUserPage && <IconBell width={24} height={24} />}
+          {isUserPage && (
+            <button onClick={toggleUser}>
+              {isOpen ? (
+                <IconX width={24} height={24} />
+              ) : (
+                <IconMenu2 width={24} height={24} />
+              )}
+            </button>
+          )}
           {isUnitPage && (
             <button onClick={toggle}>
               {isOpen ? (
@@ -83,6 +97,11 @@ const MobileHeaderComponent: FC<MobileHeaderProps> = ({ children, isSingleUnit }
           )}
         </div>
       </div>
+      <MobileMenuUser
+        isOpen={isOpenUser}
+        setClose={setCloseUser}
+        pathname={pathname}
+      />
       <MobileMenu isOpen={isOpen} setClose={setClose} pathname={pathname} />
     </div>
   );

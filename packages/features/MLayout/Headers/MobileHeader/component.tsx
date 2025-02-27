@@ -6,7 +6,7 @@ import BackButton from 'app/components/Buttons/BackButton';
 import { usePathsAndTitles } from '../constants';
 import { useParams, usePathname } from 'next/navigation';
 import { IconBell, IconMenu2, IconX } from '@tabler/icons-react';
-import { useMobileMenuStore } from 'app/store/useMobileMenuStore';
+import { useUnitMenuStore, useUserMenuStore } from 'app/store/useMobileMenuStore';
 import MobileMenu from 'app/features/Unit/Details/_SidebarMenuMobile';
 import UserIcon from 'app/components/Icons/IconUser';
 import UserDropdown from 'app/components/Dropdowns/DropdownUser';
@@ -18,7 +18,9 @@ interface MobileHeaderProps extends PropsWithChildren {
 
 const MobileHeaderComponent: FC<MobileHeaderProps> = ({ children, isSingleUnit }) => {
   //  const { hasBuilding, isInView } = useLayoutStore()
-  const { isOpen, toggle, setClose } = useMobileMenuStore()
+  const { isOpen, toggle, setClose } = useUnitMenuStore()
+  const { isOpen: isOpenUser, toggle: toggleUser, setClose: setCloseUser } = useUserMenuStore()
+
   const [user, setUser] = useState<{
     atajos: any[];
     roles: string[];

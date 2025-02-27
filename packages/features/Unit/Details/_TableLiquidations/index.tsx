@@ -12,7 +12,6 @@ import {
   getSortedRowModel,
   SortingState,
 } from "@tanstack/react-table"
-import { IconArrowsUpDown } from "@tabler/icons-react";
 
 import {
   Table,
@@ -25,8 +24,8 @@ import {
 import { cn } from "app/lib/utils"
 import Input from "app/components/Form/Input"
 import React, { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { IconSearch } from "@tabler/icons-react"
+import { IconChevronLeft, IconChevronRight, IconFiles, IconFileSad, IconFileSadFilled, IconSearch } from "@tabler/icons-react"
+import EmptySection from "app/components/Messages/EmptySection"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -114,6 +113,7 @@ export function DataTable<TData, TValue>({
                 ))}
               </TableRow>
             ))}
+            {data.length === 0 && <div className="p-4"><EmptySection Icon={IconFileSad} title="No hay liquidaciones"/></div>}
           </TableBody>
         </Table>
       </div>
@@ -124,7 +124,7 @@ export function DataTable<TData, TValue>({
             disabled={!table.getCanPreviousPage()}
             className="rounded-md bg-grey border border-outline dark:bg-grey-dark dark:border-outline-dark p-1 text-text-grey"
           >
-            <ChevronLeft width={20} height={20} />
+            <IconChevronLeft width={20} height={20} />
           </button>
         )}
         <p className="text-center text-text-grey text-sm">
@@ -138,7 +138,7 @@ export function DataTable<TData, TValue>({
             disabled={!table.getCanNextPage()}
             className="rounded-md bg-grey border border-outline dark:bg-grey-dark dark:border-outline-dark p-1 text-text-grey"
           >
-            <ChevronRight width={20} height={20} />
+            <IconChevronRight width={20} height={20} />
           </button>
         )}
       </div>

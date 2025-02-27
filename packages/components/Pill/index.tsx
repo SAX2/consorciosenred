@@ -25,7 +25,7 @@ export const variantContainerClassName = (variant: StatusValue) =>
     : variant === "success"
     ? "border-green/15 bg-green/15"
     : variant === "neutral"
-    ? "border-outline bg-grey-sec"
+    ? "border-outline bg-grey-sec dark:border-outline-dark dark:bg-grey-dark"
     : variant === "default"
     ? "border-outline bg-white dark:border-outline-dark dark:bg-grey-dark"
     : variant === "info"
@@ -86,7 +86,7 @@ const Pill: React.FC<PillProps> = ({
     <div
       className={cn(
         variantContainerClassName(variant),
-        "darkk:bg-grey-sec-dark darkk:border-outline-dark flex w-fit items-center justify-center rounded-[6px] border px-1 text-xs font-medium flex-row",
+        "darkk:bg-grey-sec-dark darkk:border-outline-dark flex w-fit items-center justify-center rounded-[6px] border px-1 text-xs font-medium flex-row gap-1",
         className
       )}
     >

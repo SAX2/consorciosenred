@@ -3,11 +3,18 @@ import { Popover, PopoverContent, PopoverTrigger } from 'app/components/ui/popov
 import { cn } from 'app/lib/utils';
 import { format } from 'date-fns';
 import { es } from "date-fns/locale"
-import React from 'react';
+import React, { FC } from 'react';
 import { inputClassName } from '../Input';
 import { IconCalendarFilled } from '@tabler/icons-react';
+import { DayPickerProps } from 'react-day-picker';
 
-const InputCalendar = ({ field, className }: { field: any, className?: string }) => {
+interface InputCalendarProps {
+  field: any;
+  className?: string;
+  calendarMode?: DayPickerProps["mode"];
+}
+
+const InputCalendar: FC<InputCalendarProps> = ({ field, className, calendarMode = "single" }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -15,7 +22,7 @@ const InputCalendar = ({ field, className }: { field: any, className?: string })
           className={cn(
             inputClassName(className),
             "!text-start flex justify-between",
-            !field.value && "text-muted-foreground"
+            !field.value && "text-text-grey/50"
           )}
         >
           {field.value ? (
@@ -35,7 +42,7 @@ const InputCalendar = ({ field, className }: { field: any, className?: string })
         <Calendar
           locale={es}
           initialFocus
-          mode="single"
+          mode={calendarMode}
           selected={field.value}
           onSelect={field.onChange}
           disabled={(date: Date) =>

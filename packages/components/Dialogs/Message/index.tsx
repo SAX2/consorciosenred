@@ -110,7 +110,7 @@ const DialogMessage: FC<DialogMessageProps> = ({
         <div className="flex flex-col gap-2">
           {button && button}
           {backButton && backButton?.closeDialog && (
-            <DialogClose className='w-full'>
+            <DialogClose className='w-full' asChild>
               <Button {...backButton.button} classNameText="text-text-grey" classNameContainer='w-full' />
             </DialogClose>
           )}

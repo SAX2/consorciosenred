@@ -34,7 +34,14 @@ const unit: FC<unitProps> = ({ unit }) => {
     <div className="w-full flex flex-col gap-2 justify-between p-4 rounded-2xl border-outline border dark:border-outline-dark">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3 w-full">
-          <IconUnit id={unit.edf_id} name={unit.nombreAdjunto ?? null} padding="p-2" rounded="rounded-lg" iconSize={36} size={54}/>
+          <IconUnit
+            id={unit.edf_id}
+            name={unit.nombreAdjunto ?? null}
+            padding="p-2"
+            rounded="rounded-lg"
+            iconSize={36}
+            size={54}
+          />
           <div className="flex flex-col gap-[2px] max-w-max w-full">
             <p className="font-semibold truncate">{unit.uf_domiDpto}</p>
             <div className="flex items-center gap-1">
@@ -87,7 +94,10 @@ const unit: FC<unitProps> = ({ unit }) => {
                     {
                       title: unitCard.expirations[1],
                       children: (
-                        <Pill text={unit.uf_vto2UltimaExpensa} classNameText="text-sm" />
+                        <Pill
+                          text={unit.uf_vto2UltimaExpensa}
+                          classNameText="text-sm"
+                        />
                       ),
                     },
                   ]
@@ -95,45 +105,41 @@ const unit: FC<unitProps> = ({ unit }) => {
             ]}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          {mostRecentLiquidation && (
-            <ButtonFile
-              fileType="uf_liquidaciones"
-              key={mostRecentLiquidation.id}
-              fileId={mostRecentLiquidation.id}
-              fileName={mostRecentLiquidation.nombreAdjunto}
-              title="Ver Ultima Liquidación"
-              icon={
-                <IconMailForward
-                  size={24}
-                  className="text-[#1f9163]"
-                />
-              }
-            />
-          )}
-          {unit.uf_aviso.length > 0 && (
-            <ButtonFile
-              // classname={!(unit.uf_aviso[0]) ? "pointer-events-none opacity-25 blur-sm" : ""}
-              fileType="uf_aviso"
-              key={unit.uf_aviso[0]?.id ?? ""}
-              fileId={unit.uf_aviso[0]?.id ?? ""}
-              fileName={unit.uf_aviso[0]?.nombreAdjunto ?? ""}
-              title="Ver Aviso de pago"
-              icon={
-                <IconMailExclamation
-                  size={24}
-                  className="text-[#91694a]"
-                />
-              }
-            />
-          )} 
-        </div>
-        <Shortcuts
-          data={shortcutsUnit}
-          display="no-styled"
-          className={cn("grid gap-2", getShortcutCols(shortcutsUnit.length))}
-          mainPath={`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`}
-        />
+        {(mostRecentLiquidation || unit.uf_aviso.length > 0) && (
+          <div className="flex flex-col gap-2">
+            {mostRecentLiquidation && (
+              <ButtonFile
+                fileType="uf_liquidaciones"
+                key={mostRecentLiquidation.id}
+                fileId={mostRecentLiquidation.id}
+                fileName={mostRecentLiquidation.nombreAdjunto}
+                title="Ver Ultima Liquidación"
+                icon={<IconMailForward size={24} className="text-[#1f9163]" />}
+              />
+            )}
+            {unit.uf_aviso.length > 0 && (
+              <ButtonFile
+                // classname={!(unit.uf_aviso[0]) ? "pointer-events-none opacity-25 blur-sm" : ""}
+                fileType="uf_aviso"
+                key={unit.uf_aviso[0]?.id ?? ""}
+                fileId={unit.uf_aviso[0]?.id ?? ""}
+                fileName={unit.uf_aviso[0]?.nombreAdjunto ?? ""}
+                title="Ver Aviso de pago"
+                icon={
+                  <IconMailExclamation size={24} className="text-[#91694a]" />
+                }
+              />
+            )}
+          </div>
+        )}
+        {shortcutsUnit.length > 0 && (
+          <Shortcuts
+            data={shortcutsUnit}
+            display="no-styled"
+            className={cn("grid gap-2", getShortcutCols(shortcutsUnit.length))}
+            mainPath={`/prp/expensas/${unit.uf_id}_${unit.uf_codEdificio}`}
+          />
+        )}
         <Link
           prefetch
           scroll={true}

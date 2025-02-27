@@ -17,6 +17,7 @@ export interface ButtonProps {
   buttonPadding?: string;
   buttonJustifyContent?: string;
   isDiv?: boolean;
+  disabled?: boolean;
 }
 
 export const classNameButton = 'flex flex-row items-center rounded-[8px] transition-colors gap-1';
@@ -37,6 +38,7 @@ const Button: React.FC<ButtonProps> = ({
   buttonPadding = 'p-2',
   buttonJustifyContent = 'justify-center',
   isDiv = false,
+  disabled = false,
 }) => {
   const content = (
     <>
@@ -84,6 +86,7 @@ const Button: React.FC<ButtonProps> = ({
           buttonJustifyContent,
           classNameButton
         )}
+        onClick={onClick}
       >
         {content}
       </Link>
@@ -92,6 +95,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
       style={style}
       className={cn(classNameContainer, buttonBackground, buttonPadding, buttonJustifyContent, classNameButton)}

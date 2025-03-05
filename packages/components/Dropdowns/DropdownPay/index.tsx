@@ -2,6 +2,7 @@ import ShortcutButton from 'app/components/Buttons/ButtonShortcut';
 import { Popover, PopoverContent, PopoverTrigger } from 'app/components/ui/popover'
 import { ShortcutProps } from 'app/types/globals';
 import React, { FC } from 'react'
+import { dropdownContainerClassName } from '..';
 
 interface DropdownPayProps {
   shortcut: React.ReactNode;
@@ -16,7 +17,7 @@ const DropdownPay: FC<DropdownPayProps> = ({ methods, params, shortcut }) => {
         <div>{shortcut}</div>
       </PopoverTrigger>
       <PopoverContent
-        className="p-1 border-outline dark:border-outline-dark bg-white dark:bg-black-app-bg rounded-xl w-fit"
+        className={dropdownContainerClassName}
         align="start"
       >
         {methods &&

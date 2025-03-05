@@ -81,7 +81,7 @@ export function DataTable<TData, TValue>({
         placeholder="Buscar"
         orientation="icon-left"
         className="bg-transparent border-0"
-        classNameContainerInput="bg-grey dark:bg-grey-dark w-full border-0"
+        classNameContainerInput="bg-grey dark:bg-grey-dark w-full border border-outline dark:border-outline-dark"
         classNameContainer="border-0"
         value={globalFilter ?? ""}
         onChange={(event) => setGlobalFilter(event.target.value)}
@@ -113,8 +113,8 @@ export function DataTable<TData, TValue>({
                 ))}
               </TableRow>
             ))}
-            {data.length === 0 && <div className="p-4"><EmptySection Icon={IconFileSad} title="No hay liquidaciones"/></div>}
           </TableBody>
+            {data.length === 0 && <div className="p-6 bg-white"><EmptySection Icon={IconFileSad} title="No hay liquidaciones"/></div>}
         </Table>
       </div>
       <div className={`flex items-center ${table.getRowCount() > 5 ? 'justify-between' : 'justify-center'} space-x-2 py-2`}>

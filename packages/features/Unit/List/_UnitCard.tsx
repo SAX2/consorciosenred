@@ -4,9 +4,9 @@ import Link from "next/link";
 import Pill from "app/components/Pill";
 import SemiSectionData from "app/components/Sections/SemiSection";
 import Shortcuts, { getShortcutCols } from "app/components/Buttons/ButtonShortcut/List";
-import { IconCalendarExclamation, IconMailExclamation, IconMailForward, IconPlus } from "@tabler/icons-react";
+import { IconCalendarExclamation, IconMailExclamation, IconPlus, IconReceipt2 } from "@tabler/icons-react";
 import { FC } from "react";
-import { shortcutsUnit, unitCard } from "app/assets/constants/(app)/contents";
+import { unitCard } from "app/assets/constants/(app)/contents";
 import IconUnit from "app/components/Icons/IconUnit";
 import ButtonFile from "app/components/Buttons/ButtonFile";
 import { formatUnitPermissions, getShortcutRoutesWithPermissions } from "app/hooks/permissions/useUnitPermissions";
@@ -114,7 +114,7 @@ const unit: FC<unitProps> = ({ unit }) => {
                 fileId={mostRecentLiquidation.id}
                 fileName={mostRecentLiquidation.nombreAdjunto}
                 title="Ver Ultima Liquidación"
-                icon={<IconMailForward size={24} className="text-[#1f9163]" />}
+                icon={<IconReceipt2 size={24} className="text-[#1f9163]" />}
               />
             )}
             {unit.uf_aviso.length > 0 && (

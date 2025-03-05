@@ -4,8 +4,8 @@ import SemiSectionData from "app/components/Sections/SemiSection";
 import Pill from "app/components/Pill";
 import Shortcuts, { getShortcutCols } from "../../../components/Buttons/ButtonShortcut/List";
 import MediaQueryProvider from "app/contexts/MediaQueryProvider";
-import { IconCalendarExclamation, IconCoins, IconExclamationCircle, IconMailExclamation, IconMailForward } from "@tabler/icons-react";
-import { FC, useRef } from "react";
+import { IconCalendarExclamation, IconCoins, IconExclamationCircle, IconMailExclamation, IconReceipt2 } from "@tabler/icons-react";
+import { FC } from "react";
 import { unitCard } from "app/assets/constants/(app)/contents";
 import IconUnit from "app/components/Icons/IconUnit";
 import ButtonFile from "app/components/Buttons/ButtonFile";
@@ -172,7 +172,7 @@ const UnitInfoSection: FC<UnitInfoSectionProps> = ({ unit }) => {
             fileId={mostRecentLiquidation.id}
             fileName={mostRecentLiquidation.nombreAdjunto}
             title="Ver Ultima Liquidación"
-            icon={<IconMailForward size={24} className="text-[#1f9163]" />}
+            icon={<IconReceipt2 size={24} className="text-[#1f9163]" />}
           />
         )}
         {unit.uf_aviso.length > 0 && (

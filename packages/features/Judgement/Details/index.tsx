@@ -6,7 +6,7 @@ import Pill from "app/components/Pill";
 import SemiSection from "app/components/Sections/SemiSection";
 import { getStatusType } from "app/hooks/use-status";
 import { cn } from "app/lib/utils";
-import { IconAlertTriangle, IconChevronRight, IconFolderDollar, IconGavel, IconId, IconInfoCircle, IconMailExclamation, IconMessage, IconUserSquareRounded } from "@tabler/icons-react";
+import { IconAlertTriangle, IconChevronRight, IconFileFilled, IconFolderDollar, IconGavel, IconId, IconInfoCircle, IconMailExclamation, IconMessage, IconUserSquareRounded } from "@tabler/icons-react";
 import { format, parse } from "date-fns";
 import { es } from "date-fns/locale";
 import Link from "next/link";
@@ -152,7 +152,7 @@ const PageDatos = ({ item }: { item: any }) => {
               fileName={file.nombre}
               fileType={file.tipo}
               title={file.nombre}
-              icon={<IconMailExclamation type='image/png' size={18} />}
+              icon={<IconFileFilled className="fill-text-grey" type='image/png' size={22} />}
               chevron
             />
           ))}

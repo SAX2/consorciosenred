@@ -23,7 +23,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
       unitId={unitId}
       unitCode={unit.uf_codEdificio}
     >
-      <AccordionNewPaymentDetails unit={unit} id={id}/>
+      <AccordionNewPaymentDetails unit={unit} id={unit.edf_id}/>
     </NewPayment>
   );
 }

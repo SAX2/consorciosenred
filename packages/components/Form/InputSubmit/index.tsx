@@ -60,6 +60,7 @@ const InputSubmit = ({
 
   return (
     <MButton
+      onClick={props.onClick}
       type="submit"
       disabled={status === 'loading' || props.disabled}
       className={cn(

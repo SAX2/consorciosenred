@@ -9,65 +9,49 @@ import { cn } from 'app/lib/utils'
 import { IconBellFilled, IconBellRingingFilled, IconCalendarFilled, IconChevronRight, IconFile, IconSettings } from '@tabler/icons-react'
 import Pill from 'app/components/Pill'
 import SemiSection from 'app/components/Sections/SemiSection'
+import { DropdownFiles } from 'app/components/Dropdowns/DropdownFiles'
 
 const NewDetail = ({ item }: { item: any }) => {
   const itemDate = parse(item.fecha, 'dd/MM/yyyy', new Date());
   const formattedDateTime = format(itemDate, "d 'de' MMMM, yyyy", { locale: es })
 
   return (
-      <div className="flex flex-col gap-2">
-        <SemiSection type="custom" title="" className="px-2">
-          <div className="flex flex-col gap-1">
-            <p className="text-lg font-bold text-black">{item.asunto}</p>
-            <p className="text-base text-black/75 flex">
-              {item.detalle}
-            </p>
-            {/* <SeeMoreText
-              className="text-base text-black/75 flex"
-              seeMoreClassName="font-medium text-black/75"
-              numberOfLines={3}
-            >
-              {item.detalle} adasidujb
-            </SeeMoreText> */}
+    <div className="flex flex-col gap-2">
+      <SemiSection type="custom" title="" className="px-2">
+        <div className="flex flex-col gap-1">
+          <p className="text-lg font-bold">{item.asunto}</p>
+          <p className="text-base text-black/75 dark:text-white/75  flex">{item.detalle}</p>
+        </div>
+      </SemiSection>
+      <SemiSection
+        type="simple"
+        title="Fecha de publicación"
+        key="Fecha de publicación"
+        icon={<IconCalendarFilled size={24} />}
+      >
+        <Pill
+          text={formattedDateTime}
+          classNameText="text-base"
+          className="py-0"
+        />
+      </SemiSection>
+      <SemiSection
+        type="simple"
+        title="Tipo de novedad"
+        key="Tipo de novedad"
+        icon={<IconSettings size={24} />}
+      >
+        <Pill text={item.tipo} classNameText="text-base" className="py-0" />
+      </SemiSection>
+      {item.adjuntosMobile.length > 0 && (
+        <SemiSection type="custom" title="">
+          <div className="flex w-full gap-2 items-center">
+            <IconFile size={24} />
+            <DropdownFiles files={item.adjuntosMobile} totalLength={item.adjuntosMobile.length} modal={false}/>
           </div>
         </SemiSection>
-        <SemiSection
-          type="simple"
-          title="Fecha de publicación"
-          key="Fecha de publicación"
-          icon={
-            <IconCalendarFilled
-              size={24}
-              className="text-black"
-            />
-          }
-        >
-          <Pill
-            text={formattedDateTime}
-            classNameText="text-base"
-            className="py-0"
-          />
-        </SemiSection>
-        <SemiSection
-          type="simple"
-          title="Tipo de novedad"
-          key="Tipo de novedad"
-          icon={<IconSettings size={24} />}
-        >
-          <Pill text={item.tipo} classNameText="text-base" className="py-0" />
-        </SemiSection>
-        {item.adjuntosMobile.length > 0 && (
-          <SemiSection type="custom" title="">
-            <div className="flex w-full gap-2 items-center">
-              <IconFile size={24} />
-              {item.adjuntosMobile.map((item: any) => {
-                return <Pill text={"Adjunto"} isFile fileId={item.id} fileName={item.nombre} fileType={item.tipo} className='text-sm'/>;
-              })}
-              {/* <DropdownFiles files={item.adjuntosMobile} totalLength={item.adjuntosMobile.length}/> */}
-            </div>
-          </SemiSection>
-        )}
-      </div>
+      )}
+    </div>
   );
 }
 
@@ -82,7 +66,7 @@ const NewCard = ({ item }: NewCardProps) => {
       <DialogMessage
         message="Detalles de la Novedad"
         trigger={
-          <div className="flex flex-row rounded-2xl bg-grey p-3 gap-3 cursor-pointer">
+          <div className="flex flex-row rounded-2xl bg-grey dark:bg-grey-dark p-3 gap-3 cursor-pointer">
             <div
               className={cn(
                 "flex flex-col rounded-lg p-1 flex-shrink-0 self-start",
@@ -95,12 +79,12 @@ const NewCard = ({ item }: NewCardProps) => {
                 <IconBellRingingFilled size={24} className="text-white" />
               )}
             </div>
-            <div className="flex flex-col flex-1">
-              <p className="text-lg font-bold text-black w-fit">
+            <div className="flex flex-col flex-1 gap-2">
+              <p className="text-lg font-bold w-fit">
                 {item.asunto}
               </p>
-              <div className="flex justify-between gap-1 flex-1">
-                <div className="flex gap-1 flex-wrap">
+              <div className="flex justify-between gap-2 flex-1">
+                <div className="flex gap-2 flex-wrap">
                   <Pill
                     text={
                       isToday(parse(item.fecha, "dd/MM/yyyy", new Date()))
@@ -110,21 +94,20 @@ const NewCard = ({ item }: NewCardProps) => {
                             { locale: es, addSuffix: true }
                           )
                     }
-                    className="py-0 border-outline bg-white"
-                    classNameText="text-base text-text-grey"
-                    variant="custom"
+                    classNameText="text-base"
+                    variant="default"
                   />
                   <Pill
                     text={`${item.adjuntos.length} adjunto${
                       item.adjuntos.length == 1 ? "" : "s"
                     }`}
-                    className="py-0 bg-grey-sec border-0"
-                    classNameText="text-base text-text-grey"
+                    className="py-0 bg-grey-sec dark:bg-grey-sec-dark border-0"
+                    classNameText="text-base !text-text-grey"
                     variant="custom"
                   />
                 </div>
                 <Button
-                  buttonPadding="pl-2"
+                  buttonPadding=""
                   iconOrientation="right"
                   classNameText="text-text-grey"
                   icon={

@@ -24,9 +24,9 @@ export const ButtonTrigger = ({ totalLength }: { totalLength: number }) => {
   );
 }
 
-export const DropdownFiles = ({ files, totalLength }: { files: any[], totalLength: number }) => {
+export const DropdownFiles = ({ files, totalLength, modal = true }: { files: any[], totalLength: number, modal?: boolean }) => {
   return (
-    <Popover modal>
+    <Popover modal={modal}>
       <PopoverTrigger>
         <ButtonTrigger totalLength={totalLength} />
       </PopoverTrigger>
@@ -38,7 +38,7 @@ export const DropdownFiles = ({ files, totalLength }: { files: any[], totalLengt
             className="w-[250px] flex flex-row justify-between items-center p-1 hover:bg-grey dark:hover:bg-grey-dark rounded-md group"
             key={file.id + index}
           >
-            <div className="flex flex-row items-center gap-1 flex-1">
+            <div className="flex flex-row items-center gap-1 flex-1 max-w-[220px]">
               <IconFileFilled size={20} className="text-text-grey" />
               <p className="truncate flex-1">{file.nombre}</p>
             </div>

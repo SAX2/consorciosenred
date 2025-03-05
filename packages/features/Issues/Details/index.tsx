@@ -10,7 +10,7 @@ import SemiSection from 'app/components/Sections/SemiSection';
 import { getStatusType } from 'app/hooks/use-status';
 import { details } from 'app/assets/constants/(app)/contents';
 import { createNewCommentRcl } from "app/services/queries";
-import { IconAlertTriangle, IconArrowUp, IconInfoSquareRounded, IconInfoTriangle, IconMessage, IconMessagesOff, IconPaperclip } from '@tabler/icons-react';
+import { IconAlertTriangle, IconArrowUp, IconInfoSquareRounded, IconInfoTriangle, IconMessage, IconMessagesOff } from '@tabler/icons-react';
 import { format, formatDistanceToNow, isToday, parse } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { useRouter } from 'next/navigation';
@@ -74,14 +74,14 @@ const InfoHeader = ({ issue }: { issue: any }) => {
           title={details.issue.description}
           margin="top"
         >
-          <div className="flex w-full flex-col">
+          <div className="flex w-full flex-col gap-3">
             <div className="flex flex-row items-center gap-2">
               <IconMessage size={24} />
-              <p className="ios:ml-[6px] android:ml-[6px] text-base font-semibold">
+              <p className="text-base font-semibold">
                 {details.issue.description}
               </p>
             </div>
-            <p className="mt-3 text-base text-black/75 dark:text-white/75">
+            <p className="text-base text-black/75 dark:text-white/75">
               {issue.Rcl_Description}
             </p>
             {issue.adjuntosMobile.length > 0 && (
@@ -119,8 +119,8 @@ const Comment = ({ item }: { item: any }) => (
             )}
       </p>
     </div>
-    <div className="flex bg-grey mt-2 justify-center self-start rounded-[8px] p-1 px-2">
-      <p className="text-base text-black/75">{item.Rcl_DescriptionRsp}</p>
+    <div className="flex bg-grey dark:bg-grey-dark mt-2 justify-center self-start rounded-[8px] p-1 px-2">
+      <p className="text-base text-black/75 dark:text-white/75">{item.Rcl_DescriptionRsp}</p>
     </div>
   </div>
 );
@@ -187,10 +187,6 @@ const RclDetails = ({ data }: RclDetailsProps) => {
         className="flex flex-row items-center gap-2 sticky bottom-0 pb-4 py-2"
         action={submitAction}
       >
-        <label className="cursor-pointer">
-          <IconPaperclip size={26} className="text-text-grey" />
-          <input type="file" className="hidden" />
-        </label>
         <Input
           autoComplete='off'
           className="bg-grey dark:bg-grey-dark border-0"

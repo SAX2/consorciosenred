@@ -147,7 +147,7 @@ export const InputSelect = ({
               {group?.arr.map((item) => {
                 return (
                   <SelectItem
-                    className="hover:!bg-grey text-base"
+                    className="hover:!bg-grey dark:hover:!bg-grey-dark text-base"
                     key={item}
                     value={item}
                   >

@@ -114,7 +114,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableBody>
-            {data.length === 0 && <div className="p-6 bg-white"><EmptySection Icon={IconFileSad} title="No hay liquidaciones"/></div>}
+          {data.length === 0 && <div className="p-6 bg-white dark:bg-black-app-bg"><EmptySection Icon={IconFileSad} title="No hay liquidaciones"/></div>}
         </Table>
       </div>
       <div className={`flex items-center ${table.getRowCount() > 5 ? 'justify-between' : 'justify-center'} space-x-2 py-2`}>

@@ -1,18 +1,17 @@
 
 import React from 'react'
-import { format, isSameYear, parse } from 'date-fns';
-import { es } from 'date-fns/locale';
-import { IconChevronRight, IconJpg } from '@tabler/icons-react';
+// import { format, isSameYear, parse } from 'date-fns';
+// import { es } from 'date-fns/locale';
+import { IconChevronRight, IconFileFilled } from '@tabler/icons-react';
 import Pill from 'app/components/Pill';
-import Image from 'next/image';
 import ButtonFile from 'app/components/Buttons/ButtonFile';
 import IconUnit from 'app/components/Icons/IconUnit';
 
 const RegulationItem = ({ item }: { item: any }) => {
-  const itemDate = parse(item.fecha, "dd/MM/yyyy", new Date());
-  const formattedDateTime = isSameYear(itemDate, new Date())
-    ? format(itemDate, "dd/MM", { locale: es })
-    : format(itemDate, "yyyy", { locale: es });
+  // const itemDate = parse(item.fecha, "dd/MM/yyyy", new Date());
+  // const formattedDateTime = isSameYear(itemDate, new Date())
+  //   ? format(itemDate, "dd/MM", { locale: es })
+  //   : format(itemDate, "yyyy", { locale: es });
 
   return (
     <div className="flex flex-col gap-2 mt-2">
@@ -25,11 +24,7 @@ const RegulationItem = ({ item }: { item: any }) => {
           fileName={file.nombre}
           fileType={file.tipo}
           title={file.nombre}
-          icon={
-            <div className="rounded-sm bg-green h-fit p-[2px]">
-              <IconJpg size={18} className="text-white" />
-            </div>
-          }
+          icon={<IconFileFilled size={22} className='text-text-grey'/>}
         />
       ))}
     </div>
@@ -38,15 +33,11 @@ const RegulationItem = ({ item }: { item: any }) => {
 
 const UnitDetails = ({ unit }: { unit: any }) => {
   return (
-    <div className="flex items-center justify-between bg-grey rounded-lg p-2 w-full">
+    <div className="flex items-center justify-between bg-grey dark:bg-grey-dark rounded-lg p-2 w-full">
       <div className="flex gap-2">
-        <IconUnit id={unit.edf_id} name={""} size={44} iconSize={34}/>
+        <IconUnit id={unit.edf_id} name={""} size={44} iconSize={34} />
         <div className="flex max-w-max flex-col items-start gap-[2px]">
-          <p
-            className="text-base font-semibold truncate"
-          >
-            {unit.domiDpto}
-          </p>
+          <p className="text-base font-semibold truncate">{unit.domiDpto}</p>
           <div className="flex items-start" style={{ gap: 4 }}>
             <Pill text={`${unit.nroUnidad} ${unit.CodDepto}`} />
             <Pill
@@ -56,7 +47,6 @@ const UnitDetails = ({ unit }: { unit: any }) => {
           </div>
         </div>
       </div>
-      <IconChevronRight size={20} className="text-text-grey" />
     </div>
   );
 }

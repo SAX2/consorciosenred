@@ -35,6 +35,18 @@ export const usePathsAndTitles = () => {
     },
     {
       isSubroute: true,
+      title: "Mercado pago",
+      paths: [`/prp/expensas/${params.id}/pagar/mp`],
+      backPaths: [{ path: `/prp/expensas/${params.id}`, title: "Pagar" }],
+    },
+    {
+      isSubroute: true,
+      title: "SIRO Online",
+      paths: [`/prp/expensas/${params.id}/pagar/hb`],
+      backPaths: [{ path: `/prp/expensas/${params.id}`, title: "Pagar" }],
+    },
+    {
+      isSubroute: true,
       title: "Configuración de usuario",
       paths: [`/prp/usuario`],
       backPaths: [{ path: `/prp/expensas`, title: "Expensas" }],

@@ -1,5 +1,8 @@
 import { ShortcutProps } from "app/types/globals";
 import { IconAlertTriangle, IconBell, IconBellRinging, IconBook, IconCalendar, IconCreditCard, IconGavel, IconPackages, IconUsers, IconWallet, IconCalendarFilled, IconBox } from "@tabler/icons-react";
+import Image from "next/image";
+import Mp from 'app/assets/images/mp.png'
+import Siro from 'app/assets/images/siro.png'
 
 export interface ShortcutPropsMapping {
   simpleShortcut?: ShortcutProps;
@@ -57,29 +60,23 @@ export const ACTIONS: ActionsProps = {
     },
   },
   ver_pagarHomeBanking: {
-    simpleShortcut: {
-      title: "Pagar expensa",
-      description: "Abonar expensa de la unidad",
-      icon: <IconWallet width={32} height={32}  />,
-      path: "/pagos/pagar",
-    },
     descriptionShortcut: {
-      title: "Pagar expensa",
-      description: "Abonar expensa de la unidad",
-      icon: <IconWallet width={36} height={36} className="text-[#1F9163]" />,
-      path: "/pagos/pagar",
+      title: "Siro Online",
+      description: "El Servicio Integral del Banco Roela ",
+      icon: <Image src={Siro} style={{ width: 36, height: 36 }} alt="Siro"/>,
+      path: "/pagar/hb",
       display: "icon-bg-description",
       style: {
-        background: "#1F916315",
+        background: "#fff",
         color: "#1F9163",
       },
-      isBottomSheet: true,
+      isBottomSheet: false,
     },
     backgroundShortcut: {
       title: "Pagar expensa",
       description: "Pagar expensa",
       icon: <IconWallet width={24} height={24} className="text-white" />,
-      path: "/",
+      path: "/pagar",
       display: "icon-bg",
       style: {
         background: "#1F9163",
@@ -89,35 +86,28 @@ export const ACTIONS: ActionsProps = {
     },
   },
   ver_pagarMercadoPago: {
-    simpleShortcut: {
-      title: "Pagar expensa",
-      description: "Abonar expensa con mercado pago",
-      icon: <IconWallet width={32} height={32}  />,
-      path: "/pagos/pagar",
-    },
     descriptionShortcut: {
-      title: "Pagar expensa",
-      description: "Abonar expensa con mercado pago",
-      icon: <IconWallet width={36} height={36} className="text-[#1F9163]" />,
-      path: "/pagos/pagar",
+      title: "Mercado pago",
+      description: "Pagar con la plataforma digital",
+      icon: <Image src={Mp} style={{ width: 36, height: 36 }} alt="Mp" />,
+      path: "/pagar/mp",
       display: "icon-bg-description",
       style: {
-        background: "#1F916315",
+        background: "#9CE0FF",
         color: "#1F9163",
       },
-      isBottomSheet: true,
+      isBottomSheet: false,
     },
     backgroundShortcut: {
-      title: "Pagar expensa",
-      description: "Abonar expensa con mercado pago",
-      icon: <IconWallet width={24} height={24} className="text-white" />,
-      path: "/",
+      title: 'Notificar pago',
+      description: 'Notificar pago',
+      icon: <IconBellRinging width={24} height={24} className="text-white" />,
+      path: '/pagar',
       display: "icon-bg",
       style: {
-        background: "#1F9163",
-        color: "#1F9163",
+        background: "#008AEA",
+        color: "#086FB7",
       },
-      isBottomSheet: true,
     },
   },
   ver_notificarPago: {

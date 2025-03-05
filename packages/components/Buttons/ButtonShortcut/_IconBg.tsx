@@ -19,7 +19,7 @@ const IconBg = memo(({ title, icon, style, handlePress, index, isBottomSheet, pa
     return (
       <button
         onClick={handlePress ?? handlePressAction}
-        className={`border-outline dark:border-outline-dark dark:bg-black-app-bg flex items-center justify-center rounded-[12px] border bg-white p-3 max-md:p-2 ${
+        className={`border-outline dark:border-outline-dark dark:bg-black-app-bg flex items-center justify-center rounded-[12px] border bg-white p-3 max-md:p-2 w-full ${
           index && index > 0 ? "ml-2" : ""
         }`}
         style={{ cursor: "pointer" }}
@@ -32,7 +32,7 @@ const IconBg = memo(({ title, icon, style, handlePress, index, isBottomSheet, pa
   return (
     <Link
       href={path}
-      className={`border-outline dark:border-outline-dark dark:bg-black-app-bg flex rounded-[12px] border bg-white p-3 max-md:p-2 ${
+      className={`border-outline dark:border-outline-dark dark:bg-black-app-bg flex rounded-[12px] border bg-white p-3 max-md:p-2 w-full ${
         index && index > 0 ? "ml-2" : ""
       }`}
     >

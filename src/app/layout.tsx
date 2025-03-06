@@ -23,6 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" dir="ltr" className={`${GeistSans.variable}`} suppressHydrationWarning>
+      <head>
+        <script src="https://unpkg.com/react-scan/dist/auto.global.js" />
+      </head>
       <body className={inter.className} style={{ background: "#0a0a0a" }} suppressHydrationWarning>
         {children}
       </body>

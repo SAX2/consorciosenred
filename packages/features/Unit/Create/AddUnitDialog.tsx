@@ -9,6 +9,7 @@ import SemiSection from 'app/components/Sections/SemiSection';
 import { z, ZodFormattedError } from 'zod';
 import InputSubmit from 'app/components/Form/InputSubmit';
 import { addNewUnit } from "app/services/queries";
+import { cn } from 'app/lib/utils';
 
 export const content = {
   description: "Si desea vincularse a otra unidad como Propietario o Inquilino, puede ingresar el P.I.N. de activación que se adjunta en el recibo de expensas que usted recibe todos los meses. En caso de no poseerlo solicítelo a su Administración.",
@@ -18,7 +19,7 @@ export const content = {
   trigger: "Agregar / Modificar unidades"
 }
 
-const AddUnitDialog = () => {
+const AddUnitDialog = ({ isSidebar = false }: { isSidebar?: boolean }) => {
   return (
     <DialogMessage
       message={content.title}
@@ -31,7 +32,7 @@ const AddUnitDialog = () => {
           classNameContainer="border border-green/15 max-lg:w-full"
           buttonPadding='p-2 max-md:p-3'
           buttonBackground="bg-green/15"
-          classNameText="text-green truncate max-lg:hidden max-md:block max-md:text-lg"
+          classNameText={cn("text-green truncate max-md:text-lg", isSidebar && "max-xl:hidden")}
         />
       }
     >

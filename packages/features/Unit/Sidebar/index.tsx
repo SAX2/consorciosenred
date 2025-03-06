@@ -2,9 +2,41 @@
 
 import { cn } from "app/lib/utils";
 import { usePathname } from "next/navigation";
-import NavLinkButton from "app/components/Buttons/ButtonNavLink";
 import { getSidebarRoutes } from "app/hooks/permissions/useUnitPermissions";
 import AddUnitDialog from "app/features/Unit/Create/AddUnitDialog";
+import Button, { ButtonProps } from "app/components/Buttons/Button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "app/components/ui/tooltip";
+import MediaQueryProvider from "app/contexts/MediaQueryProvider";
+import React, { PropsWithChildren } from "react";
+
+const NavButton = ({ ...props }: ButtonProps) => {
+  return (
+    <Button
+      {...props}
+      classNameText="text-black dark:text-white max-xl:hidden"
+      buttonJustifyContent="justify-start max-xl:justify-center"
+    />
+  );
+}
+
+const TooltipComponent = ({ trigger, children }: { trigger: React.ReactNode } & PropsWithChildren) => {
+  return (
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger>{trigger}</TooltipTrigger>
+        <TooltipContent
+          align="center"
+          side="right"
+          className={cn(
+            "p-1 px-2 border-outline dark:border-outline-dark bg-white dark:bg-black-app-bg rounded-md z-[200]"
+          )}
+        >
+          {children}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
 
 const Sidebar = ({ permissions }: { permissions: any }) => {
   const pathname = usePathname();
@@ -19,27 +51,25 @@ const Sidebar = ({ permissions }: { permissions: any }) => {
         "max-md:hidden"
       )}
     >
-      {sidebar.map((item) => {
+      {sidebar.map((item) => {  
+        const href = item.path.startsWith("/prp")
+          ? item.path
+          : pathname.split("/").slice(0, 4).join("/") + item.path;
+
         return (
-          <NavLinkButton
-            href={
-              item.url.startsWith("/prp")
-                ? item.url
-                : pathname.split("/").slice(0, 4).join("/") + item.url
-            }
-            className={
-              "max-xl:p-2 max-xl:flex-col rounded-md py-[6px] px-3 bg-grey dark:bg-grey-dark hover:bg-grey-sec hover:dark:bg-grey-sec-dark w-full font-medium flex items-center gap-3"
-            }
-            activeClassName="bg-grey-sec dark:bg-grey-sec-dark"
-            key={item.url}
-            title={item.titulo}
-          >
-            {item.iconoWeb}
-            <span className={"max-xl:hidden"}>{item.descripcion}</span>
-          </NavLinkButton>
+          <React.Fragment key={item.path}>
+            <MediaQueryProvider minWidth={1280} key={item.path + "-1280"}>
+              <NavButton title={item.description} href={href} icon={item.icon}/>
+            </MediaQueryProvider>
+            <MediaQueryProvider maxWidth={1280} key={item.path + "+1280"}>
+              <TooltipComponent trigger={<NavButton title={item.description} href={href} icon={item.icon}/>}>
+                <p className="font-medium">{item.description}</p>
+              </TooltipComponent>
+            </MediaQueryProvider>
+          </React.Fragment>
         );
       })}
-      <AddUnitDialog />
+      <AddUnitDialog isSidebar={true} key={"add-unit"}/>
     </div>
   );
 };

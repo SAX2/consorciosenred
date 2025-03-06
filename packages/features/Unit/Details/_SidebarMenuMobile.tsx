@@ -44,19 +44,19 @@ const MobileMenu: FC<MobileMenuProps> = ({ isOpen, setClose, pathname }) => {
       {sidebarMobile.length > 0 && sidebarMobile.map((item) => {
         return (
           <NavLinkButton
-            key={item.titulo}
+            key={item.title}
             onClick={setClose}
             href={
-              item.url.startsWith("/prp")
-                ? item.url
-                : pathname.split("/").slice(0, 4).join("/") + item.url
+              item.path.startsWith("/prp")
+                ? item.path
+                : pathname.split("/").slice(0, 4).join("/") + item.path
             }
-            title={item.titulo}
+            title={item.title}
             className="font-medium text-2xl px-4 py-3 rounded-xl bg-grey w-full flex items-center gap-3 border border-transparent dark:bg-grey-dark"
             activeClassName="border-outline dark:border-outline-dark"
           >
-            <span>{item.iconoWeb}</span>
-            <span>{item.descripcion}</span>
+            <span>{item.icon}</span>
+            <span>{item.description}</span>
           </NavLinkButton>
         );
       })}

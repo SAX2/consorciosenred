@@ -12,7 +12,7 @@ interface UserCardProps {
 
 const UserCard: FC<UserCardProps> = async ({ className }) => {
   const data = await getUser();
-  
+
   return (
     <div
       className={cn(

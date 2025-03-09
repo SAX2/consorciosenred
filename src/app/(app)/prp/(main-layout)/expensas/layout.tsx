@@ -1,12 +1,14 @@
 import React, { PropsWithChildren, FC, Suspense } from 'react'
 import { Separator } from 'app/components/ui/separator';
 import AsideSection from 'app/components/Aside';
-import UserCard from 'app/features/MLayout/Aside/_UserCard';
 import Header from 'app/features/MLayout/Headers/Header';
 import MediaQueryProvider from 'app/contexts/MediaQueryProvider';
 import MobileHeader from 'app/features/MLayout/Headers/MobileHeader';
 import { Metadata } from 'next';
 import { AsideUnit } from 'app/features/Unit/Details/_AsideSection';
+import AsideHome from 'app/features/MLayout/Aside';
+import AsideHomeContent from 'app/features/MLayout/Aside/content';
+import UserCard from 'app/features/MLayout/Aside/_UserCard';
 
 interface LayoutProps extends PropsWithChildren {
   modal: React.ReactNode
@@ -36,6 +38,9 @@ const layout: FC<LayoutProps> = async ({ children, modal }) => {
             <MediaQueryProvider minWidth={768}>
               <AsideSection >
                 <UserCard />
+                <AsideHome>
+                  <AsideHomeContent />
+                </AsideHome>
                 <AsideUnit />
               </AsideSection>
             </MediaQueryProvider>

@@ -13,15 +13,6 @@ interface ServicesProps {
 const Service: React.FC<ServicesProps> = ({ children, service, className, index }) => {
   return (
     <section className={cn("h-full max-w-[1000px] w-full justify-center flex py-8 max-md:py-8 gap-12 max-md:flex-col-reverse", className)}>
-      <div className="w-full bg-grey rounded-md max-h-[420px] relative flex justify-center overflow-clip">
-        <Image
-          width={291}
-          height={604}
-          src={service.image}
-          alt={service.title}
-          className="h-fit pt-8 relative"
-        />
-      </div>
       <div className="w-full flex flex-col gap-4">
         <span className={cn("font-medium leading-tight", service.mainColor)}>
           {service.pill}
@@ -40,6 +31,15 @@ const Service: React.FC<ServicesProps> = ({ children, service, className, index 
             );
           })}
         </ul>
+      </div>
+      <div className="w-full bg-grey rounded-md max-h-[420px] relative flex justify-center overflow-clip">
+        <Image
+          width={291}
+          height={604}
+          src={service.image}
+          alt={service.title}
+          className="h-fit pt-8 relative"
+        />
       </div>
     </section>
   );

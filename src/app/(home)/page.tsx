@@ -1,11 +1,11 @@
 "use client"
 
-import services, { appInstall } from 'app/assets/constants/services'
+import services from 'app/assets/constants/services'
 import { Separator } from "app/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "app/components/ui/accordion";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "app/components/ui/carousel";
-import { caba1, desktopAdminPreview, mobileUnit } from "app/assets/images";
-import { IconChevronRight } from "@tabler/icons-react";
+import { Carousel, CarouselContent, CarouselItem } from "app/components/ui/carousel";
+import { desktopAdminPreview } from "app/assets/images";
+import { IconChevronRight, IconEyeFilled } from "@tabler/icons-react";
 import { cn } from "app/lib/utils";
 import Image from "next/image";
 import main from 'app/assets/constants//main.json'
@@ -69,102 +69,76 @@ const ServicesSection = () => {
       {services.map((service, index) => {
         return (
           <React.Fragment key={service.title}>
-            <Service
-              service={service}
-              className={cn(
-                (index + 1) % 2 == 0 ? "flex-row-reverse" : "flex-row"
-              )}
-            />
+            <Service service={service} />
             <div className="max-w-[1000px] w-full py-8">
               {index + 1 !== services.length && <Separator />}
             </div>
           </React.Fragment>
         );
       })}
-      <Button
-        title="Conoce mas instalando la App"
-        buttonBackground="bg-[#32A071] border border-green/25"
-        classNameText="text-white !font-medium"
-        textSize="text-2xl max-md:text-lg"
-        classNameContainer="mb-16 group"
-        buttonPadding="p-2 px-4 pr-3 max-md:py-1 max-md:px-3 max-md:pr-1"
-        icon={
-          <>
-            <HoverPopover className="!ml-1 duration-150 !mr-0 max-md:hidden">
-              <IconChevronRight size={32} className="text-white" strokeWidth={3} />
-            </HoverPopover>
-            <div className="hidden max-md:block">
-              <IconChevronRight size={26} className="text-white" />
-            </div>
-          </>
-        }
-        iconOrientation="right"
-      />
+      <div
+        className={cn(
+          "p-8 max-md:p-4 bg-grey rounded-xl mb-16 w-full max-w-[1000px] flex flex-row gap-4 items-center",
+          "max-md:flex-col max-md:items-start"
+        )}
+      >
+        <p className="flex-1 font-semibold font-geist leading-none tracking-tight text-4xl text-black/75">
+          Instalá la app y empezá a gestionar más fácil hoy
+        </p>
+        <Button
+          title="Conoce mas instalando la App"
+          buttonBackground="bg-[#32A071] border border-green/25"
+          classNameText="text-white !font-medium"
+          textSize="text-2xl max-md:text-xl"
+          classNameContainer="group max-md:w-full"
+          buttonPadding="p-2 px-4 max-md:p-2"
+          iconOrientation="right"
+        />
+      </div>
     </article>
   );
 }
 
 const MainSection = () => {
   return (
-    <section className="items-center h-screen-main-h h-full max-w-[1000px] w-full justify-center flex max-sm:items-end max-sm:pb-28">
-      <div className="absolute top-0 left-0 w-full h-screen h-screen-main  select-none">
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-radial-gradient"></div>
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-linear"></div>
-        <Image
-          src={caba1}
-          alt=""
-          className="w-full h-screen-main h-full object-cover"
-          width={1920}
-          height={1080}
-          priority
-        />
+    <section className="max-w-[1000px] w-full justify-start flex flex-row py-8">
+      <div className='lg:w-[70%] flex flex-col gap-4'>
+        <div className="flex flex-col gap-3">
+          <div className="p-2 rounded-lg bg-grey flex w-fit max-md:py-0 max-md:rounded-md">
+            <p className="font-semibold text-xl max-md:text-lg text-text-grey leading-none">
+              {main.main.pill}
+            </p>
+          </div>
+          <h2 className="leading-none text-5xl font-semibold font-geist tracking-tight">
+            {main.main.title}
+          </h2>
+          <p className="leading-none text-xl font-medium text-black/75">{main.main.description}</p>
+        </div>
+        <ul className="flex gap-3 items-center max-md:flex-col max-md:items-start w-full mt-4">
+          {main.main.content.map((route) => {
+            return (
+              <li key={route.path} className="max-md:w-full">
+                <Link
+                  href={route.path}
+                  className={cn(
+                    "group px-4 py-2 rounded-md text-2xl font-semibold flex items-center",
+                    "max-md:text-lg max-md:p-2 max-md:py-1 max-md:justify-center",
+                    route.className
+                  )}
+                >
+                  {route.title}
+                  {route.type === "button-ingress" && (
+                    <HoverPopover className="!ml-1 duration-150 !mr-0 max-sm:hidden">
+                      <IconChevronRight size={32} />
+                    </HoverPopover>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-      <div className="z-10 relative w-full max-w-[655px] flex flex-col gap-2 max-md:max-w-[500px]">
-        <h1
-          className={cn(
-            "text-white text-6xl text-center tracking-tight font-geist font-black max-md:text-5xl max-sm:text-4xl max-[425px]:text-3xl transition-all duration-500 animate-fade-in-up"
-          )}
-        >
-          {main.main.title}
-        </h1>
-        <p
-          className={cn(
-            "text-white text-2xl text-center tracking-tight max-md:text-xl max-sm:text-lg max-[425px]:text-sm max-[425px]:leading-snug transition-all duration-500 animate-fade-in-up delay-75"
-          )}
-        >
-          {main.main.description}
-        </p>
-        <nav
-          className={cn(
-            "mt-4 transition-all duration-500 delay-100 animate-fade-in-up"
-          )}
-        >
-          <ul className="flex gap-3 justify-center items-center">
-            {main.main.content.map((route) => {
-              return (
-                <li key={route.path}>
-                  <Link
-                    href={route.path}
-                    className={cn(
-                      "group px-4 py-2 text-white rounded-md text-2xl font-medium flex items-center max-md:text-xl max-md:py-1 max-md:px-2 max-sm:text-lg",
-                      route.type === "button-ingress" &&
-                        "bg-white/15 backdrop-blur-md",
-                      route.type === "button-download" && "bg-blue-button"
-                    )}
-                  >
-                    {route.title}
-                    {route.type === "button-ingress" && (
-                      <HoverPopover className="!ml-1 duration-150 !mr-0 max-sm:hidden">
-                        <IconChevronRight width={32} height={32} />
-                      </HoverPopover>
-                    )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
+      <div className='flex-1 max-md:hidden'></div>
     </section>
   );
 }
@@ -176,22 +150,18 @@ const ProductImageSection = () => {
         "items-center h-full max-w-[1000px] w-full justify-center flex z-10 transition-all duration-500 delay-75 animate-fade-in-up"
       )}
     >
-      <div className="flex flex-col gap-2 items-end max-[425px]:items-center max-[425px]:px-4">
+      <div className="flex flex-col gap-2 items-start">
         <Image
           width={992}
           height={644}
           src={desktopAdminPreview}
           alt="Captura del panel de administrador"
-          className="w-dvh h-auto rounded-xl border-4 border-outline/25 max-[425px]:hidden"
+          className="w-dvh h-auto rounded-xl border-1 border-outline/25"
         />
-        <Image
-          width={582}
-          height={1144}
-          src={mobileUnit}
-          alt="Captura del panel de administrador"
-          className="w-dvw h-auto max-[425px]:block hidden"
-        />
-        <p className="text-xs text-text-grey">{main.mainImage.description}</p>
+        <div className='flex flex-row items-center gap-1'>
+          <IconEyeFilled size={14} className='text-text-grey'/>
+          <p className="text-xs font-medium text-text-grey">{main.mainImage.description}</p>
+        </div>
       </div>
     </section>
   );
@@ -264,20 +234,20 @@ const FaQSection = () => {
 export default function Home() {
   return (
     <Main>
-      <article className="flex flex-col items-center bg-black w-full px-8 max-md:px-4">
+      <article className="flex flex-col items-center bg-white w-full px-8 max-md:px-4">
         <MainSection />
         <ProductImageSection />
-        <Section data={main.experience} black>
-          <p className="text-white text-lg">{main.experience.content}</p>
+        <Section data={main.experience}>
+          <p className="text-black text-lg">{main.experience.content}</p>
         </Section>
       </article>
       <ServicesSection />
       <SectionMetrics />
       <article className="flex flex-col items-center bg-white w-full px-8 max-md:px-4">
-        <BlogSection />
+        {/* <BlogSection /> */}
         <FaQSection />
       </article>
-      <article className="flex flex-col items-center bg-black w-full px-8 max-md:px-4">
+      <article>
         <SectionApps />
       </article>
     </Main>

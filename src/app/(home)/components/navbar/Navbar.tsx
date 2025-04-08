@@ -34,10 +34,8 @@ const Navbar = () => {
     <header
       ref={header}
       className={cn(
-        "w-full flex justify-center sticky top-0 px-8 max-md:px-4 z-20 transition-all duration-300 animate-appear",
-        isScrolled && "bg-black",
-        isMenuOpen && "bg-black",
-        !isMain && "bg-black",
+        "w-full flex justify-center sticky top-0 px-8 max-md:px-4 z-20 transition-all duration-300 animate-appear bg-white",
+        isMenuOpen && "bg-black"
       )}
     >
       <nav
@@ -45,36 +43,26 @@ const Navbar = () => {
           "max-w-[1000px] w-full py-8 max-md:py-4 flex justify-between gap-3"
         )}
       >
-        <ul>
-          <li>
-            <Link
-              aria-label='Consorcios en red logo'
-              href={"/"}
-              className="flex items-center gap-[6px] transition-transform"
-            >
-              <Image
-                src={logoBackgroundWhite}
-                alt="Logo"
-                width={26}
-                height={26}
-                // className="w-[24px] max-md:w-[36px]"
-              />
-              <span
-                className={cn(
-                  "text-white italic font-bold text-xl max-md:!block",
-                  isScrolled && "hidden",
-                  !isMain && "hidden",
-                )}
-              >
-                Consorcios<span className="text-green-logo">en</span>red
-              </span>
-            </Link>
-          </li>
-        </ul>
+        <Link
+          href={"/"}
+          aria-label="Consorcios en red logo"
+          className="flex items-center gap-[6px] transition-transform"
+        >
+          <Image src={logoBackgroundWhite} alt="Logo" width={26} height={26} />
+          <span
+            className={cn(
+              "text-blue italic font-extrabold text-xl max-md:!block",
+              isScrolled && "hidden",
+              !isMain && "hidden"
+            )}
+          >
+            Consorcios<span className="text-green">en</span>red
+          </span>
+        </Link>
         <div className="max-md:flex hidden items-center">
           <button
             onClick={toggleMenu}
-            className="text-white focus:outline-none w-6 h-2 relative"
+            className="text-black focus:outline-none w-6 h-2 relative"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             <Burger isMenuOpen={isMenuOpen} />
@@ -93,7 +81,8 @@ const Navbar = () => {
         >
           <ul
             className={cn(
-              "text-white flex items-center gap-3 font-medium max-md:flex-col max-md:items-start max-md:text-4xl max-md:gap-8"
+              "text-black flex items-center gap-3 font-medium max-md:flex-col max-md:items-start max-md:text-4xl max-md:gap-8",
+              isMenuOpen && "text-white"
             )}
           >
             {navigation.routes.map((route) => {
@@ -117,10 +106,17 @@ const Navbar = () => {
               {navigation.routes.map((route) => {
                 if (route.type === "button-download")
                   return (
-                    <li key={route.path} className="max-md:w-full" onClick={() => setIsMenuOpen(false)}>
+                    <li
+                      key={route.path}
+                      className="max-md:w-full"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
                       <Link
                         href={route.path}
-                        className="border border-white rounded-sm px-2 py-1 max-md:bg-white max-md:text-black max-md:flex max-md:justify-center"
+                        className={cn(
+                          "rounded-sm px-2 py-1 max-md:bg-white max-md:text-black max-md:flex max-md:justify-center",
+                          route.className
+                        )}
                       >
                         {route.title}
                       </Link>
@@ -131,7 +127,10 @@ const Navbar = () => {
                     <li key={route.path} className="max-md:w-full">
                       <Link
                         href={route.path}
-                        className="text-black bg-white rounded-sm px-2 py-1 border border-white max-md:bg-transparent max-md:text-white max-md:flex max-md:justify-center "
+                        className={cn(
+                          "rounded-sm px-2 py-1 max-md:bg-transparent max-md:text-white max-md:border-2 max-md:border-white max-md:flex max-md:justify-center ",
+                          route.className
+                        )}
                       >
                         {route.title}
                       </Link>

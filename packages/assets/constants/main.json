@@ -1,17 +1,20 @@
 {
   "main": {
-    "title": "Gestión Eficiente de \n Propiedad Horizontal",
-    "description": "La Herramienta Interactiva para Administraciones, Proveedores, Propietarios e Inquilinos.",
+    "title": "Conectá a tu comunidad consorcial.",
+    "pill": "Herramienta integral para consorcios",
+    "description": "Administradores, Propietarios e Inquilinos en una misma app.",
     "content": [
-      {
-        "title": "Ingresar online",
-        "path": "/ingresar",
-        "type": "button-ingress"
-      },
       {
         "title": "Descarga la app",
         "path": "#descargar",
-        "type": "button-download"
+        "type": "button-download",
+        "className": "bg-blue-button text-white"
+      },
+      {
+        "title": "Ingresar",
+        "path": "/ingresar",
+        "type": "button-ingress",
+        "className": "bg-blue-button/15 text-blue-button"
       }
     ]
   },

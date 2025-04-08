@@ -146,14 +146,14 @@ const services = [
 
 export const appInstall = {
   image: mobileAppInstallPreview,
-  title: "Pruebe Ahora Nuestras Apps \n para una Gestión Simplificada",
+  title: "Empezá ahora para una Gestión Simplificada",
   content: [
     {
       page: {
         path: "/propietarios",
         title: "propietarios",
         button: "Soy propietario",
-        className: "hover:bg-green/15 text-green",
+        className: "bg-green/15 text-green",
       },
     },
     {
@@ -161,8 +161,7 @@ export const appInstall = {
         path: "/administradores",
         title: "administadores",
         button: "Administradores",
-        className: "hover:bg-yellow/15 text-yellow",
-        classNameDark: "hover:bg-yellow/15 text-yellow-sec"
+        className: "bg-yellow/15 text-yellow-sec",
       },
     },
   ],

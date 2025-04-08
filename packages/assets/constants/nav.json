@@ -23,12 +23,14 @@
     {
       "title": "Descarga la app",
       "path": "#descargar",
-      "type": "button-download"
+      "type": "button-download",
+      "className": "bg-blue-button text-white"
     },
     {
-      "title": "Ingresar online",
+      "title": "Ingresar",
       "path": "/ingresar",
-      "type": "button-ingress"
+      "type": "button-ingress",
+      "className": "bg-blue-button/15 text-blue-button"
     }
   ]
 }

@@ -6,7 +6,7 @@ const Layout = ({ children }: PropsWithChildren) => {
   return (
     <Main className='bg-white'>
       {children}
-      <SectionApps isLightMode />
+      <SectionApps />
     </Main>
   )
 }

@@ -156,7 +156,7 @@ const ProductImageSection = () => {
           height={644}
           src={desktopAdminPreview}
           alt="Captura del panel de administrador"
-          className="w-dvh h-auto rounded-xl border-1 border-outline/25"
+          className="w-dvh h-auto rounded-xl border-2 border-outline/25" 
         />
         <div className='flex flex-row items-center gap-1'>
           <IconEyeFilled size={14} className='text-text-grey'/>
@@ -247,7 +247,7 @@ export default function Home() {
         {/* <BlogSection /> */}
         <FaQSection />
       </article>
-      <article>
+      <article className='w-full bg-grey'>
         <SectionApps />
       </article>
     </Main>

@@ -8,7 +8,7 @@ const SectionApps = () => {
   return (
     <section
       id="descargar"
-      className={cn("w-full justify-center items-center flex bg-grey")}
+      className={cn("w-full justify-center items-center flex bg-grey p-8 max-md:p-4")}
     >
       <div className="items-center h-full w-full justify-center flex py-16 gap-8 max-md:flex-col max-w-[1000px]">
         <div className="w-full flex flex-col gap-8">
